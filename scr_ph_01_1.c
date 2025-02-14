@@ -6,7 +6,7 @@
 // Esta es la función que el hilo ejecutará
 void* printMessages(void* arg) {
     char* message = (char*)arg;
-    printf("Hilo en ejecución: PID del proceso: %d, TID del hilo: %lu\n", getpid(), pthread_self());
+    printf("Hilo en ejecución: PID del proceso: %d, PID del hilo: %lu\n", getpid(), pthread_self());
     printf("%s\n", message);
     return NULL;
 }
