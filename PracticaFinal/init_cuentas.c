@@ -6,7 +6,7 @@
 #include <unistd.h>
 #include <sys/types.h>
 #define Punt_Archivo_Properties "Variables.properties"
-#include "init_cuentas.h" 
+#include "init_cuentas.h"
 
 void Menu_Usuario()
 {
@@ -14,7 +14,7 @@ void Menu_Usuario()
     int Eleccion;
     do
     {
-         // menu de los usuarios
+        // menu de los usuarios
         printf(" ------------------Elija una opcion---------------------- ");
         printf(" |   1.Incio de sesion                                    |");
         printf(" |   2.Registro                                           |");
@@ -24,26 +24,26 @@ void Menu_Usuario()
 
         if (Eleccion == 1)
         {
-            InicioDeSesion(); // Funcion de inicio de sesion 
+            InicioDeSesion(); // Funcion de inicio de sesion
         }
         else if (Eleccion == 2)
-        { 
+        {
             Registro(); // funcion de registro
         }
-    } while (Eleccion != 1 || Eleccion !=2);
+    } while (Eleccion != 1 || Eleccion != 2);
 }
 void InicioDeSesion()
 {
-    FILE *archivo = fopen("usuarios.dat", "r"); //Abrimos el archivos usuarios.dat
-    //declaramos todas las variables
-    char user[255]; 
+    FILE *archivo = fopen("usuarios.dat", "r"); // Abrimos el archivos usuarios.dat
+    // declaramos todas las variables
+    char user[255];
     char passwd[255];
     char Usuario[255];
     char Contraseña[255];
     char linea[256];
     do
     {
-        
+
         printf("\n -------------------Inicio de Sesion------------------------ \n ");
         printf("\n Introduce tu nombre de usuario: \n");
         scanf("%s", Usuario);
@@ -84,14 +84,34 @@ void InicioDeSesion()
                 }
             }
         }
-        
-    }while(Contraseña == passwd && Usuario == user); // si la contraseña o el usuario no son correctas volvemos a mostrar el menu y este mensaje , tambien se podria hacer un contandor para que te avise de que has fallado muchas veces o algo asi
+
+    } while (Contraseña == passwd && Usuario == user); // si la contraseña o el usuario no son correctas volvemos a mostrar el menu y este mensaje , tambien se podria hacer un contandor para que te avise de que has fallado muchas veces o algo asi
 
     fclose(archivo); // cerramos el archivo con fclose
 }
 void Registro()
 {
- // Pedir los datos y almacenarlos en el usuario.dat : id,nombre,apellidos,numeroDeCuenta,saldo_inicial
- // Registrar el registro con el .log
+    struct Cuenta
+    {
+        int id;                   // id de la cuenta
+        char Nombre[50];          // Nombre de usuario de la cuenta
+        double saldo;             // saldo de la cuenta
+        int Numero_transacciones; // Numero de transacciones
+    };
+
+    struct Cuenta cuenta;
+    printf("--------Registro-------");
+    printf("Introduce tu Nombre : ");
+    scanf("%s", cuenta.Nombre);
+    printf("Introudce el saldo inicial");
+    scanf("%lf", cuenta.saldo);
+
+    FILE *usuarios=fopen("usuarios.dat","w+");
+    if(!usuarios){
+        perror("Error al abrir el archivo de propiedades");
+        return;
+    }
+
+    // Pedir los datos y almacenarlos en el usuario.dat : id,nombre,apellidos,numeroDeCuenta,saldo_inicial
+    // Registrar el registro con el .log
 }
-//AYIYIYIYI

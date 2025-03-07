@@ -1,9 +1,17 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <pthread.h>
 #include <string.h>
+#include <sys/ipc.h>
+#include <sys/msg.h>
+#include <sys/types.h>
+#include <fcntl.h>
 #include <unistd.h>
-#include <sys/types.h> // Para fork()
+#include <sys/stat.h>
+#include <signal.h>
+#include <errno.h>
+#include <pthread.h>
+#define PIPE_NAME "/tmp/alert_pipe"
+#define MONTO_LIMITE 1000
 #define Punt_Archivo_Properties "Variables.properties"
 #define MAX_LENGTH 256
 #include "init_cuentas.h"
@@ -13,7 +21,7 @@
 // Prototipos de funciones
 void AbrirPropertis();
 void CrearMonitor();
-int main() // hola esto es una prueba
+int main() 
 {
     AbrirPropertis();
     CrearMonitor(); 
@@ -58,41 +66,57 @@ void AbrirPropertis()
     fclose(ArchivoPro);
 }
 
-void *hilo_transacciones(void *arg)
-{
-    FILE *archivo = fopen("transaciones.txt", "r");
-    if (archivo == NULL)
-    {
-        perror("Error al abrir el archivo");
-        return NULL;
+struct msgbuf {
+    long tipo;
+    char texto[100];
+};
+
+int cola_mensajes;
+
+void enviar_alerta(const char *mensaje) {
+    int fd = open(PIPE_NAME, O_WRONLY | O_NONBLOCK);
+    if (fd != -1) {
+        write(fd, mensaje, strlen(mensaje));
+        close(fd);
+    } else {
+        perror("Error al abrir la tubería");
+    }
+}
+
+void limpiar(int sig) {
+    msgctl(cola_mensajes, IPC_RMID, NULL);
+    unlink(PIPE_NAME);
+    exit(0);
+}
+
+void detectar_transacciones() {
+    signal(SIGINT, limpiar);
+
+    key_t key = ftok("transaciones.txt", 65);
+    cola_mensajes = msgget(key, 0666 | IPC_CREAT);
+    struct msgbuf mensaje;
+
+    if (cola_mensajes == -1) {
+        perror("Error al acceder a la cola de mensajes");
+        exit(1);
     }
 
-    char linea[256];
-    int ids[100]; // Suponiendo un máximo de 100 transacciones que cumplan la condición
-    int contador = 0;
+    // Crear la tubería si no existe
+    if (mkfifo(PIPE_NAME, 0666) == -1 && errno != EEXIST) {
+        perror("Error al crear la tubería");
+        exit(1);
+    }
 
-    while (fgets(linea, sizeof(linea), archivo))
-    {
-        int id;
-        char tipo[20];
-        int cuenta1, cuenta2;
-        double saldo1, saldo2, dinero_transaccion;
+    while (1) {
+        if (msgrcv(cola_mensajes, &mensaje, sizeof(mensaje.texto), 0, 0) != -1) {
+            printf("Transacción recibida: %s\n", mensaje.texto);
 
-        // Parsear la línea del CSV
-        if (sscanf(linea, "%d,%19[^,],%d,%d,%lf,%lf,%lf", &id, tipo, &cuenta1, &cuenta2, &saldo1, &saldo2, &dinero_transaccion) == 7)
-        {
-            // Verificar las condiciones
-            if (dinero_transaccion > 5000 || saldo1 < 0 || saldo2 < 0)
-            {
-                ids[contador++] = id;
-                // escribir en el .log la anomalia 
+            int monto;
+            if (sscanf(mensaje.texto, "retiro %d", &monto) == 1 && monto > MONTO_LIMITE) {
+                enviar_alerta("ALERTA: Retiro sospechoso detectado\n");
             }
         }
     }
-
-    fclose(archivo);
-
-    return NULL;
 }
 
 void CrearMonitor()
@@ -108,7 +132,7 @@ void CrearMonitor()
     if (Monitor == 0)
     { // Código del hijo esto es como tal el monitor
         pthread_t Transacciones;
-        if (pthread_create(&Transacciones, NULL, hilo_transacciones, NULL) != 0)
+        if (pthread_create(&Transacciones, NULL,detectar_transacciones, NULL) != 0)
         {
             perror("Error al crear el hilo de transacciones");
             exit(1);

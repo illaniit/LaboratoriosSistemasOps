@@ -11,5 +11,7 @@
 
 
 void Menu_User(){
+    printf("Este es el menu del usuario");
+    printf("1.I");
     //Mostrara el menu del usuario
 }
