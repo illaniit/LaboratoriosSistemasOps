@@ -94,3 +94,4 @@ void Registro()
  // Pedir los datos y almacenarlos en el usuario.dat : id,nombre,apellidos,numeroDeCuenta,saldo_inicial
  // Registrar el registro con el .log
 }
+//AYIYIYIYI
