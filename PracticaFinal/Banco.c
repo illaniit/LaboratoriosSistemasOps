@@ -10,7 +10,7 @@
 // Prototipos de funciones
 void AbrirPropertis();
 void CrearMonitor();
-int main()
+int main() // hola esto es una prueba
 {
     AbrirPropertis();
     CrearMonitor(); 
