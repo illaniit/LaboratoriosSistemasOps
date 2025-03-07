@@ -7,6 +7,9 @@
 #define Punt_Archivo_Properties "Variables.properties"
 #define MAX_LENGTH 256
 #include "init_cuentas.h"
+
+
+
 // Prototipos de funciones
 void AbrirPropertis();
 void CrearMonitor();
