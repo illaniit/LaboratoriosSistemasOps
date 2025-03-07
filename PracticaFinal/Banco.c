@@ -8,7 +8,7 @@
 #define MAX_LENGTH 256
 #include "init_cuentas.h"
 
-
+//Hola este es un comentario
 
 // Prototipos de funciones
 void AbrirPropertis();
