@@ -104,7 +104,7 @@ void Registro()
     printf("Introduce tu Nombre : ");
     scanf("%s", cuenta.Nombre);
     printf("Introudce el saldo inicial");
-    scanf("%lf", cuenta.saldo);
+    //scanf("%lf", cuenta.saldo);
 
     FILE *usuarios=fopen("usuarios.dat","w+");
     if(!usuarios){

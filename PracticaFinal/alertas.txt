@@ -1,0 +1,4 @@
+Transacción inválida, campos incorrectos en retiro o ingreso
+Saldo negativo detectado
+Usuario con saldo negativo
+
