@@ -9,11 +9,12 @@
 #include <signal.h>
 #include <errno.h>
 #include <pthread.h>
+#include <time.h>
 #define MONTO_LIMITE 1000
 #define Punt_Archivo_Properties "Variables.properties"
 #define MAX_LENGTH 256
 #include "init_cuentas.h"
-int pipefd[2]; // Tubería que la declaramos para poder pasar informacion de monitor a banco yregistrarlo en alertas .txt
+int pipefd[2]; // Tubería que la declaramos para poder pasar informacion de monitor a banco y registrarlo en alertas .txt
 
 
 
@@ -22,9 +23,11 @@ int pipefd[2]; // Tubería que la declaramos para poder pasar informacion de mon
 void AbrirPropertis();
 void CrearMonitor();
 void *detectar_transacciones(void *arg);
-void enviar_alerta(const char *mensaje);
+void enviar_alerta(const char *mensaje,const int *id,const char *titular);
 void limpiar(int sig);
 void registrar_alerta(const char *mensaje);
+void Escribir_registro(const char *mensaje_registro);
+
 
 int main()
 {
@@ -41,11 +44,45 @@ int main()
     return 0;
 }
 
+//Funcion para escribir en el registro de log 
+void Escribir_registro(const char *mensaje_registro){
+  //declaramos la variable time_t
+  time_t t;
+    struct tm *tm_info;
+    char buffer[30];  // Para almacenar la fecha y hora formateadas
+
+    // Obtiene la hora actual
+    time(&t);
+    tm_info = localtime(&t);
+
+    // Formatea la fecha y hora en "YYYY-MM-DD HH:MM:SS"
+    strftime(buffer, sizeof(buffer), "%Y-%m-%d %H:%M:%S", tm_info);
+
+    // Abre el archivo en modo "a" para añadir sin sobrescribir
+    FILE *ArchivoDeRegistro = fopen("registro.log", "a");
+    if (!ArchivoDeRegistro) {
+        perror("Error al abrir el archivo de registro");
+        return;
+    }
+
+    // Escribe la fecha, la hora y el mensaje en el archivo
+    fprintf(ArchivoDeRegistro, "[%s] %s\n", buffer, mensaje_registro);
+    
+    // Cierra el archivo
+    fclose(ArchivoDeRegistro);
+}
+
+
+
+
 // Función para abrir y leer el archivo de propiedades 
 //Esta funcion nos permite cargar las variables que usemos en el codigo para que sea mas accesible
 void AbrirPropertis()
 {
 
+
+    //Llamamos al registro.log 
+    Escribir_registro("Se ha abierto el archivo de properties");
     char *key, *value;
     char line[MAX_LENGTH];
     char username[MAX_LENGTH] = {0};
@@ -56,6 +93,7 @@ void AbrirPropertis()
     if (!ArchivoPro)
     {
         perror("Error al abrir el archivo de propiedades");
+        Escribir_registro("Fallo al abrir el arhivo de properties");
         return;
     }
 
@@ -83,10 +121,17 @@ void AbrirPropertis()
 
 // Esta funcion se encarga de "pegar" la alerta en el pipe para poder pasarlo al proceso padre
 
-void enviar_alerta(const char *mensaje)
+void enviar_alerta(const char *mensaje, const int *id,const char *titular)
 {
+    Escribir_registro("Se ha enviado una alerta");
     char auxiliar[256];
-    snprintf(auxiliar, sizeof(auxiliar), "%s\n", mensaje); // esta funcion nos permite agregar un \n en el archivo de texto para que sea entendible y legible
+    if(titular != ""){
+        snprintf(auxiliar, sizeof(auxiliar), " %d | %s | %s\n", *id,titular, mensaje); // esta funcion nos permite agregar un \n en el archivo de texto para que sea entendible y legible
+    }
+    else{
+        snprintf(auxiliar, sizeof(auxiliar), " %d | Transaccion | %s\n", *id, mensaje); // esta funcion nos permite agregar un \n en el archivo de texto para que sea entendible y legible
+    }
+   
     write(pipefd[1], auxiliar, strlen(auxiliar));
 }
 
@@ -101,7 +146,7 @@ void limpiar(int sig)
 // Esta funcion abre/ crea si no existe el archivo de texto donde se almacenan las alertas y escribe las alertas que se encuentren en la variable mensaje
 void registrar_alerta(const char *mensaje)
 {
-
+    Escribir_registro("Se ha abierto el fichero de alertas");
     FILE *archivo_alertas = fopen("alertas.txt", "a"); // Abrimos el fichero
     if (archivo_alertas)
     {
@@ -111,6 +156,7 @@ void registrar_alerta(const char *mensaje)
     else
     {
         perror("Error al abrir alertas.txt");
+        Escribir_registro("Se ha producido un error al abrir el fichero de alertas");
     }
 }
 
@@ -120,11 +166,14 @@ void registrar_alerta(const char *mensaje)
 void *detectar_transacciones(void *arg)
 {
     signal(SIGINT, limpiar); // limpiamos la tuberia 
+    Escribir_registro("Se ha abierto el fichero de transacciones");
     FILE *archivo = fopen("transaciones.txt", "r"); // abrimos el archivo transacciones para buscar anomalias en el
     if (!archivo)
     {
         perror("Error al abrir el archivo de transacciones"); // Comprobamos que el archivo no de error 
+        Escribir_registro("Se ha producido un error al abrirr el archivo de transacciones");
         return NULL; // devolvemos null en este caso
+        
     }
     char linea[256];
     while (fgets(linea, sizeof(linea), archivo)) // leemos el archivo transacciones.txt
@@ -137,13 +186,14 @@ void *detectar_transacciones(void *arg)
             {
                 if (strlen(cuenta2) > 0 || saldo2 != 0) // comprobamos que  
                 {
-                    enviar_alerta("Transacción inválida, campos incorrectos en retiro o ingreso");
+                    Escribir_registro("Se ha detectado una transaccion invalida");
+                    enviar_alerta("Transacción inválida, campos incorrectos en retiro o ingreso",&id,"");
                 }
             }
             if (saldo1 < 0 || saldo2 < 0 || saldo_final < 0) // comprobamso que cualquiera de los 3 campos que indican saldo sean positivos
             {
-
-                enviar_alerta("Saldo negativo detectado");
+                Escribir_registro("Se ha detectado un saldo negativo");
+                enviar_alerta("Saldo negativo detectado",&id,"");
             }
         }
     }
@@ -156,9 +206,10 @@ void *detectar_transacciones(void *arg)
     if (!usuarios)
     {
         perror("Error al abrir el archivo de usuarios");
+        Escribir_registro("Se ha producido un error en la apertura del archivo de usuarios");
         return NULL;
     }
-
+    Escribir_registro("Se ha abierto el arhivo de usuarios");
     while (fgets(linea, sizeof(linea), usuarios)) // leemos el archivo
     {
         int id, saldo, num_transacciones;
@@ -167,12 +218,14 @@ void *detectar_transacciones(void *arg)
         {
             if (saldo < 0)
             {
-                enviar_alerta("Usuario con saldo negativo"); // enviamos alerta si un usuario tiene el saldo negativo
+                Escribir_registro("Se ha encontrado un usuario con el saldo negativo");
+                enviar_alerta("Usuario con saldo negativo",&id,titular); // enviamos alerta si un usuario tiene el saldo negativo
             }
 
             if (num_transacciones < 0)
             {
-                enviar_alerta("Número de transacciones inválido"); // enviamos alerta si el numero de transacciones es menor que cero
+                Escribir_registro("Se ha encontrado un usuario con un numero de transacciones negativo");
+                enviar_alerta("Número de transacciones inválido",&id,titular); // enviamos alerta si el numero de transacciones es menor que cero
             }
         }
     }
@@ -186,6 +239,7 @@ void CrearMonitor()
     if (pipe(pipefd) == -1)
     {
         perror("Error al crear la tubería");
+        Escribir_registro("Se ha producido un fallo en la comunicacion entre procesos");
         exit(1);
     }
 
@@ -193,6 +247,7 @@ void CrearMonitor()
     if (Monitor < 0)
     {
         perror("Error al crear el proceso Monitor");
+        Escribir_registro("Se ha producido un fallo en la creacion del proceso monitor");
         return;
     }
     if (Monitor == 0)
@@ -205,14 +260,18 @@ void CrearMonitor()
             perror("Error al crear el hilo de transacciones"); // comprobamos que el hilo se haya creado correctamente
             exit(1);
         }
+        Escribir_registro("Se ha creado correctamente el hilo que revisa ls anomalias");
         pthread_join(Transacciones, NULL); //cerramos el hilo
         close(pipefd[1]); // Cerrar escritura cuando termine
+        Escribir_registro("Se ha cerrado el extremo de escritura de la tuberia del proceso hijo de monitor");
         exit(0);
     }
     else
     {
         // Código del padre (lector de alertas y almacenamiento en archivo)
         close(pipefd[1]); // Cierra escritura en el padre
+        Escribir_registro("Se ha cerrado el extremo de escritura de la tuberia del proceso padre de monitor");
+        //igual hay que hacer aqui un malloc para asignarle memoria al buffer que 256 es poco
         char buffer[256]; // declaramos una variable para leer de la pipe
         int bytes_leidos;
        // printf("⚠ Monitoreo de alertas iniciado... (Guardando en alertas.txt)\n");
@@ -221,6 +280,7 @@ void CrearMonitor()
             bytes_leidos = read(pipefd[0], buffer, sizeof(buffer) - 1); // lee la pipe y lo almacena en el buffer
             if (bytes_leidos > 0)
             {
+                Escribir_registro("Se ha registrado una alerta en el sistema");
                 buffer[bytes_leidos] = '\0'; // Convertir a string, añade el barra cero al final para indicar el final de la cadena en el ultimo char
                 registrar_alerta(buffer); // manda a registrar alerta con lo que tiene la  pipe
             }
@@ -231,9 +291,11 @@ void CrearMonitor()
             else
             {
                 perror("Error al leer la tubería"); // da error si se lee mal la tuberia
+                Escribir_registro("Error al leer la tuberia");
                 break;
             }
         }
         close(pipefd[0]); // Cierra lectura al terminar
+        Escribir_registro("Se ha cerrado el extremo de lectura de la tuberia del proceso padre de monitor");
     }
 }

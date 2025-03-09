@@ -1,4 +1,6 @@
-Transacción inválida, campos incorrectos en retiro o ingreso
-Saldo negativo detectado
-Usuario con saldo negativo
+ 1 | Alejandro | Usuario con saldo negativo
+
+ 1 | Transaccion | Transacción inválida, campos incorrectos en retiro o ingreso
+ 1 | Transaccion | Saldo negativo detectado
+ 1 | Alejandro | Usuario con saldo negativo
 
