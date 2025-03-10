@@ -21,7 +21,6 @@ int pipefd[2]; // Tubería que la declaramos para poder pasar informacion de mon
 // Definimos las funciones  que vamos a utilizar
 
 void AbrirPropertis();
-void AbrirPropertis2();
 void CrearMonitor();
 void *detectar_transacciones(void *arg);
 void enviar_alerta(const char *mensaje,const int *id,const char *titular);
@@ -48,16 +47,16 @@ int main()
 //Funcion para escribir en el registro de log 
 void Escribir_registro(const char *mensaje_registro){
   //declaramos la variable time_t
-  time_t t;
+    time_t t;
     struct tm *tm_info;
-    char buffer[30];  // Para almacenar la fecha y hora formateadas
+    char hora[30];  // Para almacenar la fecha y hora formateadas
 
     // Obtiene la hora actual
     time(&t);
     tm_info = localtime(&t);
 
     // Formatea la fecha y hora en "YYYY-MM-DD HH:MM:SS"
-    strftime(buffer, sizeof(buffer), "%Y-%m-%d %H:%M:%S", tm_info);
+    strftime(hora, sizeof(hora), "%Y-%m-%d %H:%M:%S", tm_info);
 
     // Abre el archivo en modo "a" para añadir sin sobrescribir
     FILE *ArchivoDeRegistro = fopen("registro.log", "a");
@@ -67,7 +66,7 @@ void Escribir_registro(const char *mensaje_registro){
     }
 
     // Escribe la fecha, la hora y el mensaje en el archivo
-    fprintf(ArchivoDeRegistro, "[%s] %s\n", buffer, mensaje_registro);
+    fprintf(ArchivoDeRegistro, "[%s] %s\n", hora, mensaje_registro);
     
     // Cierra el archivo
     fclose(ArchivoDeRegistro);
@@ -125,12 +124,23 @@ void AbrirPropertis()
 void enviar_alerta(const char *mensaje, const int *id,const char *titular)
 {
     Escribir_registro("Se ha enviado una alerta");
+
+    time_t t;
+    struct tm *tm_info;
+    char hora[30];  // Para almacenar la fecha y hora formateadas
+
+    // Obtiene la hora actual
+    time(&t);
+    tm_info = localtime(&t);
+
+    // Formatea la fecha y hora en "YYYY-MM-DD HH:MM:SS"
+    strftime(hora, sizeof(hora), "%Y-%m-%d %H:%M:%S", tm_info);
     char auxiliar[256];
     if(titular != ""){
-        snprintf(auxiliar, sizeof(auxiliar), " %d | %s | %s\n", *id,titular, mensaje); // esta funcion nos permite agregar un \n en el archivo de texto para que sea entendible y legible
+        snprintf(auxiliar, sizeof(auxiliar), "[%s] %d | %s | %s\n", hora,*id,titular, mensaje); // esta funcion nos permite agregar un \n en el archivo de texto para que sea entendible y legible
     }
     else{
-        snprintf(auxiliar, sizeof(auxiliar), " %d | Transaccion | %s\n", *id, mensaje); // esta funcion nos permite agregar un \n en el archivo de texto para que sea entendible y legible
+        snprintf(auxiliar, sizeof(auxiliar), "[%s] %d | Transaccion | %s\n",hora, *id, mensaje); // esta funcion nos permite agregar un \n en el archivo de texto para que sea entendible y legible
     }
    
     write(pipefd[1], auxiliar, strlen(auxiliar));

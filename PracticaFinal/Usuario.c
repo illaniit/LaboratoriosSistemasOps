@@ -5,8 +5,17 @@
 #include <unistd.h>
 #include <sys/types.h>
 #define Punt_Archivo_Properties "Variables.properties"
+#include "Usuario.h"
 /// @brief
 /// En este bloque de codigo mostraremos el menu del usuario donde le daremos opciones a realizar diferentes operaciones
+
+//Aqui hay que meter las funciones de properties y 
+
+
+
+
+
+
 
 void Menu_User()
 {
@@ -39,9 +48,22 @@ void Mostrar_Menu(){
         switch (Eleccion)
         {
         case (1):
-
+            //IntroducirDinero();
             break;
-
+        case(2):
+            //ExtraerDinero();
+            break;
+        case(3):
+            //HacerTransferencia();
+            break;
+        case(4):
+            //ConsultarDatos
+            break;
+        case(5):
+                //salir del sistema 
+                printf("Saliendo del sistema...");
+                sleep(10);
+            break;
         default:
             break;
         }

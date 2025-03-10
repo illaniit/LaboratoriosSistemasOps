@@ -7,6 +7,7 @@
 #include <sys/types.h>
 #define Punt_Archivo_Properties "Variables.properties"
 #include "init_cuentas.h"
+#include "Usuario.h"
 #define MAX_LENGTH 256
 
 
@@ -85,7 +86,7 @@ void Escribir_registro2(const char *mensaje_registro){
 
 void Menu_Usuario()
 {
-
+    AbrirPropertis2();
     int Eleccion;
     do
     {
@@ -147,7 +148,7 @@ void InicioDeSesion()
                     {
                         printf("Dando acceso al sistema...");
                         sleep(10);
-                        // Funcion para crear hilos de usuario.c con un semaforo
+                        Menu_User();// Llama a la funcion de usuarios.c
                         Escribir_registro2("Se ha accedido al sistema");
                     }
                     else
@@ -173,26 +174,33 @@ void InicioDeSesion()
 void Registro()
 {
     Escribir_registro2("El usuario ha entrado el la seccion del registro");
+  
+    char linea[255];
     struct Cuenta
     {
         int id;                   // id de la cuenta
         char Nombre[50];          // Nombre de usuario de la cuenta
-        double saldo;             // saldo de la cuenta
+        int saldo;             // saldo de la cuenta
         int Numero_transacciones; // Numero de transacciones
     };
 
     struct Cuenta cuenta;
+    cuenta.Numero_transacciones=0;
     printf("--------Registro-------");
     printf("Introduce tu Nombre : ");
     scanf("%s", cuenta.Nombre);
-    printf("Introudce el saldo inicial");
-    //scanf("%lf", cuenta.saldo);
+    printf("Introudce el saldo inicial :");
+    scanf("%d", &cuenta.saldo);
 
     FILE *usuarios=fopen("usuarios.dat","w+");
     if(!usuarios){
         perror("Error al abrir el archivo de propiedades");
         return;
     }
+    while(fgets(linea, sizeof(linea), usuarios) !=0){
+        cuenta.id++;
+    }
+    fprintf(usuarios,"%id | %s | %d | %d",cuenta.id , cuenta.Nombre,cuenta.saldo,cuenta.Numero_transacciones);
     Escribir_registro2("Se ha registrado un nuevo usuario en el sistema");
     // Pedir los datos y almacenarlos en el usuario.dat : id,nombre,apellidos,numeroDeCuenta,saldo_inicial
     // Registrar el registro con el .log
