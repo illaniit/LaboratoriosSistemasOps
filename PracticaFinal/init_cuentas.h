@@ -5,5 +5,6 @@
 void Menu_Usuario();
 void InicioDeSesion();
 void Registro();
+void AbrirPropertis2();
 
 #endif

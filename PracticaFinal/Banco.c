@@ -21,6 +21,7 @@ int pipefd[2]; // Tubería que la declaramos para poder pasar informacion de mon
 // Definimos las funciones  que vamos a utilizar
 
 void AbrirPropertis();
+void AbrirPropertis2();
 void CrearMonitor();
 void *detectar_transacciones(void *arg);
 void enviar_alerta(const char *mensaje,const int *id,const char *titular);
