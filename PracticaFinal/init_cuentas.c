@@ -9,11 +9,13 @@
 #include "init_cuentas.h"
 #include "Usuario.h"
 #define MAX_LENGTH 256
+#define NUM_USUARIOS 5
+#include <semaphore.h>
+
+void *Menu_Usuario(void *arg);
 
 
-
-
-
+sem_t semaforo;
 
 void Escribir_registro2(const char *mensaje_registro){
     //declaramos la variable time_t
@@ -84,33 +86,59 @@ void Escribir_registro2(const char *mensaje_registro){
       fclose(ArchivoPro);
   }
 
-void Menu_Usuario()
-{
+  void Menu_Hilos() {
+    pthread_t hilos[NUM_USUARIOS];
+    int id[NUM_USUARIOS];
+    int contador = 1;
+    sem_init(&semaforo, 0, 1); // Inicializamos el semáforo
+
+    // Crear 5 hilos para los usuarios
+        
+        pthread_create(&hilos[contador], NULL, Menu_Usuario(contador), (void *)&id[contador]);
+        
+    
+
+    // Esperamos que todos los hilos terminen
+
+        pthread_join(hilos[contador], NULL);
+        
+
+    sem_destroy(&semaforo); // Destruimos el semáforo
+
+    return;
+}
+
+// Función para cada usuario ejecutándose en un hilo
+void *Menu_Usuario(void *arg) {
+    arg++;
+
+    //printf("👤 Usuario %d ha iniciado el menú.\n", usuario_id);
+    Escribir_registro2("Se ha accedido al menú de entrada");
     AbrirPropertis2();
+    
     int Eleccion;
-    do
-    {
-        Escribir_registro2("Se ha abierto el menu de incio de sesion");
-        // menu de los usuarios
-        printf(" ------------------Elija una opcion---------------------- ");
-        printf(" |   1.Incio de sesion                                    |");
-        printf(" |   2.Registro                                           |");
-        printf(" |       Pulse una opcion (1/2):                          |");
-        printf(" --------------------------------------------------------- ");
+    do {
+        Escribir_registro2("Se ha abierto el menú de inicio de sesión");
+
+        printf("\n------------------ Elija una opción ----------------------\n");
+        printf("|   1. Inicio de sesión                                   |\n");
+        printf("|   2. Registro                                          |\n");
+        printf("|       Pulse una opción (1/2):                          |\n");
+        printf("---------------------------------------------------------\n");
         scanf("%d", &Eleccion);
 
-        if (Eleccion == 1)
-        {
-            
-            InicioDeSesion(); // Funcion de inicio de sesion
-            Escribir_registro2("El usuario ha elegido iniciar sesion");
+        if (Eleccion == 1) {
+            sem_wait(&semaforo); // Bloqueamos el semáforo
+            InicioDeSesion();
+            sem_post(&semaforo); // Liberamos el semáforo
+            Escribir_registro2("El usuario ha elegido iniciar sesión");
+        } else if (Eleccion == 2) {
+            Registro();
+            Escribir_registro2("El usuario ha elegido la opción de registro");
         }
-        else if (Eleccion == 2)
-        {
-            Registro(); // funcion de registro
-            Escribir_registro2("El usuario ha elegido la opcion de registro");
-        }
-    } while (Eleccion != 1 || Eleccion != 2);
+    } while (Eleccion != 1 && Eleccion != 2);
+
+    return NULL;
 }
 void InicioDeSesion()
 {
@@ -148,7 +176,7 @@ void InicioDeSesion()
                     {
                         printf("Dando acceso al sistema...");
                         sleep(10);
-                        Menu_User();// Llama a la funcion de usuarios.c
+                        Mostrar_Menu();// Llama a la funcion de usuarios.c
                         Escribir_registro2("Se ha accedido al sistema");
                     }
                     else

@@ -3,3 +3,12 @@
 [2025-03-10 19:27:20] 1 | Transaccion | Saldo negativo detectado
 [2025-03-10 19:27:20] 1 | Alejandro | Usuario con saldo negativo
 
+[2025-03-14 11:17:25] 1 | Transaccion | Transacción inválida, campos incorrectos en retiro o ingreso
+[2025-03-14 11:17:25] 1 | Transaccion | Saldo negativo detectado
+
+[2025-03-14 11:19:19] 1 | Transaccion | Transacción inválida, campos incorrectos en retiro o ingreso
+[2025-03-14 11:19:19] 1 | Transaccion | Saldo negativo detectado
+
+[2025-03-14 11:19:31] 1 | Transaccion | Transacción inválida, campos incorrectos en retiro o ingreso
+[2025-03-14 11:19:31] 1 | Transaccion | Saldo negativo detectado
+

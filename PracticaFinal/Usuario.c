@@ -13,27 +13,6 @@
 
 
 
-
-
-
-
-void Menu_User()
-{
-
-    pid_t Usuario = fork();
-    if (Usuario < 0)
-    {
-        perror("Error con la creacion del usuario");
-    }
-    else if (Usuario == 0)
-    {
-        pthread_t HiloUsuario;
-
-        // hay que hacer pthread_create de esos y to el rollo
-        // hay que crear otra funcion que es MostrarMenu donde este el menu que lo llamas desde el hilo de ejeccucion 
-        
-    }
-}
 void Mostrar_Menu(){
     int Eleccion = 0;
         printf("-------------Hola Bienvenido al menu interactivo----------\n"); // la idea aqui despues de hola es poner el nombre del usuario para que quede chulo

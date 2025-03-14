@@ -37,7 +37,7 @@ int main()
     CrearMonitor();
 
     //Cargamos el menu del usuario que se encuentra en init_cuentas.c donde cada usuario sera un hilo de ejecuccion
-    Menu_Usuario();
+    Menu_Hilos();
 
     //Volvemos a llamara monitor para que encuentre las anomalias despues de que el usuario haya cerrado la sesion
     CrearMonitor();
@@ -285,7 +285,6 @@ void CrearMonitor()
         //igual hay que hacer aqui un malloc para asignarle memoria al buffer que 256 es poco
         char buffer[256]; // declaramos una variable para leer de la pipe
         int bytes_leidos;
-       // printf("⚠ Monitoreo de alertas iniciado... (Guardando en alertas.txt)\n");
         while (1)
         {
             bytes_leidos = read(pipefd[0], buffer, sizeof(buffer) - 1); // lee la pipe y lo almacena en el buffer
