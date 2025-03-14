@@ -85,23 +85,20 @@ void Escribir_registro2(const char *mensaje_registro){
   
       fclose(ArchivoPro);
   }
-
+  int contador = 1;
   void Menu_Hilos() {
     pthread_t hilos[NUM_USUARIOS];
     int id[NUM_USUARIOS];
-    int contador = 1;
     sem_init(&semaforo, 0, 1); // Inicializamos el semáforo
 
     // Crear 5 hilos para los usuarios
         
         pthread_create(&hilos[contador], NULL, Menu_Usuario(contador), (void *)&id[contador]);
-        
     
-
     // Esperamos que todos los hilos terminen
 
         pthread_join(hilos[contador], NULL);
-        
+
 
     sem_destroy(&semaforo); // Destruimos el semáforo
 
@@ -110,8 +107,7 @@ void Escribir_registro2(const char *mensaje_registro){
 
 // Función para cada usuario ejecutándose en un hilo
 void *Menu_Usuario(void *arg) {
-    arg++;
-
+    contador++;
     //printf("👤 Usuario %d ha iniciado el menú.\n", usuario_id);
     Escribir_registro2("Se ha accedido al menú de entrada");
     AbrirPropertis2();
