@@ -17,7 +17,6 @@
 
 void *Menu_Usuario();
 
-sem_t semaforo;
 
 void Escribir_registro2(const char *mensaje_registro)
 {
@@ -136,8 +135,7 @@ void Menu_Procesos()
     }
 
     // El padre espera a que todos los procesos hijos terminen antes de cerrar
-    while (wait(NULL) > 0)
-        ; // Espera a que todos los hijos terminen
+    while (wait(NULL) > 0) ; // Espera a que todos los hijos terminen
 
     // Cerramos el semáforo y lo eliminamos
     sem_close(sem);
@@ -169,16 +167,16 @@ void *Menu_Usuario()
 
         if (Eleccion == 1)
         {
-            sem_wait(&semaforo); // Bloqueamos el semáforo
+            
             InicioDeSesion();
-            sem_post(&semaforo); // Liberamos el semáforo
+
             Escribir_registro2("El usuario ha elegido iniciar sesión");
         }
         else if (Eleccion == 2)
         {
             Registro();
             Escribir_registro2("El usuario ha elegido la opción de registro");
-            printf("volviendo a tu menu...");
+            printf("Volviendo a tu menu...");
             sleep(4);
             Menu_Usuario();
         }

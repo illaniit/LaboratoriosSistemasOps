@@ -6,5 +6,4 @@ void Menu_Procesos();
 void InicioDeSesion();
 void Registro();
 
-
 #endif

@@ -16,8 +16,6 @@
 #include "init_cuentas.h"
 int pipefd[2]; // Tubería que la declaramos para poder pasar informacion de monitor a banco y registrarlo en alertas .txt
 
-
-
 // Definimos las funciones  que vamos a utilizar
 
 void AbrirPropertis();
@@ -213,7 +211,7 @@ void *detectar_transacciones(void *arg)
 
     // Verificación de usuarios.dat
      // hacemos exactamente lo mismo pero con el fichero que almacena los usuarios
-    FILE *usuarios = fopen("usuarios.dat", "r"); //abrimos el archivo
+    FILE *usuarios = fopen("usuarios.txt", "r"); //abrimos el archivo
     if (!usuarios)
     {
         perror("Error al abrir el archivo de usuarios");
