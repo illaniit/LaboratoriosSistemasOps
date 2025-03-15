@@ -324,3 +324,19 @@
 [2025-03-15 18:28:14] Se ha accedido al menú de entrada
 [2025-03-15 18:28:14] Se ha abierto el archivo de properties de init cuentas
 [2025-03-15 18:28:14] Se ha abierto el menú de inicio de sesión
+[2025-03-15 19:03:39] Se ha abierto el archivo de properties
+[2025-03-15 19:03:39] Se ha cerrado el extremo de escritura de la tuberia del proceso padre de monitor
+[2025-03-15 19:03:39] Se ha creado correctamente el hilo que revisa ls anomalias
+[2025-03-15 19:03:39] Se ha abierto el fichero de transacciones
+[2025-03-15 19:03:39] Se ha detectado una transaccion invalida
+[2025-03-15 19:03:39] Se ha enviado una alerta
+[2025-03-15 19:03:39] Se ha detectado un saldo negativo
+[2025-03-15 19:03:39] Se ha enviado una alerta
+[2025-03-15 19:03:39] Se ha abierto el arhivo de usuarios
+[2025-03-15 19:03:39] Se ha cerrado el extremo de escritura de la tuberia del proceso hijo de monitor
+[2025-03-15 19:03:39] Se ha registrado una alerta en el sistema
+[2025-03-15 19:03:39] Se ha abierto el fichero de alertas
+[2025-03-15 19:03:39] Se ha cerrado el extremo de lectura de la tuberia del proceso padre de monitor
+[2025-03-15 19:03:39] Se ha accedido al menú de entrada
+[2025-03-15 19:03:39] Se ha abierto el archivo de properties de init cuentas
+[2025-03-15 19:03:39] Se ha abierto el menú de inicio de sesión

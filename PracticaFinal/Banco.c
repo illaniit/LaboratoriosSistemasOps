@@ -10,14 +10,17 @@
 #include <errno.h>
 #include <pthread.h>
 #include <time.h>
+#include <semaphore.h>
+#include <sys/fcntl.h>
+#include <sys/wait.h>
 #define MONTO_LIMITE 1000
 #define Punt_Archivo_Properties "Variables.properties"
 #define MAX_LENGTH 256
-#include "init_cuentas.h"
+
 int pipefd[2]; // Tubería que la declaramos para poder pasar informacion de monitor a banco y registrarlo en alertas .txt
 
 // Definimos las funciones  que vamos a utilizar
-
+void Menu_Procesos();
 void AbrirPropertis();
 void CrearMonitor();
 void *detectar_transacciones(void *arg);
@@ -115,6 +118,60 @@ void AbrirPropertis()
     }
 
     fclose(ArchivoPro);
+}
+void Menu_Procesos()
+{
+
+    char respuesta;
+    sem_t *sem; // Declaración del semáforo
+    int continuar = 1;
+
+    // Crear un semáforo nombrado (SEM_UNDO garantiza que se libere cuando el proceso termine)
+    sem = sem_open("/semaforo_banco", O_CREAT, 0644, 0); // Inicializa el semáforo a 0
+    if (sem == SEM_FAILED)
+    {
+        perror("Error al crear el semáforo");
+        exit(1);
+    }
+
+    while (continuar)
+    {
+        printf("Esperando conexión de un nuevo usuario...\n");
+
+        pid_t pid = fork(); // Crear un proceso hijo
+        if (pid == 0)
+        {                   // Si estamos en el proceso hijo
+            execlp("gnome-terminal", "gnome-terminal", "--", "./usuario", NULL) ; // Llamamos a la función que maneja el usuario
+            sem_post(sem);  // Liberar el semáforo para que el padre sepa que terminó
+            exit(0);        // Termina el proceso hijo
+        }
+        else if (pid > 0)
+        {                  // Si estamos en el proceso padre
+            sem_wait(sem); // Espera a que el hijo termine (semaforo bloqueado hasta que el hijo lo libere)
+
+            // Preguntar si desea aceptar otro usuario después de que el hijo termine
+            printf("¿Desea aceptar otro usuario? (s/n): ");
+            scanf(" %c", &respuesta); // Espacio antes de %c para consumir el salto de línea pendiente
+            if (respuesta != 's' && respuesta != 'S')
+            {
+                continuar = 0; // Si no quiere otro usuario, salimos del bucle
+            }
+        }
+        else
+        {
+            perror("Error en fork");
+            exit(EXIT_FAILURE);
+        }
+    }
+
+    // El padre espera a que todos los procesos hijos terminen antes de cerrar
+    while (wait(NULL) > 0) ; // Espera a que todos los hijos terminen
+
+    // Cerramos el semáforo y lo eliminamos
+    sem_close(sem);
+    sem_unlink("/semaforo_banco");
+
+   
 }
 
 // Esta funcion se encarga de "pegar" la alerta en el pipe para poder pasarlo al proceso padre
