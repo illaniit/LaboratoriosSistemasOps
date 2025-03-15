@@ -37,7 +37,7 @@ int main()
     CrearMonitor();
 
     //Cargamos el menu del usuario que se encuentra en init_cuentas.c donde cada usuario sera un hilo de ejecuccion
-    Menu_Hilos();
+    Menu_Procesos();
 
     //Volvemos a llamara monitor para que encuentre las anomalias despues de que el usuario haya cerrado la sesion
     CrearMonitor();

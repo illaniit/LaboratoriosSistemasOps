@@ -1,0 +1,3 @@
+1 | alejandro | de pazos  | calle urano 14 | españa | 20 | 0
+2 | Mario | Hernandez | velilla | sara | 400 | 0
+3 | Geert | Prummel | Carlos Ruiz | Holanda | 0 | 0
