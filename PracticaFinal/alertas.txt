@@ -1,50 +1,10 @@
-[2025-03-15 16:55:40] 1 | Transaccion | Transacción inválida, campos incorrectos en retiro o ingreso
-[2025-03-15 16:55:40] 1 | Transaccion | Saldo negativo detectado
+[2025-03-17 18:49:16] 5 | pedro  | Usuario con saldo negativo
 
-[2025-03-15 17:03:02] 1 | Transaccion | Transacción inválida, campos incorrectos en retiro o ingreso
+[2025-03-17 18:58:06] 5 | pedro  | Usuario con saldo negativo
 
-[2025-03-15 17:03:02] 1 | Transaccion | Saldo negativo detectado
+[2025-03-17 18:59:25] 5 | pedro  | Usuario con saldo negativo
 
-[2025-03-15 17:03:23] 1 | Transaccion | Transacción inválida, campos incorrectos en retiro o ingreso
-[2025-03-15 17:03:23] 1 | Transaccion | Saldo negativo detectado
+[2025-03-17 19:03:01] 5 | pedro  | Usuario con saldo negativo
 
-[2025-03-15 17:03:46] 1 | Transaccion | Transacción inválida, campos incorrectos en retiro o ingreso
-
-[2025-03-15 17:03:46] 1 | Transaccion | Saldo negativo detectado
-
-[2025-03-15 17:13:01] 1 | Transaccion | Transacción inválida, campos incorrectos en retiro o ingreso
-[2025-03-15 17:13:01] 1 | Transaccion | Saldo negativo detectado
-
-[2025-03-15 17:13:46] 1 | Transaccion | Transacción inválida, campos incorrectos en retiro o ingreso
-[2025-03-15 17:13:46] 1 | Transaccion | Saldo negativo detectado
-
-[2025-03-15 17:18:14] 1 | Transaccion | Transacción inválida, campos incorrectos en retiro o ingreso
-[2025-03-15 17:18:14] 1 | Transaccion | Saldo negativo detectado
-
-[2025-03-15 17:21:39] 1 | Transaccion | Transacción inválida, campos incorrectos en retiro o ingreso
-[2025-03-15 17:21:39] 1 | Transaccion | Saldo negativo detectado
-
-[2025-03-15 17:22:44] 1 | Transaccion | Transacción inválida, campos incorrectos en retiro o ingreso
-[2025-03-15 17:22:44] 1 | Transaccion | Saldo negativo detectado
-
-[2025-03-15 17:25:26] 1 | Transaccion | Transacción inválida, campos incorrectos en retiro o ingreso
-[2025-03-15 17:25:26] 1 | Transaccion | Saldo negativo detectado
-
-[2025-03-15 17:27:14] 1 | Transaccion | Transacción inválida, campos incorrectos en retiro o ingreso
-[2025-03-15 17:27:14] 1 | Transaccion | Saldo negativo detectado
-
-[2025-03-15 17:30:01] 1 | Transaccion | Transacción inválida, campos incorrectos en retiro o ingreso
-[2025-03-15 17:30:01] 1 | Transaccion | Saldo negativo detectado
-
-[2025-03-15 17:31:34] 1 | Transaccion | Transacción inválida, campos incorrectos en retiro o ingreso
-[2025-03-15 17:31:34] 1 | Transaccion | Saldo negativo detectado
-
-[2025-03-15 17:33:58] 1 | Transaccion | Transacción inválida, campos incorrectos en retiro o ingreso
-[2025-03-15 17:33:58] 1 | Transaccion | Saldo negativo detectado
-
-[2025-03-15 18:27:00] 1 | Transaccion | Transacción inválida, campos incorrectos en retiro o ingreso
-[2025-03-15 18:27:00] 1 | Transaccion | Saldo negativo detectado
-
-[2025-03-15 19:03:39] 1 | Transaccion | Transacción inválida, campos incorrectos en retiro o ingreso
-[2025-03-15 19:03:39] 1 | Transaccion | Saldo negativo detectado
+[2025-03-17 19:04:48] 5 | pedro  | Usuario con saldo negativo
 

@@ -14,6 +14,7 @@
 
 
 void Mostrar_Menu(){
+    system("clear");
     int Eleccion = 0;
         printf("-------------Hola Bienvenido al menu interactivo----------\n"); // la idea aqui despues de hola es poner el nombre del usuario para que quede chulo
         printf("\t Pulse la opcion que desea realizar.....\n");

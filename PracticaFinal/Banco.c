@@ -123,31 +123,19 @@ void Menu_Procesos()
 {
 
     char respuesta;
-    sem_t *sem; // Declaración del semáforo
     int continuar = 1;
-
-    // Crear un semáforo nombrado (SEM_UNDO garantiza que se libere cuando el proceso termine)
-    sem = sem_open("/semaforo_banco", O_CREAT, 0644, 0); // Inicializa el semáforo a 0
-    if (sem == SEM_FAILED)
-    {
-        perror("Error al crear el semáforo");
-        exit(1);
-    }
-
     while (continuar)
     {
-        printf("Esperando conexión de un nuevo usuario...\n");
-
         pid_t pid = fork(); // Crear un proceso hijo
         if (pid == 0)
         {                   // Si estamos en el proceso hijo
             execlp("gnome-terminal", "gnome-terminal", "--", "./usuario", NULL) ; // Llamamos a la función que maneja el usuario
-            sem_post(sem);  // Liberar el semáforo para que el padre sepa que terminó
+             // Liberar el semáforo para que el padre sepa que terminó
             exit(0);        // Termina el proceso hijo
         }
         else if (pid > 0)
         {                  // Si estamos en el proceso padre
-            sem_wait(sem); // Espera a que el hijo termine (semaforo bloqueado hasta que el hijo lo libere)
+             // Espera a que el hijo termine (semaforo bloqueado hasta que el hijo lo libere)
 
             // Preguntar si desea aceptar otro usuario después de que el hijo termine
             printf("¿Desea aceptar otro usuario? (s/n): ");
@@ -168,8 +156,6 @@ void Menu_Procesos()
     while (wait(NULL) > 0) ; // Espera a que todos los hijos terminen
 
     // Cerramos el semáforo y lo eliminamos
-    sem_close(sem);
-    sem_unlink("/semaforo_banco");
 
    
 }
@@ -246,7 +232,7 @@ void *detectar_transacciones(void *arg)
     {
         int id, saldo1, saldo2, saldo_final; // declaramos las variables 
         char tipo[20], cuenta1[20], cuenta2[20];
-        if (sscanf(linea, "%d,%19[^,],%19[^,],%19[^,],%d,%d,%d", &id, tipo, cuenta1, cuenta2, &saldo1, &saldo2, &saldo_final) == 7) // leemos los campos correspondientes
+        if (sscanf(linea, "%d | %19[^,],%19[^,],%19[^,],%d,%d,%d", &id, tipo, cuenta1, cuenta2, &saldo1, &saldo2, &saldo_final) == 7) // leemos los campos correspondientes
         {
             if (strcmp(tipo, "retiro") == 0 || strcmp(tipo, "ingreso") == 0) // comprobamso que los campos sean validos es decir si es un ingreso o un retiro esos campos de cuenta 2 y saldo 2 deben estar vacios
             {
@@ -275,29 +261,33 @@ void *detectar_transacciones(void *arg)
         Escribir_registro("Se ha producido un error en la apertura del archivo de usuarios");
         return NULL;
     }
-    Escribir_registro("Se ha abierto el arhivo de usuarios");
-    while (fgets(linea, sizeof(linea), usuarios)) // leemos el archivo
-    {
+    Escribir_registro("Se ha abierto el archivo de usuarios");
+
+    
+
+    while (fgets(linea, sizeof(linea), usuarios)) { // Leemos línea por línea
         int id, saldo, num_transacciones;
-        char titular[50];
-        if (sscanf(linea, "%d,%49[^,],%d,%d", &id, titular, &saldo, &num_transacciones) == 4)
-        {
-            if (saldo < 0)
-            {
-                Escribir_registro("Se ha encontrado un usuario con el saldo negativo");
-                enviar_alerta("Usuario con saldo negativo",&id,titular); // enviamos alerta si un usuario tiene el saldo negativo
+        char nombre[50], apellidos[50], domicilio[100], pais[50];
+
+        // Parseamos la línea según el formato: id | nombre | apellidos | domicilio | pais | saldo | numero_transacciones
+        if (sscanf(linea, "%d | %49[^|] | %49[^|] | %99[^|] | %49[^|] | %d | %d", 
+                   &id, nombre, apellidos, domicilio, pais, &saldo, &num_transacciones) == 7) {
+
+            if (saldo < 0) {
+                Escribir_registro("Se ha encontrado un usuario con saldo negativo");
+                enviar_alerta("Usuario con saldo negativo", &id, nombre);
             }
 
-            if (num_transacciones < 0)
-            {
-                Escribir_registro("Se ha encontrado un usuario con un numero de transacciones negativo");
-                enviar_alerta("Número de transacciones inválido",&id,titular); // enviamos alerta si el numero de transacciones es menor que cero
+            if (num_transacciones < 0) {
+                Escribir_registro("Se ha encontrado un usuario con un número de transacciones negativo");
+                enviar_alerta("Número de transacciones inválido", &id, nombre);
             }
+        } else {
+            Escribir_registro("Error en el formato de la línea del archivo");
         }
     }
 
-    fclose(usuarios); // cerramos el archivo
-    return NULL; // ya que es de tipo void
+    fclose(usuarios); // Cerramos el archivo
 }
 // Función para crear el proceso Monitor y manejar alertas en tiempo real
 void CrearMonitor()
