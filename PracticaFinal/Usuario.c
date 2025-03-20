@@ -17,20 +17,27 @@ void Mostrar_Menu()
 {
     pthread_t hilo1, hilo2, hilo3, hilo4;
     int Eleccion = 0;
+
     do
     {
-        system("clear");
-        printf("------------- Hola, Bienvenido al Menú Interactivo ----------\n");
+        system("clear");  // Limpia la pantalla en sistemas UNIX (en Windows usar "cls")
+        printf("------------- 🏦 Menú Interactivo 🏦 -------------\n");
         printf("\tSeleccione una opción:\n");
-        printf("1. Introducir Dinero\n");
-        printf("2. Extraer Dinero\n");
-        printf("3. Hacer una Transferencia\n");
-        printf("4. Consultar mis Datos\n");
-        printf("5. Cerrar Sesión\n");
+        printf("1️⃣  Introducir Dinero\n");
+        printf("2️⃣  Extraer Dinero\n");
+        printf("3️⃣  Hacer una Transferencia\n");
+        printf("4️⃣  Consultar mis Datos\n");
+        printf("5️⃣  Cerrar Sesión\n");
 
-        printf("Ingrese su opción: ");
+        printf("\nIngrese su opción: ");
 
-        scanf("%d", &Eleccion);
+        if (scanf("%d", &Eleccion) != 1)
+        {
+            printf("❌ Entrada inválida. Intente nuevamente.\n");
+            while (getchar() != '\n');  // Limpiar el buffer de entrada
+            sleep(2);
+            continue;
+        }
 
         switch (Eleccion)
         {
@@ -38,46 +45,56 @@ void Mostrar_Menu()
             if (pthread_create(&hilo1, NULL, IntroducirDinero, NULL) != 0)
             {
                 printf("❌ Error al crear el hilo para Introducir Dinero.\n");
-                return;
             }
-            pthread_join(hilo1, NULL);
-           
+            else
+            {
+                pthread_join(hilo1, NULL);
+            }
+            break;
 
         case 2:
             if (pthread_create(&hilo2, NULL, ExtraerDinero, NULL) != 0)
             {
                 printf("❌ Error al crear el hilo para Extraer Dinero.\n");
-                return;
             }
-            pthread_join(hilo2, NULL);
-           
+            else
+            {
+                pthread_join(hilo2, NULL);
+            }
+            break;
 
         case 3:
             if (pthread_create(&hilo3, NULL, Transferencia, NULL) != 0)
             {
                 printf("❌ Error al crear el hilo para Transferencia.\n");
-                return;
             }
-            pthread_join(hilo3, NULL);
-           
+            else
+            {
+                pthread_join(hilo3, NULL);
+            }
+            break;
 
         case 4:
             if (pthread_create(&hilo4, NULL, ConsultarDatos, NULL) != 0)
             {
                 printf("❌ Error al crear el hilo para Consultar Datos.\n");
-                return;
             }
-            pthread_join(hilo4, NULL);
-            
+            else
+            {
+                pthread_join(hilo4, NULL);
+            }
+            break;
 
         case 5:
-            printf("Saliendo del sistema...\n");
+            printf("🔒 Cerrando sesión... Hasta pronto!\n");
             sleep(2);
-            return;
+            break;
 
         default:
             printf("❌ Opción inválida. Inténtelo de nuevo.\n");
+            sleep(2);
             break;
         }
+
     } while (Eleccion != 5);
 }

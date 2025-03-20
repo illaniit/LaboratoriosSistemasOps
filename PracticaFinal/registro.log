@@ -1105,3 +1105,82 @@
 [2025-03-20 11:45:45] Se ha abierto el menú de inicio de sesión
 [2025-03-20 11:45:56] Se ha accedido al sistema correctamente
 [2025-03-20 11:46:07] Se ha accedido al sistema correctamente
+[2025-03-20 13:00:40] Se ha cerrado el extremo de escritura de la tuberia del proceso padre de monitor
+[2025-03-20 13:00:40] Se ha creado correctamente el hilo que revisa ls anomalias
+[2025-03-20 13:00:40] Se ha abierto el fichero de transacciones
+[2025-03-20 13:00:40] Se ha abierto el archivo de usuarios
+[2025-03-20 13:00:40] Error en el formato de la línea del archivo
+[2025-03-20 13:00:40] Error en el formato de la línea del archivo
+[2025-03-20 13:00:40] Error en el formato de la línea del archivo
+[2025-03-20 13:00:40] Se ha cerrado el extremo de escritura de la tuberia del proceso hijo de monitor
+[2025-03-20 13:00:40] Se ha cerrado el extremo de lectura de la tuberia del proceso padre de monitor
+[2025-03-20 13:00:49] Se ha abierto el archivo de properties
+[2025-03-20 13:00:49] Se ha cerrado el extremo de escritura de la tuberia del proceso padre de monitor
+[2025-03-20 13:00:49] Se ha creado correctamente el hilo que revisa ls anomalias
+[2025-03-20 13:00:49] Se ha abierto el fichero de transacciones
+[2025-03-20 13:00:49] Se ha abierto el archivo de usuarios
+[2025-03-20 13:00:49] Error en el formato de la línea del archivo
+[2025-03-20 13:00:49] Error en el formato de la línea del archivo
+[2025-03-20 13:00:49] Error en el formato de la línea del archivo
+[2025-03-20 13:00:49] Se ha cerrado el extremo de escritura de la tuberia del proceso hijo de monitor
+[2025-03-20 13:00:49] Se ha cerrado el extremo de lectura de la tuberia del proceso padre de monitor
+[2025-03-20 13:00:50] Se ha accedido al menú de entrada
+[2025-03-20 13:00:50] Se ha abierto el archivo de properties de init cuentas
+[2025-03-20 13:00:50] Se ha abierto el menú de inicio de sesión
+[2025-03-20 13:00:56] Se ha accedido al sistema correctamente
+[2025-03-20 13:01:07] El usuario ha elegido iniciar sesión
+[2025-03-20 13:03:48] Se ha cerrado el extremo de escritura de la tuberia del proceso padre de monitor
+[2025-03-20 13:03:48] Se ha creado correctamente el hilo que revisa ls anomalias
+[2025-03-20 13:03:48] Se ha abierto el fichero de transacciones
+[2025-03-20 13:03:48] Se ha abierto el archivo de usuarios
+[2025-03-20 13:03:48] Error en el formato de la línea del archivo
+[2025-03-20 13:03:48] Error en el formato de la línea del archivo
+[2025-03-20 13:03:48] Error en el formato de la línea del archivo
+[2025-03-20 13:03:48] Se ha cerrado el extremo de escritura de la tuberia del proceso hijo de monitor
+[2025-03-20 13:03:48] Se ha cerrado el extremo de lectura de la tuberia del proceso padre de monitor
+[2025-03-20 13:03:57] Se ha abierto el archivo de properties
+[2025-03-20 13:03:57] Se ha cerrado el extremo de escritura de la tuberia del proceso padre de monitor
+[2025-03-20 13:03:57] Se ha creado correctamente el hilo que revisa ls anomalias
+[2025-03-20 13:03:57] Se ha abierto el fichero de transacciones
+[2025-03-20 13:03:57] Se ha abierto el archivo de usuarios
+[2025-03-20 13:03:57] Error en el formato de la línea del archivo
+[2025-03-20 13:03:57] Error en el formato de la línea del archivo
+[2025-03-20 13:03:57] Error en el formato de la línea del archivo
+[2025-03-20 13:03:57] Se ha cerrado el extremo de escritura de la tuberia del proceso hijo de monitor
+[2025-03-20 13:03:57] Se ha cerrado el extremo de lectura de la tuberia del proceso padre de monitor
+[2025-03-20 13:03:58] Se ha accedido al menú de entrada
+[2025-03-20 13:03:58] Se ha abierto el archivo de properties de init cuentas
+[2025-03-20 13:03:58] Se ha abierto el menú de inicio de sesión
+[2025-03-20 13:04:03] Se ha accedido al sistema correctamente
+[2025-03-20 13:04:28] El usuario ha elegido iniciar sesión
+[2025-03-20 13:04:59] Se ha accedido al menú de entrada
+[2025-03-20 13:04:59] Se ha abierto el archivo de properties de init cuentas
+[2025-03-20 13:04:59] Se ha abierto el menú de inicio de sesión
+[2025-03-20 13:05:03] Se ha accedido al sistema correctamente
+[2025-03-20 13:05:07] El usuario ha elegido iniciar sesión
+[2025-03-20 13:06:48] Se ha cerrado el extremo de escritura de la tuberia del proceso padre de monitor
+[2025-03-20 13:06:48] Se ha creado correctamente el hilo que revisa ls anomalias
+[2025-03-20 13:06:48] Se ha abierto el fichero de transacciones
+[2025-03-20 13:06:48] Se ha abierto el archivo de usuarios
+[2025-03-20 13:06:48] Error en el formato de la línea del archivo
+[2025-03-20 13:06:48] Error en el formato de la línea del archivo
+[2025-03-20 13:06:48] Error en el formato de la línea del archivo
+[2025-03-20 13:06:48] Se ha cerrado el extremo de escritura de la tuberia del proceso hijo de monitor
+[2025-03-20 13:06:48] Se ha cerrado el extremo de lectura de la tuberia del proceso padre de monitor
+[2025-03-20 13:06:58] Se ha abierto el archivo de properties
+[2025-03-20 13:06:58] Se ha cerrado el extremo de escritura de la tuberia del proceso padre de monitor
+[2025-03-20 13:06:58] Se ha creado correctamente el hilo que revisa ls anomalias
+[2025-03-20 13:06:58] Se ha abierto el fichero de transacciones
+[2025-03-20 13:06:58] Se ha abierto el archivo de usuarios
+[2025-03-20 13:06:58] Error en el formato de la línea del archivo
+[2025-03-20 13:06:58] Error en el formato de la línea del archivo
+[2025-03-20 13:06:58] Error en el formato de la línea del archivo
+[2025-03-20 13:06:58] Se ha cerrado el extremo de escritura de la tuberia del proceso hijo de monitor
+[2025-03-20 13:06:58] Se ha cerrado el extremo de lectura de la tuberia del proceso padre de monitor
+[2025-03-20 13:06:59] Se ha accedido al menú de entrada
+[2025-03-20 13:06:59] Se ha abierto el archivo de properties de init cuentas
+[2025-03-20 13:06:59] Se ha abierto el menú de inicio de sesión
+[2025-03-20 13:07:04] Se ha accedido al sistema correctamente
+[2025-03-20 13:07:11] Se ha accedido al menú de entrada
+[2025-03-20 13:07:11] Se ha abierto el archivo de properties de init cuentas
+[2025-03-20 13:07:11] Se ha abierto el menú de inicio de sesión

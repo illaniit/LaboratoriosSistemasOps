@@ -107,7 +107,7 @@ void *Menu_Usuario()
         Escribir_registro2("Se ha abierto el menú de inicio de sesión");
 
         printf("\n------------------ Elija una opción ----------------------\n");
-        printf("|   1. Inicio de sesión                                   |\n");
+        printf("|   1. Inicio de sesión                                  |\n");
         printf("|   2. Registro                                          |\n");
         printf("|       Pulse una opción (1/2):                          |\n");
         printf("---------------------------------------------------------\n");
@@ -205,6 +205,7 @@ void InicioDeSesion() {
                         Escribir_registro2("Se ha accedido al sistema correctamente");
                         fclose(archivo);
                         Mostrar_Menu(); // Función que muestra el menú principal
+                        Menu_Usuario();
                         return;
                     } else {
                         printf("\n⚠️ Contraseña incorrecta. Inténtalo de nuevo.\n");
