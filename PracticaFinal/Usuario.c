@@ -79,5 +79,5 @@ void Mostrar_Menu()
             printf("❌ Opción inválida. Inténtelo de nuevo.\n");
             break;
         }
-    } while (Eleccion == 5);
+    } while (Eleccion != 5);
 }
