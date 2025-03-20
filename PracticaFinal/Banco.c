@@ -121,7 +121,7 @@ void AbrirPropertis()
 }
 void Menu_Procesos()
 {
-
+    
     char respuesta;
     int continuar = 1;
     while (continuar)

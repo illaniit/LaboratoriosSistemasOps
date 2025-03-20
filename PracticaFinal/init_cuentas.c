@@ -19,7 +19,6 @@ void Registro();
 void InicioDeSesion();
 int main()
 {
- 
     Menu_Usuario();
 }
 
