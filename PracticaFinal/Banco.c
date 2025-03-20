@@ -121,7 +121,7 @@ void AbrirPropertis()
 }
 void Menu_Procesos()
 {
-    
+
     char respuesta;
     int continuar = 1;
     while (continuar)
@@ -199,7 +199,7 @@ void limpiar(int sig)
 void registrar_alerta(const char *mensaje)
 {
     Escribir_registro("Se ha abierto el fichero de alertas");
-    FILE *archivo_alertas = fopen("alertas.txt", "a"); // Abrimos el fichero
+    FILE *archivo_alertas = fopen("alertas.log", "a"); // Abrimos el fichero
     if (archivo_alertas)
     {
         fprintf(archivo_alertas, "%s\n", mensaje); // escribimos el mensaje
@@ -207,7 +207,7 @@ void registrar_alerta(const char *mensaje)
     }
     else
     {
-        perror("Error al abrir alertas.txt");
+        perror("Error al abrir alertas.log");
         Escribir_registro("Se ha producido un error al abrir el fichero de alertas");
     }
 }
@@ -267,11 +267,11 @@ void *detectar_transacciones(void *arg)
 
     while (fgets(linea, sizeof(linea), usuarios)) { // Leemos línea por línea
         int id, saldo, num_transacciones;
-        char nombre[50], apellidos[50], domicilio[100], pais[50];
+        char nombre[50], apellidos[50],contraseña[50], domicilio[100], pais[50];
 
         // Parseamos la línea según el formato: id | nombre | apellidos | domicilio | pais | saldo | numero_transacciones
-        if (sscanf(linea, "%d | %49[^|] | %49[^|] | %99[^|] | %49[^|] | %d | %d", 
-                   &id, nombre, apellidos, domicilio, pais, &saldo, &num_transacciones) == 7) {
+        if (sscanf(linea, "%d | %49[^|] |%49[^|] |%49[^|] | %99[^|] | %49[^|] | %d | %d", 
+                   &id, nombre, contraseña , apellidos, domicilio, pais, &saldo, &num_transacciones) == 8) {
 
             if (saldo < 0) {
                 Escribir_registro("Se ha encontrado un usuario con saldo negativo");
