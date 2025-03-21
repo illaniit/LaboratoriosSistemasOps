@@ -1,1 +1,2 @@
-1 | 1 | 1 | 1   | 1   | 1   | 1201 | 0
+1 | 1 | 1 | 1    | 1    | 1    | 1201 | 0
+2 | Alejandro | asdfzxcv | De Pazos Tena  | calle urano  | españa  | 10500 | 0
