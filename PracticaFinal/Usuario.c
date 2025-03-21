@@ -54,7 +54,7 @@
         switch (Eleccion)
         {
         case 1:
-            if (pthread_create(&hilo1, NULL, IntroducirDinero, NULL) != 0)
+            if (pthread_create(&hilo1, NULL, IntroducirDinero, &usuario) != 0)
             {
                 printf("❌ Error al crear el hilo para Introducir Dinero.\n");
             }
