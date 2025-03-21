@@ -13,7 +13,7 @@
 
 // Aqui hay que meter las funciones de properties y
 
-void Mostrar_Menu()
+void Mostrar_Menu(char *user)
 {
     pthread_t hilo1, hilo2, hilo3, hilo4;
     int Eleccion = 0;
@@ -75,7 +75,7 @@ void Mostrar_Menu()
             break;
 
         case 4:
-            if (pthread_create(&hilo4, NULL, ConsultarDatos, NULL) != 0)
+            if (pthread_create(&hilo4, NULL, ConsultarDatos, user) != 0)
             {
                 printf("❌ Error al crear el hilo para Consultar Datos.\n");
             }

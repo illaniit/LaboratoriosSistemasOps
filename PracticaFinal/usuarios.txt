@@ -1,9 +1,0 @@
-1 | Alejandro | 12 | De Pazos | 66 | 66 | 400 | -1
-2 | 1 | 1 | 1 | 1 | 1 | 1 | 0
-3 | 2 | 2 | 22 | 2 | 2 | 2 | 0
-4 | hola | hola | hola | hola | hola | 45 | 0
-5 | alejandro  | 1 | De Pazos | si | si | -300 | 0
-6 | 1 | 1 | 1 | 1 | 1 | 1 | 0
-7 | 2 | 2 | 2 | 2 | 2 | 2 | 0
-8 | Alex | 1234 | si | calle urano | españa | 1000 | 0
-9 | Mario | mario123 | Mi chiquitajo | velilla | sri lanka | -400 | -800

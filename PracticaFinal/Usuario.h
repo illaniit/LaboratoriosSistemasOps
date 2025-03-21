@@ -3,6 +3,6 @@
 /// @brief 
 // defino la funcion del menu para poder usarlo desde init_cuenta.c
 
-void Mostrar_Menu();
+void Mostrar_Menu(char *user);
 
 #endif
