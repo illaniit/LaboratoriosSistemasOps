@@ -204,7 +204,7 @@ void InicioDeSesion() {
                         sleep(2);
                         Escribir_registro2("Se ha accedido al sistema correctamente");
                         fclose(archivo);
-                        Mostrar_Menu(Usuario); // Función que muestra el menú principal
+                        Mostrar_Menu(Usuario,Contraseña); // Función que muestra el menú principal
                         Menu_Usuario();
                         return;
                     } else {

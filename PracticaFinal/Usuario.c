@@ -13,14 +13,26 @@
 
 // Aqui hay que meter las funciones de properties y
 
-void Mostrar_Menu(char *user)
+
+
+    struct Usuario
+    {
+        char Usuario[50];
+        char Contraseña[50];
+    }Usuario;
+
+    void Mostrar_Menu(char *user, char *passwd)
 {
+    struct Usuario usuario;
+    strcpy(usuario.Usuario, user);
+    strcpy(usuario.Contraseña, passwd);
+
     pthread_t hilo1, hilo2, hilo3, hilo4;
     int Eleccion = 0;
 
     do
     {
-        system("clear");  // Limpia la pantalla en sistemas UNIX (en Windows usar "cls")
+        system("clear"); 
         printf("------------- 🏦 Menú Interactivo 🏦 -------------\n");
         printf("\tSeleccione una opción:\n");
         printf("1️⃣  Introducir Dinero\n");
@@ -75,7 +87,7 @@ void Mostrar_Menu(char *user)
             break;
 
         case 4:
-            if (pthread_create(&hilo4, NULL, ConsultarDatos, user) != 0)
+            if (pthread_create(&hilo4, NULL, ConsultarDatos, &usuario) != 0)
             {
                 printf("❌ Error al crear el hilo para Consultar Datos.\n");
             }

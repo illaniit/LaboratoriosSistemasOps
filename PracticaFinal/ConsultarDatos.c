@@ -14,10 +14,15 @@
 #include <sys/wait.h>
 #include <stdbool.h>
 #include "Operaciones.h"
-void DatosCuenta(char *user);
-void ConsultarTransferencias(char *user);
+void DatosCuenta(char *user,char *passwd);
+void ConsultarTransferencias(char *user,char *passwd);
 void limpiar_cadena1(char *cadena);
-
+bool ComprobarCuenta(char *cuenta, char *contraseña);
+struct Usuario2
+    {
+        char Usuario1[50];
+        char Contraseña1[50];
+    }Usuario2;
 
 void limpiar_cadena1(char* cadena) {
     int inicio = 0;
@@ -40,12 +45,52 @@ void limpiar_cadena1(char* cadena) {
     cadena[fin - inicio + 1] = '\0'; // Añadir el carácter nulo al final
 }
 
+
+bool ComprobarCuenta(char *cuenta, char *contraseña){
+    
+        FILE *archivo = fopen("usuarios.txt", "r"); // Abrimos el archivo en modo lectura
+    
+        if (archivo == NULL)
+        {
+            printf("❌ No se pudo abrir el archivo de usuarios.\n");
+            return false;  // No se pudo abrir el archivo
+        }
+    
+        char linea[200]; // Para almacenar cada línea del archivo
+        while (fgets(linea, sizeof(linea), archivo) != NULL)
+        {
+            // Separar la línea usando strtok() para obtener id, nombre y contraseña
+            char *id = strtok(linea, "|");
+            char *nombre = strtok(NULL, "|");
+            char *contraseña_archivo = strtok(NULL, "|");
+    
+            // Limpiar posibles espacios en blanco alrededor de las cadenas
+            if (nombre != NULL) {
+                nombre[strcspn(nombre, "\n")] = 0;  // Eliminar el salto de línea al final de nombre
+            }
+            if (contraseña_archivo != NULL) {
+                contraseña_archivo[strcspn(contraseña_archivo, "\n")] = 0;  // Eliminar el salto de línea al final de contraseña
+            }
+    
+            // Comprobamos si el nombre y la contraseña coinciden
+            if (nombre != NULL && contraseña_archivo != NULL &&
+                strcmp(nombre, cuenta) == 0 && strcmp(contraseña_archivo, contraseña) == 0)
+            {
+                fclose(archivo);  // Cerramos el archivo antes de regresar
+                return true;      // Se encontró la cuenta con la contraseña correcta
+            }
+        }
+    
+        fclose(archivo);  // Cerramos el archivo si no se encontró la cuenta
+        return false;     // No se encontró la cuenta o la contraseña no coincide
+    
+}
 void *ConsultarDatos(void *arg) {
     sem_t s1;
     sem_init(&s1,0,1);
     sem_wait(&s1);
     
-    char *user = (char *)arg;
+    struct Usuario2 *usuario = (struct Usuario2 *)arg;
     int Eleccion = 0;
 
     do {
@@ -64,11 +109,11 @@ void *ConsultarDatos(void *arg) {
 
         switch (Eleccion) {
             case 1:
-                DatosCuenta(user);
+                DatosCuenta(usuario->Usuario1,usuario->Contraseña1);
                 
                 break;
             case 2:
-                ConsultarTransferencias(user);
+                ConsultarTransferencias(usuario->Usuario1,usuario->Contraseña1);
                 break;
             case 3:
                 printf("Volviendo al menú...\n");
@@ -83,7 +128,7 @@ void *ConsultarDatos(void *arg) {
     
 }
 
-void DatosCuenta(char *user) {
+void DatosCuenta(char *user,char *passwd) {
     system("clear");
     bool encontrado=false;
     char var[100];
@@ -92,21 +137,23 @@ void DatosCuenta(char *user) {
         perror("Error al abrir usuario.txt");
         return;
     }
-      limpiar_cadena1(user);
+    limpiar_cadena1(user);
     char linea[256];
     int id1, saldo1, num_transacciones1;
     char nombre1[50], contrasena1[50], apellidos1[50], domicilio1[100], pais1[50];
     while (fgets(linea, sizeof(linea), archivoCuentas)) {
         linea[strcspn(linea, "\n")] = '\0';
 
-       
-
         if (sscanf(linea, "%d | %49[^|] | %49[^|] | %49[^|] | %99[^|] | %49[^|] | %d | %d",
                    &id1, nombre1, contrasena1, apellidos1, domicilio1, pais1, &saldo1, &num_transacciones1) == 8) {
                     limpiar_cadena1(nombre1);
+                    limpiar_cadena1(contrasena1);
             if (strcmp(nombre1, user) == 0) {
-            encontrado=true;
-                break;
+                if(strcmp(contrasena1,passwd)==0){
+                    encontrado=true;
+                    break;
+                }
+                
             }
         }
     }
@@ -126,7 +173,7 @@ void DatosCuenta(char *user) {
     fclose(archivoCuentas);
 }
 
-void ConsultarTransferencias(char *user) {
+void ConsultarTransferencias(char *user, char *passwd) {
     char var[20];
     system("clear");
     FILE *archivoTransacciones = fopen("transaciones.txt", "r");
@@ -134,7 +181,7 @@ void ConsultarTransferencias(char *user) {
         perror("Error al abrir transacciones.txt");
         return;
     }
-
+     bool CuentaVer=false;
     char linea[256];
     printf("\n------ Transferencias ------\n");
     while (fgets(linea, sizeof(linea), archivoTransacciones)) {
@@ -145,10 +192,17 @@ void ConsultarTransferencias(char *user) {
                    &id, tipo, cuenta1, cuenta2, &saldo1, &saldo2, &saldofinal) == 7) {
             limpiar_cadena1(cuenta1);
             limpiar_cadena1(cuenta2);
-            if (strcmp(cuenta1, user) == 0 || strcmp(cuenta2, user) == 0) {
+            if (strcmp(cuenta1, user) == 0) {
+                CuentaVer = ComprobarCuenta(cuenta1,passwd);
+                if(CuentaVer){
                 printf("ID: %d | Tipo: %s | De: %s | A: %s | Saldo antes: %d | Saldo después: %d\n",
                        id, tipo, cuenta1, cuenta2, saldo1, saldofinal);
-            
+                }
+            }
+            if(strcmp(cuenta2,user)==0){
+               CuentaVer = ComprobarCuenta(cuenta2,passwd);
+               printf("ID: %d | Tipo: %s | De: %s | A: %s | Saldo antes: %d | Saldo después: %d\n",
+                id, tipo, cuenta1, cuenta2, saldo1, saldofinal);
             }
         }
         
