@@ -74,3 +74,46 @@
 [2025-03-21 17:21:58] Se ha abierto el menú de inicio de sesión
 [2025-03-21 17:22:04] Intento de inicio de sesión con contraseña incorrecta
 [2025-03-21 17:22:17] Se ha accedido al sistema correctamente
+[2025-03-21 18:32:15] Se ha cerrado el extremo de escritura de la tuberia del proceso padre de monitor
+[2025-03-21 18:32:15] Se ha creado correctamente el hilo que revisa ls anomalias
+[2025-03-21 18:32:15] Se ha abierto el fichero de transacciones
+[2025-03-21 18:32:15] Se ha producido un error en la apertura del archivo de usuarios
+[2025-03-21 18:32:15] Se ha cerrado el extremo de escritura de la tuberia del proceso hijo de monitor
+[2025-03-21 18:32:15] Se ha cerrado el extremo de lectura de la tuberia del proceso padre de monitor
+[2025-03-21 18:32:46] Se ha abierto el archivo de properties
+[2025-03-21 18:32:46] Se ha creado correctamente el hilo que revisa ls anomalias
+[2025-03-21 18:32:46] Se ha cerrado el extremo de escritura de la tuberia del proceso padre de monitor
+[2025-03-21 18:32:46] Se ha abierto el fichero de transacciones
+[2025-03-21 18:32:46] Se ha producido un error en la apertura del archivo de usuarios
+[2025-03-21 18:32:46] Se ha cerrado el extremo de lectura de la tuberia del proceso padre de monitor
+[2025-03-21 18:32:46] Se ha cerrado el extremo de escritura de la tuberia del proceso hijo de monitor
+[2025-03-21 18:32:47] Se ha accedido al menú de entrada
+[2025-03-21 18:32:47] Se ha abierto el archivo de properties de init cuentas
+[2025-03-21 18:32:47] Se ha abierto el menú de inicio de sesión
+[2025-03-21 18:32:50] El usuario ha entrado en la sección de registro
+[2025-03-21 18:32:58] Se ha registrado un nuevo usuario en el sistema
+[2025-03-21 18:32:58] El usuario ha elegido la opción de registro
+[2025-03-21 18:33:02] Se ha accedido al menú de entrada
+[2025-03-21 18:33:02] Se ha abierto el archivo de properties de init cuentas
+[2025-03-21 18:33:02] Se ha abierto el menú de inicio de sesión
+[2025-03-21 18:33:08] Se ha accedido al sistema correctamente
+[2025-03-21 18:35:18] Se ha accedido al menú de entrada
+[2025-03-21 18:35:18] Se ha abierto el archivo de properties de init cuentas
+[2025-03-21 18:35:18] Se ha abierto el menú de inicio de sesión
+[2025-03-21 18:35:22] Se ha cerrado el extremo de escritura de la tuberia del proceso padre de monitor
+[2025-03-21 18:35:22] Se ha creado correctamente el hilo que revisa ls anomalias
+[2025-03-21 18:35:22] Se ha abierto el fichero de transacciones
+[2025-03-21 18:35:22] Se ha abierto el archivo de usuarios
+[2025-03-21 18:35:22] Se ha cerrado el extremo de escritura de la tuberia del proceso hijo de monitor
+[2025-03-21 18:35:22] Se ha cerrado el extremo de lectura de la tuberia del proceso padre de monitor
+[2025-03-21 18:35:31] Se ha abierto el archivo de properties
+[2025-03-21 18:35:31] Se ha cerrado el extremo de escritura de la tuberia del proceso padre de monitor
+[2025-03-21 18:35:31] Se ha creado correctamente el hilo que revisa ls anomalias
+[2025-03-21 18:35:31] Se ha abierto el fichero de transacciones
+[2025-03-21 18:35:31] Se ha abierto el archivo de usuarios
+[2025-03-21 18:35:31] Se ha cerrado el extremo de lectura de la tuberia del proceso padre de monitor
+[2025-03-21 18:35:31] Se ha cerrado el extremo de escritura de la tuberia del proceso hijo de monitor
+[2025-03-21 18:35:32] Se ha accedido al menú de entrada
+[2025-03-21 18:35:32] Se ha abierto el archivo de properties de init cuentas
+[2025-03-21 18:35:32] Se ha abierto el menú de inicio de sesión
+[2025-03-21 18:35:37] Se ha accedido al sistema correctamente
