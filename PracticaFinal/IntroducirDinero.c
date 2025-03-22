@@ -76,7 +76,8 @@ void *IntroducirDinero(void *arg2)
     int id2, saldo2, num_transacciones2;
     char nombre2[50], contrasena2[50], apellidos2[50], domicilio2[100], pais2[50];
     char linea[200];
-
+    
+    int id_transacciones = 0;
     while (fgets(linea, sizeof(linea), ArchivoUsuarios) != NULL)
     {
         linea[strcspn(linea, "\n")] = '\0';
@@ -94,14 +95,13 @@ void *IntroducirDinero(void *arg2)
                 printf("Introduzca la cantidad que desea ingresar: ");
                 scanf("%d", &saldo_introducir);
                 saldo2 += saldo_introducir;
-                int id_transacciones = 1;
-                FILE *ArchivoTransacciones = fopen("transaciones.txt", "a");
+                FILE *ArchivoTransacciones = fopen("transaciones.txt", "r+");
                 // Incrementamos el id para que sepamos el id de la transaccion//
                 while (fgets(linea, sizeof(linea), ArchivoTransacciones) != NULL)
                 {
                     id_transacciones++;
                 }
-                fprintf(ArchivoTransacciones, "%d |ingreso | %s | - | %d | - | %d ", id2, nombre2, dinero_inicial, saldo2);
+                fprintf(ArchivoTransacciones, "%d |ingreso | %s | - | %d | - | %d \n", id2, nombre2, dinero_inicial, saldo2);
                 fclose(ArchivoTransacciones);
                 num_transacciones2++;
             }

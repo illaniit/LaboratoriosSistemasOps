@@ -8,6 +8,7 @@
 #define Punt_Archivo_Properties "Variables.properties"
 #include "Usuario.h"
 #include "Operaciones.h"
+#include "Comun.h"
 /// @brief
 /// En este bloque de codigo mostraremos el menu del usuario donde le daremos opciones a realizar diferentes operaciones
 
@@ -23,6 +24,7 @@
 
     void Mostrar_Menu(char *user, char *passwd)
 {
+    leer_configuracion("variables.properties");
     struct Usuario usuario;
     strcpy(usuario.Usuario, user);
     strcpy(usuario.Contraseña, passwd);
