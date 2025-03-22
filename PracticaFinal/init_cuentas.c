@@ -118,7 +118,7 @@ void limpiar_cadena(char* cadena) {
 }
 /// @brief esta funcion le permite al usuario inciar sesion con su cuenta y guardar sus claves en el archivo
 void InicioDeSesion() {
-    systema("clear");
+    system("clear");
     FILE *archivo;
     char Usuario[50], Contraseña[50]; // Datos ingresados por el usuario
     char linea[256]; // Buffer para leer las líneas del archivo

@@ -105,7 +105,7 @@ void *IntroducirDinero(void *arg2) {
             }
         }
         // reescribimos el archivo entero en un archivo temporal
-        fprintf(tempFile, "%d | %s | %s | %s | %s | %s | %d | %d\n",id2, nombre2, contrasena2, apellidos2, domicilio2, pais2, saldo2, num_transacciones2);
+        fprintf(tempFile, "%d|%s|%s|%s|%s|%s|%d|%d\n",id2, nombre2, contrasena2, apellidos2, domicilio2, pais2, saldo2, num_transacciones2);
     }
 
     fclose(ArchivoUsuarios); // cerramos ambos archiovs
