@@ -67,7 +67,7 @@
             break;
 
         case 2:
-            if (pthread_create(&hilo2, NULL, ExtraerDinero, NULL) != 0)
+            if (pthread_create(&hilo2, NULL, ExtraerDinero, &usuario) != 0)
             {
                 printf("❌ Error al crear el hilo para Extraer Dinero.\n");
             }
