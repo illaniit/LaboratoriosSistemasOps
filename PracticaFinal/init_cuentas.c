@@ -53,45 +53,7 @@ void Escribir_registro2(const char *mensaje_registro)
 
 // Función para abrir y leer el archivo de propiedades
 // Esta funcion nos permite cargar las variables que usemos en el codigo para que sea mas accesible
-void AbrirPropertis2()
-{
-    // Llamamos al registro.log
-    Escribir_registro2("Se ha abierto el archivo de properties de init cuentas");
-    char *key, *value;
-    char line[MAX_LENGTH];
-    char username[MAX_LENGTH] = {0};
-    char password[MAX_LENGTH] = {0};
 
-    FILE *ArchivoPro = fopen(Punt_Archivo_Properties, "r");
-
-    if (!ArchivoPro)
-    {
-        perror("Error al abrir el archivo de propiedades");
-        Escribir_registro2("Fallo al abrir el arhivo de properties");
-        return;
-    }
-
-    while (fgets(line, MAX_LENGTH, ArchivoPro))
-    {
-
-        line[strcspn(line, "\n")] = 0;
-        key = strtok(line, "=");
-        value = strtok(NULL, "=");
-        if (key && value)
-        {
-            if (strcmp(key, "username") == 0)
-            {
-                strncpy(username, value, MAX_LENGTH - 1);
-            }
-            else if (strcmp(key, "password") == 0)
-            {
-                strncpy(password, value, MAX_LENGTH - 1);
-            }
-        }
-    }
-
-    fclose(ArchivoPro);
-}
 int contador = 1;
 
 // Función para cada usuario ejecutándose en un hilo
@@ -99,7 +61,7 @@ void *Menu_Usuario()
 {
     system("clear");
     Escribir_registro2("Se ha accedido al menú de entrada");
-    AbrirPropertis2();
+ 
 
     int Eleccion;
     do
@@ -238,7 +200,7 @@ void Registro()
         int id;            // ID de la cuenta
         char Nombre[50];   // Nombre de usuario
         char Apellido[50]; // Apellido del usuario
-        char Contraseña[50];
+        char Contraseña[50];  
         char RepetirContraseña[50];
         char domicilio[100];      // Domicilio
         char pais[50];            // País

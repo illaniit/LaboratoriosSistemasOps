@@ -86,6 +86,7 @@ void *IntroducirDinero(void *arg2) {
                 printf("Introduzca la cantidad que desea ingresar: ");
                 scanf("%d", &saldo_introducir);
                 saldo2 += saldo_introducir;
+                num_transacciones2++;
             }
         }
         fprintf(tempFile, "%d | %s | %s | %s | %s | %s | %d | %d\n",
@@ -98,7 +99,9 @@ void *IntroducirDinero(void *arg2) {
     if (encontrado) {
         remove("usuarios.txt");
         rename("temp.txt", "usuarios.txt");
+        //escribir en transacciones el registro del ingreso , es solo abrirlo y meterle
         printf("Saldo actualizado correctamente.\n");
+        sleep(2);
     } else {
         remove("temp.txt");
         printf("Usuario no encontrado o contraseña incorrecta.\n");
