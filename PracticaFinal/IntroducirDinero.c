@@ -99,7 +99,7 @@ void *IntroducirDinero(void *arg2) {
     if (encontrado) {
         remove("usuarios.txt");
         rename("temp.txt", "usuarios.txt");
-        //escribir en transacciones el registro del ingreso , es solo abrirlo y meterle
+        //Escribir en transacciones el registro del ingreso , es solo abrirlo y meterle
         printf("Saldo actualizado correctamente.\n");
         sleep(2);
     } else {

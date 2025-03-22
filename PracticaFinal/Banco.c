@@ -19,16 +19,7 @@
 #define MAX_LENGTH 256
 
 int pipefd[2]; // Tubería que la declaramos para poder pasar informacion de monitor a banco y registrarlo en alertas .txt
-typedef struct Config
-{
-    int limite_retiro;
-    int limite_transferencia;
-    int umbral_retiros;
-    int umbral_transferencias;
-    int num_hilos;
-    char archivo_cuentas[50];
-    char archivo_log[50];
-} Config;
+
 
 // Definimos las funciones  que vamos a utilizar
 void Menu_Procesos();

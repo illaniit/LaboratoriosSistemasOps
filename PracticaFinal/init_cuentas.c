@@ -20,7 +20,6 @@ void Registro();
 void InicioDeSesion();
 int main()
 {
-    Config config = leer_configuracion("variables.properties");
     Menu_Usuario();
 }
 

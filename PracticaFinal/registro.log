@@ -278,3 +278,27 @@
 [2025-03-22 12:43:23] Se ha cerrado el extremo de lectura de la tuberia del proceso padre de monitor
 [2025-03-22 12:43:23] Se ha accedido al menú de entrada
 [2025-03-22 12:43:23] Se ha abierto el menú de inicio de sesión
+[2025-03-22 16:28:01] Se ha cerrado el extremo de escritura de la tuberia del proceso padre de monitor
+[2025-03-22 16:28:01] Se ha creado correctamente el hilo que revisa ls anomalias
+[2025-03-22 16:28:01] Se ha abierto el fichero de transacciones
+[2025-03-22 16:28:01] Se ha abierto el archivo de usuarios
+[2025-03-22 16:28:01] Se ha encontrado un usuario con saldo negativo
+[2025-03-22 16:28:01] Se ha enviado una alerta
+[2025-03-22 16:28:01] Se ha registrado una alerta en el sistema
+[2025-03-22 16:28:01] Se ha abierto el fichero de alertas
+[2025-03-22 16:28:01] Se ha cerrado el extremo de escritura de la tuberia del proceso hijo de monitor
+[2025-03-22 16:28:01] Se ha cerrado el extremo de lectura de la tuberia del proceso padre de monitor
+[2025-03-22 16:28:02] Se ha accedido al menú de entrada
+[2025-03-22 16:28:02] Se ha abierto el menú de inicio de sesión
+[2025-03-22 16:28:06] El usuario ha entrado en la sección de registro
+[2025-03-22 16:28:37] Se ha registrado un nuevo usuario en el sistema
+[2025-03-22 16:28:37] El usuario ha elegido la opción de registro
+[2025-03-22 16:28:41] Se ha accedido al menú de entrada
+[2025-03-22 16:28:41] Se ha abierto el menú de inicio de sesión
+[2025-03-22 16:28:52] Se ha accedido al sistema correctamente
+[2025-03-22 16:29:30] Se ha accedido al menú de entrada
+[2025-03-22 16:29:30] Se ha abierto el menú de inicio de sesión
+[2025-03-22 16:29:32] Se ha accedido al menú de entrada
+[2025-03-22 16:29:32] Se ha abierto el menú de inicio de sesión
+[2025-03-22 16:29:41] Se ha accedido al sistema correctamente
+[2025-03-22 16:29:46] Se ha accedido al sistema correctamente

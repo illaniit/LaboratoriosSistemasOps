@@ -1,3 +1,4 @@
-1 | 1 | 1 | 1     | 1     | 1     | 1201 | 0
-2 | Alejandro | asdfzxcv | De Pazos Tena   | calle urano   | españa   | -11000 | 0
-3 | chuso | 123 | de andres | peru | lima | 200 | 0
+1 | 1 | 1 | 1      | 1      | 1      | 1201 | 0
+2 | Alejandro | asdfzxcv | De Pazos Tena    | calle urano    | españa    | -11000 | 0
+3 | chuso | 123 | de andres  | peru  | lima  | 200 | 0
+4 | Mario | sarita123 | Hernandez  | velilla  | finlandia  | 1400 | 1
