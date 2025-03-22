@@ -13,12 +13,14 @@
 #include <semaphore.h>
 #include <sys/wait.h>
 #include <fcntl.h>
+#include "Comun.h"
 
 void *Menu_Usuario();
 void Registro();
 void InicioDeSesion();
 int main()
 {
+    Config config = leer_configuracion("variables.properties");
     Menu_Usuario();
 }
 

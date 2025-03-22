@@ -13,6 +13,7 @@
 #include <semaphore.h>
 #include <sys/fcntl.h>
 #include <sys/wait.h>
+#include "Comun.h"
 #define MONTO_LIMITE 1000
 #define Punt_Archivo_Properties "Variables.properties"
 #define MAX_LENGTH 256
