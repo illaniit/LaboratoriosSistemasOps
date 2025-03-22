@@ -22,9 +22,13 @@
         char Contraseña[50];
     }Usuario;
 
+    /// @brief En este menu permitimos al usuario realizar distintas funciones y para cada funcion creamos un hilo del proceso en el que le 
+    // pasamos un struct con el usuario y la contraseña de la cuenta 
+    /// @param user 
+    /// @param passwd 
     void Mostrar_Menu(char *user, char *passwd)
 {
-    leer_configuracion("variables.properties");
+    leer_configuracion("variables.properties"); // abrimos el archivo de configuracion
     struct Usuario usuario;
     strcpy(usuario.Usuario, user);
     strcpy(usuario.Contraseña, passwd);
@@ -57,46 +61,37 @@
         {
         case 1:
             if (pthread_create(&hilo1, NULL, IntroducirDinero, &usuario) != 0)
-            {
                 printf("❌ Error al crear el hilo para Introducir Dinero.\n");
-            }
+            
             else
-            {
                 pthread_join(hilo1, NULL);
-            }
             break;
 
         case 2:
             if (pthread_create(&hilo2, NULL, ExtraerDinero, &usuario) != 0)
-            {
                 printf("❌ Error al crear el hilo para Extraer Dinero.\n");
-            }
+            
             else
-            {
                 pthread_join(hilo2, NULL);
-            }
+            
             break;
 
         case 3:
             if (pthread_create(&hilo3, NULL, Transferencia, NULL) != 0)
-            {
                 printf("❌ Error al crear el hilo para Transferencia.\n");
-            }
+            
             else
-            {
                 pthread_join(hilo3, NULL);
-            }
+            
             break;
 
         case 4:
             if (pthread_create(&hilo4, NULL, ConsultarDatos, &usuario) != 0)
-            {
                 printf("❌ Error al crear el hilo para Consultar Datos.\n");
-            }
+            
             else
-            {
                 pthread_join(hilo4, NULL);
-            }
+            
             break;
 
         case 5:

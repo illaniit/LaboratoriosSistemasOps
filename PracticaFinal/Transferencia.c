@@ -20,5 +20,11 @@ void *Transferencia(){
     sem_t semaforo4;
     
     sem_init(&semaforo4, 0, 1);
+    sem_wait(&semaforo4);
+    
+
+
+    sem_post(&semaforo4);
+    sem_destroy(&semaforo4);
 
 }

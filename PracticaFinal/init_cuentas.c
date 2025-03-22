@@ -15,14 +15,17 @@
 #include <fcntl.h>
 #include "Comun.h"
 
+
+//incializamos las funciones
 void *Menu_Usuario();
 void Registro();
 void InicioDeSesion();
 int main()
 {
+  //  Llamamos a menu usuario
     Menu_Usuario();
 }
-
+//esto hay que meterlo en abrir_propertis.c y asi no lo tenemos que declarar en todos falta hacerlo
 void Escribir_registro2(const char *mensaje_registro)
 {
     // declaramos la variable time_t
@@ -55,23 +58,21 @@ void Escribir_registro2(const char *mensaje_registro)
 // Función para abrir y leer el archivo de propiedades
 // Esta funcion nos permite cargar las variables que usemos en el codigo para que sea mas accesible
 
-int contador = 1;
-
-// Función para cada usuario ejecutándose en un hilo
+/// @brief Esta funcion despliega un menu que le permite al usuario inciar sesion o registrarse
+/// @return 
 void *Menu_Usuario()
 {
-    system("clear");
-    Escribir_registro2("Se ha accedido al menú de entrada");
- 
+    
+    Escribir_registro2("Se ha accedido al menú de entrada"); // escribimos en el registro
 
     int Eleccion;
     do
     {
-        Escribir_registro2("Se ha abierto el menú de inicio de sesión");
-
-        printf("\n------------------ Elija una opción ----------------------\n");
-        printf("|   1. Inicio de sesión                                  |\n");
-        printf("|   2. Registro                                          |\n");
+        //este es el menu de incio de sesion
+        system("clear");
+        printf("\n------------------💰Elija una opción💰------------------\n");
+        printf("|   1️⃣  Inicio de sesión                                 |\n");
+        printf("|   2️⃣ Registro                                          |\n");
         printf("|       Pulse una opción (1/2):                          |\n");
         printf("---------------------------------------------------------\n");
         scanf("%d", &Eleccion);
@@ -115,8 +116,9 @@ void limpiar_cadena(char* cadena) {
     }
     cadena[fin - inicio + 1] = '\0'; // Añadir el carácter nulo al final
 }
-
+/// @brief esta funcion le permite al usuario inciar sesion con su cuenta y guardar sus claves en el archivo
 void InicioDeSesion() {
+    systema("clear");
     FILE *archivo;
     char Usuario[50], Contraseña[50]; // Datos ingresados por el usuario
     char linea[256]; // Buffer para leer las líneas del archivo
@@ -192,6 +194,7 @@ void InicioDeSesion() {
     printf("\n⛔ Demasiados intentos fallidos. Inténtalo más tarde.\n");
     Escribir_registro2("Se ha bloqueado el acceso por múltiples intentos fallidos.");
 }
+/// @brief esta funcion permite que el usuario se registre en una cuenta nueva
 void Registro()
 {
     Escribir_registro2("El usuario ha entrado en la sección de registro");

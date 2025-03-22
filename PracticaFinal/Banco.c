@@ -14,12 +14,11 @@
 #include <sys/fcntl.h>
 #include <sys/wait.h>
 #include "Comun.h"
-#define MONTO_LIMITE 1000
+#define Cantidad_limite 1000
 #define Punt_Archivo_Properties "Variables.properties"
 #define MAX_LENGTH 256
 
 int pipefd[2]; // Tubería que la declaramos para poder pasar informacion de monitor a banco y registrarlo en alertas .txt
-
 
 // Definimos las funciones  que vamos a utilizar
 void Menu_Procesos();
@@ -31,7 +30,8 @@ void limpiar(int sig);
 void registrar_alerta(const char *mensaje);
 void Escribir_registro(const char *mensaje_registro);
 
-
+/// @brief este es el main en el cual leemos propertis con las variables 
+/// @return y devolvemos 0 si la ejecuccion ha sido exitosa
 int main()
 {
     // Lo primero abrimos el archivo de Properties y "nos traemos las variables"
@@ -77,13 +77,9 @@ void Escribir_registro(const char *mensaje_registro)
     fclose(ArchivoDeRegistro);
 }
 
-// Función para abrir y leer el archivo de propiedades
-// Esta funcion nos permite cargar las variables que usemos en el codigo para que sea mas accesible
 
-
-   
-
-
+/// @brief Esta funcion crea procesos en una nueva terminal que lo que
+/// hacen es ejecutar la instancia de usuario y ejecutar el codigo del mismo
 void Menu_Procesos()
 {
 
@@ -112,16 +108,14 @@ void Menu_Procesos()
         }
         else
         {
-            perror("Error en fork");
-            exit(EXIT_FAILURE);
+            perror("Error en fork"); // devolvemos un error si se ha generado mal el codigo
+            exit(EXIT_FAILURE); // terminamos la ejeccion si ha habido un problema en el fork
         }
     }
 
     // El padre espera a que todos los procesos hijos terminen antes de cerrar
-    while (wait(NULL) > 0)
-        ; // Espera a que todos los hijos terminen
+    while (wait(NULL) > 0) ; // Espera a que todos los hijos terminen
 
-    // Cerramos el semáforo y lo eliminamos
 }
 
 // Esta funcion se encarga de "pegar" la alerta en el pipe para poder pasarlo al proceso padre
@@ -173,14 +167,14 @@ void registrar_alerta(const char *mensaje)
     }
     else
     {
-        perror("Error al abrir alertas.log");
+        perror("Error al abrir alertas.log"); // si hay un error en la apertura lo notificamos
         Escribir_registro("Se ha producido un error al abrir el fichero de alertas");
     }
 }
 
-// Función para detectar transacciones sospechosas
-// Lo que hago en esta funcion es abrir los dos ficheritos y mirar si hay cosas raras , enviarlas a la funcion que ya me habia creado
-// , el trabajo duro ya estaba hecho =)
+/// @brief Esta funcion es la encargada de detectar anomaliase en usuarios y transacciones en el proceso monohilo monitor 
+/// @param arg 
+/// @return 
 void *detectar_transacciones(void *arg)
 {
     signal(SIGINT, limpiar); // limpiamos la tuberia
@@ -268,7 +262,7 @@ void CrearMonitor()
         exit(1);
     }
 
-    pid_t Monitor = fork();
+    pid_t Monitor = fork(); // crea el proceso monitor
     if (Monitor < 0)
     {
         perror("Error al crear el proceso Monitor");
@@ -279,7 +273,7 @@ void CrearMonitor()
     {
         // Código del hijo (Monitor)
         close(pipefd[0]); // Cierra lectura en el hijo
-        pthread_t Transacciones;
+        pthread_t Transacciones; // crea el hilo
         if (pthread_create(&Transacciones, NULL, detectar_transacciones, NULL) != 0) // crea el hilo y llama a detecatar transacciones
         {
             perror("Error al crear el hilo de transacciones"); // comprobamos que el hilo se haya creado correctamente
@@ -288,7 +282,7 @@ void CrearMonitor()
         Escribir_registro("Se ha creado correctamente el hilo que revisa ls anomalias");
         pthread_join(Transacciones, NULL); // cerramos el hilo
         close(pipefd[1]);                  // Cerrar escritura cuando termine
-        Escribir_registro("Se ha cerrado el extremo de escritura de la tuberia del proceso hijo de monitor");
+        Escribir_registro("Se ha cerrado el extremo de escritura de la tuberia del proceso hijo de monitor"); // escrbimos en el registro
         exit(0);
     }
     else
