@@ -77,7 +77,7 @@
             break;
 
         case 3:
-            if (pthread_create(&hilo3, NULL, Transferencia, NULL) != 0)
+            if (pthread_create(&hilo3, NULL, Transferencia, &usuario) != 0)
                 printf("❌ Error al crear el hilo para Transferencia.\n");
             
             else

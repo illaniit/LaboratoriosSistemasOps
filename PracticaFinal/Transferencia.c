@@ -12,7 +12,7 @@
 #include <semaphore.h>
 #include <sys/fcntl.h>
 #include <sys/wait.h>
-
+#include <stdbool.h>
 #include "Operaciones.h"
 
 struct Usuario {
@@ -25,6 +25,9 @@ void *Transferencia(void *arg) {
     sem_t semaforo4; // Inicializamos el semáforo para manejar la concurrencia
     sem_init(&semaforo4, 0, 1);
     sem_wait(&semaforo4); // Esperamos a que el semáforo esté disponible
+
+    // Leemos la configuración
+    Config config = leer_configuracion("variables.properties");
 
     struct Usuario *usuario = (struct Usuario *)arg; // Convertimos el argumento a un puntero de tipo Usuario
     char cuenta_destino[50]; // Almacena el nombre de la cuenta destino
