@@ -14,6 +14,7 @@
 #include <sys/wait.h>
 #include <stdbool.h>
 #include "Operaciones.h"
+#include "Comun.h"
 
 struct Usuario {
     char nombre[50];
