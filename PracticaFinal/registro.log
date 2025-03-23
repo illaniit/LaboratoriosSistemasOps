@@ -129,3 +129,15 @@
 [2025-03-22 20:51:02] Intento fallido de inicio de sesión
 [2025-03-22 20:51:07] Intento fallido de inicio de sesión
 [2025-03-22 20:51:12] Se ha accedido al sistema correctamente
+[2025-03-23 12:53:11] Se ha cerrado el extremo de escritura de la tuberia del proceso padre de monitor
+[2025-03-23 12:53:11] Se ha creado correctamente el hilo que revisa ls anomalias
+[2025-03-23 12:53:11] Se ha abierto el fichero de transacciones
+[2025-03-23 12:53:11] Se ha abierto el archivo de usuarios
+[2025-03-23 12:53:11] Se ha cerrado el extremo de escritura de la tuberia del proceso hijo de monitor
+[2025-03-23 12:53:11] Se ha cerrado el extremo de lectura de la tuberia del proceso padre de monitor
+[2025-03-23 12:53:11] Se ha accedido al menú de entrada
+[2025-03-23 12:53:19] El usuario ha entrado en la sección de registro
+[2025-03-23 12:53:48] Se ha registrado un nuevo usuario en el sistema
+[2025-03-23 12:53:48] El usuario ha elegido la opción de registro
+[2025-03-23 12:53:52] Se ha accedido al menú de entrada
+[2025-03-23 12:54:00] Se ha accedido al sistema correctamente

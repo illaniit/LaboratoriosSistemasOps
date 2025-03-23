@@ -29,19 +29,18 @@ void *Transferencia(void *arg) {
 
     // Leemos la configuración
     Config config = leer_configuracion("variables.properties");
-
     struct Usuario *usuario = (struct Usuario *)arg; // Convertimos el argumento a un puntero de tipo Usuario
     char cuenta_destino[50]; // Almacena el nombre de la cuenta destino
-    int monto_transferir; // Almacena el monto a transferir
+    int Cantidad_transferir; // Almacena el monto a transferir
 
     // Solicitamos al usuario la cuenta destino y el monto a transferir
-    printf("Ingrese la cuenta destino: ");
+    printf("Ingrese la cuenta destino: "); // pedir el id
     scanf("%s", cuenta_destino);
     printf("Ingrese el monto a transferir: ");
-    scanf("%d", &monto_transferir);
+    scanf("%d", &Cantidad_transferir);
 
     // Verificamos si el monto a transferir excede el límite permitido
-    if (monto_transferir > LIMITE_TRANSFERENCIA) {
+    if (Cantidad_transferir > config.limite_transferencia) {
         printf("El monto excede el límite de transferencia permitido.\n");
         sem_post(&semaforo4);
         return NULL;
@@ -49,8 +48,8 @@ void *Transferencia(void *arg) {
 
     // Abrimos los archivos necesarios para leer y escribir los datos de los usuarios
     FILE *archivoUsuarios = fopen("usuarios.txt", "r");
-    FILE *tempFile = fopen("temp.txt", "w");
-    if (!archivoUsuarios || !tempFile) {
+    FILE *tempFile3 = fopen("temp3.txt", "w");
+    if (!archivoUsuarios || !tempFile3) {
         perror("Error al abrir los archivos");
         sem_post(&semaforo4);
         return NULL;
@@ -69,50 +68,54 @@ void *Transferencia(void *arg) {
             // Verificamos si la cuenta de origen coincide con el usuario actual
             if (strcmp(nombre, usuario->nombre) == 0 && strcmp(contrasena, usuario->contrasena) == 0) {
                 // Verificamos si hay saldo suficiente para la transferencia
-                if (saldo < monto_transferir) {
+                if (saldo < Cantidad_transferir) {
                     printf("Saldo insuficiente para realizar la transferencia.\n");
                     fclose(archivoUsuarios);
-                    fclose(tempFile);
+                    fclose(tempFile3);
                     sem_post(&semaforo4);
                     return NULL;
                 }
-                saldo -= monto_transferir; // Descontamos el monto del saldo de la cuenta de origen
-                cuenta_origen_encontrada = true; // Marcamos que la cuenta de origen fue encontrada
+                saldo -= Cantidad_transferir; // Descontamos el monto del saldo de la cuenta de origen
+                cuenta_origen_encontrada = true;
+                
+                 // Marcamos que la cuenta de origen fue encontrada
             }
             // Verificamos si la cuenta destino coincide
             if (strcmp(nombre, cuenta_destino) == 0) {
-                saldo += monto_transferir; // Sumamos el monto al saldo de la cuenta destino
+                saldo += Cantidad_transferir; // Sumamos el monto al saldo de la cuenta destino
                 cuenta_destino_encontrada = true; // Marcamos que la cuenta destino fue encontrada
+                
             }
+            
             // Escribimos los datos actualizados en el archivo temporal
-            fprintf(tempFile, "%d | %s | %s | %s | %s | %s | %d | %d\n",
+            fprintf(tempFile3, "%d | %s | %s | %s | %s | %s | %d | %d\n",
                     id, nombre, contrasena, apellidos, domicilio, pais, saldo, num_transacciones);
         }
     }
 
     fclose(archivoUsuarios); // Cerramos el archivo de usuarios
-    fclose(tempFile); // Cerramos el archivo temporal
+    fclose(tempFile3); // Cerramos el archivo temporal
 
     // Verificamos si ambas cuentas fueron encontradas
     if (!cuenta_origen_encontrada || !cuenta_destino_encontrada) {
         printf("Error: Una de las cuentas no fue encontrada.\n");
-        remove("temp.txt"); // Eliminamos el archivo temporal
+        remove("temp3.txt"); // Eliminamos el archivo temporal
         sem_post(&semaforo4);
         return NULL;
     }
 
     // Reemplazamos el archivo de usuarios original con el archivo temporal actualizado
     remove("usuarios.txt");
-    rename("temp.txt", "usuarios.txt");
+    rename("temp3.txt", "usuarios.txt");
 
     // Registramos la transacción en el archivo de transacciones
-    FILE *archivoTransacciones = fopen("transaciones.txt", "a");
-    if (archivoTransacciones) {
-        fprintf(archivoTransacciones, "%d | transferencia | %s | %s | %d\n",
-                id, usuario->nombre, cuenta_destino, monto_transferir);
-        fclose(archivoTransacciones);
-    }
-
+   // FILE *archivoTransacciones = fopen("transaciones.txt", "a");
+  //  if (archivoTransacciones) {
+     //   fprintf(archivoTransacciones, "%d | transferencia | %s | %s | | %d \n",
+     //           id, usuario->nombre, cuenta_destino, Cantidad_transferir);
+    //    fclose(archivoTransacciones);
+    //}
+//
     printf("Transferencia realizada con éxito.\n"); // Mensaje de éxito
     sem_post(&semaforo4); // Liberamos el semáforo
     sem_destroy(&semaforo4); // Destruimos el semáforo
