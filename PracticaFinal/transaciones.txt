@@ -4,3 +4,5 @@
 3 | ingreso | 1 | - | 3 | - | 103 
 4 | ingreso | Alejandro | - | 1200 | - | 1340 
 2 | transferencia | Alejandro | Alejandro | | 120 
+3 | ingreso | Alejandro | - | 1340 | - | 1540 
+4 | retiro | Alejandro | - | 1540 | - | 1340 

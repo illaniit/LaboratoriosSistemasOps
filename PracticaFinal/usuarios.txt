@@ -1,2 +1,2 @@
-1 | 1 | 1 | 1     | 1     | 1     | 103 | 3
-2 | Alejandro | 123 | si  | peru  | casa de nico  | 1340 | 1
+1 | 1 | 1 | 1      | 1      | 1      | 103 | 3
+2 | Alejandro | 123 | si   | peru   | casa de nico   | 1340 | 3

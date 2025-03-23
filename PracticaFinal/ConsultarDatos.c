@@ -119,8 +119,8 @@ void *ConsultarDatos(void *arg) {
         system("clear");
         printf("\n----------📊 Menu de consulta de datos 📊----------\n");
         printf("1️⃣  Datos de tu cuenta\n");
-        printf("2️⃣ Consultar las transferencias\n");
-        printf("3️⃣ Volver al menu\n");
+        printf("2️⃣  Consultar las transferencias\n");
+        printf("3️⃣  Volver al menu\n");
         printf("Introduce tu elección: ");
         
         if (scanf("%d", &Eleccion) != 1) {

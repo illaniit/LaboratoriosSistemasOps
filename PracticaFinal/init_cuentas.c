@@ -72,7 +72,7 @@ void *Menu_Usuario()
         system("clear");
         printf("\n------------------💰Elija una opción💰------------------\n");
         printf("|   1️⃣  Inicio de sesión                                 |\n");
-        printf("|   2️⃣ Registro                                          |\n");
+        printf("|   2️⃣  Registro                                         |\n");
         printf("|       Pulse una opción (1/2):                          |\n");
         printf("---------------------------------------------------------\n");
         scanf("%d", &Eleccion);

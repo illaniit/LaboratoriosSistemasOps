@@ -191,7 +191,7 @@ void *detectar_transacciones(void *arg)
     {
         int id, saldo1, saldo2, saldo_final; // declaramos las variables
         char tipo[20], cuenta1[20], cuenta2[20];
-        if (sscanf(linea, "%d , %19[^,],%19[^,],%19[^,],%d,%d,%d", &id, tipo, cuenta1, cuenta2, &saldo1, &saldo2, &saldo_final) == 7) // leemos los campos correspondientes
+        if (sscanf(linea, "%d | %39[^|]|%39[^|]|%39[^|]|%d|%d|%d", &id, tipo, cuenta1, cuenta2, &saldo1, &saldo2, &saldo_final) == 7) // leemos los campos correspondientes
         {
             if (strcmp(tipo, "retiro") == 0 || strcmp(tipo, "ingreso") == 0) // comprobamso que los campos sean validos es decir si es un ingreso o un retiro esos campos de cuenta 2 y saldo 2 deben estar vacios
             {
