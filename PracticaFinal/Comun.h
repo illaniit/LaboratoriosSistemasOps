@@ -15,5 +15,11 @@ typedef struct Config
 
 Config leer_configuracion(const char *ruta);
 
+extern sem_t *sem_usuarios;
+extern sem_t *sem_transacciones;
+void Inicializar_semaforos();
+void Destruir_semaforos();
+void Escribir_registro(const char *mensaje_registro);
+void limpiar_cadena(char *cadena);
 
 #endif

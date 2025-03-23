@@ -14,6 +14,7 @@
 #include <sys/wait.h>
 #include <stdbool.h>
 #include "Operaciones.h"
+#include "Comun.h"
 
 
 /// @brief En esta funcion permitimos al usuario consualtar sus datos , abriendo el archivo y tambien sus transferencias, para verficiar el
@@ -25,7 +26,7 @@
 // Todas estas funciones son llamadas por la funcion que llama el hilo , ConsultarDatos  y cada una tiene una funcion especifica
 void DatosCuenta(char *user,char *passwd); 
 void ConsultarTransferencias(char *user,char *passwd);
-void limpiar_cadena1(char *cadena);
+
 bool ComprobarCuenta(char *cuenta, char *contraseña);
 
 //Este es el struct usuario para cargar las variables que pasan por parametro del hilo
@@ -35,29 +36,6 @@ struct Usuario2
         char Contraseña1[50];
     }Usuario2;
 
-
-/// @brief esta funcion limpia la cadena para el strcmp posterior , lo que hace es quitar los espacios en blanco y tabulaciones de la cadena
-/// @param cadena 
-void limpiar_cadena1(char* cadena) {
-    int inicio = 0;
-    int fin = strlen(cadena) - 1;
-
-    // Eliminar los espacios al principio
-    while (cadena[inicio] == ' ' || cadena[inicio] == '\t') {
-        inicio++;
-    }
-
-    // Eliminar los espacios al final
-    while (fin >= inicio && (cadena[fin] == ' ' || cadena[fin] == '\t')) {
-        fin--;
-    }
-
-    // Mover la cadena limpia
-    for (int i = 0; i <= fin - inicio; i++) {
-        cadena[i] = cadena[inicio + i];
-    }
-    cadena[fin - inicio + 1] = '\0'; // Añadir el carácter nulo al final
-}
 
 /// @brief Esta funcion la llamamos mas adelante y nos sirve para comprobar que la cuenta sea correcta
 /// @param cuenta 
@@ -107,10 +85,10 @@ bool ComprobarCuenta(char *cuenta, char *contraseña){
 /// @param arg 
 /// @return // esta funcion no devuelve nada
 void *ConsultarDatos(void *arg) {
-    sem_t s1;  // declaramos el semaforo de hilos 
-    sem_init(&s1,0,1); //  inicializamos el semaforo a 1
-    sem_wait(&s1); // esta es la funcion critica y disminuimos uno el valor del semaforo
     
+    sem_wait(sem_usuarios);
+    sem_wait(sem_transacciones);
+
     struct Usuario2 *usuario = (struct Usuario2 *)arg; // hacemos un cast del argumneto y cambiamos el void por el tipo struct
     int Eleccion = 0;
 
@@ -145,8 +123,9 @@ void *ConsultarDatos(void *arg) {
                 printf("Opción no válida, intenta de nuevo.\n");
         }
     } while (Eleccion != 3);
-  sem_post(&s1); // incrementamos 1 el valor del semaforo porque la seccion critica ha finalizado
-  sem_destroy(&s1); // destruimos los recursos del semaforo
+
+    sem_post(sem_usuarios);
+    sem_post(sem_transacciones);
     return NULL; // devolvemos NULL
     
 }
@@ -160,7 +139,7 @@ void DatosCuenta(char *user,char *passwd) {
         perror("Error al abrir usuario.txt");
         return;
     }
-    limpiar_cadena1(user);
+    limpiar_cadena(user);
     char linea[256];
     int id1, saldo1, num_transacciones1;
     char nombre1[50], contrasena1[50], apellidos1[50], domicilio1[100], pais1[50];
@@ -169,8 +148,8 @@ void DatosCuenta(char *user,char *passwd) {
 
         if (sscanf(linea, "%d | %49[^|] | %49[^|] | %49[^|] | %99[^|] | %49[^|] | %d | %d",
                    &id1, nombre1, contrasena1, apellidos1, domicilio1, pais1, &saldo1, &num_transacciones1) == 8) {
-                    limpiar_cadena1(nombre1);
-                    limpiar_cadena1(contrasena1);
+                    limpiar_cadena(nombre1);
+                    limpiar_cadena(contrasena1);
             if (strcmp(nombre1, user) == 0) {
                 if(strcmp(contrasena1,passwd)==0){
                     encontrado=true;
@@ -213,8 +192,8 @@ void ConsultarTransferencias(char *user, char *passwd) {
 
         if (sscanf(linea, "%d , %19[^,] , %49[^,] , %49[^,] , %d , %d , %d",
                    &id, tipo, cuenta1, cuenta2, &saldo1, &saldo2, &saldofinal) == 7) {
-            limpiar_cadena1(cuenta1);
-            limpiar_cadena1(cuenta2);
+            limpiar_cadena(cuenta1);
+            limpiar_cadena(cuenta2);
             if (strcmp(cuenta1, user) == 0) {
                 CuentaVer = ComprobarCuenta(cuenta1,passwd);
                 if(CuentaVer){

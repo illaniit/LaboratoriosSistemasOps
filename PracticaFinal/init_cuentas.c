@@ -68,12 +68,13 @@ void *Menu_Usuario()
     int Eleccion;
     do
     {
+    
         //este es el menu de incio de sesion
         system("clear");
         printf("\n------------------💰Elija una opción💰------------------\n");
         printf("|   1️⃣  Inicio de sesión                                 |\n");
         printf("|   2️⃣  Registro                                         |\n");
-        printf("|       Pulse una opción (1/2):                          |\n");
+        printf("|       Pulse una opción (1/2):                           |\n");
         printf("---------------------------------------------------------\n");
         scanf("%d", &Eleccion);
 
@@ -96,26 +97,7 @@ void *Menu_Usuario()
 
     return NULL;
 }
-void limpiar_cadena(char* cadena) {
-    int inicio = 0;
-    int fin = strlen(cadena) - 1;
 
-    // Eliminar los espacios al principio
-    while (cadena[inicio] == ' ' || cadena[inicio] == '\t') {
-        inicio++;
-    }
-
-    // Eliminar los espacios al final
-    while (fin >= inicio && (cadena[fin] == ' ' || cadena[fin] == '\t')) {
-        fin--;
-    }
-
-    // Mover la cadena limpia
-    for (int i = 0; i <= fin - inicio; i++) {
-        cadena[i] = cadena[inicio + i];
-    }
-    cadena[fin - inicio + 1] = '\0'; // Añadir el carácter nulo al final
-}
 /// @brief esta funcion le permite al usuario inciar sesion con su cuenta y guardar sus claves en el archivo
 void InicioDeSesion() {
     system("clear");

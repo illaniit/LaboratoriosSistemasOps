@@ -6,3 +6,13 @@
 2 | transferencia | Alejandro | Alejandro | | 120 
 3 | ingreso | Alejandro | - | 1340 | - | 1540 
 4 | retiro | Alejandro | - | 1540 | - | 1340 
+5 | ingreso | Alex | - | 2000 | - | 2200 
+5 | ingreso | Alex | - | 2000 | - | 2200 
+6 | ingreso | 1 | - | 1 | - | 201 
+6 | ingreso | 1 | - | 1 | - | 101 
+7 | ingreso | 1 | - | 1 | - | 101 
+8 | ingreso | Alejandro | - | 1000 | - | 1100 
+8 | ingreso | 1 | - | 101 | - | 301 
+9 | ingreso | 1 | - | 1 | - | 101 
+10 | ingreso | 2 | - | 2 | - | 302 
+11 | ingreso | 1 | - | 101 | - | 301 

@@ -14,51 +14,25 @@
 #include <sys/wait.h>
 #include "Operaciones.h"
 #include <stdbool.h>
-void limpiar_cadena2(char *cadena);
+#include "Comun.h"
+
 // Introduzco un struct para que me pida la contraseña a la hora de introducir un usuario :) //
 struct Usuario4
 {
     char Usuario3[50];
     char Contraseña1[50];
 } Usuario4;
-
-void limpiar_cadena3(char *cadena)
-{
-    int inicio = 0;
-    int fin = strlen(cadena) - 1;
-
-    // Eliminar los espacios al principio
-    while (cadena[inicio] == ' ' || cadena[inicio] == '\t')
-    {
-        inicio++;
-    }
-
-    // Eliminar los espacios al final
-    while (fin >= inicio && (cadena[fin] == ' ' || cadena[fin] == '\t'))
-    {
-        fin--;
-    }
-
-    // Mover la cadena limpia
-    for (int i = 0; i <= fin - inicio; i++)
-    {
-        cadena[i] = cadena[inicio + i];
-    }
-    cadena[fin - inicio + 1] = '\0'; // Añadir el carácter nulo al final
-}
-
 void *ExtraerDinero(void *arg3) {
-    sem_t semaforo_extraer;
-    sem_init(&semaforo_extraer, 0, 1);
-    sem_wait(&semaforo_extraer);
-
+ 
+    sem_wait(sem_usuarios);
+    sem_wait(sem_transacciones);
     struct Usuario4 *usuario = (struct Usuario4 *)arg3;
     bool encontrado = false;
 
     FILE *ArchivoUsuarios = fopen("usuarios.txt", "r");
     if (!ArchivoUsuarios) {
         perror("Error al abrir el archivo");
-        sem_post(&semaforo_extraer);
+     
         return NULL;
     }
 
@@ -66,7 +40,7 @@ void *ExtraerDinero(void *arg3) {
     if (!tempFile1) {
         perror("Error al abrir el archivo temporal");
         fclose(ArchivoUsuarios);
-        sem_post(&semaforo_extraer);
+     
         return NULL;
     }
 
@@ -92,8 +66,8 @@ void *ExtraerDinero(void *arg3) {
 
         if (sscanf(linea, "%d | %49[^|] | %49[^|] | %49[^|] | %99[^|] | %49[^|] | %d | %d",
                    &id3, nombre3, contrasena3, apellidos3, domicilio3, pais3, &saldo3, &num_transacciones3) == 8) {
-            limpiar_cadena2(nombre3);
-            limpiar_cadena2(contrasena3);
+            limpiar_cadena(nombre3);
+            limpiar_cadena(contrasena3);
             if (strcmp(nombre3, usuario->Usuario3) == 0 && strcmp(contrasena3, usuario->Contraseña1) == 0) {
                 int dinero_inicial = saldo3;
                 encontrado = true;
@@ -106,7 +80,6 @@ void *ExtraerDinero(void *arg3) {
                     fclose(tempFile1);
                     fclose(ArchivoUsuarios);
                     remove("temp1.txt");
-                    sem_post(&semaforo_extraer);
                     return NULL;
                 }
 
@@ -137,6 +110,7 @@ void *ExtraerDinero(void *arg3) {
         printf("Usuario no encontrado o contraseña incorrecta.\n");
     }
 
-    sem_post(&semaforo_extraer);
+    sem_post(sem_usuarios);
+    sem_post(sem_transacciones);
     return NULL;
 }

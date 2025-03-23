@@ -13,9 +13,6 @@
 /// En este bloque de codigo mostraremos el menu del usuario donde le daremos opciones a realizar diferentes operaciones
 
 // Aqui hay que meter las funciones de properties y
-
-
-
     struct Usuario
     {
         char Usuario[50];
@@ -28,13 +25,14 @@
     /// @param passwd 
     void Mostrar_Menu(char *user, char *passwd)
 {
-    leer_configuracion("variables.properties"); // abrimos el archivo de configuracion
+    Config config =leer_configuracion("variables.properties"); // abrimos el archivo de configuracion
     struct Usuario usuario;
     strcpy(usuario.Usuario, user);
     strcpy(usuario.Contraseña, passwd);
-
-    pthread_t hilo1, hilo2, hilo3, hilo4;
+    pthread_t hilo1,hilo2,hilo3,hilo4;
     int Eleccion = 0;
+    sem_usuarios = sem_open("/sem_usuarios", 0);
+    sem_transacciones = sem_open("/sem_transacciones", 0);
 
     do
     {

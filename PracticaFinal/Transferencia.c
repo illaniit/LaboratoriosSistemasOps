@@ -23,9 +23,8 @@ struct Usuario {
 };
 
 void *Transferencia(void *arg) {
-    sem_t semaforo4; // Inicializamos el semáforo para manejar la concurrencia
-    sem_init(&semaforo4, 0, 1);
-    sem_wait(&semaforo4); // Esperamos a que el semáforo esté disponible
+    sem_wait(sem_usuarios);
+    sem_wait(sem_transacciones);
 
     // Leemos la configuración
     Config config = leer_configuracion("variables.properties");
@@ -42,7 +41,7 @@ void *Transferencia(void *arg) {
     // Verificamos si el monto a transferir excede el límite permitido
     if (Cantidad_transferir > config.limite_transferencia) {
         printf("El monto excede el límite de transferencia permitido.\n");
-        sem_post(&semaforo4);
+     
         return NULL;
     }
 
@@ -51,7 +50,7 @@ void *Transferencia(void *arg) {
     FILE *tempFile3 = fopen("temp3.txt", "w");
     if (!archivoUsuarios || !tempFile3) {
         perror("Error al abrir los archivos");
-        sem_post(&semaforo4);
+        
         return NULL;
     }
 
@@ -72,7 +71,7 @@ void *Transferencia(void *arg) {
                     printf("Saldo insuficiente para realizar la transferencia.\n");
                     fclose(archivoUsuarios);
                     fclose(tempFile3);
-                    sem_post(&semaforo4);
+                    
                     return NULL;
                 }
                 saldo -= Cantidad_transferir; // Descontamos el monto del saldo de la cuenta de origen
@@ -100,7 +99,7 @@ void *Transferencia(void *arg) {
     if (!cuenta_origen_encontrada || !cuenta_destino_encontrada) {
         printf("Error: Una de las cuentas no fue encontrada.\n");
         remove("temp3.txt"); // Eliminamos el archivo temporal
-        sem_post(&semaforo4);
+   
         return NULL;
     }
 
@@ -117,7 +116,7 @@ void *Transferencia(void *arg) {
     //}
 //
     printf("Transferencia realizada con éxito.\n"); // Mensaje de éxito
-    sem_post(&semaforo4); // Liberamos el semáforo
-    sem_destroy(&semaforo4); // Destruimos el semáforo
+    sem_post(sem_usuarios);
+    sem_post(sem_transacciones);
     return NULL; // Finalizamos la función
 }

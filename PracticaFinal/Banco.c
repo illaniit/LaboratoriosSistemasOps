@@ -22,59 +22,31 @@ int pipefd[2]; // Tubería que la declaramos para poder pasar informacion de mon
 
 // Definimos las funciones  que vamos a utilizar
 void Menu_Procesos();
-void AbrirPropertis();
 void CrearMonitor();
 void *detectar_transacciones(void *arg);
 void enviar_alerta(const char *mensaje, const int *id, const char *titular);
 void limpiar(int sig);
 void registrar_alerta(const char *mensaje);
-void Escribir_registro(const char *mensaje_registro);
+
 
 /// @brief este es el main en el cual leemos propertis con las variables 
 /// @return y devolvemos 0 si la ejecuccion ha sido exitosa
 int main()
 {
+
     // Lo primero abrimos el archivo de Properties y "nos traemos las variables"
     leer_configuracion("variables.properties");
     // Iniciamos monitor para que encuentre  anomalias
+    Inicializar_semaforos();
+
     CrearMonitor();
 
     // Cargamos el menu del usuario que se encuentra en init_cuentas.c donde cada usuario sera un hilo de ejecuccion
     Menu_Procesos();
 
     // Volvemos a llamara monitor para que encuentre las anomalias despues de que el usuario haya cerrado la sesion
-
+    Destruir_semaforos();
     return 0;
-}
-
-// Funcion para escribir en el registro de log
-void Escribir_registro(const char *mensaje_registro)
-{
-    // declaramos la variable time_t
-    time_t t;
-    struct tm *tm_info;
-    char hora[30]; // Para almacenar la fecha y hora formateadas
-
-    // Obtiene la hora actual
-    time(&t);
-    tm_info = localtime(&t);
-
-    // Formatea la fecha y hora en "YYYY-MM-DD HH:MM:SS"
-    strftime(hora, sizeof(hora), "%Y-%m-%d %H:%M:%S", tm_info);
-
-    // Abre el archivo en modo "a" para añadir sin sobrescribir
-    FILE *ArchivoDeRegistro = fopen("registro.log", "a");
-    if (!ArchivoDeRegistro)
-    {
-        perror("Error al abrir el archivo de registro");
-        return;
-    }
-
-    // Escribe la fecha, la hora y el mensaje en el archivo
-    fprintf(ArchivoDeRegistro, "[%s] %s\n", hora, mensaje_registro);
-
-    // Cierra el archivo
-    fclose(ArchivoDeRegistro);
 }
 
 
