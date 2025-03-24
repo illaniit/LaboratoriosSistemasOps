@@ -24,18 +24,18 @@ int pipefd[2]; // Tubería que la declaramos para poder pasar informacion de mon
 void Menu_Procesos();
 void CrearMonitor();
 void *detectar_transacciones(void *arg);
-void enviar_alerta(const char *mensaje, const int *id, const char *titular);
+void enviar_alerta(const char *mensaje, const int *id, const int titular);
 void limpiar(int sig);
 void registrar_alerta(const char *mensaje);
 
 
-/// @brief este es el main en el cual leemos propertis con las variables 
+/// @brief este es el main en el cual leemos propertis con las variables
 /// @return y devolvemos 0 si la ejecuccion ha sido exitosa
 int main()
 {
-
+    Config config = leer_configuracion("variables.properties");
     // Lo primero abrimos el archivo de Properties y "nos traemos las variables"
-   Config config =  leer_configuracion("variables.properties");
+   
     // Iniciamos monitor para que encuentre  anomalias
     Inicializar_semaforos();
 
@@ -48,7 +48,6 @@ int main()
     Destruir_semaforos();
     return 0;
 }
-
 
 /// @brief Esta funcion crea procesos en una nueva terminal que lo que
 /// hacen es ejecutar la instancia de usuario y ejecutar el codigo del mismo
@@ -81,18 +80,18 @@ void Menu_Procesos()
         else
         {
             perror("Error en fork"); // devolvemos un error si se ha generado mal el codigo
-            exit(EXIT_FAILURE); // terminamos la ejeccion si ha habido un problema en el fork
+            exit(EXIT_FAILURE);      // terminamos la ejeccion si ha habido un problema en el fork
         }
     }
 
     // El padre espera a que todos los procesos hijos terminen antes de cerrar
-    while (wait(NULL) > 0) ; // Espera a que todos los hijos terminen
-
+    while (wait(NULL) > 0)
+        ; // Espera a que todos los hijos terminen
 }
 
 // Esta funcion se encarga de "pegar" la alerta en el pipe para poder pasarlo al proceso padre
 
-void enviar_alerta(const char *mensaje, const int *id, const char *titular)
+void enviar_alerta(const char *mensaje, const int *id, const int titular)
 {
     Escribir_registro("Se ha enviado una alerta");
 
@@ -107,13 +106,14 @@ void enviar_alerta(const char *mensaje, const int *id, const char *titular)
     // Formatea la fecha y hora en "YYYY-MM-DD HH:MM:SS"
     strftime(hora, sizeof(hora), "%Y-%m-%d %H:%M:%S", tm_info);
     char auxiliar[256];
-    if (titular != "")
+    
+    if (titular==1)
     {
-        snprintf(auxiliar, sizeof(auxiliar), "[%s] %d | %s | %s\n", hora, *id, titular, mensaje); // esta funcion nos permite agregar un \n en el archivo de texto para que sea entendible y legible
+        snprintf(auxiliar, sizeof(auxiliar), "[%s] Id del Usuario :%d | %s\n", hora, *id, mensaje); // esta funcion nos permite agregar un \n en el archivo de texto para que sea entendible y legible
     }
-    else
+    else if(titular==0)
     {
-        snprintf(auxiliar, sizeof(auxiliar), "[%s] %d | Transaccion | %s\n", hora, *id, mensaje); // esta funcion nos permite agregar un \n en el archivo de texto para que sea entendible y legible
+        snprintf(auxiliar, sizeof(auxiliar), "[%s] Id de la transaccion:%d | Transaccion | %s\n", hora, *id, mensaje); // esta funcion nos permite agregar un \n en el archivo de texto para que sea entendible y legible
     }
 
     write(pipefd[1], auxiliar, strlen(auxiliar));
@@ -144,76 +144,151 @@ void registrar_alerta(const char *mensaje)
     }
 }
 
-/// @brief Esta funcion es la encargada de detectar anomaliase en usuarios y transacciones en el proceso monohilo monitor 
-/// @param arg 
-/// @return 
+/// @brief Esta funcion es la encargada de detectar anomaliase en usuarios y transacciones en el proceso monohilo monitor
+/// @param arg
+/// @return
 void *detectar_transacciones(void *arg)
 {
-    signal(SIGINT, limpiar); // limpiamos la tuberia
+    Config config = leer_configuracion("variables.properties");
+    signal(SIGINT, limpiar); // limpiamos la tubería
     Escribir_registro("Se ha abierto el fichero de transacciones");
-    FILE *archivo = fopen("transaciones.txt", "r"); // abrimos el archivo transacciones para buscar anomalias en el
+    FILE *archivo = fopen("transaciones.txt", "r"); // abrimos el archivo transacciones para buscar anomalías
     if (!archivo)
     {
-        perror("Error al abrir el archivo de transacciones"); // Comprobamos que el archivo no de error
-        Escribir_registro("Se ha producido un error al abrirr el archivo de transacciones");
+        perror("Error al abrir el archivo de transacciones"); // Comprobamos que el archivo no dé error
+        Escribir_registro("Se ha producido un error al abrir el archivo de transacciones");
         return NULL; // devolvemos null en este caso
     }
+
     char linea[256];
+    int retiros_consecutivos = 0;
+    int transferencias_consecutivas = 0;
+    int usuario_id_anterior = -1;
+
     while (fgets(linea, sizeof(linea), archivo)) // leemos el archivo transacciones.txt
     {
-        int id, saldo1, saldo2, saldo_final; // declaramos las variables
-        char tipo[20], cuenta1[20], cuenta2[20];
-        if (sscanf(linea, "%d | %39[^|]|%39[^|]|%39[^|]|%d|%d|%d", &id, tipo, cuenta1, cuenta2, &saldo1, &saldo2, &saldo_final) == 7) // leemos los campos correspondientes
+        int id, saldo1, saldo2, saldo_final, id2, saldo_t1, saldo_t2, saldo_finalt1, saldo_finalt2;
+        char tipo[20], cuenta1[20], cuenta2[20], tipo1[20], cuenta_t1[20], cuenta_t2[20];
+
+        // Procesamos retiros o ingresos con 7 campos
+        
+        // Procesamos transferencias con 8 campos
+         if (sscanf(linea, "%d | %39[^|] | %39[^|] | %39[^|] | %d | %d | %d | %d", &id2, tipo1, cuenta_t1, cuenta_t2, &saldo_t1, &saldo_t2, &saldo_finalt1, &saldo_finalt2) == 8)
         {
-            if (strcmp(tipo, "retiro") == 0 || strcmp(tipo, "ingreso") == 0) // comprobamso que los campos sean validos es decir si es un ingreso o un retiro esos campos de cuenta 2 y saldo 2 deben estar vacios
-            {
-                if (strlen(cuenta2) > 0 || saldo2 != 0) // comprobamos que
+            limpiar_cadena(tipo1);
+
+            // Verificación de transferencia
+           
+                if (saldo_finalt2 - saldo_t2 > config.limite_transferencia) // Transferencia superior a 10000
                 {
-                    Escribir_registro("Se ha detectado una transaccion invalida");
-                    enviar_alerta("Transacción inválida, campos incorrectos en retiro o ingreso", &id, "");
+                    Escribir_registro("Se ha detectado una transferencia superior a 10000");
+                    enviar_alerta("Transferencia superior a 10000 detectada", &id2, 0);
                 }
-            }
-            if (saldo1 < 0 || saldo2 < 0 || saldo_final < 0) // comprobamso que cualquiera de los 3 campos que indican saldo sean positivos
+
+                // Verificación de transferencias consecutivas
+                if (usuario_id_anterior == id2)
+                {
+                    transferencias_consecutivas++;
+                }
+                else
+                {
+                    transferencias_consecutivas = 1; // Iniciar contador si el usuario cambia
+                }
+
+                if (transferencias_consecutivas > config.umbral_transferencias)
+                {
+                    Escribir_registro("Se han detectado más de 5 transferencias consecutivas");
+                    enviar_alerta("Usuario ha hecho más de 5 transferencias consecutivas", &id2,0);
+                }
+            
+
+            // Verificación de saldos negativos en transferencias
+            if (saldo_t1 < 0 || saldo_t2 < 0 || saldo_finalt1 < 0 || saldo_finalt2 < 0)
             {
-                Escribir_registro("Se ha detectado un saldo negativo");
-                enviar_alerta("Saldo negativo detectado", &id, "");
+                Escribir_registro("Se ha detectado un saldo negativo en una transacción");
+                enviar_alerta("Saldo negativo detectado en una transacción", &id2,0);
             }
         }
+        else 
+        {
+            sscanf(linea, "%d | %39[^|] | %39[^|] | %39[^|] | %d | %d | %d", &id, tipo, cuenta1, cuenta2, &saldo1, &saldo2, &saldo_final);
+            limpiar_cadena(tipo);
+
+            // Verificación de retiro
+            if (strcmp(tipo, " retiro ") == 0)
+            {
+                if (saldo1 - saldo_final > config.limite_retiro) // Retiro superior a 5000
+                {
+                    Escribir_registro("Se ha detectado un retiro superior a 5000");
+                    enviar_alerta("Retiro superior a 5000 detectado", &id, 0);
+                }
+
+                // Verificación de retiros consecutivos
+                if (usuario_id_anterior == id)
+                {
+                    retiros_consecutivos++;
+                }
+                else
+                {
+                    retiros_consecutivos = 1; // Iniciar contador si el usuario cambia
+                }
+
+                if (retiros_consecutivos > config.umbral_retiros)
+                {
+                    Escribir_registro("Se han detectado más de 3 retiros consecutivos");
+                    enviar_alerta("Usuario ha hecho más de 3 retiros consecutivos", &id, 0);
+                }
+            }
+
+            // Verificación de saldos negativos
+            if (saldo1 < 0 || saldo2 < 0 || saldo_final < 0)
+            {
+                Escribir_registro("Se ha detectado un saldo negativo");
+                enviar_alerta("Saldo negativo detectado", &id, 0);
+            }
+
+            // Verificación de formato inválido para ingresos y retiros
+            if ((strcmp(tipo, "retiro") == 0 || strcmp(tipo, "ingreso") == 0) && (strlen(cuenta2) > 0 || saldo2 != 0))
+            {
+                Escribir_registro("Se ha detectado una transacción inválida");
+                enviar_alerta("Transacción inválida, campos incorrectos en retiro o ingreso", &id,0);
+            }
+        }
+
+        usuario_id_anterior = id2; // Actualizamos el usuario actual para las validaciones consecutivas
     }
 
     fclose(archivo); // cerramos el archivo
 
     // Verificación de usuarios.dat
-    // hacemos exactamente lo mismo pero con el fichero que almacena los usuarios
-    FILE *usuarios = fopen("usuarios.txt", "r"); // abrimos el archivo
+    FILE *usuarios = fopen("usuarios.txt", "r"); // abrimos el archivo de usuarios
     if (!usuarios)
     {
         perror("Error al abrir el archivo de usuarios");
         Escribir_registro("Se ha producido un error en la apertura del archivo de usuarios");
         return NULL;
     }
+
     Escribir_registro("Se ha abierto el archivo de usuarios");
 
-    while (fgets(linea, sizeof(linea), usuarios))
-    { // Leemos línea por línea
+    while (fgets(linea, sizeof(linea), usuarios)) // Leemos línea por línea
+    {
         int id, saldo, num_transacciones;
         char nombre[50], apellidos[50], contraseña[50], domicilio[100], pais[50];
 
         // Parseamos la línea según el formato: id | nombre | apellidos | domicilio | pais | saldo | numero_transacciones
-        if (sscanf(linea, "%d | %49[^|] |%49[^|] |%49[^|] | %99[^|] | %49[^|] | %d | %d",
-                   &id, nombre, contraseña, apellidos, domicilio, pais, &saldo, &num_transacciones) == 8)
+        if (sscanf(linea, "%d | %49[^|] | %49[^|] | %49[^|] | %99[^|] | %49[^|] | %d | %d", &id, nombre, contraseña, apellidos, domicilio, pais, &saldo, &num_transacciones) == 8)
         {
-
             if (saldo < 0)
             {
                 Escribir_registro("Se ha encontrado un usuario con saldo negativo");
-                enviar_alerta("Usuario con saldo negativo", &id, nombre);
+                enviar_alerta("Usuario con saldo negativo", &id,1);
             }
 
             if (num_transacciones < 0)
             {
                 Escribir_registro("Se ha encontrado un usuario con un número de transacciones negativo");
-                enviar_alerta("Número de transacciones inválido", &id, nombre);
+                enviar_alerta("Número de transacciones inválido", &id, 1);
             }
         }
         else
@@ -224,6 +299,8 @@ void *detectar_transacciones(void *arg)
 
     fclose(usuarios); // Cerramos el archivo
 }
+
+
 // Función para crear el proceso Monitor y manejar alertas en tiempo real
 void CrearMonitor()
 {
@@ -244,16 +321,16 @@ void CrearMonitor()
     if (Monitor == 0)
     {
         // Código del hijo (Monitor)
-        close(pipefd[0]); // Cierra lectura en el hijo
-        pthread_t Transacciones; // crea el hilo
+        close(pipefd[0]);                                                            // Cierra lectura en el hijo
+        pthread_t Transacciones;                                                     // crea el hilo
         if (pthread_create(&Transacciones, NULL, detectar_transacciones, NULL) != 0) // crea el hilo y llama a detecatar transacciones
         {
             perror("Error al crear el hilo de transacciones"); // comprobamos que el hilo se haya creado correctamente
             exit(1);
         }
         Escribir_registro("Se ha creado correctamente el hilo que revisa ls anomalias");
-        pthread_join(Transacciones, NULL); // cerramos el hilo
-        close(pipefd[1]);                  // Cerrar escritura cuando termine
+        pthread_join(Transacciones, NULL);                                                                    // cerramos el hilo
+        close(pipefd[1]);                                                                                     // Cerrar escritura cuando termine
         Escribir_registro("Se ha cerrado el extremo de escritura de la tuberia del proceso hijo de monitor"); // escrbimos en el registro
         exit(0);
     }

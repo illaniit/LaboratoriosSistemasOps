@@ -1,0 +1,9 @@
+[2025-03-24 21:19:16] Id de la transaccion:1 | Transaccion | Saldo negativo detectado
+[2025-03-24 21:19:16] Id de la transaccion:1 | Transaccion | Transacción inválida, campos incorrectos en retiro o ingreso
+[2025-03-24 21:19:16] Id de la transaccion:3 
+| Transaccion | Transacción inválida, campos incorrectos en retiro o ingreso
+[2025-03-24 21:19:16] Id de la transaccion:4 | Transaccion | Transferencia superior a 10000 detectada
+[2025-03-24 21:19:16] Id de la transaccion:4 | Transaccion | Saldo negativ
+o detectado en una transacción
+[2025-03-24 21:19:16] Id del Usuario :2 | Usuario con saldo negativo
+
