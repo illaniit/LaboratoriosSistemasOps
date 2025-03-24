@@ -30,6 +30,7 @@
     strcpy(usuario.Contraseña, passwd);
     pthread_t hilo1,hilo2,hilo3,hilo4;
     int Eleccion = 0;
+
     sem_usuarios = sem_open("/sem_usuarios", 0);
     sem_transacciones = sem_open("/sem_transacciones", 0);
 

@@ -284,3 +284,66 @@
 [2025-03-24 11:31:04] El usuario ha elegido la opción de registro
 [2025-03-24 11:31:08] Se ha accedido al menú de entrada
 [2025-03-24 11:31:17] Se ha accedido al sistema correctamente
+[2025-03-24 17:16:28] Se ha cerrado el extremo de escritura de la tuberia del proceso padre de monitor
+[2025-03-24 17:16:28] Se ha abierto el fichero de transacciones
+[2025-03-24 17:16:28] Se ha abierto el archivo de usuarios
+[2025-03-24 17:16:28] Se ha creado correctamente el hilo que revisa ls anomalias
+[2025-03-24 17:16:28] Se ha cerrado el extremo de escritura de la tuberia del proceso hijo de monitor
+[2025-03-24 17:16:28] Se ha cerrado el extremo de lectura de la tuberia del proceso padre de monitor
+[2025-03-24 17:16:28] Se ha accedido al menú de entrada
+[2025-03-24 17:16:33] Se ha accedido al menú de entrada
+[2025-03-24 17:16:39] Se ha accedido al sistema correctamente
+[2025-03-24 17:16:43] Se ha accedido al sistema correctamente
+[2025-03-24 17:42:06] Se ha cerrado el extremo de escritura de la tuberia del proceso padre de monitor
+[2025-03-24 17:42:06] Se ha creado correctamente el hilo que revisa ls anomalias
+[2025-03-24 17:42:06] Se ha abierto el fichero de transacciones
+[2025-03-24 17:42:06] Se ha producido un error al abrirr el archivo de transacciones
+[2025-03-24 17:42:06] Se ha cerrado el extremo de escritura de la tuberia del proceso hijo de monitor
+[2025-03-24 17:42:06] Se ha cerrado el extremo de lectura de la tuberia del proceso padre de monitor
+[2025-03-24 17:43:25] Se ha cerrado el extremo de escritura de la tuberia del proceso padre de monitor
+[2025-03-24 17:43:25] Se ha creado correctamente el hilo que revisa ls anomalias
+[2025-03-24 17:43:25] Se ha abierto el fichero de transacciones
+[2025-03-24 17:43:25] Se ha producido un error al abrirr el archivo de transacciones
+[2025-03-24 17:43:25] Se ha cerrado el extremo de escritura de la tuberia del proceso hijo de monitor
+[2025-03-24 17:43:25] Se ha cerrado el extremo de lectura de la tuberia del proceso padre de monitor
+[2025-03-24 17:44:42] Se ha cerrado el extremo de escritura de la tuberia del proceso padre de monitor
+[2025-03-24 17:44:42] Se ha creado correctamente el hilo que revisa ls anomalias
+[2025-03-24 17:44:42] Se ha abierto el fichero de transacciones
+[2025-03-24 17:44:42] Se ha abierto el archivo de usuarios
+[2025-03-24 17:44:42] Se ha cerrado el extremo de escritura de la tuberia del proceso hijo de monitor
+[2025-03-24 17:44:42] Se ha cerrado el extremo de lectura de la tuberia del proceso padre de monitor
+[2025-03-24 17:46:16] Se ha cerrado el extremo de escritura de la tuberia del proceso padre de monitor
+[2025-03-24 17:46:16] Se ha creado correctamente el hilo que revisa ls anomalias
+[2025-03-24 17:46:16] Se ha abierto el fichero de transacciones
+[2025-03-24 17:46:16] Se ha abierto el archivo de usuarios
+[2025-03-24 17:46:16] Se ha cerrado el extremo de escritura de la tuberia del proceso hijo de monitor
+[2025-03-24 17:46:16] Se ha cerrado el extremo de lectura de la tuberia del proceso padre de monitor
+[2025-03-24 17:46:17] Se ha accedido al menú de entrada
+[2025-03-24 17:48:37] Se ha accedido al menú de entrada
+[2025-03-24 17:48:48] Se ha cerrado el extremo de escritura de la tuberia del proceso padre de monitor
+[2025-03-24 17:48:48] Se ha creado correctamente el hilo que revisa ls anomalias
+[2025-03-24 17:48:48] Se ha abierto el fichero de transacciones
+[2025-03-24 17:48:48] Se ha abierto el archivo de usuarios
+[2025-03-24 17:48:48] Se ha cerrado el extremo de escritura de la tuberia del proceso hijo de monitor
+[2025-03-24 17:48:48] Se ha cerrado el extremo de lectura de la tuberia del proceso padre de monitor
+[2025-03-24 17:51:08] Se ha cerrado el extremo de escritura de la tuberia del proceso padre de monitor
+[2025-03-24 17:51:08] Se ha creado correctamente el hilo que revisa ls anomalias
+[2025-03-24 17:51:08] Se ha abierto el fichero de transacciones
+[2025-03-24 17:51:08] Se ha abierto el archivo de usuarios
+[2025-03-24 17:51:08] Se ha cerrado el extremo de escritura de la tuberia del proceso hijo de monitor
+[2025-03-24 17:51:08] Se ha cerrado el extremo de lectura de la tuberia del proceso padre de monitor
+[2025-03-24 17:52:07] Se ha cerrado el extremo de escritura de la tuberia del proceso padre de monitor
+[2025-03-24 17:52:07] Se ha creado correctamente el hilo que revisa ls anomalias
+[2025-03-24 17:52:07] Se ha abierto el fichero de transacciones
+[2025-03-24 17:52:07] Se ha abierto el archivo de usuarios
+[2025-03-24 17:52:07] Se ha cerrado el extremo de escritura de la tuberia del proceso hijo de monitor
+[2025-03-24 17:52:07] Se ha cerrado el extremo de lectura de la tuberia del proceso padre de monitor
+[2025-03-24 17:52:07] Se ha accedido al menú de entrada
+[2025-03-24 17:52:59] Se ha cerrado el extremo de escritura de la tuberia del proceso padre de monitor
+[2025-03-24 17:52:59] Se ha creado correctamente el hilo que revisa ls anomalias
+[2025-03-24 17:52:59] Se ha abierto el fichero de transacciones
+[2025-03-24 17:52:59] Se ha abierto el archivo de usuarios
+[2025-03-24 17:52:59] Se ha cerrado el extremo de escritura de la tuberia del proceso hijo de monitor
+[2025-03-24 17:52:59] Se ha cerrado el extremo de lectura de la tuberia del proceso padre de monitor
+[2025-03-24 17:52:59] Se ha accedido al menú de entrada
+[2025-03-24 17:53:04] Se ha accedido al sistema correctamente

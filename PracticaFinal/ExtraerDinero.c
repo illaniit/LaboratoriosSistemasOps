@@ -24,11 +24,16 @@ struct Usuario4
 } Usuario4;
 void *ExtraerDinero(void *arg3) {
  
-    sem_wait(sem_usuarios);
-    sem_wait(sem_transacciones);
     struct Usuario4 *usuario = (struct Usuario4 *)arg3;
     bool encontrado = false;
 
+    int saldo_extraer;
+    printf("Introduzca la cantidad que desea extraer: ");
+    scanf("%d", &saldo_extraer);
+
+    sem_wait(sem_usuarios);
+    sem_wait(sem_usuarios);
+    
     FILE *ArchivoUsuarios = fopen("usuarios.txt", "r");
     if (!ArchivoUsuarios) {
         perror("Error al abrir el archivo");
@@ -71,10 +76,7 @@ void *ExtraerDinero(void *arg3) {
             if (strcmp(nombre3, usuario->Usuario3) == 0 && strcmp(contrasena3, usuario->Contraseña1) == 0) {
                 int dinero_inicial = saldo3;
                 encontrado = true;
-                int saldo_extraer;
-                printf("Introduzca la cantidad que desea extraer: ");
-                scanf("%d", &saldo_extraer);
-                
+             
                 if (saldo_extraer > saldo3) {
                     printf("Saldo insuficiente.\n");
                     fclose(tempFile1);
@@ -88,7 +90,7 @@ void *ExtraerDinero(void *arg3) {
 
                 ArchivoTransacciones = fopen("transaciones.txt", "a");
                 if (ArchivoTransacciones) {
-                    fprintf(ArchivoTransacciones, "%d | retiro | %s | - | %d | - | %d \n", id_transacciones, nombre3, dinero_inicial, saldo3);
+                    fprintf(ArchivoTransacciones, "%d | retiro | %d | - | %d | - | %d \n", id_transacciones,id3, dinero_inicial, saldo3);
                     fclose(ArchivoTransacciones);
                 }
             }

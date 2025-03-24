@@ -23,8 +23,7 @@ struct Usuario {
 };
 
 void *Transferencia(void *arg) {
-    sem_wait(sem_usuarios);
-    sem_wait(sem_transacciones);
+   
 
     // Leemos la configuración
     Config config = leer_configuracion("variables.properties");
@@ -45,6 +44,8 @@ void *Transferencia(void *arg) {
         return NULL;
     }
 
+    sem_wait(sem_usuarios);
+    sem_wait(sem_transacciones);
     // Abrimos los archivos necesarios para leer y escribir los datos de los usuarios
     FILE *archivoUsuarios = fopen("usuarios.txt", "r");
     FILE *tempFile3 = fopen("temp3.txt", "w");
@@ -94,6 +95,8 @@ void *Transferencia(void *arg) {
 
     fclose(archivoUsuarios); // Cerramos el archivo de usuarios
     fclose(tempFile3); // Cerramos el archivo temporal
+    sem_post(sem_usuarios);
+    sem_post(sem_transacciones);
 
     // Verificamos si ambas cuentas fueron encontradas
     if (!cuenta_origen_encontrada || !cuenta_destino_encontrada) {
@@ -116,7 +119,6 @@ void *Transferencia(void *arg) {
     //}
 //
     printf("Transferencia realizada con éxito.\n"); // Mensaje de éxito
-    sem_post(sem_usuarios);
-    sem_post(sem_transacciones);
+   
     return NULL; // Finalizamos la función
 }

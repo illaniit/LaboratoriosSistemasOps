@@ -14,17 +14,16 @@
 #include <sys/wait.h>
 #include "Comun.h"
 sem_t *sem_usuarios;
-
 sem_t *sem_transacciones;
-
+sem_t *sem_registro;
 // Inicializar semáforos compartidos
 
 void Inicializar_semaforos()
 {
-
+    sem_registro = sem_open("/sem_registro", O_CREAT, 0666, 1);
     sem_usuarios = sem_open("/sem_usuarios", O_CREAT, 0666, 1);
     sem_transacciones = sem_open("/sem_transacciones", O_CREAT, 0666, 1);
-    if (sem_usuarios == SEM_FAILED || sem_transacciones == SEM_FAILED)
+    if (sem_usuarios == SEM_FAILED || sem_transacciones == SEM_FAILED || sem_registro == SEM_FAILED)
     {
         perror("Error al inicializar semáforos");
         exit(EXIT_FAILURE);
@@ -37,6 +36,8 @@ void Destruir_semaforos()
 {
     sem_close(sem_usuarios);
     sem_close(sem_transacciones);
+    sem_close(sem_registro);
+    sem_unlink("/sem_registro");
     sem_unlink("/sem_usuarios");
     sem_unlink("/sem_transacciones");
 }
@@ -95,6 +96,7 @@ void Escribir_registro(const char *mensaje_registro)
     // Formatea la fecha y hora en "YYYY-MM-DD HH:MM:SS"
     strftime(hora, sizeof(hora), "%Y-%m-%d %H:%M:%S", tm_info);
 
+    sem_wait(sem_registro);
     // Abre el archivo en modo "a" para añadir sin sobrescribir
     FILE *ArchivoDeRegistro = fopen("registro.log", "a");
     if (!ArchivoDeRegistro)
@@ -108,6 +110,7 @@ void Escribir_registro(const char *mensaje_registro)
 
     // Cierra el archivo
     fclose(ArchivoDeRegistro);
+    sem_post(sem_registro);
 }
 
 /// @brief esta funcion limpia la cadena para el strcmp posterior , lo que hace es quitar los espacios en blanco y tabulaciones de la cadena

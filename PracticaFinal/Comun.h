@@ -17,6 +17,8 @@ Config leer_configuracion(const char *ruta);
 
 extern sem_t *sem_usuarios;
 extern sem_t *sem_transacciones;
+extern sem_t *sem_registro;
+
 void Inicializar_semaforos();
 void Destruir_semaforos();
 void Escribir_registro(const char *mensaje_registro);
