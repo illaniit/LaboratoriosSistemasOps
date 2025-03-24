@@ -5,7 +5,6 @@
 #include <semaphore.h>
 #include <unistd.h>
 #include <sys/types.h>
-#define Punt_Archivo_Properties "Variables.properties"
 #include "Usuario.h"
 #include "Operaciones.h"
 #include "Comun.h"

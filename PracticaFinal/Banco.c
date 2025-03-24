@@ -35,7 +35,7 @@ int main()
 {
 
     // Lo primero abrimos el archivo de Properties y "nos traemos las variables"
-    leer_configuracion("variables.properties");
+   Config config =  leer_configuracion("variables.properties");
     // Iniciamos monitor para que encuentre  anomalias
     Inicializar_semaforos();
 

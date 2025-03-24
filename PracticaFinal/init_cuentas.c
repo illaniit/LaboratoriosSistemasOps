@@ -26,34 +26,6 @@ int main()
     Menu_Usuario();
 }
 //esto hay que meterlo en abrir_propertis.c y asi no lo tenemos que declarar en todos falta hacerlo
-void Escribir_registro2(const char *mensaje_registro)
-{
-    // declaramos la variable time_t
-    time_t t;
-    struct tm *tm_info;
-    char buffer[30]; // Para almacenar la fecha y hora formateadas
-
-    // Obtiene la hora actual
-    time(&t);
-    tm_info = localtime(&t);
-
-    // Formatea la fecha y hora en "YYYY-MM-DD HH:MM:SS"
-    strftime(buffer, sizeof(buffer), "%Y-%m-%d %H:%M:%S", tm_info);
-
-    // Abre el archivo en modo "a" para añadir sin sobrescribir
-    FILE *ArchivoDeRegistro = fopen("registro.log", "a");
-    if (!ArchivoDeRegistro)
-    {
-        perror("Error al abrir el archivo de registro");
-        return;
-    }
-
-    // Escribe la fecha, la hora y el mensaje en el archivo
-    fprintf(ArchivoDeRegistro, "[%s] %s\n", buffer, mensaje_registro);
-
-    // Cierra el archivo
-    fclose(ArchivoDeRegistro);
-}
 
 // Función para abrir y leer el archivo de propiedades
 // Esta funcion nos permite cargar las variables que usemos en el codigo para que sea mas accesible
@@ -63,7 +35,7 @@ void Escribir_registro2(const char *mensaje_registro)
 void *Menu_Usuario()
 {
     
-    Escribir_registro2("Se ha accedido al menú de entrada"); // escribimos en el registro
+    Escribir_registro("Se ha accedido al menú de entrada"); // escribimos en el registro
 
     int Eleccion;
     do
@@ -88,7 +60,7 @@ void *Menu_Usuario()
         else if (Eleccion == 2)
         {
             Registro();
-            Escribir_registro2("El usuario ha elegido la opción de registro");
+            Escribir_registro("El usuario ha elegido la opción de registro");
             printf("Volviendo a tu menu...");
             sleep(4);
             Menu_Usuario();
@@ -174,12 +146,12 @@ void InicioDeSesion() {
     } while (intentos < max_intentos);
 
     printf("\n⛔ Demasiados intentos fallidos. Inténtalo más tarde.\n");
-    Escribir_registro2("Se ha bloqueado el acceso por múltiples intentos fallidos.");
+    Escribir_registro("Se ha bloqueado el acceso por múltiples intentos fallidos.");
 }
 /// @brief esta funcion permite que el usuario se registre en una cuenta nueva
 void Registro()
 {
-    Escribir_registro2("El usuario ha entrado en la sección de registro");
+    Escribir_registro("El usuario ha entrado en la sección de registro");
 
     struct Cuenta
     {
@@ -201,8 +173,7 @@ void Registro()
     printf("-------- Registro -------\n");
 
     printf("Introduce tu Nombre: ");
-    while (getchar() != '\n')
-        ; // Limpieza del buffer de entrada
+    while (getchar() != '\n') ; // Limpieza del buffer de entrada
     fgets(cuenta.Nombre, sizeof(cuenta.Nombre), stdin);
     cuenta.Nombre[strcspn(cuenta.Nombre, "\n")] = '\0'; // Eliminar salto de línea
 
@@ -238,8 +209,7 @@ void Registro()
         if (scanf("%d", &cuenta.saldo) != 1)
         {
             printf("Error: Debes ingresar un número válido.\n");
-            while (getchar() != '\n')
-                ; // Limpiar el buffer de entrada
+            while (getchar() != '\n'); // Limpiar el buffer de entrada
         }
         else if (cuenta.saldo < 0)
         {
@@ -247,8 +217,7 @@ void Registro()
         }
     } while (cuenta.saldo < 0);
 
-    while (getchar() != '\n')
-        ; // Limpiar buffer tras scanf()
+    while (getchar() != '\n'); // Limpiar buffer tras scanf()
 
     printf("Verificando que el saldo que ha introducido es correcto...\n");
     sleep(2);
@@ -278,7 +247,7 @@ void Registro()
 
     fclose(usuarios); // Cerrar el archivo
 
-    Escribir_registro2("Se ha registrado un nuevo usuario en el sistema");
+    Escribir_registro("Se ha registrado un nuevo usuario en el sistema");
 
    
 }
