@@ -20,8 +20,7 @@ void Registro();
 void InicioDeSesion();
 int main()
 {
-    sem_registro= sem_open("/sem_registro",0);
-  //  Llamamos a menu usuario
+    sem_registro= sem_open("/sem_registro",0);//  Llamamos a menu usuario
     Menu_Usuario();
 }
 //esto hay que meterlo en abrir_propertis.c y asi no lo tenemos que declarar en todos falta hacerlo
@@ -76,7 +75,7 @@ void InicioDeSesion() {
     char Usuario[50], Contraseña[50]; // Datos ingresados por el usuario
     char linea[256]; // Buffer para leer las líneas del archivo
     int intentos = 0, max_intentos = 3; // Contador de intentos
-    
+
     do {
         archivo = fopen("usuarios.txt", "r"); // Abrimos el archivo en modo lectura
         if (archivo == NULL) {
@@ -106,7 +105,7 @@ void InicioDeSesion() {
             char nombre[50], contrasena[50], apellidos[50], domicilio[100], pais[50];
 
             // Extraemos correctamente los campos de acuerdo al formato "id | nombre | contraseña | apellidos | domicilio | pais | saldo | num_transacciones"
-            if (sscanf(linea, "%d|%49[^|]| %49[^|]|%49[^|]|%99[^|]|%49[^|]|%d|%d",
+            if (sscanf(linea, "%d | %49[^|] | %49[^|] | %49[^|] | %99[^|] | %49[^|] | %d | %d",
                     &id, nombre, contrasena, apellidos, domicilio, pais, &saldo, &num_transacciones) == 8) {
 
                 // Limpiar las cadenas leídas del archivo

@@ -32,8 +32,8 @@ void *ExtraerDinero(void *arg3) {
     scanf("%d", &saldo_extraer);
 
     sem_wait(sem_usuarios);
-    sem_wait(sem_usuarios);
-    
+    sem_wait(sem_transacciones);
+
     FILE *ArchivoUsuarios = fopen("usuarios.txt", "r");
     if (!ArchivoUsuarios) {
         perror("Error al abrir el archivo");
@@ -79,8 +79,11 @@ void *ExtraerDinero(void *arg3) {
              
                 if (saldo_extraer > saldo3) {
                     printf("Saldo insuficiente.\n");
+                
                     fclose(tempFile1);
                     fclose(ArchivoUsuarios);
+                    sem_post(sem_usuarios);
+                    sem_post(sem_transacciones);
                     remove("temp1.txt");
                     return NULL;
                 }

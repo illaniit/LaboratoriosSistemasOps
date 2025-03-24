@@ -79,7 +79,7 @@ void *IntroducirDinero(void *arg2)
     {
         linea[strcspn(linea, "\n")] = '\0';
 
-        if (sscanf(linea, "%d |%49[^|]|%49[^|]|%49[^|]|%99[^|]|%49[^|]|%d|%d",
+        if (sscanf(linea, "%d | %49[^|] | %49[^|] | %49[^|] | %99[^|] | %49[^|] | %d | %d",
                    &id2, nombre2, contrasena2, apellidos2, domicilio2, pais2, &saldo2, &num_transacciones2) == 8)
         {
             limpiar_cadena(nombre2); // llamamos a limpiar cadena
@@ -95,13 +95,13 @@ void *IntroducirDinero(void *arg2)
                 ArchivoTransacciones = fopen("transaciones.txt", "a"); // abrimos el archivo de transacciones para registrar la transaccione con este formato
                 if (ArchivoTransacciones)
                 {
-                    fprintf(ArchivoTransacciones, "%d|ingreso|%d|-|%d|-|%d \n", id_transacciones, id2, dinero_inicial, saldo2);
+                    fprintf(ArchivoTransacciones, "%d | ingreso | %d | - | %d | - | %d \n", id_transacciones, id2, dinero_inicial, saldo2);
                     fclose(ArchivoTransacciones);
                 }
             }
         }
         // reescribimos el archivo entero en un archivo temporal
-        fprintf(tempFile, "%d|%s|%s|%s|%s|%s|%d|%d\n", id2, nombre2, contrasena2, apellidos2, domicilio2, pais2, saldo2, num_transacciones2);
+        fprintf(tempFile, "%d | %s | %s | %s | %s | %s | %d | %d\n", id2, nombre2, contrasena2, apellidos2, domicilio2, pais2, saldo2, num_transacciones2);
     }
 
     fclose(ArchivoUsuarios); // cerramos ambos archiovs
