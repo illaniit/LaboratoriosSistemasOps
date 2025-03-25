@@ -153,14 +153,11 @@ void ConsultarTransferencias(char *user, char *passwd) {
     while (fgets(linea, sizeof(linea), archivoTransacciones)) {
         int id, id1, id2, saldo1, saldo2, saldofinal1, saldofinal2;
         char tipo[20];
-
+        int user_id = obtener_id_usuario(user,passwd);
         // Leer la línea en el formato correcto
         if (sscanf(linea, "%d | %19[^|] | %d | %d | %d | %d | %d | %d",
                    &id, tipo, &id1, &id2, &saldo1, &saldo2, &saldofinal1, &saldofinal2) == 8) {
-            
-            // Convertimos el ID de usuario a entero
-            int user_id = atoi(user);
-
+      
             // Si el usuario está involucrado en la transacción, la mostramos
             if (user_id == id1 || user_id == id2) {
                 printf("ID: %d | Tipo: %s | De: %d | A: %d | Saldo antes: %d | %d | Saldo después: %d | %d\n",

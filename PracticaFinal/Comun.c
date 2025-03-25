@@ -139,3 +139,29 @@ void limpiar_cadena(char *cadena)
     }
     cadena[fin - inicio + 1] = '\0'; // Añadir el carácter nulo al final
 }
+int obtener_id_usuario(const char *nombre, const char *contrasena)
+{
+    FILE *archivo = fopen("usuarios.txt", "r");
+    if (!archivo)
+    {
+        perror("Error al abrir usuarios.txt");
+        return -1;
+    }
+
+    int id, saldo, num_transacciones;
+    char nombre_archivo[50], contrasena_archivo[50], apellidos[50], domicilio[100], pais[50];
+
+    while (fscanf(archivo, "%d | %49[^|] | %49[^|] | %49[^|] | %99[^|] | %49[^|] | %d | %d\n",
+                  &id, nombre_archivo, contrasena_archivo, apellidos, domicilio, pais, &saldo, &num_transacciones) == 8)
+    {
+        limpiar_cadena(nombre_archivo);
+        limpiar_cadena(contrasena_archivo);
+        if (strcmp(nombre, nombre_archivo) == 0 && strcmp(contrasena, contrasena_archivo) == 0)
+        {
+            fclose(archivo);
+            return id; // Retorna el ID del usuario
+        }
+    }
+    fclose(archivo);
+    return -1; // No se encontró el usuario
+}

@@ -23,5 +23,5 @@ void Inicializar_semaforos();
 void Destruir_semaforos();
 void Escribir_registro(const char *mensaje_registro);
 void limpiar_cadena(char *cadena);
-
+int obtener_id_usuario(const char *nombre, const char *contraseña);
 #endif

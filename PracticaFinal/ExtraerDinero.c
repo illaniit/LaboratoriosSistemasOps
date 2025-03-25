@@ -22,30 +22,38 @@ struct Usuario4
     char Usuario3[50];
     char Contraseña1[50];
 } Usuario4;
-void *ExtraerDinero(void *arg3) {
- 
+void *ExtraerDinero(void *arg3)
+{
+    Config config = leer_configuracion("variables.properties");
     struct Usuario4 *usuario = (struct Usuario4 *)arg3;
     bool encontrado = false;
 
     int saldo_extraer;
     printf("Introduzca la cantidad que desea extraer: ");
     scanf("%d", &saldo_extraer);
-
+    if (saldo_extraer > config.limite_retiro)
+    {
+        printf("El dinero que desea extraer excede nuestro limite");
+        sleep(2);
+        return NULL;
+    }
     sem_wait(sem_usuarios);
     sem_wait(sem_transacciones);
 
     FILE *ArchivoUsuarios = fopen("usuarios.txt", "r");
-    if (!ArchivoUsuarios) {
+    if (!ArchivoUsuarios)
+    {
         perror("Error al abrir el archivo");
-     
+
         return NULL;
     }
 
     FILE *tempFile1 = fopen("temp1.txt", "w");
-    if (!tempFile1) {
+    if (!tempFile1)
+    {
         perror("Error al abrir el archivo temporal");
         fclose(ArchivoUsuarios);
-     
+
         return NULL;
     }
 
@@ -55,10 +63,13 @@ void *ExtraerDinero(void *arg3) {
 
     int id_transacciones = 0;
     FILE *ArchivoTransacciones = fopen("transaciones.txt", "r");
-    if (ArchivoTransacciones) {
-        while (fgets(linea2, sizeof(linea2), ArchivoTransacciones) != NULL) {
+    if (ArchivoTransacciones)
+    {
+        while (fgets(linea2, sizeof(linea2), ArchivoTransacciones) != NULL)
+        {
             int temp_id;
-            if (sscanf(linea2, "%d |", &temp_id) == 1) {
+            if (sscanf(linea2, "%d |", &temp_id) == 1)
+            {
                 id_transacciones = temp_id; // Guardamos el último ID encontrado
             }
         }
@@ -66,20 +77,24 @@ void *ExtraerDinero(void *arg3) {
     }
     id_transacciones++; // Incrementamos para el nuevo registro
 
-    while (fgets(linea, sizeof(linea), ArchivoUsuarios) != NULL) {
+    while (fgets(linea, sizeof(linea), ArchivoUsuarios) != NULL)
+    {
         linea[strcspn(linea, "\n")] = '\0';
 
         if (sscanf(linea, "%d | %49[^|] | %49[^|] | %49[^|] | %99[^|] | %49[^|] | %d | %d",
-                   &id3, nombre3, contrasena3, apellidos3, domicilio3, pais3, &saldo3, &num_transacciones3) == 8) {
+                   &id3, nombre3, contrasena3, apellidos3, domicilio3, pais3, &saldo3, &num_transacciones3) == 8)
+        {
             limpiar_cadena(nombre3);
             limpiar_cadena(contrasena3);
-            if (strcmp(nombre3, usuario->Usuario3) == 0 && strcmp(contrasena3, usuario->Contraseña1) == 0) {
+            if (strcmp(nombre3, usuario->Usuario3) == 0 && strcmp(contrasena3, usuario->Contraseña1) == 0)
+            {
                 int dinero_inicial = saldo3;
                 encontrado = true;
-             
-                if (saldo_extraer > saldo3) {
+
+                if (saldo_extraer > saldo3)
+                {
                     printf("Saldo insuficiente.\n");
-                
+
                     fclose(tempFile1);
                     fclose(ArchivoUsuarios);
                     sem_post(sem_usuarios);
@@ -92,8 +107,9 @@ void *ExtraerDinero(void *arg3) {
                 num_transacciones3++;
 
                 ArchivoTransacciones = fopen("transaciones.txt", "a");
-                if (ArchivoTransacciones) {
-                    fprintf(ArchivoTransacciones, "%d | retiro | %d | - | %d | - | %d \n", id_transacciones,id3, dinero_inicial, saldo3);
+                if (ArchivoTransacciones)
+                {
+                    fprintf(ArchivoTransacciones, "%d | retiro | %d | - | %d | - | %d \n", id_transacciones, id3, dinero_inicial, saldo3);
                     fclose(ArchivoTransacciones);
                 }
             }
@@ -105,12 +121,15 @@ void *ExtraerDinero(void *arg3) {
     fclose(ArchivoUsuarios);
     fclose(tempFile1);
 
-    if (encontrado) {
+    if (encontrado)
+    {
         remove("usuarios.txt");
         rename("temp1.txt", "usuarios.txt");
         printf("Saldo actualizado correctamente.\n");
         sleep(2);
-    } else {
+    }
+    else
+    {
         remove("temp1.txt");
         printf("Usuario no encontrado o contraseña incorrecta.\n");
     }

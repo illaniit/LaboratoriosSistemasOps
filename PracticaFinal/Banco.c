@@ -248,11 +248,7 @@ void *detectar_transacciones(void *arg)
             }
 
             // Verificación de formato inválido para ingresos y retiros
-            if ((strcmp(tipo, "retiro") == 0 || strcmp(tipo, "ingreso") == 0) && (strlen(cuenta2) > 0 || saldo2 != 0))
-            {
-                Escribir_registro("Se ha detectado una transacción inválida");
-                enviar_alerta("Transacción inválida, campos incorrectos en retiro o ingreso", &id,0);
-            }
+          
         }
 
         usuario_id_anterior = id2; // Actualizamos el usuario actual para las validaciones consecutivas

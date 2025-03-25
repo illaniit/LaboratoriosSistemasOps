@@ -339,3 +339,40 @@
 [2025-03-24 21:19:16] Se ha cerrado el extremo de escritura de la tuberia del proceso hijo de monitor
 [2025-03-24 21:19:16] Se ha cerrado el extremo de lectura de la tuberia del proceso padre de monitor
 [2025-03-24 21:19:16] Se ha accedido al menú de entrada
+[2025-03-25 08:13:50] Se ha cerrado el extremo de escritura de la tuberia del proceso padre de monitor
+[2025-03-25 08:13:50] Se ha creado correctamente el hilo que revisa ls anomalias
+[2025-03-25 08:13:50] Se ha abierto el fichero de transacciones
+[2025-03-25 08:13:50] Se ha producido un error al abrir el archivo de transacciones
+[2025-03-25 08:13:50] Se ha cerrado el extremo de escritura de la tuberia del proceso hijo de monitor
+[2025-03-25 08:13:50] Se ha cerrado el extremo de lectura de la tuberia del proceso padre de monitor
+[2025-03-25 08:13:50] Se ha accedido al menú de entrada
+[2025-03-25 08:14:00] El usuario ha entrado en la sección de registro
+[2025-03-25 08:14:40] Se ha registrado un nuevo usuario en el sistema
+[2025-03-25 08:14:40] El usuario ha elegido la opción de registro
+[2025-03-25 08:14:44] Se ha accedido al menú de entrada
+[2025-03-25 08:14:51] Se ha accedido al sistema correctamente
+[2025-03-25 08:15:14] El usuario ha introducido la cantidad ha ingresar 
+[2025-03-25 08:15:16] El usuario ha ingresado dinero
+[2025-03-25 08:16:09] Se ha accedido al menú de entrada
+[2025-03-25 08:16:11] El usuario ha entrado en la sección de registro
+[2025-03-25 08:16:23] Se ha registrado un nuevo usuario en el sistema
+[2025-03-25 08:16:23] El usuario ha elegido la opción de registro
+[2025-03-25 08:16:27] Se ha accedido al menú de entrada
+[2025-03-25 08:16:34] Se ha accedido al sistema correctamente
+[2025-03-25 08:29:55] Se ha cerrado el extremo de escritura de la tuberia del proceso padre de monitor
+[2025-03-25 08:29:55] Se ha creado correctamente el hilo que revisa ls anomalias
+[2025-03-25 08:29:55] Se ha abierto el fichero de transacciones
+[2025-03-25 08:29:55] Se ha detectado una transacción inválida
+[2025-03-25 08:29:55] Se ha enviado una alerta
+[2025-03-25 08:29:55] Se ha detectado una transacción inválida
+[2025-03-25 08:29:55] Se ha enviado una alerta
+[2025-03-25 08:29:55] Se ha registrado una alerta en el sistema
+[2025-03-25 08:29:55] Se ha abierto el fichero de alertas
+[2025-03-25 08:29:55] Se ha abierto el archivo de usuarios
+[2025-03-25 08:29:55] Se ha registrado una alerta en el sistema
+[2025-03-25 08:29:55] Se ha abierto el fichero de alertas
+[2025-03-25 08:29:55] Se ha cerrado el extremo de escritura de la tuberia del proceso hijo de monitor
+[2025-03-25 08:29:55] Se ha cerrado el extremo de lectura de la tuberia del proceso padre de monitor
+[2025-03-25 08:29:55] Se ha accedido al menú de entrada
+[2025-03-25 08:30:00] Intento fallido de inicio de sesión
+[2025-03-25 08:30:07] Se ha accedido al sistema correctamente
