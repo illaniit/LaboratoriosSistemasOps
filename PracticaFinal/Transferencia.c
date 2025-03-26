@@ -15,7 +15,7 @@
 #include <stdbool.h>
 #include "Operaciones.h"
 #include "Comun.h"
-
+//Utilizamos este struct para almacenar los datos 
 struct Usuario {
     char nombre[50];
     char contrasena[50];
@@ -25,7 +25,9 @@ struct Usuario {
 
 
 
-
+/// @brief 
+/// @param arg 
+/// @return 
 void *Transferencia(void *arg) {
     
     Config config = leer_configuracion("variables.properties");
@@ -46,18 +48,25 @@ void *Transferencia(void *arg) {
     int id_origen = obtener_id_usuario(usuario->nombre, usuario->contrasena);
     
     if(id_origen==id_destino){
-        printf("No te puedes hacer una transferencia a ti mismo !!");
+        printf("No te puedes hacer una transferencia a ti mismo !!\n");
+        sleep(2);
         sem_post(sem_usuarios);
         sem_post(sem_transacciones);
         return NULL;
     }
     if (id_origen == -1) {
         printf("Error: Usuario no encontrado.\n");
+        sleep(2);
+        sem_post(sem_usuarios);
+        sem_post(sem_transacciones);
         return NULL;
     }
     // Verificar límite de transferencia
     if (Cantidad_transferir > config.limite_transferencia) {
         printf("La cantidad excede el límite de transferencia permitido.\n");
+        sleep(2);
+        sem_post(sem_usuarios);
+        sem_post(sem_transacciones);
         return NULL;
     }
 
@@ -125,6 +134,10 @@ void *Transferencia(void *arg) {
     if (!cuenta_origen_encontrada || !cuenta_destino_encontrada) {
         printf("Error: Cuenta no encontrada.\n");
         remove("temp.txt");
+        sleep(2);
+        sem_post(sem_usuarios);
+        sem_post(sem_transacciones);
+        
         return NULL;
     }
 

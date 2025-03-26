@@ -1,0 +1,2 @@
+1 | Pedro   | ss   | Redriguez       | paula       | marioatleti       | 297044 | 3
+2 | alex   | 1   | 1     | 1     | 1     | 4003 | 0
