@@ -14,6 +14,7 @@
 #include <sys/fcntl.h>
 #include <sys/wait.h>
 #include "Comun.h"
+#include <sys/prctl.h> // Para PR_SET_PDEATHSIG
 #define Cantidad_limite 1000
 #define Punt_Archivo_Properties "Variables.properties"
 #define MAX_LENGTH 256
@@ -28,14 +29,13 @@ void enviar_alerta(const char *mensaje, const int *id, const int titular);
 void limpiar(int sig);
 void registrar_alerta(const char *mensaje);
 
-
 /// @brief este es el main en el cual leemos propertis con las variables
 /// @return y devolvemos 0 si la ejecuccion ha sido exitosa
 int main()
 {
     Config config = leer_configuracion("variables.properties");
     // Lo primero abrimos el archivo de Properties y "nos traemos las variables"
-   
+
     // Iniciamos monitor para que encuentre  anomalias
     Inicializar_semaforos();
 
@@ -51,43 +51,114 @@ int main()
 
 /// @brief Esta funcion crea procesos en una nueva terminal que lo que
 /// hacen es ejecutar la instancia de usuario y ejecutar el codigo del mismo
+
+#define MAX_HIJOS 100  // Máximo número de hijos permitidos
+
+// Array de PIDs de los hijos
+pid_t hijos[MAX_HIJOS];  
+int num_hijos = 0;         // Contador de hijos creados
+
+// Función para matar todos los procesos hijos usando system()
+void matar_hijos()
+{
+    printf("\nEl padre ha terminado. Terminando todos los procesos hijos...\n");
+
+    for (int i = 0; i < num_hijos; i++)
+    {
+        if (hijos[i] > 0)  // Verifica que el PID sea válido
+        {
+            printf("Matando hijo PID: %d\n", hijos[i]);
+
+            // Matar proceso hijo directamente
+            char comando[100];
+            snprintf(comando, sizeof(comando), "sudo kill -9 %d", hijos[i]);
+            system(comando);
+            sleep(1);
+        }
+    }
+}
+
 void Menu_Procesos()
 {
-
     char respuesta;
     int continuar = 1;
+
+  
+
     while (continuar)
     {
+        if (num_hijos >= MAX_HIJOS)
+        {
+            printf("Se ha alcanzado el límite de usuarios.\n");
+            break;
+        }
+
         pid_t pid = fork(); // Crear un proceso hijo
+        
         if (pid == 0)
-        {                                                                        // Si estamos en el proceso hijo
-            execlp("gnome-terminal", "gnome-terminal", "--", "./usuario", NULL); // Llamamos a la función que maneja el usuario
-                                                                                 // Liberar el semáforo para que el padre sepa que terminó
-            exit(0);                                                             // Termina el proceso hijo
+        {   
+            // Crear un nuevo grupo de procesos para el hijo
+            setpgid(0, 0);
+
+            // Ejecutar en una nueva terminal y obtener el PID real
+            char comando[200];
+            snprintf(comando, sizeof(comando), 
+                     "gnome-terminal -- sh -c 'echo $$ > /tmp/pid_%d.txt; gcc init_cuentas.c Usuario.c Transferencia.c ConsultarDatos.c ExtraerDinero.c IntroducirDinero.c Comun.c -o usuario && ./usuario'", getpid());
+            
+            system(comando);
+            
+            exit(0); // El hijo termina aquí, la terminal sigue corriendo
         }
         else if (pid > 0)
-        { // Si estamos en el proceso padre
-          // Espera a que el hijo termine (semaforo bloqueado hasta que el hijo lo libere)
+        { 
+            // Esperar un momento para que el archivo con el PID se cree
+            sleep(1);
 
-            // Preguntar si desea aceptar otro usuario después de que el hijo termine
+            // Leer el PID real del hijo desde el archivo
+            char filename[50];
+            snprintf(filename, sizeof(filename), "/tmp/pid_%d.txt", pid);
+            FILE *fp = fopen(filename, "r");
+            if (fp)
+            {
+                fscanf(fp, "%d", &hijos[num_hijos]);  // Guardar el PID real del hijo
+                fclose(fp);
+            }
+            else
+            {
+                perror("Error al leer el archivo de PID");
+                hijos[num_hijos] = pid;  // Si falla, usar el PID de fork()
+            }
+
+            num_hijos++;
+
+            // Preguntar si desea aceptar otro usuario
             printf("¿Desea aceptar otro usuario? (s/n): ");
-            scanf(" %c", &respuesta); // Espacio antes de %c para consumir el salto de línea pendiente
+            scanf(" %c", &respuesta); 
             if (respuesta != 's' && respuesta != 'S')
             {
-                continuar = 0; // Si no quiere otro usuario, salimos del bucle
+                continuar = 0; 
             }
         }
         else
         {
-            perror("Error en fork"); // devolvemos un error si se ha generado mal el codigo
-            exit(EXIT_FAILURE);      // terminamos la ejeccion si ha habido un problema en el fork
+            perror("Error en fork"); 
+            exit(EXIT_FAILURE);
         }
     }
 
-    // El padre espera a que todos los procesos hijos terminen antes de cerrar
-    while (wait(NULL) > 0)
-        ; // Espera a que todos los hijos terminen
+    // El padre espera a que todos los hijos terminen
+    for (int i = 0; i < num_hijos; i++)
+    {
+        if (hijos[i] > 0)
+        {
+            waitpid(hijos[i], NULL, 0);
+        }
+    }
+    
+    // Cuando el padre termina, mata a todos los hijos
+    matar_hijos();
 }
+
 
 // Esta funcion se encarga de "pegar" la alerta en el pipe para poder pasarlo al proceso padre
 
@@ -106,12 +177,12 @@ void enviar_alerta(const char *mensaje, const int *id, const int titular)
     // Formatea la fecha y hora en "YYYY-MM-DD HH:MM:SS"
     strftime(hora, sizeof(hora), "%Y-%m-%d %H:%M:%S", tm_info);
     char auxiliar[256];
-    
-    if (titular==1)
+
+    if (titular == 1)
     {
         snprintf(auxiliar, sizeof(auxiliar), "[%s] Id del Usuario :%d | %s\n", hora, *id, mensaje); // esta funcion nos permite agregar un \n en el archivo de texto para que sea entendible y legible
     }
-    else if(titular==0)
+    else if (titular == 0)
     {
         snprintf(auxiliar, sizeof(auxiliar), "[%s] Id de la transaccion:%d | Transaccion | %s\n", hora, *id, mensaje); // esta funcion nos permite agregar un \n en el archivo de texto para que sea entendible y legible
     }
@@ -171,45 +242,44 @@ void *detectar_transacciones(void *arg)
         char tipo[20], cuenta1[20], cuenta2[20], tipo1[20], cuenta_t1[20], cuenta_t2[20];
 
         // Procesamos retiros o ingresos con 7 campos
-        
+
         // Procesamos transferencias con 8 campos
-         if (sscanf(linea, "%d | %39[^|] | %39[^|] | %39[^|] | %d | %d | %d | %d", &id2, tipo1, cuenta_t1, cuenta_t2, &saldo_t1, &saldo_t2, &saldo_finalt1, &saldo_finalt2) == 8)
+        if (sscanf(linea, "%d | %39[^|] | %39[^|] | %39[^|] | %d | %d | %d | %d", &id2, tipo1, cuenta_t1, cuenta_t2, &saldo_t1, &saldo_t2, &saldo_finalt1, &saldo_finalt2) == 8)
         {
             limpiar_cadena(tipo1);
 
             // Verificación de transferencia
-           
-                if (saldo_finalt2 - saldo_t2 > config.limite_transferencia) // Transferencia superior a 10000
-                {
-                    Escribir_registro("Se ha detectado una transferencia superior a 10000");
-                    enviar_alerta("Transferencia superior a 10000 detectada", &id2, 0);
-                }
 
-                // Verificación de transferencias consecutivas
-                if (usuario_id_anterior == id2)
-                {
-                    transferencias_consecutivas++;
-                }
-                else
-                {
-                    transferencias_consecutivas = 1; // Iniciar contador si el usuario cambia
-                }
+            if (saldo_finalt2 - saldo_t2 > config.limite_transferencia) // Transferencia superior a 10000
+            {
+                Escribir_registro("Se ha detectado una transferencia superior a 10000");
+                enviar_alerta("Transferencia superior a 10000 detectada", &id2, 0);
+            }
 
-                if (transferencias_consecutivas > config.umbral_transferencias)
-                {
-                    Escribir_registro("Se han detectado más de 5 transferencias consecutivas");
-                    enviar_alerta("Usuario ha hecho más de 5 transferencias consecutivas", &id2,0);
-                }
-            
+            // Verificación de transferencias consecutivas
+            if (usuario_id_anterior == id2)
+            {
+                transferencias_consecutivas++;
+            }
+            else
+            {
+                transferencias_consecutivas = 1; // Iniciar contador si el usuario cambia
+            }
+
+            if (transferencias_consecutivas > config.umbral_transferencias)
+            {
+                Escribir_registro("Se han detectado más de 5 transferencias consecutivas");
+                enviar_alerta("Usuario ha hecho más de 5 transferencias consecutivas", &id2, 0);
+            }
 
             // Verificación de saldos negativos en transferencias
             if (saldo_t1 < 0 || saldo_t2 < 0 || saldo_finalt1 < 0 || saldo_finalt2 < 0)
             {
                 Escribir_registro("Se ha detectado un saldo negativo en una transacción");
-                enviar_alerta("Saldo negativo detectado en una transacción", &id2,0);
+                enviar_alerta("Saldo negativo detectado en una transacción", &id2, 0);
             }
         }
-        else 
+        else
         {
             sscanf(linea, "%d | %39[^|] | %39[^|] | %39[^|] | %d | %d | %d", &id, tipo, cuenta1, cuenta2, &saldo1, &saldo2, &saldo_final);
             limpiar_cadena(tipo);
@@ -248,7 +318,6 @@ void *detectar_transacciones(void *arg)
             }
 
             // Verificación de formato inválido para ingresos y retiros
-          
         }
 
         usuario_id_anterior = id2; // Actualizamos el usuario actual para las validaciones consecutivas
@@ -278,7 +347,7 @@ void *detectar_transacciones(void *arg)
             if (saldo < 0)
             {
                 Escribir_registro("Se ha encontrado un usuario con saldo negativo");
-                enviar_alerta("Usuario con saldo negativo", &id,1);
+                enviar_alerta("Usuario con saldo negativo", &id, 1);
             }
 
             if (num_transacciones < 0)
@@ -295,7 +364,6 @@ void *detectar_transacciones(void *arg)
 
     fclose(usuarios); // Cerramos el archivo
 }
-
 
 // Función para crear el proceso Monitor y manejar alertas en tiempo real
 void CrearMonitor()
