@@ -123,17 +123,20 @@ void DatosCuenta(char *user,char *passwd) {
         }
     }
     if(encontrado){
-    printf("\n------ Datos de la cuenta ------\n");
-                printf("ID: %d\n", id1);
-                printf("Nombre: %s\n", nombre1);
-                printf("Apellidos: %s\n", apellidos1);
-                printf("Domicilio: %s\n", domicilio1);
-                printf("Pais: %s\n", pais1);
-                printf("Saldo: %d\n", saldo1);
-                printf("Número de Transacciones: %d\n", num_transacciones1);
-                printf("Presione s  para volver al menu....");
-                scanf("%s",var);
-            
+        printf("\n=================================================\n");
+        printf("              💳 DATOS DE LA CUENTA 💳              \n");
+        printf("=================================================\n");
+        printf("🔹 Numero de cuenta:   %d\n", id1);
+        printf("👤 Nombre:            %s\n", nombre1);
+        printf("🗂️  Apellidos:         %s\n", apellidos1);
+        printf("🏠 Domicilio:         %s\n", domicilio1);
+        printf("🌍 País:             %s\n", pais1);
+        printf("💰 Saldo:            %d\n", saldo1);
+        printf("🔄 Transacciones:    %d\n", num_transacciones1);
+        printf("=================================================\n");
+        printf("📌 Presione 's' para volver al menú principal... ");
+        scanf(" %s", var);
+        
     }
     fclose(archivoCuentas);
 }
@@ -143,31 +146,44 @@ void ConsultarTransferencias(char *user, char *passwd) {
     system("clear");
     FILE *archivoTransacciones = fopen("transaciones.txt", "r");
     if (!archivoTransacciones) {
-        perror("Error al abrir transaciones.txt");
+        perror("❌ Error al abrir transacciones.txt");
         return;
     }
 
     char linea[256];
-    printf("\n------ Transferencias ------\n");
+    int transacciones_encontradas = 0; // Para verificar si el usuario tiene transacciones
+
+    printf("\n=================================================\n");
+    printf("        💳 CONSULTA DE TRANSFERENCIAS 💳 \n");
+    printf("=================================================\n");
 
     while (fgets(linea, sizeof(linea), archivoTransacciones)) {
         int id, id1, id2, saldo1, saldo2, saldofinal1, saldofinal2;
         char tipo[20];
-        int user_id = obtener_id_usuario(user,passwd);
+        int user_id = obtener_id_usuario(user, passwd);
+        
         // Leer la línea en el formato correcto
         if (sscanf(linea, "%d | %19[^|] | %d | %d | %d | %d | %d | %d",
                    &id, tipo, &id1, &id2, &saldo1, &saldo2, &saldofinal1, &saldofinal2) == 8) {
       
             // Si el usuario está involucrado en la transacción, la mostramos
             if (user_id == id1 || user_id == id2) {
-                printf("ID: %d | Tipo: %s | De: %d | A: %d | Saldo antes: %d | %d | Saldo después: %d | %d\n",
-                       id, tipo, id1, id2, saldo1, saldo2, saldofinal1, saldofinal2);
+                transacciones_encontradas = 1; // Si encontramos al menos una transacción
+                printf("\nNumero de tranferencia: %d | Tipo: %s | De cuenta: %d | A cuenta: %d\n", id, tipo, id1, id2);
+                printf(" Saldo antes: %d | %d | Saldo después: %d | %d\n", saldo1, saldo2, saldofinal1, saldofinal2);
+                printf("-------------------------------------------------\n");
             }
         }
     }
 
-    printf("Presione 's' para volver al menú...");
+    // Si no se encontraron transferencias
+    if (!transacciones_encontradas) {
+        printf("\n❗ No se han encontrado transferencias para este usuario.\n");
+    }
+
+    printf("\n📌 Presione 's' para volver al menú principal... ");
     scanf(" %c", &var);  // Espacio antes de %c para evitar problemas con el buffer
 
     fclose(archivoTransacciones);
 }
+

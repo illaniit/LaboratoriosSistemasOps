@@ -1,2 +1,6 @@
 1 | Pedro  | ss  | Redriguez      | paula      | marioatleti      | 297047 | 3
 2 | alex  | 1  | 1    | 1    | 1    | 4003 | 0
+3 | alejandro | si | de pazos | pozuelo | españa | 200 | 0
+4 | 1 | 1 | 1 | 1 | 1 | 1 | 0
+5 | alex | ss | de pazex | calle urano 14 | españa | 300 | 0
+6 | 2 | 2 | 2 | 2 | 2 | 3 | 0

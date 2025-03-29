@@ -29,40 +29,47 @@ int main()
 
 /// @brief Esta funcion despliega un menu que le permite al usuario inciar sesion o registrarse
 /// @return 
-void *Menu_Usuario()
-{
-    
-    Escribir_registro("Se ha accedido al menú de entrada"); // escribimos en el registro
+void *Menu_Usuario() {
+    Escribir_registro("Se ha accedido al menú de entrada");
 
     int Eleccion;
-    do
-    {
-    
-        //este es el menu de incio de sesion
-        system("clear");
-        printf("\n------------------💰Elija una opción💰------------------\n");
-        printf("|   1️⃣  Inicio de sesión                                 |\n");
-        printf("|   2️⃣  Registro                                         |\n");
-        printf("|       Pulse una opción (1/2):                         |\n");
-        printf("---------------------------------------------------------\n");
-        scanf("%d", &Eleccion);
 
-        if (Eleccion == 1)
-        {
+    do {
+        system("clear");  // Limpia la pantalla en sistemas UNIX
 
-            InicioDeSesion();
+        printf("\n------------------💰 Elija una opción 💰---------------\n");
+        printf("|   1️⃣  Inicio de sesión                                |\n");
+        printf("|   2️⃣  Registro                                        |\n");
+        printf("|   3️⃣  Salir                                           |\n");
+        printf("------------------------------------------------------\n");
+        printf("   Pulse una opción: ");  // Aquí queda el cursor esperando entrada
+      
+        scanf("%d", &Eleccion);  // Aquí el usuario ingresa la opción
+        switch (Eleccion) {
+            case 1:
+                Escribir_registro("El usuario ha elegido iniciar sesión");
+                InicioDeSesion();
+                break;
 
-            Escribir_registro("El usuario ha elegido iniciar sesión");
+            case 2:
+                Escribir_registro("El usuario ha elegido la opción de registro");
+                Registro();
+                printf("Volviendo al menú...\n");
+                sleep(2);
+                break;
+
+            case 3:
+                printf("Tenga un buen día 😊...\n");
+                sleep(2);
+                return NULL;
+
+            default:
+                printf("⚠️  Opción no válida. Intente de nuevo.\n");
+                sleep(2);
+                break;
         }
-        else if (Eleccion == 2)
-        {
-            Registro();
-            Escribir_registro("El usuario ha elegido la opción de registro");
-            printf("Volviendo a tu menu...");
-            sleep(4);
-            Menu_Usuario();
-        }
-    } while (Eleccion != 1 && Eleccion != 2);
+
+    } while (Eleccion != 3);
 
     return NULL;
 }
@@ -82,13 +89,14 @@ void InicioDeSesion() {
             exit(EXIT_FAILURE);
         }
 
-        printf("\n------------------- Inicio de Sesión ------------------------\n");
-        printf("Introduce tu nombre de usuario: ");
+        printf("\n============================================================\n");
+        printf("                 🔐  INICIO DE SESIÓN  🔐                   \n");
+        printf("============================================================\n");
+        printf("📌  Introduce tu nombre : ");
         scanf("%49s", Usuario);
-
-        printf("Contraseña: ");
+    
+        printf("🔑  Contraseña: ");
         scanf("%49s", Contraseña);
-
         // Limpiar las cadenas de los espacios antes de compararlas
         limpiar_cadena(Usuario);
         limpiar_cadena(Contraseña);
@@ -146,105 +154,108 @@ void InicioDeSesion() {
     Escribir_registro("Se ha bloqueado el acceso por múltiples intentos fallidos.");
 }
 /// @brief esta funcion permite que el usuario se registre en una cuenta nueva
-void Registro()
-{
+void Registro() {
     Escribir_registro("El usuario ha entrado en la sección de registro");
 
-    struct Cuenta
-    {
-        int id;            // ID de la cuenta
-        char Nombre[50];   // Nombre de usuario
-        char Apellido[50]; // Apellido del usuario
-        char Contraseña[50];  
+    struct Cuenta {
+        int id;
+        char Nombre[50];
+        char Apellido[50];
+        char Contraseña[50];
         char RepetirContraseña[50];
-        char domicilio[100];      // Domicilio
-        char pais[50];            // País
-        int saldo;                // Saldo inicial
-        int Numero_transacciones; // Número de transacciones
+        char domicilio[100];
+        char pais[50];
+        int saldo;
+        int Numero_transacciones;
     };
 
     struct Cuenta cuenta;
-    cuenta.id = 1; // Comenzamos en 1 en caso de ser el primer usuario
+    cuenta.id = 1;
     cuenta.Numero_transacciones = 0;
 
-    printf("-------- Registro -------\n");
+    system("clear");  // Limpia la pantalla antes de mostrar el menú
 
-    printf("Introduce tu Nombre: ");
-    while (getchar() != '\n') ; // Limpieza del buffer de entrada
+    printf("\n============================================================\n");
+    printf("                 📝 REGISTRO DE NUEVO USUARIO               \n");
+    printf("============================================================\n");
+
+    // Capturar el nombre de usuario
+    printf("\n👤 Introduce tu Nombre: ");
+    while (getchar() != '\n'); // Limpieza del buffer
     fgets(cuenta.Nombre, sizeof(cuenta.Nombre), stdin);
-    cuenta.Nombre[strcspn(cuenta.Nombre, "\n")] = '\0'; // Eliminar salto de línea
+    cuenta.Nombre[strcspn(cuenta.Nombre, "\n")] = '\0';
 
+    // Capturar el apellido
     printf("Introduce tus Apellidos: ");
     fgets(cuenta.Apellido, sizeof(cuenta.Apellido), stdin);
     cuenta.Apellido[strcspn(cuenta.Apellido, "\n")] = '\0';
-    do {
-        printf("Escribe tu contraseña: ");
-        fgets(cuenta.Contraseña, sizeof(cuenta.Contraseña), stdin);
-        cuenta.Contraseña[strcspn(cuenta.Contraseña, "\n")] = '\0'; // Elimina el salto de línea
 
-        printf("Repite tu contraseña: ");
+    // Validar contraseña
+    do {
+        printf("🔑 Escribe tu contraseña: ");
+        fgets(cuenta.Contraseña, sizeof(cuenta.Contraseña), stdin);
+        cuenta.Contraseña[strcspn(cuenta.Contraseña, "\n")] = '\0';
+
+        printf(" Repite tu contraseña: ");
         fgets(cuenta.RepetirContraseña, sizeof(cuenta.RepetirContraseña), stdin);
         cuenta.RepetirContraseña[strcspn(cuenta.RepetirContraseña, "\n")] = '\0';
 
         if (strcmp(cuenta.Contraseña, cuenta.RepetirContraseña) != 0) {
-            printf("⚠️ Las contraseñas no coinciden ⚠️\n");
-            printf("Vuelve a escribirlas.\n");
+            printf("\n⚠️  ¡Las contraseñas no coinciden! Inténtalo nuevamente.\n\n");
         }
     } while (strcmp(cuenta.Contraseña, cuenta.RepetirContraseña) != 0);
-    printf("Introduce tu domicilio: ");
+
+    // Capturar domicilio
+    printf("🏠 Introduce tu domicilio: ");
     fgets(cuenta.domicilio, sizeof(cuenta.domicilio), stdin);
     cuenta.domicilio[strcspn(cuenta.domicilio, "\n")] = '\0';
 
+    // Capturar país
     printf("Introduce tu país de residencia: ");
     fgets(cuenta.pais, sizeof(cuenta.pais), stdin);
     cuenta.pais[strcspn(cuenta.pais, "\n")] = '\0';
 
     // Validación del saldo ingresado
-    do
-    {
-        printf("Introduce el saldo inicial (debe ser un número positivo): ");
-        if (scanf("%d", &cuenta.saldo) != 1)
-        {
-            printf("Error: Debes ingresar un número válido.\n");
-            while (getchar() != '\n'); // Limpiar el buffer de entrada
-        }
-        else if (cuenta.saldo < 0)
-        {
-            printf("Error: El saldo no puede ser negativo.\n");
+    do {
+        printf("💰 Introduce el saldo inicial (debe ser un número positivo): ");
+        if (scanf("%d", &cuenta.saldo) != 1) {
+            printf("\n❌ Error: Debes ingresar un número válido.\n\n");
+            while (getchar() != '\n'); // Limpiar el buffer
+        } else if (cuenta.saldo < 0) {
+            printf("\n❌ Error: El saldo no puede ser negativo.\n\n");
         }
     } while (cuenta.saldo < 0);
 
     while (getchar() != '\n'); // Limpiar buffer tras scanf()
 
-    printf("Verificando que el saldo que ha introducido es correcto...\n");
+    printf("\n✅ Verificando datos... Por favor, espere.\n");
     sleep(2);
 
     // Abrir el archivo en modo lectura para contar usuarios existentes
     FILE *usuarios = fopen("usuarios.txt", "r+");
-    if (!usuarios)
-    {
-        usuarios = fopen("usuarios.txt", "w"); // Si no existe, crearlo
-        if (!usuarios)
-        {
-            perror("Error al abrir el archivo de usuarios");
+    if (!usuarios) {
+        usuarios = fopen("usuarios.txt", "w");
+        if (!usuarios) {
+            perror("❌ Error al abrir el archivo de usuarios");
             return;
         }
     }
 
+    // Contar líneas para asignar el ID del usuario
     char linea[255];
-    while (fgets(linea, sizeof(linea), usuarios) != NULL)
-    {
-        cuenta.id++; // Incrementar ID basado en el número de líneas
+    while (fgets(linea, sizeof(linea), usuarios) != NULL) {
+        cuenta.id++;
     }
 
     // Escribir los datos en el archivo
     fprintf(usuarios, "%d | %s | %s | %s | %s | %s | %d | %d\n",
-            cuenta.id, cuenta.Nombre,cuenta.Contraseña ,cuenta.Apellido, cuenta.domicilio,
-            cuenta.pais, cuenta.saldo, cuenta.Numero_transacciones);
+            cuenta.id, cuenta.Nombre, cuenta.Contraseña, cuenta.Apellido, 
+            cuenta.domicilio, cuenta.pais, cuenta.saldo, cuenta.Numero_transacciones);
 
-    fclose(usuarios); // Cerrar el archivo
+    fclose(usuarios);
+
+    printf("\n¡Registro exitoso! Bienvenido, %s.\n", cuenta.Nombre);
+    sleep(2);
 
     Escribir_registro("Se ha registrado un nuevo usuario en el sistema");
-
-   
 }

@@ -52,28 +52,26 @@ int main()
 /// @brief Esta funcion crea procesos en una nueva terminal que lo que
 /// hacen es ejecutar la instancia de usuario y ejecutar el codigo del mismo
 
-#define MAX_HIJOS 100  // Máximo número de hijos permitidos
+#define MAX_HIJOS 100 // Máximo número de hijos permitidos
 
 // Array de PIDs de los hijos
-pid_t hijos[MAX_HIJOS];  
-int num_hijos = 0;         // Contador de hijos creados
+pid_t hijos[MAX_HIJOS];
+int num_hijos = 0; // Contador de hijos creados
 
 // Función para matar todos los procesos hijos usando system()
 void matar_hijos()
 {
-    printf("\nEl padre ha terminado. Terminando todos los procesos hijos...\n");
+    printf("\n Cerrando sesiones...\n");
 
     for (int i = 0; i < num_hijos; i++)
     {
-        if (hijos[i] > 0)  // Verifica que el PID sea válido
+        if (hijos[i] > 0) // Verifica que el PID sea válido
         {
-            printf("Matando hijo PID: %d\n", hijos[i]);
-
             // Matar proceso hijo directamente
             char comando[100];
-            snprintf(comando, sizeof(comando), "sudo kill -9 %d", hijos[i]);
+            snprintf(comando, sizeof(comando), "kill -9 %d", hijos[i]);
             system(comando);
-            sleep(1);
+            sleep(0.5);
         }
     }
 }
@@ -82,8 +80,6 @@ void Menu_Procesos()
 {
     char respuesta;
     int continuar = 1;
-
-  
 
     while (continuar)
     {
@@ -94,23 +90,23 @@ void Menu_Procesos()
         }
 
         pid_t pid = fork(); // Crear un proceso hijo
-        
+
         if (pid == 0)
-        {   
+        {
             // Crear un nuevo grupo de procesos para el hijo
             setpgid(0, 0);
 
             // Ejecutar en una nueva terminal y obtener el PID real
             char comando[200];
-            snprintf(comando, sizeof(comando), 
+            snprintf(comando, sizeof(comando),
                      "gnome-terminal -- sh -c 'echo $$ > /tmp/pid_%d.txt; gcc init_cuentas.c Usuario.c Transferencia.c ConsultarDatos.c ExtraerDinero.c IntroducirDinero.c Comun.c -o usuario && ./usuario'", getpid());
-            
+
             system(comando);
-            
+
             exit(0); // El hijo termina aquí, la terminal sigue corriendo
         }
         else if (pid > 0)
-        { 
+        {
             // Esperar un momento para que el archivo con el PID se cree
             sleep(1);
 
@@ -120,28 +116,28 @@ void Menu_Procesos()
             FILE *fp = fopen(filename, "r");
             if (fp)
             {
-                fscanf(fp, "%d", &hijos[num_hijos]);  // Guardar el PID real del hijo
+                fscanf(fp, "%d", &hijos[num_hijos]); 
                 fclose(fp);
             }
             else
             {
                 perror("Error al leer el archivo de PID");
-                hijos[num_hijos] = pid;  // Si falla, usar el PID de fork()
+                hijos[num_hijos] = pid; // Si falla, usar el PID de fork()
             }
 
             num_hijos++;
 
             // Preguntar si desea aceptar otro usuario
             printf("¿Desea aceptar otro usuario? (s/n): ");
-            scanf(" %c", &respuesta); 
+            scanf(" %c", &respuesta);
             if (respuesta != 's' && respuesta != 'S')
             {
-                continuar = 0; 
+                continuar = 0;
             }
         }
         else
         {
-            perror("Error en fork"); 
+            perror("Error en fork");
             exit(EXIT_FAILURE);
         }
     }
@@ -154,11 +150,10 @@ void Menu_Procesos()
             waitpid(hijos[i], NULL, 0);
         }
     }
-    
+
     // Cuando el padre termina, mata a todos los hijos
     matar_hijos();
 }
-
 
 // Esta funcion se encarga de "pegar" la alerta en el pipe para poder pasarlo al proceso padre
 
