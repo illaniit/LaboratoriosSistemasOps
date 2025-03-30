@@ -22,6 +22,9 @@ struct Usuario4
     char Usuario3[50];
     char Contraseña1[50];
 } Usuario4;
+/// @brief 
+/// @param arg3 
+/// @return 
 void *ExtraerDinero(void *arg3)
 {
     Config config = leer_configuracion("variables.properties");

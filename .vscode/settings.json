@@ -2,6 +2,7 @@
     "files.associations": {
         "msg.h": "c",
         "signal.h": "c",
-        "ipc.h": "c"
+        "ipc.h": "c",
+        "semaphore.h": "c"
     }
 }

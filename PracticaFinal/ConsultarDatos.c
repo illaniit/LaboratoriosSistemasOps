@@ -36,19 +36,11 @@ struct Usuario2
         char Contraseña1[50];
     }Usuario2;
 
-
-/// @brief Esta funcion la llamamos mas adelante y nos sirve para comprobar que la cuenta sea correcta
-/// @param cuenta 
-/// @param contraseña 
-/// @return devuelve true si la cuenta es correcta y false si no encuentra la cuenta
-
 /// @brief Esta funcion despliega un menu con opciones y sobretodo es una seccion critica ya que maneja archivos , comprobar cuenta tambien maneja un archivo pero 
 /// realmente la llama desde esta funcion por lo que no es necesario 
 /// @param arg 
 /// @return // esta funcion no devuelve nada
 void *ConsultarDatos(void *arg) {
-    
-   
 
     struct Usuario2 *usuario = (struct Usuario2 *)arg; // hacemos un cast del argumneto y cambiamos el void por el tipo struct
     int Eleccion = 0;
@@ -92,7 +84,9 @@ void *ConsultarDatos(void *arg) {
     return NULL; // devolvemos NULL
     
 }
-
+/// @brief 
+/// @param user 
+/// @param passwd 
 void DatosCuenta(char *user,char *passwd) {
     system("clear");
     Config config = leer_configuracion("variables.properties");
@@ -141,7 +135,9 @@ void DatosCuenta(char *user,char *passwd) {
     }
     fclose(archivoCuentas);
 }
-
+/// @brief 
+/// @param user 
+/// @param passwd 
 void ConsultarTransferencias(char *user, char *passwd) {
     char var;
     system("clear");

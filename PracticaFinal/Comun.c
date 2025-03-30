@@ -18,6 +18,7 @@ sem_t *sem_transacciones;
 sem_t *sem_registro;
 // Inicializar semáforos compartidos
 
+/// @brief 
 void Inicializar_semaforos()
 {
     sem_registro = sem_open("/sem_registro", O_CREAT, 0666, 1);
@@ -30,8 +31,9 @@ void Inicializar_semaforos()
     }
 }
 
-// Destruir semáforos compartidos
 
+
+/// @brief 
 void Destruir_semaforos()
 {
     sem_close(sem_usuarios);
@@ -82,6 +84,9 @@ Config leer_configuracion(const char *ruta)
     return config;
 }
 // Funcion para escribir en el registro de log
+
+/// @brief 
+/// @param mensaje_registro 
 void Escribir_registro(const char *mensaje_registro)
 {
     // declaramos la variable time_t
@@ -139,6 +144,11 @@ void limpiar_cadena(char *cadena)
     }
     cadena[fin - inicio + 1] = '\0'; // Añadir el carácter nulo al final
 }
+
+/// @brief 
+/// @param nombre 
+/// @param contrasena 
+/// @return 
 int obtener_id_usuario(const char *nombre, const char *contrasena)
 {
     FILE *archivo = fopen("usuarios.txt", "r");
