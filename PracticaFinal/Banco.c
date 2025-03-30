@@ -15,6 +15,7 @@
 #include <sys/wait.h>
 #include "Comun.h"
 #include <sys/prctl.h> // Para PR_SET_PDEATHSIG
+#include <ctype.h>
 #define Cantidad_limite 1000
 #define Punt_Archivo_Properties "Variables.properties"
 #define MAX_LENGTH 256
@@ -22,6 +23,7 @@
 int pipefd[2]; // Tubería que la declaramos para poder pasar informacion de monitor a banco y registrarlo en alertas .txt
 
 // Definimos las funciones  que vamos a utilizar
+
 void Menu_Procesos();
 void CrearMonitor();
 void *detectar_transacciones(void *arg);
@@ -220,7 +222,7 @@ void *detectar_transacciones(void *arg)
     Config config = leer_configuracion("variables.properties");
     signal(SIGINT, limpiar); // limpiamos la tubería
     Escribir_registro("Se ha abierto el fichero de transacciones");
-    FILE *archivo = fopen("transaciones.txt", "r"); // abrimos el archivo transacciones para buscar anomalías
+    FILE *archivo = fopen(config.archivo_log, "r"); // abrimos el archivo transacciones para buscar anomalías
     if (!archivo)
     {
         perror("Error al abrir el archivo de transacciones"); // Comprobamos que el archivo no dé error
@@ -323,7 +325,7 @@ void *detectar_transacciones(void *arg)
     fclose(archivo); // cerramos el archivo
 
     // Verificación de usuarios.dat
-    FILE *usuarios = fopen("usuarios.txt", "r"); // abrimos el archivo de usuarios
+    FILE *usuarios = fopen(config.archivo_cuentas, "r"); // abrimos el archivo de usuarios
     if (!usuarios)
     {
         perror("Error al abrir el archivo de usuarios");
@@ -427,3 +429,5 @@ void CrearMonitor()
         Escribir_registro("Se ha cerrado el extremo de lectura de la tuberia del proceso padre de monitor");
     }
 }
+
+

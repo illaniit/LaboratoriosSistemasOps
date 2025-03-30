@@ -30,8 +30,16 @@ void *ExtraerDinero(void *arg3)
 
     int saldo_extraer;
     system("clear");
+    printf("\n==============================\n");
+    printf("    💵 EXTRACCION DE DINERO 💵\n");
+    printf("==============================\n");   // vemos cuento quiere ingresar el usuario
     printf("Introduzca la cantidad que desea extraer: ");
     scanf("%d", &saldo_extraer);
+    Escribir_registro("El usuario ha introducido el saldo a extraer");
+    if(saldo_extraer<0){
+        printf("No se puede extraer dinero negativo!\n");
+        return(NULL);
+    }
     if (saldo_extraer > config.limite_retiro)
     {
         printf("El dinero que desea extraer excede nuestro limite");

@@ -79,13 +79,14 @@ void *Menu_Usuario() {
 /// @brief esta funcion le permite al usuario inciar sesion con su cuenta y guardar sus claves en el archivo
 void InicioDeSesion() {
     system("clear");
+    Config config = leer_configuracion("variables.properties");
     FILE *archivo;
     char Usuario[50], Contraseña[50]; // Datos ingresados por el usuario
     char linea[256]; // Buffer para leer las líneas del archivo
     int intentos = 0, max_intentos = 3; // Contador de intentos
 
     do {
-        archivo = fopen("usuarios.txt", "r"); // Abrimos el archivo en modo lectura
+        archivo = fopen(config.archivo_cuentas, "r"); // Abrimos el archivo en modo lectura
         if (archivo == NULL) {
             perror("Error al abrir el archivo");
             exit(EXIT_FAILURE);
@@ -160,7 +161,7 @@ void InicioDeSesion() {
 /// @brief esta funcion permite que el usuario se registre en una cuenta nueva
 void Registro() {
     Escribir_registro("El usuario ha entrado en la sección de registro");
-
+    Config config = leer_configuracion("variables.properties");
     struct Cuenta {
         int id;
         char Nombre[50];
@@ -236,9 +237,9 @@ void Registro() {
     sleep(2);
 
     // Abrir el archivo en modo lectura para contar usuarios existentes
-    FILE *usuarios = fopen("usuarios.txt", "r+");
+    FILE *usuarios = fopen(config.archivo_cuentas, "r+");
     if (!usuarios) {
-        usuarios = fopen("usuarios.txt", "w");
+        usuarios = fopen(config.archivo_cuentas, "w");
         if (!usuarios) {
             perror("❌ Error al abrir el archivo de usuarios");
             return;

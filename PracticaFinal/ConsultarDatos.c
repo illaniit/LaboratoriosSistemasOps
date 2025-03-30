@@ -95,9 +95,10 @@ void *ConsultarDatos(void *arg) {
 
 void DatosCuenta(char *user,char *passwd) {
     system("clear");
+    Config config = leer_configuracion("variables.properties");
     bool encontrado=false;
     char var[100];
-    FILE *archivoCuentas = fopen("usuarios.txt", "r");
+    FILE *archivoCuentas = fopen(config.archivo_cuentas, "r");
     if (!archivoCuentas) {
         perror("Error al abrir usuario.txt");
         return;
@@ -144,7 +145,8 @@ void DatosCuenta(char *user,char *passwd) {
 void ConsultarTransferencias(char *user, char *passwd) {
     char var;
     system("clear");
-    FILE *archivoTransacciones = fopen("transaciones.txt", "r");
+    Config config = leer_configuracion("variables.properties");
+    FILE *archivoTransacciones = fopen(config.archivo_log, "r");
     if (!archivoTransacciones) {
         perror("❌ Error al abrir transacciones.txt");
         return;
