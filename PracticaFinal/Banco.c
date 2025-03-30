@@ -43,6 +43,8 @@ int main()
 
     // Cargamos el menu del usuario que se encuentra en init_cuentas.c donde cada usuario sera un hilo de ejecuccion
     Menu_Procesos();
+    
+    CrearMonitor();
 
     // Volvemos a llamara monitor para que encuentre las anomalias despues de que el usuario haya cerrado la sesion
     Destruir_semaforos();

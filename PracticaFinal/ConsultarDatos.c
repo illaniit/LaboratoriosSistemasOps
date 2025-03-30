@@ -170,7 +170,7 @@ void ConsultarTransferencias(char *user, char *passwd) {
             if (user_id == id1 || user_id == id2) {
                 transacciones_encontradas = 1; // Si encontramos al menos una transacción
                 printf("\nNumero de tranferencia: %d | Tipo: %s | De cuenta: %d | A cuenta: %d\n", id, tipo, id1, id2);
-                printf(" Saldo antes: %d | %d | Saldo después: %d | %d\n", saldo1, saldo2, saldofinal1, saldofinal2);
+                printf(" Saldo antes: %d | Saldo después: %d | \n", saldo1, saldofinal1);
                 printf("-------------------------------------------------\n");
             }
         }

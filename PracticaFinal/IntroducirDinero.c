@@ -33,9 +33,17 @@ void *IntroducirDinero(void *arg2)
     struct Usuario3 *usuario = (struct Usuario3 *)arg2; // cargamos el struct que le hemso pasado al hilo en nuestro struct
     bool encontrado = false; 
                                // declaramos una variable boolean de tipo encontrado a false
-    int saldo_introducir;        // vemos cuento quiere ingresar el usuario
+    int saldo_introducir;  
+    system("clear");   
+    printf("\n==============================\n");
+    printf("    💵 INGRESO DE DINERO 💵\n");
+    printf("==============================\n");   // vemos cuento quiere ingresar el usuario
     printf("Introduzca la cantidad que desea ingresar: ");
     scanf("%d", &saldo_introducir);
+    if(saldo_introducir<0){
+        printf("No puedes ingresar una cantidad negativa!");
+        return NULL;
+    }
     sem_wait(sem_usuarios);
     sem_wait(sem_transacciones);
 

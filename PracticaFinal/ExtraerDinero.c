@@ -29,6 +29,7 @@ void *ExtraerDinero(void *arg3)
     bool encontrado = false;
 
     int saldo_extraer;
+    system("clear");
     printf("Introduzca la cantidad que desea extraer: ");
     scanf("%d", &saldo_extraer);
     if (saldo_extraer > config.limite_retiro)

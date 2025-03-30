@@ -37,12 +37,14 @@ void *Menu_Usuario() {
     do {
         system("clear");  // Limpia la pantalla en sistemas UNIX
 
-        printf("\n------------------💰 Elija una opción 💰---------------\n");
-        printf("|   1️⃣  Inicio de sesión                                |\n");
-        printf("|   2️⃣  Registro                                        |\n");
-        printf("|   3️⃣  Salir                                           |\n");
-        printf("------------------------------------------------------\n");
-        printf("   Pulse una opción: ");  // Aquí queda el cursor esperando entrada
+    printf("\n==========================================\n");
+    printf("            💰 BANCO 💰                        \n");
+    printf("==========================================\n");
+    printf(" 1️⃣  Inicio de sesión\n");
+    printf(" 2️⃣  Registro\n");
+    printf(" 3️⃣  Salir\n");
+    printf("------------------------------------------\n");
+    printf("\n  Pulse una opción: ");
       
         scanf("%d", &Eleccion);  // Aquí el usuario ingresa la opción
         switch (Eleccion) {
@@ -54,7 +56,7 @@ void *Menu_Usuario() {
             case 2:
                 Escribir_registro("El usuario ha elegido la opción de registro");
                 Registro();
-                printf("Volviendo al menú...\n");
+                printf("Volviendo al menú...💰\n");
                 sleep(2);
                 break;
 
@@ -88,7 +90,7 @@ void InicioDeSesion() {
             perror("Error al abrir el archivo");
             exit(EXIT_FAILURE);
         }
-
+        system("clear");
         printf("\n============================================================\n");
         printf("                 🔐  INICIO DE SESIÓN  🔐                   \n");
         printf("============================================================\n");
@@ -141,8 +143,10 @@ void InicioDeSesion() {
         }
 
         if (!acceso) {
-            printf("\n⚠️ Nombre de usuario o contraseña incorrectos.\n");
             Escribir_registro("Intento fallido de inicio de sesión");
+            printf("\n⚠️ Nombre de usuario o contraseña incorrectos \n\n");
+            sleep(2);
+    
         }
 
         fclose(archivo); // Cerramos el archivo después de leer
