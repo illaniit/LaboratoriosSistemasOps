@@ -22,6 +22,7 @@ struct Usuario4
     char Usuario3[50];
     char Contraseña1[50];
 } Usuario4;
+
 /// @brief 
 /// @param arg3 
 /// @return 
@@ -39,6 +40,7 @@ void *ExtraerDinero(void *arg3)
     printf("Introduzca la cantidad que desea extraer: ");
     scanf("%d", &saldo_extraer);
     Escribir_registro("El usuario ha introducido el saldo a extraer");
+    
     if(saldo_extraer<0){
         printf("No se puede extraer dinero negativo!\n");
         return(NULL);

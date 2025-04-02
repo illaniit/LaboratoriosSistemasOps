@@ -41,11 +41,9 @@ int main()
     // Iniciamos monitor para que encuentre  anomalias
     Inicializar_semaforos();
 
-    CrearMonitor();
-
     // Cargamos el menu del usuario que se encuentra en init_cuentas.c donde cada usuario sera un hilo de ejecuccion
     Menu_Procesos();
-    
+
     CrearMonitor();
 
     // Volvemos a llamara monitor para que encuentre las anomalias despues de que el usuario haya cerrado la sesion
@@ -179,11 +177,11 @@ void enviar_alerta(const char *mensaje, const int *id, const int titular)
 
     if (titular == 1)
     {
-        snprintf(auxiliar, sizeof(auxiliar), "[%s] Id del Usuario :%d | %s\n", hora, *id, mensaje); // esta funcion nos permite agregar un \n en el archivo de texto para que sea entendible y legible
+        snprintf(auxiliar, sizeof(auxiliar), "[%s] Id del Usuario : %d | %s\n", hora, *id, mensaje); // esta funcion nos permite agregar un \n en el archivo de texto para que sea entendible y legible
     }
     else if (titular == 0)
     {
-        snprintf(auxiliar, sizeof(auxiliar), "[%s] Id de la transaccion:%d | Transaccion | %s\n", hora, *id, mensaje); // esta funcion nos permite agregar un \n en el archivo de texto para que sea entendible y legible
+        snprintf(auxiliar, sizeof(auxiliar), "[%s] Id de la transaccion: %d | Transaccion | %s\n", hora, *id, mensaje); // esta funcion nos permite agregar un \n en el archivo de texto para que sea entendible y legible
     }
 
     write(pipefd[1], auxiliar, strlen(auxiliar));
@@ -217,151 +215,73 @@ void registrar_alerta(const char *mensaje)
 /// @brief Esta funcion es la encargada de detectar anomaliase en usuarios y transacciones en el proceso monohilo monitor
 /// @param arg
 /// @return
-void *detectar_transacciones(void *arg)
-{
+void *detectar_transacciones(void *arg) {
     Config config = leer_configuracion("variables.properties");
-    signal(SIGINT, limpiar); // limpiamos la tubería
+    signal(SIGINT, limpiar);
     Escribir_registro("Se ha abierto el fichero de transacciones");
-    FILE *archivo = fopen(config.archivo_log, "r"); // abrimos el archivo transacciones para buscar anomalías
-    if (!archivo)
-    {
-        perror("Error al abrir el archivo de transacciones"); // Comprobamos que el archivo no dé error
+
+    FILE *archivo = fopen(config.archivo_log, "r");
+    if (!archivo) {
+        perror("Error al abrir el archivo de transacciones");
         Escribir_registro("Se ha producido un error al abrir el archivo de transacciones");
-        return NULL; // devolvemos null en este caso
-    }
-
-    char linea[256];
-    int retiros_consecutivos = 0;
-    int transferencias_consecutivas = 0;
-    int usuario_id_anterior = -1;
-
-    while (fgets(linea, sizeof(linea), archivo)) // leemos el archivo transacciones.txt
-    {
-        int id, saldo1, saldo2, saldo_final, id2, saldo_t1, saldo_t2, saldo_finalt1, saldo_finalt2;
-        char tipo[20], cuenta1[20], cuenta2[20], tipo1[20], cuenta_t1[20], cuenta_t2[20];
-
-        // Procesamos retiros o ingresos con 7 campos
-
-        // Procesamos transferencias con 8 campos
-        if (sscanf(linea, "%d | %39[^|] | %39[^|] | %39[^|] | %d | %d | %d | %d", &id2, tipo1, cuenta_t1, cuenta_t2, &saldo_t1, &saldo_t2, &saldo_finalt1, &saldo_finalt2) == 8)
-        {
-            limpiar_cadena(tipo1);
-
-            // Verificación de transferencia
-
-            if (saldo_finalt2 - saldo_t2 > config.limite_transferencia) // Transferencia superior a 10000
-            {
-                Escribir_registro("Se ha detectado una transferencia superior a 10000");
-                enviar_alerta("Transferencia superior a 10000 detectada", &id2, 0);
-            }
-
-            // Verificación de transferencias consecutivas
-            if (usuario_id_anterior == id2)
-            {
-                transferencias_consecutivas++;
-            }
-            else
-            {
-                transferencias_consecutivas = 1; // Iniciar contador si el usuario cambia
-            }
-
-            if (transferencias_consecutivas > config.umbral_transferencias)
-            {
-                Escribir_registro("Se han detectado más de 5 transferencias consecutivas");
-                enviar_alerta("Usuario ha hecho más de 5 transferencias consecutivas", &id2, 0);
-            }
-
-            // Verificación de saldos negativos en transferencias
-            if (saldo_t1 < 0 || saldo_t2 < 0 || saldo_finalt1 < 0 || saldo_finalt2 < 0)
-            {
-                Escribir_registro("Se ha detectado un saldo negativo en una transacción");
-                enviar_alerta("Saldo negativo detectado en una transacción", &id2, 0);
-            }
-        }
-        else
-        {
-            sscanf(linea, "%d | %39[^|] | %39[^|] | %39[^|] | %d | %d | %d", &id, tipo, cuenta1, cuenta2, &saldo1, &saldo2, &saldo_final);
-            limpiar_cadena(tipo);
-
-            // Verificación de retiro
-            if (strcmp(tipo, " retiro ") == 0)
-            {
-                if (saldo1 - saldo_final > config.limite_retiro) // Retiro superior a 5000
-                {
-                    Escribir_registro("Se ha detectado un retiro superior a 5000");
-                    enviar_alerta("Retiro superior a 5000 detectado", &id, 0);
-                }
-
-                // Verificación de retiros consecutivos
-                if (usuario_id_anterior == id)
-                {
-                    retiros_consecutivos++;
-                }
-                else
-                {
-                    retiros_consecutivos = 1; // Iniciar contador si el usuario cambia
-                }
-
-                if (retiros_consecutivos > config.umbral_retiros)
-                {
-                    Escribir_registro("Se han detectado más de 3 retiros consecutivos");
-                    enviar_alerta("Usuario ha hecho más de 3 retiros consecutivos", &id, 0);
-                }
-            }
-
-            // Verificación de saldos negativos
-            if (saldo1 < 0 || saldo2 < 0 || saldo_final < 0)
-            {
-                Escribir_registro("Se ha detectado un saldo negativo");
-                enviar_alerta("Saldo negativo detectado", &id, 0);
-            }
-
-            // Verificación de formato inválido para ingresos y retiros
-        }
-
-        usuario_id_anterior = id2; // Actualizamos el usuario actual para las validaciones consecutivas
-    }
-
-    fclose(archivo); // cerramos el archivo
-
-    // Verificación de usuarios.dat
-    FILE *usuarios = fopen(config.archivo_cuentas, "r"); // abrimos el archivo de usuarios
-    if (!usuarios)
-    {
-        perror("Error al abrir el archivo de usuarios");
-        Escribir_registro("Se ha producido un error en la apertura del archivo de usuarios");
         return NULL;
     }
 
-    Escribir_registro("Se ha abierto el archivo de usuarios");
+    char linea[256];
+    int transferencias_consecutivas = 0;
+    int retiros_consecutivos = 0;
+    int ultima_cuenta_transferencia = -1;
+    int ultima_cuenta_retiro = -1;
 
-    while (fgets(linea, sizeof(linea), usuarios)) // Leemos línea por línea
-    {
-        int id, saldo, num_transacciones;
-        char nombre[50], apellidos[50], contraseña[50], domicilio[100], pais[50];
+    while (fgets(linea, sizeof(linea), archivo)) {
+        int id, cuenta1, cuenta2, saldo1, saldo2, saldo_final, saldo_final2;
+        char tipo[20];
 
-        // Parseamos la línea según el formato: id | nombre | apellidos | domicilio | pais | saldo | numero_transacciones
-        if (sscanf(linea, "%d | %49[^|] | %49[^|] | %49[^|] | %99[^|] | %49[^|] | %d | %d", &id, nombre, contraseña, apellidos, domicilio, pais, &saldo, &num_transacciones) == 8)
-        {
-            if (saldo < 0)
-            {
-                Escribir_registro("Se ha encontrado un usuario con saldo negativo");
-                enviar_alerta("Usuario con saldo negativo", &id, 1);
+        if (sscanf(linea, "%d | %39[^|] | %d | %d | %d | %d | %d | %d", 
+                   &id, tipo, &cuenta1, &cuenta2, &saldo1, &saldo2, &saldo_final, &saldo_final2) == 8) {
+            limpiar_cadena(tipo);
+
+            if (strcmp(tipo, "transferencia") == 0) {
+                if (ultima_cuenta_transferencia == cuenta1) {
+                    transferencias_consecutivas++;
+                } else {
+                    transferencias_consecutivas = 1;
+                    ultima_cuenta_transferencia = cuenta1;
+                }
+
+                if (transferencias_consecutivas > config.umbral_transferencias) {
+                    Escribir_registro("Cuenta ha realizado múltiples transferencias consecutivas");
+                    enviar_alerta("Actividad sospechosa: múltiples transferencias consecutivas", &id, 0);
+                }
             }
+        } 
+        else if (sscanf(linea, "%d | %39[^|] | %d | - | %d | - | %d", 
+                        &id, tipo, &cuenta1, &saldo1, &saldo_final) == 7) {
+            limpiar_cadena(tipo);
 
-            if (num_transacciones < 0)
-            {
-                Escribir_registro("Se ha encontrado un usuario con un número de transacciones negativo");
-                enviar_alerta("Número de transacciones inválido", &id, 1);
+            if (strcmp(tipo, "retiro") == 0) {
+                if (ultima_cuenta_retiro == cuenta1) {
+                    retiros_consecutivos++;
+                } else {
+                    retiros_consecutivos = 1;
+                    ultima_cuenta_retiro = cuenta1;
+                }
+
+                if (retiros_consecutivos > config.umbral_retiros) {
+                    Escribir_registro("Cuenta ha realizado múltiples retiros consecutivos");
+                    enviar_alerta("Actividad sospechosa: múltiples retiros consecutivos", &id, 0);
+                }
             }
         }
-        else
-        {
-            Escribir_registro("Error en el formato de la línea del archivo");
+
+        if (saldo1 < 0 || saldo2 < 0 || saldo_final < 0) {
+            Escribir_registro("Se ha detectado un saldo negativo");
+            enviar_alerta("Saldo negativo detectado", &id, 0);
         }
     }
 
-    fclose(usuarios); // Cerramos el archivo
+    fclose(archivo);
+    return NULL;
 }
 
 // Función para crear el proceso Monitor y manejar alertas en tiempo real

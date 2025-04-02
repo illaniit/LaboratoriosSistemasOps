@@ -62,7 +62,7 @@ void *Menu_Usuario() {
             case 3:
                 printf("Tenga un buen día 😊...\n");
                 sleep(2);
-                return NULL;
+                break;
 
             default:
                 printf("⚠️  Opción no válida. Intente de nuevo.\n");
