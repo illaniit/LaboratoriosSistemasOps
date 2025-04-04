@@ -20,8 +20,8 @@
 #define Cantidad_limite 1000
 #define Punt_Archivo_Properties "Variables.properties"
 #define MAX_LENGTH 256
-#define ALERT_PIPE "/tmp/alerta_pipe"
-int pipefd[2]; // Tubería que la declaramos para poder pasar informacion de monitor a banco y registrarlo en alertas .txt
+
+
 
 // Definimos las funciones  que vamos a utilizar
 
@@ -29,70 +29,93 @@ void Menu_Procesos();
 void CrearMonitor();
 void limpiar(int sig);
 void *LeerDeMonitor(void *arg);
-void crear_named_pipe();
+void matar_hijos();
+
+void leer_alerta_pipe(int sig);
 
 /// @brief este es el main en el cual leemos propertis con las variables
 /// @return y devolvemos 0 si la ejecuccion ha sido exitosa
 int main()
 {
-    Config config = leer_configuracion("variables.properties");
-    // Lo primero abrimos el archivo de Properties y "nos traemos las variables"
-    crear_named_pipe();
-    // Iniciamos monitor para que encuentre  anomalias
     Inicializar_semaforos();
 
-    CrearMonitor();
-    // Cargamos el menu del usuario que se encuentra en init_cuentas.c donde cada usuario sera un hilo de ejecuccion
-    Menu_Procesos();
+    crear_cola_mensajes();
+    
+    Config config = leer_configuracion("variables.properties");
+    // Lo primero abrimos el archivo de Properties y "nos traemos las variables"
+    signal(SIGUSR1, leer_alerta_pipe); // Manejar señal del monitor
 
-    // Volvemos a llamara monitor para que encuentre las anomalias despues de que el usuario haya cerrado la sesion
+    CrearMonitor(); // Lanzar monitor
+
+    Menu_Procesos(); // Ejecutar usuarios
+
     Destruir_semaforos();
+
     return 0;
 }
-void crear_named_pipe()
-{
-    // Comprobar si la named pipe ya existe
-    if (access(ALERT_PIPE, F_OK) != -1)
-    {
-        // La named pipe ya existe, no es necesario crearla
 
+void leer_alerta_pipe(int sig)
+{
+    MensajeAlerta msg;
+    int id_cola = msgget(CLAVE_COLA, 0666);
+    if (id_cola == -1)
+    {
+        perror("Error al obtener cola");
         return;
     }
 
-    // Crear la named pipe (FIFO) si no existe
-    if (mkfifo(ALERT_PIPE, 0666) == -1)
+    if (msgrcv(id_cola, &msg, sizeof(msg.texto), TIPO_ALERTA, IPC_NOWAIT) == -1)
     {
-        perror("Error al crear la named pipe");
-        exit(EXIT_FAILURE);
+        perror("No se pudo leer alerta de la cola");
+        return;
     }
 
-    printf("Named pipe creada correctamente.\n");
+    // Abrir el archivo alertas.log en modo append
+    FILE *archivo = fopen("alertas.log", "a");
+    if (!archivo) {
+        perror("No se pudo abrir alertas.log");
+        return;
+    }
+
+    // Escribir la alerta en el archivo
+    fprintf(archivo, "🚨 ALERTA DEL MONITOR 🚨\n%s\n", msg.texto);
+    fclose(archivo);
+    printf("🚨 Se ha registrado una nueva alerta\n");
+    
+    
 }
+
+#define MAX_HIJOS 100
 
 /// @brief Esta funcion crea procesos en una nueva terminal que lo que
 /// hacen es ejecutar la instancia de usuario y ejecutar el codigo del mismo
 
-#define MAX_HIJOS 100 // Máximo número de hijos permitidos
 
-// Array de PIDs de los hijos
+// Función para matar todos los procesos hijos usando system()
 pid_t hijos[MAX_HIJOS];
 int num_hijos = 0; // Contador de hijos creados
 
-// Función para matar todos los procesos hijos usando system()
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <sys/wait.h>
+#include <string.h>
+int temp[100];  // Arreglo donde almacenarás los números
+
+
 void matar_hijos()
 {
     printf("\n Cerrando sesiones...\n");
 
     for (int i = 0; i < num_hijos; i++)
     {
-        if (hijos[i] > 0) // Verifica que el PID sea válido
-        {
+        
             // Matar proceso hijo directamente
             char comando[100];
-            snprintf(comando, sizeof(comando), "kill -9 %d", hijos[i]);
+            snprintf(comando, sizeof(comando), "kill -9 %d", temp[i]);
             system(comando);
             sleep(0.5);
-        }
+        
     }
 }
 
@@ -100,6 +123,7 @@ void Menu_Procesos()
 {
     char respuesta;
     int continuar = 1;
+    int contador =0;
 
     while (continuar)
     {
@@ -110,7 +134,7 @@ void Menu_Procesos()
         }
 
         pid_t pid = fork(); // Crear un proceso hijo
-
+        pid_t h;
         if (pid == 0)
         {
             // Crear un nuevo grupo de procesos para el hijo
@@ -120,25 +144,38 @@ void Menu_Procesos()
             char comando[200];
             snprintf(comando, sizeof(comando),
                      "gnome-terminal -- sh -c 'echo $$ > /tmp/pid_%d.txt; gcc init_cuentas.c Usuario.c Transferencia.c ConsultarDatos.c ExtraerDinero.c IntroducirDinero.c Comun.c -o usuario && ./usuario'", getpid());
-
             system(comando);
-
+           
             exit(0); // El hijo termina aquí, la terminal sigue corriendo
         }
         else if (pid > 0)
         {
             // Esperar un momento para que el archivo con el PID se cree
             sleep(1);
-
-            // Leer el PID real del hijo desde el archivo
             char filename[50];
+            // Leer el PID real del hijo desde el archivo
             snprintf(filename, sizeof(filename), "/tmp/pid_%d.txt", pid);
-            FILE *fp = fopen(filename, "r");
-            if (fp)
-            {
-                fscanf(fp, "%d", &hijos[num_hijos]);
+            printf("Este es el pid %d\n", pid);
+        
+            // Esperamos 20 segundos (puedes quitar esto si no es necesario)
+            sleep(5);
+
+            // Abrimos el archivo en modo lectura y escritura
+            FILE *fp = fopen(filename, "r+");
+        
+            if (fp) {
+                
+                
+                // Leemos un único número entero del archivo
+                if (fscanf(fp, "%d", &temp[contador]) == 1) {
+                    printf("El número leído y almacenado en el arreglo es: %d\n", temp[contador]);
+                } else {
+                    printf("No se pudo leer un número del archivo.\n");
+                }
+                contador++;
+                // Cerramos el archivo
                 fclose(fp);
-            }
+            } 
             else
             {
                 perror("Error al leer el archivo de PID");
@@ -174,18 +211,11 @@ void Menu_Procesos()
     // Cuando el padre termina, mata a todos los hijos
     matar_hijos();
 }
-
 // Esta funcion se encarga de "pegar" la alerta en el pipe para poder pasarlo al proceso padre
 
 // Función para crear el proceso Monitor y manejar alertas en tiempo real
 void CrearMonitor()
 {
-    if (pipe(pipefd) == -1)
-    {
-        perror("Error al crear la tubería");
-        return;
-    }
-
     pid_t Monitor = fork(); // Crea el proceso monitor
 
     if (Monitor < 0)
@@ -197,64 +227,20 @@ void CrearMonitor()
 
     if (Monitor == 0)
     {
+        Escribir_registro("Proceso monitor hijo iniciado");
+       
 
-        execl("./monitor", "monitor", NULL); // Ejecuta el proceso monitor
+        execlp("./monitor", "monitor", NULL); // Ejecuta el proceso monitor
+
         // Si execl falla:
         perror("Error al ejecutar monitor");
+        Escribir_registro("Error al ejecutar monitor");
         exit(EXIT_FAILURE);
     }
     else
     {
-        // Código del padre
-        while (1)
-        {
-            // Lanza un hilo para leer las alertas
-            pthread_t hilo_alertas;
-            pthread_create(&hilo_alertas, NULL, LeerDeMonitor, NULL);
-            pthread_detach(hilo_alertas); // Hilo que no bloquea la ejecución principal
-            sleep(5);
-        }
+        
+        Escribir_registro("Proceso monitor creado correctamente");
     }
 }
-void *LeerDeMonitor(void *arg)
-{
 
-    char buffer[256]; // Buffer para almacenar las alertas
-    ssize_t leido;
-
-    // Abrimos la named pipe en modo de lectura
-    int fd = open(ALERT_PIPE, O_RDONLY);
-    if (fd == -1)
-    {
-        perror("Error al abrir la named pipe");
-        return NULL;
-    }
-
-    while ((leido = read(fd, buffer, sizeof(buffer) - 1)) > 0)
-    {
-        buffer[leido] = '\0'; // Asegura que el string esté bien terminado
-
-        // Muestra la alerta parpadeando durante 3 segundos
-        for (int i = 0; i < 3; i++)
-        {
-            // Cambiar el color para hacerla parpadear
-            printf("\033[1;31m%s\033[0m\n", buffer); // Rojo brillante
-            usleep(500000);                          // Pausa de 0.5 segundos
-
-            // Limpiar la pantalla para crear el efecto de parpadeo
-            printf("\033[H\033[J");
-            usleep(500000); // Pausa de 0.5 segundos para crear el parpadeo
-        }
-
-        // Imprimir normalmente al final para dejar de parpadear
-        printf("\033[0m%s\n", buffer);
-    }
-
-    if (leido == -1)
-    {
-        perror("Error al leer desde la named pipe");
-    }
-
-    // Cierra la named pipe cuando haya terminado de leer
-    close(fd);
-}

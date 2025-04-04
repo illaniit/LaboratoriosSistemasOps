@@ -3,6 +3,9 @@
         "msg.h": "c",
         "signal.h": "c",
         "ipc.h": "c",
-        "semaphore.h": "c"
+        "semaphore.h": "c",
+        "prctl.h": "c",
+        "stat.h": "c",
+        "cstdlib": "c"
     }
 }

@@ -31,8 +31,6 @@ void Inicializar_semaforos()
     }
 }
 
-
-
 /// @brief 
 void Destruir_semaforos()
 {
@@ -42,6 +40,22 @@ void Destruir_semaforos()
     sem_unlink("/sem_registro");
     sem_unlink("/sem_usuarios");
     sem_unlink("/sem_transacciones");
+    int id_cola = msgget(CLAVE_COLA, 0666);
+    if (id_cola != -1) {
+        msgctl(id_cola, IPC_RMID, NULL);
+        printf("Cola de mensajes eliminada.\n");
+    }
+}
+
+
+int id_cola;
+
+void crear_cola_mensajes() {
+    id_cola = msgget(CLAVE_COLA, IPC_CREAT | 0666);
+    if (id_cola == -1) {
+        perror("Error al crear la cola de mensajes");
+        exit(EXIT_FAILURE);
+    }
 }
 
 Config leer_configuracion(const char *ruta)
@@ -89,32 +103,32 @@ Config leer_configuracion(const char *ruta)
 /// @param mensaje_registro 
 void Escribir_registro(const char *mensaje_registro)
 {
-    // declaramos la variable time_t
-    time_t t;
-    struct tm *tm_info;
-    char hora[30]; // Para almacenar la fecha y hora formateadas
-
-    // Obtiene la hora actual
-    time(&t);
-    tm_info = localtime(&t);
-
-    // Formatea la fecha y hora en "YYYY-MM-DD HH:MM:SS"
-    strftime(hora, sizeof(hora), "%Y-%m-%d %H:%M:%S", tm_info);
+    if (sem_registro == NULL) {
+        fprintf(stderr, "⚠️ Error: semáforo de registro no inicializado.\n");
+        return;
+    }
 
     sem_wait(sem_registro);
-    // Abre el archivo en modo "a" para añadir sin sobrescribir
+
+    time_t t;
+    struct tm *tm_info;
+    char hora[30];
+
+    time(&t);
+    tm_info = localtime(&t);
+    strftime(hora, sizeof(hora), "%Y-%m-%d %H:%M:%S", tm_info);
+
     FILE *ArchivoDeRegistro = fopen("registro.log", "a");
     if (!ArchivoDeRegistro)
     {
         perror("Error al abrir el archivo de registro");
+        sem_post(sem_registro); // libera el semáforo incluso si hay error
         return;
     }
 
-    // Escribe la fecha, la hora y el mensaje en el archivo
     fprintf(ArchivoDeRegistro, "[%s] %s\n", hora, mensaje_registro);
-
-    // Cierra el archivo
     fclose(ArchivoDeRegistro);
+
     sem_post(sem_registro);
 }
 

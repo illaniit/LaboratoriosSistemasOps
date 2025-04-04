@@ -10,21 +10,19 @@
 #include <sys/wait.h>
 #include <fcntl.h>
 #include "Comun.h"
-
+#include <signal.h>
 
 //incializamos las funciones
 void *Menu_Usuario();
 void Registro();
 void InicioDeSesion();
+
 int main()
 {
+    
     sem_registro= sem_open("/sem_registro",0);//  Llamamos a menu usuario
     Menu_Usuario();
 }
-//esto hay que meterlo en abrir_propertis.c y asi no lo tenemos que declarar en todos falta hacerlo
-
-// Función para abrir y leer el archivo de propiedades
-// Esta funcion nos permite cargar las variables que usemos en el codigo para que sea mas accesible
 
 /// @brief Esta funcion despliega un menu que le permite al usuario inciar sesion o registrarse
 /// @return 
