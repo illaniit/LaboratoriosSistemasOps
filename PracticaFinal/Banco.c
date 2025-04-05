@@ -21,7 +21,16 @@
 #define Punt_Archivo_Properties "Variables.properties"
 #define MAX_LENGTH 256
 
+#define MAX_HIJOS 100
 
+/// @brief Esta funcion crea procesos en una nueva terminal que lo que
+/// hacen es ejecutar la instancia de usuario y ejecutar el codigo del mismo
+
+
+// Función para matar todos los procesos hijos usando system()
+pid_t hijos[MAX_HIJOS];
+int num_hijos = 0; // Contador de hijos creados
+int temp[100];  // Arreglo donde almacenarás los números
 
 // Definimos las funciones  que vamos a utilizar
 
@@ -86,22 +95,7 @@ void leer_alerta_pipe(int sig)
     
 }
 
-#define MAX_HIJOS 100
 
-/// @brief Esta funcion crea procesos en una nueva terminal que lo que
-/// hacen es ejecutar la instancia de usuario y ejecutar el codigo del mismo
-
-
-// Función para matar todos los procesos hijos usando system()
-pid_t hijos[MAX_HIJOS];
-int num_hijos = 0; // Contador de hijos creados
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <sys/wait.h>
-#include <string.h>
-int temp[100];  // Arreglo donde almacenarás los números
 
 
 void matar_hijos()
@@ -119,12 +113,12 @@ void matar_hijos()
         
     }
 }
-
+int contador =0;
 void Menu_Procesos()
 {
     char respuesta;
     int continuar = 1;
-    int contador =0;
+   
 
     while (continuar)
     {
@@ -228,10 +222,26 @@ void CrearMonitor()
 
     if (Monitor == 0)
     {
+        // Proceso hijo
         Escribir_registro("Proceso monitor hijo iniciado");
-       
 
-        execlp("./monitor", "monitor", NULL); // Ejecuta el proceso monitor
+        // Guardar PID en archivo
+        char filename[50];
+        snprintf(filename, sizeof(filename), "/tmp/pid_%d.txt", getpid());
+
+        FILE *fp = fopen(filename, "w");
+        if (fp)
+        {
+            fprintf(fp, "%d\n", getpid());
+            fclose(fp);
+        }
+        else
+        {
+            perror("No se pudo crear el archivo de PID");
+        }
+
+        // Ejecutar el programa monitor
+        execl("./monitor", "monitor", (char *)NULL);
 
         // Si execl falla:
         perror("Error al ejecutar monitor");
@@ -240,8 +250,37 @@ void CrearMonitor()
     }
     else
     {
-        
+        // Proceso padre
+        char filename[50];
+        snprintf(filename, sizeof(filename), "/tmp/pid_%d.txt", Monitor);
+
+        printf("Este es el pid (estimado): %d\n", Monitor);
+
+        sleep(5); // Dar tiempo al hijo para crear el archivo
+
+        FILE *fp = fopen(filename, "r+");
+        if (fp)
+        {
+            if (fscanf(fp, "%d", &temp[contador]) == 1)
+            {
+                printf("El número leído y almacenado en el arreglo es: %d\n", temp[contador]);
+            }
+            else
+            {
+                printf("No se pudo leer un número del archivo.\n");
+            }
+            contador++;
+            fclose(fp);
+        }
+        else
+        {
+            perror("Error al leer el archivo de PID");
+            hijos[num_hijos] = Monitor; // fallback
+        }
+
+        num_hijos++;
         Escribir_registro("Proceso monitor creado correctamente");
     }
 }
+
 
