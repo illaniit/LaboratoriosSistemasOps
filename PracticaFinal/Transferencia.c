@@ -26,6 +26,7 @@ struct Usuario {
 /// @return 
 void *Transferencia(void *arg) {
     
+    // Leer configuración desde archivo (como el límite de transferencia)
     Config config = leer_configuracion("variables.properties");
     struct Usuario *usuario = (struct Usuario *)arg;
    
@@ -43,6 +44,7 @@ void *Transferencia(void *arg) {
     printf("Ingrese la cantidad a transferir: ");
     scanf("%d", &Cantidad_transferir);
 
+    // Bloqueo de semáforos para sincronizar acceso a archivos
     sem_wait(sem_usuarios);
     sem_wait(sem_transacciones);
 
