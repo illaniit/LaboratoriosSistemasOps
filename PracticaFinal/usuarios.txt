@@ -1,5 +1,2 @@
-1 | 1  | 1  | 1      | 1      | 1      | 96 | 2
-2 | 2  | 2  | 2      | 2      | 2      | 7 | 0
-3 | Mario  | mario123  | hernandez santos      | velilla de san antonio      | mongolia      | 1000 | 0
-4 | migui  | 123  | angel     | la calle     | marruecos     | -500 | 2
-5 | joan | malo | diez | pozuelo | marruecos | 1000 | 0
+1 | pedro  | 12  | paula      | tt      | morocco      | 900 | 3
+2 | geert  | asdf  | prummel      | brawl      | jannet      | 900 | 2

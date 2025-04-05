@@ -47,7 +47,7 @@ int main()
         pthread_join(h3, NULL);
         pthread_join(h4, NULL);
 
-        sleep(40);
+        sleep(60);
     }
     Destruir_semaforos();
     return 0;

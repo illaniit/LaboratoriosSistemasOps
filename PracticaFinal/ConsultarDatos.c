@@ -26,7 +26,6 @@
 // Todas estas funciones son llamadas por la funcion que llama el hilo , ConsultarDatos  y cada una tiene una funcion especifica
 void DatosCuenta(char *user,char *passwd); 
 void ConsultarTransferencias(char *user,char *passwd);
-
 bool ComprobarCuenta(char *cuenta, char *contraseña);
 
 //Este es el struct usuario para cargar las variables que pasan por parametro del hilo
@@ -59,8 +58,7 @@ void *ConsultarDatos(void *arg) {
             while (getchar() != '\n'); // Limpiar buffer de entrada
             continue;
         }
-        sem_wait(sem_usuarios);
-        sem_wait(sem_transacciones);
+       
         switch (Eleccion) {
             case 1:
                 DatosCuenta(usuario->Usuario1,usuario->Contraseña1); // le pasamos a cada funcion el usuario y contraseña de la persona que ha iniciado sesion
@@ -76,8 +74,7 @@ void *ConsultarDatos(void *arg) {
             default:
                 printf("Opción no válida, intenta de nuevo.\n");
         }
-    sem_post(sem_usuarios);
-    sem_post(sem_transacciones);
+   
     } while (Eleccion != 3);
 
  
@@ -92,9 +89,13 @@ void DatosCuenta(char *user,char *passwd) {
     Config config = leer_configuracion("variables.properties");
     bool encontrado=false;
     char var[100];
+    sem_wait(sem_usuarios);
+    sem_wait(sem_transacciones);
     FILE *archivoCuentas = fopen(config.archivo_cuentas, "r");
     if (!archivoCuentas) {
         perror("Error al abrir usuario.txt");
+        sem_post(sem_usuarios);
+        sem_post(sem_transacciones);
         return;
     }
     limpiar_cadena(user);
@@ -117,6 +118,9 @@ void DatosCuenta(char *user,char *passwd) {
             }
         }
     }
+    fclose(archivoCuentas);
+    sem_post(sem_usuarios);
+    sem_post(sem_transacciones);
     if(encontrado){
         printf("\n=================================================\n");
         printf("              💳 DATOS DE LA CUENTA 💳              \n");
@@ -133,7 +137,7 @@ void DatosCuenta(char *user,char *passwd) {
         scanf(" %s", var);
         
     }
-    fclose(archivoCuentas);
+    
 }
 /// @brief 
 /// @param user 
@@ -142,9 +146,13 @@ void ConsultarTransferencias(char *user, char *passwd) {
     char var;
     system("clear");
     Config config = leer_configuracion("variables.properties");
+    sem_wait(sem_usuarios);
+    sem_wait(sem_transacciones);
     FILE *archivoTransacciones = fopen(config.archivo_log, "r");
     if (!archivoTransacciones) {
         perror("❌ Error al abrir transacciones.txt");
+        sem_post(sem_usuarios);
+        sem_post(sem_transacciones);
         return;
     }
 
@@ -173,6 +181,9 @@ void ConsultarTransferencias(char *user, char *passwd) {
             }
         }
     }
+    fclose(archivoTransacciones);
+    sem_post(sem_usuarios);
+    sem_post(sem_transacciones);
 
     // Si no se encontraron transferencias
     if (!transacciones_encontradas) {
@@ -182,6 +193,6 @@ void ConsultarTransferencias(char *user, char *passwd) {
     printf("\n📌 Presione 's' para volver al menú principal... ");
     scanf(" %c", &var);  // Espacio antes de %c para evitar problemas con el buffer
 
-    fclose(archivoTransacciones);
+   
 }
 

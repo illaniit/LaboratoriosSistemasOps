@@ -43,11 +43,12 @@ void *ExtraerDinero(void *arg3)
     
     if(saldo_extraer<0){
         printf("No se puede extraer dinero negativo!\n");
+        sleep(2);
         return(NULL);
     }
     if (saldo_extraer > config.limite_retiro)
     {
-        printf("El dinero que desea extraer excede nuestro limite");
+        printf("El dinero que desea extraer excede nuestro limite\n");
         sleep(2);
         return NULL;
     }
@@ -134,6 +135,8 @@ void *ExtraerDinero(void *arg3)
 
     fclose(ArchivoUsuarios);
     fclose(tempFile1);
+    sem_post(sem_usuarios);
+    sem_post(sem_transacciones);
 
     if (encontrado)
     {
@@ -146,9 +149,9 @@ void *ExtraerDinero(void *arg3)
     {
         remove("temp1.txt");
         printf("Usuario no encontrado o contraseña incorrecta.\n");
+        sleep(2);
     }
 
-    sem_post(sem_usuarios);
-    sem_post(sem_transacciones);
+  
     return NULL;
 }
