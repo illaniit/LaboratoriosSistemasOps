@@ -28,8 +28,8 @@ struct Usuario4
 /// @return 
 void *ExtraerDinero(void *arg3)
 {
-    Config config = leer_configuracion("variables.properties");
-    struct Usuario4 *usuario = (struct Usuario4 *)arg3;
+    Config config = leer_configuracion("variables.properties"); // Cargamos la configuración del sistema
+    struct Usuario4 *usuario = (struct Usuario4 *)arg3; // Cast del argumento recibido al tipo correcto
     bool encontrado = false;
 
     int saldo_extraer;
@@ -38,9 +38,10 @@ void *ExtraerDinero(void *arg3)
     printf("    💵 EXTRACCION DE DINERO 💵\n");
     printf("==============================\n");   // vemos cuento quiere ingresar el usuario
     printf("Introduzca la cantidad que desea extraer: ");
-    scanf("%d", &saldo_extraer);
+    scanf("%d", &saldo_extraer);  // Usuario ingresa el monto a retirar
     Escribir_registro("El usuario ha introducido el saldo a extraer");
     
+    // Validaciones
     if(saldo_extraer<0){
         printf("No se puede extraer dinero negativo!\n");
         sleep(2);
@@ -55,6 +56,7 @@ void *ExtraerDinero(void *arg3)
     sem_wait(sem_usuarios);
     sem_wait(sem_transacciones);
 
+    
     FILE *ArchivoUsuarios = fopen("usuarios.txt", "r");
     if (!ArchivoUsuarios)
     {
@@ -63,6 +65,7 @@ void *ExtraerDinero(void *arg3)
         return NULL;
     }
 
+    // Archivo temporal para sobrescribir los datos actualizados
     FILE *tempFile1 = fopen("temp1.txt", "w");
     if (!tempFile1)
     {
@@ -72,10 +75,12 @@ void *ExtraerDinero(void *arg3)
         return NULL;
     }
 
+    // Variables para lectura de archivo
     int id3, saldo3, num_transacciones3;
     char nombre3[50], contrasena3[50], apellidos3[50], domicilio3[100], pais3[50];
     char linea[200], linea2[200];
 
+    // Buscar el ID más reciente de transacciones para asignar uno nuevo
     int id_transacciones = 0;
     FILE *ArchivoTransacciones = fopen("transaciones.txt", "r");
     if (ArchivoTransacciones)
@@ -92,6 +97,7 @@ void *ExtraerDinero(void *arg3)
     }
     id_transacciones++; // Incrementamos para el nuevo registro
 
+    // Leer línea por línea del archivo de usuarios
     while (fgets(linea, sizeof(linea), ArchivoUsuarios) != NULL)
     {
         linea[strcspn(linea, "\n")] = '\0';
@@ -101,11 +107,14 @@ void *ExtraerDinero(void *arg3)
         {
             limpiar_cadena(nombre3);
             limpiar_cadena(contrasena3);
+
+            // Verificar si coincide con el usuario que desea extraer
             if (strcmp(nombre3, usuario->Usuario3) == 0 && strcmp(contrasena3, usuario->Contraseña1) == 0)
             {
                 int dinero_inicial = saldo3;
                 encontrado = true;
 
+                // Validar si hay suficiente saldo
                 if (saldo_extraer > saldo3)
                 {
                     printf("Saldo insuficiente.\n");
@@ -118,9 +127,11 @@ void *ExtraerDinero(void *arg3)
                     return NULL;
                 }
 
+                // Actualizar saldo y número de transacciones
                 saldo3 -= saldo_extraer;
                 num_transacciones3++;
 
+                // Guardar transacción en archivo
                 ArchivoTransacciones = fopen("transaciones.txt", "a");
                 if (ArchivoTransacciones)
                 {
@@ -133,6 +144,7 @@ void *ExtraerDinero(void *arg3)
                 id3, nombre3, contrasena3, apellidos3, domicilio3, pais3, saldo3, num_transacciones3);
     }
 
+    // Cierre de archivos y salida de sección crítica
     fclose(ArchivoUsuarios);
     fclose(tempFile1);
     sem_post(sem_usuarios);
@@ -140,8 +152,8 @@ void *ExtraerDinero(void *arg3)
 
     if (encontrado)
     {
-        remove("usuarios.txt");
-        rename("temp1.txt", "usuarios.txt");
+        remove("usuarios.txt");  // Eliminamos el archivo viejo
+        rename("temp1.txt", "usuarios.txt");  // Renombramos el temporal como nuevo archivo
         printf("Saldo actualizado correctamente.\n");
         sleep(2);
     }

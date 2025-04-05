@@ -31,7 +31,7 @@ void Inicializar_semaforos()
     }
 }
 
-/// @brief 
+/// @brief Cierra y elimina los semáforos, también elimina la cola de mensajes
 void Destruir_semaforos()
 {
     sem_close(sem_usuarios);
@@ -40,6 +40,8 @@ void Destruir_semaforos()
     sem_unlink("/sem_registro");
     sem_unlink("/sem_usuarios");
     sem_unlink("/sem_transacciones");
+
+    // Eliminar la cola de mensajes si existe
     int id_cola = msgget(CLAVE_COLA, 0666);
     if (id_cola != -1) {
         msgctl(id_cola, IPC_RMID, NULL);
@@ -49,6 +51,7 @@ void Destruir_semaforos()
 
 int id_cola;
 
+//Crea una cola de mensajes del sistema con la clave definida
 void crear_cola_mensajes() {
     id_cola = msgget(CLAVE_COLA, IPC_CREAT | 0666);
     if (id_cola == -1) {
@@ -56,6 +59,7 @@ void crear_cola_mensajes() {
         exit(EXIT_FAILURE);
     }
 }
+
 
 Config leer_configuracion(const char *ruta)
 {
@@ -67,10 +71,12 @@ Config leer_configuracion(const char *ruta)
     }
     Config config;
     char linea[100];
+
+    // Leer cada línea del archivo de configuración
     while (fgets(linea, sizeof(linea), archivo))
     {
         if (linea[0] == '#' || strlen(linea) < 3)
-            continue; // Ignorar comentarios y
+            continue; // Ignorar comentarios y lineas vacias
         if (strstr(linea, "LIMITE_RETIRO"))
             sscanf(linea, "LIMITE_RETIRO=%d",
                    &config.limite_retiro);
@@ -107,7 +113,7 @@ void Escribir_registro(const char *mensaje_registro)
         return;
     }
 
-    sem_wait(sem_registro);
+    sem_wait(sem_registro);    // Espera semáforo para acceso exclusivo al archivo
 
     time_t t;
     struct tm *tm_info;
@@ -117,6 +123,7 @@ void Escribir_registro(const char *mensaje_registro)
     tm_info = localtime(&t);
     strftime(hora, sizeof(hora), "%Y-%m-%d %H:%M:%S", tm_info);
 
+    // Abrir archivo de registro en modo append
     FILE *ArchivoDeRegistro = fopen("registro.log", "a");
     if (!ArchivoDeRegistro)
     {
@@ -125,6 +132,7 @@ void Escribir_registro(const char *mensaje_registro)
         return;
     }
 
+    // Escribir mensaje en el log
     fprintf(ArchivoDeRegistro, "[%s] %s\n", hora, mensaje_registro);
     fclose(ArchivoDeRegistro);
 
@@ -158,10 +166,10 @@ void limpiar_cadena(char *cadena)
     cadena[fin - inicio + 1] = '\0'; // Añadir el carácter nulo al final
 }
 
-/// @brief 
-/// @param nombre 
-/// @param contrasena 
-/// @return 
+/// @brief Verifica credenciales de usuario y retorna su ID si es válido
+/// @param nombre Nombre de usuario
+/// @param contrasena Contraseña del usuario
+/// @return ID del usuario si es válido, -1 si no se encuentra
 int obtener_id_usuario(const char *nombre, const char *contrasena)
 {
     FILE *archivo = fopen("usuarios.txt", "r");
@@ -171,9 +179,12 @@ int obtener_id_usuario(const char *nombre, const char *contrasena)
         return -1;
     }
 
+    // Variables para los campos de usuario
     int id, saldo, num_transacciones;
     char nombre_archivo[50], contrasena_archivo[50], apellidos[50], domicilio[100], pais[50];
 
+
+    // Leer línea por línea y parsear los datos de usuario
     while (fscanf(archivo, "%d | %49[^|] | %49[^|] | %49[^|] | %99[^|] | %49[^|] | %d | %d\n",
                   &id, nombre_archivo, contrasena_archivo, apellidos, domicilio, pais, &saldo, &num_transacciones) == 8)
     {
