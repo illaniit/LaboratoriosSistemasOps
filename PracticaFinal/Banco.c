@@ -80,6 +80,7 @@ void leer_alerta_pipe(int sig)
     // Escribir la alerta en el archivo
     fprintf(archivo, "🚨 ALERTA DEL MONITOR 🚨\n%s\n", msg.texto);
     fclose(archivo);
+    
     printf("🚨 Se ha registrado una nueva alerta\n");
     
     
@@ -183,7 +184,7 @@ void Menu_Procesos()
             }
 
             num_hijos++;
-
+            system("clear");
             // Preguntar si desea aceptar otro usuario
             printf("¿Desea aceptar otro usuario? (s/n): ");
             scanf(" %c", &respuesta);

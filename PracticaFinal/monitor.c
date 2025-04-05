@@ -47,7 +47,7 @@ int main()
         pthread_join(h3, NULL);
         pthread_join(h4, NULL);
 
-        sleep(200);
+        sleep(40);
     }
     Destruir_semaforos();
     return 0;
@@ -125,9 +125,11 @@ void *detectar_transferencias_consecutivas(void *arg)
                 }
             }
         
-        fclose(archivo);
-        sleep(10);
+        
     }
+
+    fclose(archivo);
+    sleep(10);
     pthread_exit(NULL);
 }
 

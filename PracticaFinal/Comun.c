@@ -43,7 +43,6 @@ void Destruir_semaforos()
     int id_cola = msgget(CLAVE_COLA, 0666);
     if (id_cola != -1) {
         msgctl(id_cola, IPC_RMID, NULL);
-        printf("Cola de mensajes eliminada.\n");
     }
 }
 
