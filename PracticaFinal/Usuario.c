@@ -24,16 +24,25 @@ struct Usuario
 /// @param passwd
 void Mostrar_Menu(char *user, char *passwd)
 {
-    Config config = leer_configuracion("variables.properties"); // abrimos el archivo de configuracion
+
+    // Cargamos configuración desde el archivo .properties
+    Config config = leer_configuracion("variables.properties");
+
+    // Inicializamos el struct del usuario con los datos ingresados
     struct Usuario usuario;
     strcpy(usuario.Usuario, user);
     strcpy(usuario.Contraseña, passwd);
+
+    // Declaramos los hilos para las operaciones
     pthread_t hilo1, hilo2, hilo3, hilo4;
     int Eleccion = 0;
 
+    // Abrimos los semáforos necesarios para controlar el acceso a recursos compartidos
     sem_usuarios = sem_open("/sem_usuarios", 0);
     sem_transacciones = sem_open("/sem_transacciones", 0);
 
+
+    // Iniciamos ciclo del menú hasta que el usuario elija salir
     do
     {
         system("clear");
@@ -47,6 +56,8 @@ void Mostrar_Menu(char *user, char *passwd)
         printf("5️⃣  Cerrar Sesión\n\n");
         printf("------------------------------------\n");
         printf("\n🔹 Ingrese su opción: ");
+
+        // Validamos la entrada del usuario
         if (scanf("%d", &Eleccion) != 1)
         {
             printf("❌ Entrada inválida. Intente nuevamente.\n");
@@ -63,7 +74,7 @@ void Mostrar_Menu(char *user, char *passwd)
                 printf("❌ Error al crear el hilo para Introducir Dinero.\n");
 
             else
-                pthread_join(hilo1, NULL);
+                pthread_join(hilo1, NULL); // Esperamos a que termine
             break;
 
         case 2:
@@ -104,5 +115,5 @@ void Mostrar_Menu(char *user, char *passwd)
             break;
         }
 
-    } while (Eleccion != 5);
+    } while (Eleccion != 5); // Repetir mientras no se elija salir
 }

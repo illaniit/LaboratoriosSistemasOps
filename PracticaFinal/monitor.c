@@ -15,6 +15,7 @@
 
 volatile sig_atomic_t corriendo = 1;
 
+// Manejador de señal para terminar el programa de forma segura
 void manejador_salida(int sig)
 {
     corriendo = 0;
@@ -32,9 +33,11 @@ int main()
 
     Inicializar_semaforos();
     pthread_t h1, h2, h3, h4;
+
+    // Bucle principal que se ejecuta continuamente mientras corriendo sea true
     while (corriendo)
     {
-       
+       // Se lanzan los hilos que detectan distintos tipos de comportamiento sospechoso
         pthread_create(&h1, NULL, detectar_transferencias_consecutivas, NULL);
         pthread_create(&h2, NULL, detectar_retiros_consecutivos, NULL);
         pthread_create(&h3, NULL, detectar_saldo_negativo, NULL);
@@ -47,9 +50,9 @@ int main()
         pthread_join(h3, NULL);
         pthread_join(h4, NULL);
 
-        sleep(60);
+        sleep(60); // Espera de un minuto antes de volver a lanzar los hilos
     }
-    Destruir_semaforos();
+    Destruir_semaforos();  // Libera los semáforos al terminar
     return 0;
 }
 
@@ -58,6 +61,7 @@ void enviar_alerta(const char *mensaje, const int *id, const int titular)
     MensajeAlerta msg;
     msg.mtype = TIPO_ALERTA;
 
+    // Obtener la hora actual para registrar cuándo se detectó la alerta
     time_t t;
     struct tm *tm_info;
     char hora[30];
@@ -69,6 +73,7 @@ void enviar_alerta(const char *mensaje, const int *id, const int titular)
              "[%s] Id de la transacci\xC3\xB3n: %d | %s\n",
              hora, *id, mensaje);
 
+    // Enviar mensaje a la cola
     int id_cola = msgget(CLAVE_COLA, 0666);
     if (id_cola == -1)
     {
@@ -81,6 +86,7 @@ void enviar_alerta(const char *mensaje, const int *id, const int titular)
         perror("Error al enviar mensaje a la cola");
     }
 
+    // Notificar al proceso padre con una señal
     kill(getppid(), SIGUSR1);
 }
 
@@ -117,6 +123,8 @@ void *detectar_transferencias_consecutivas(void *arg)
                         transferencias_consecutivas = 1;
                         ultima_cuenta = cuenta1;
                     }
+
+                    // Si se detectan más de 4 transferencias seguidas de la misma cuenta
                     if (transferencias_consecutivas > 4)
                     {
                         Escribir_registro("Transferencias consecutivas detectadas");
@@ -166,6 +174,8 @@ void *detectar_retiros_consecutivos(void *arg)
                         retiros = 1;
                         ultima_cuenta = cuenta1;
                     }
+
+                    // Si se detectan más de 3 retiros consecutivos
                     if (retiros > 3)
                     {
                         Escribir_registro("Retiros consecutivos detectados");
@@ -198,6 +208,7 @@ void *detectar_saldo_negativo(void *arg)
             int id, cuenta1, cuenta2, saldo1, saldo2, saldo_final1, saldo_final2;
             char tipo[20];
 
+            // Leer línea y detectar saldos negativos
             if (sscanf(linea, "%d | %19[^|] | %d | %d | %d | %d | %d | %d",
                        &id, tipo, &cuenta1, &cuenta2, &saldo1, &saldo2, &saldo_final1, &saldo_final2) == 8)
             {

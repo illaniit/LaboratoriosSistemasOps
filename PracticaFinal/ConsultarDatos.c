@@ -86,11 +86,16 @@ void *ConsultarDatos(void *arg) {
 /// @param passwd 
 void DatosCuenta(char *user,char *passwd) {
     system("clear");
+
+    // Leemos la configuración para obtener la ruta del archivo de cuentas
     Config config = leer_configuracion("variables.properties");
     bool encontrado=false;
     char var[100];
+
     sem_wait(sem_usuarios);
     sem_wait(sem_transacciones);
+
+    // Abrimos el archivo de cuentas
     FILE *archivoCuentas = fopen(config.archivo_cuentas, "r");
     if (!archivoCuentas) {
         perror("Error al abrir usuario.txt");
@@ -98,10 +103,14 @@ void DatosCuenta(char *user,char *passwd) {
         sem_post(sem_transacciones);
         return;
     }
-    limpiar_cadena(user);
+    limpiar_cadena(user);   // Limpiamos espacios innecesarios en el usuario
+
+    // Variables temporales para leer del archivo
     char linea[256];
     int id1, saldo1, num_transacciones1;
     char nombre1[50], contrasena1[50], apellidos1[50], domicilio1[100], pais1[50];
+
+    // Buscamos la cuenta que coincida con el nombre y contraseña
     while (fgets(linea, sizeof(linea), archivoCuentas)) {
         linea[strcspn(linea, "\n")] = '\0';
 
@@ -109,6 +118,8 @@ void DatosCuenta(char *user,char *passwd) {
                    &id1, nombre1, contrasena1, apellidos1, domicilio1, pais1, &saldo1, &num_transacciones1) == 8) {
                     limpiar_cadena(nombre1);
                     limpiar_cadena(contrasena1);
+
+            // Si nombre y contraseña coinciden, lo encontramos
             if (strcmp(nombre1, user) == 0) {
                 if(strcmp(contrasena1,passwd)==0){
                     encontrado=true;
@@ -121,6 +132,8 @@ void DatosCuenta(char *user,char *passwd) {
     fclose(archivoCuentas);
     sem_post(sem_usuarios);
     sem_post(sem_transacciones);
+
+    // Si encontramos el usuario, mostramos los datos en pantalla
     if(encontrado){
         printf("\n=================================================\n");
         printf("              💳 DATOS DE LA CUENTA 💳              \n");
@@ -148,6 +161,8 @@ void ConsultarTransferencias(char *user, char *passwd) {
     Config config = leer_configuracion("variables.properties");
     sem_wait(sem_usuarios);
     sem_wait(sem_transacciones);
+
+    // Abrimos el archivo de transacciones
     FILE *archivoTransacciones = fopen(config.archivo_log, "r");
     if (!archivoTransacciones) {
         perror("❌ Error al abrir transacciones.txt");
@@ -166,6 +181,8 @@ void ConsultarTransferencias(char *user, char *passwd) {
     while (fgets(linea, sizeof(linea), archivoTransacciones)) {
         int id, id1, id2, saldo1, saldo2, saldofinal1, saldofinal2;
         char tipo[20];
+
+        // Obtenemos el ID del usuario para buscar sus transferencias
         int user_id = obtener_id_usuario(user, passwd);
         
         // Leer la línea en el formato correcto
