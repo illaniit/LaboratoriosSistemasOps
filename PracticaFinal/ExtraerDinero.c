@@ -23,9 +23,9 @@ struct Usuario4
     char Contraseña1[50];
 } Usuario4;
 
-/// @brief 
+/// @brief esta funcion permite extraer dinero y lo actualiza
 /// @param arg3 
-/// @return 
+/// @return no devuelebe nada, es de tipo void actualiza 
 void *ExtraerDinero(void *arg3)
 {
     Config config = leer_configuracion("variables.properties"); // Cargamos la configuración del sistema
@@ -44,12 +44,14 @@ void *ExtraerDinero(void *arg3)
     // Validaciones
     if(saldo_extraer<0){
         printf("No se puede extraer dinero negativo!\n");
+        Escribir_registro("El usuario ha intentado extraer dinero negativo en ExtraerDinero.c");
         sleep(2);
         return(NULL);
     }
     if (saldo_extraer > config.limite_retiro)
     {
         printf("El dinero que desea extraer excede nuestro limite\n");
+        Escribir_registro("El usuario ha intentado extraer mas cantidad que el limite permitido en ExtraerDinero.c");
         sleep(2);
         return NULL;
     }
@@ -161,6 +163,7 @@ void *ExtraerDinero(void *arg3)
     {
         remove("temp1.txt");
         printf("Usuario no encontrado o contraseña incorrecta.\n");
+        Escribir_registro("No se ha encontrado el usuario en ExtraerDinero.c");
         sleep(2);
     }
 

@@ -1,5 +1,4 @@
-1 | ingreso | 1 | - | 1000 | - | 1100 
-2 | retiro | 1 | - | 1100 | - | 800 
-3 | transferencia | 1 | 2 | 800 | 2000 | 700 | 2100
-4 | retiro | 2 | - | 2100 | - | 1100 
-5 | transferencia | 2 | 1 | 1100 | 700 | -900 | 900
+1 | ingreso | 1 | - | 1 | - | 2 
+2 | retiro | 1 | - | 2 | - | 0 
+3 | ingreso | 1 | - | 0 | - | -100 
+4 | transferencia | 1 | 2 | 100 | 2 | 50 | 52

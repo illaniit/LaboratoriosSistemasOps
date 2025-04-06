@@ -45,6 +45,7 @@ void *ConsultarDatos(void *arg) {
     int Eleccion = 0;
 
     do {
+        Escribir_registro("El usuario ha desplegado el menu de consulta de datos en ConsultarDato.c");
         // este es el menu de la consulta de datos
         system("clear");
         printf("\n----------📊 Menu de consulta de datos 📊----------\n");
@@ -62,10 +63,11 @@ void *ConsultarDatos(void *arg) {
         switch (Eleccion) {
             case 1:
                 DatosCuenta(usuario->Usuario1,usuario->Contraseña1); // le pasamos a cada funcion el usuario y contraseña de la persona que ha iniciado sesion
-                
+                Escribir_registro("El usuario ha elegido la opcion de consultar datos en ConsultarDatos.c");
                 break;
             case 2:
                 ConsultarTransferencias(usuario->Usuario1,usuario->Contraseña1);
+                Escribir_registro("El usuario ha elegido la opcion de consultar transferncias en ConsultarDatos.c");
                 break;
             case 3:
                 printf("Volviendo al menú...\n");
@@ -129,12 +131,15 @@ void DatosCuenta(char *user,char *passwd) {
             }
         }
     }
+   
     fclose(archivoCuentas);
     sem_post(sem_usuarios);
     sem_post(sem_transacciones);
+   
 
     // Si encontramos el usuario, mostramos los datos en pantalla
     if(encontrado){
+        Escribir_registro("El usuario ha visto sus datos en ConsultarDatos.c");
         printf("\n=================================================\n");
         printf("              💳 DATOS DE LA CUENTA 💳              \n");
         printf("=================================================\n");

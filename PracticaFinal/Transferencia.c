@@ -49,9 +49,10 @@ void *Transferencia(void *arg) {
     sem_wait(sem_transacciones);
 
     int id_origen = obtener_id_usuario(usuario->nombre, usuario->contrasena);
-    
+    Escribir_registro("se ha obtenido el id del usuario en el menu de transferencia.c");
     if(id_origen==id_destino){
         printf("No te puedes hacer una transferencia a ti mismo !!\n");
+        Escribir_registro("El usuario ha intentado hacer hacerse una transferencia asimismo");
         sleep(2);
         sem_post(sem_usuarios);
         sem_post(sem_transacciones);
@@ -59,6 +60,7 @@ void *Transferencia(void *arg) {
     }
     if (id_origen == -1) {
         printf("Error: Usuario no encontrado.\n");
+        Escribir_registro("No se ha encontrado el usuario al hacer la transeferncia en Transferencia.c");
         sleep(2);
         sem_post(sem_usuarios);
         sem_post(sem_transacciones);
@@ -67,6 +69,7 @@ void *Transferencia(void *arg) {
     // Verificar límite de transferencia
     if (Cantidad_transferir > config.limite_transferencia) {
         printf("La cantidad excede el límite de transferencia permitido.\n");
+        Escribir_registro("El usuario ha intentado hacer una transferncia por encima del limite en Transferencia.c");
         sleep(2);
         sem_post(sem_usuarios);
         sem_post(sem_transacciones);
@@ -104,6 +107,7 @@ void *Transferencia(void *arg) {
             if (Id == id_origen) {
                 if (Saldo < Cantidad_transferir) {
                     printf("Saldo insuficiente.\n");
+                    Escribir_registro("El usuario tiene saldo insuficiente");
                     sleep(2);
                     fclose(archivoUsuarios);
                     fclose(tempFile);
@@ -137,6 +141,7 @@ void *Transferencia(void *arg) {
     // Verificar si ambas cuentas existen
     if (!cuenta_origen_encontrada || !cuenta_destino_encontrada) {
         printf("Error: Cuenta no encontrada.\n");
+        Escribir_registro("No se ha encontrado la cuenta de la transferencia");
         remove("temp.txt");
         sleep(2);
         sem_post(sem_usuarios);
@@ -171,6 +176,7 @@ void *Transferencia(void *arg) {
         fprintf(archivoTransacciones, "%d | transferencia | %d | %d | %d | %d | %d | %d\n",
                 id_transacciones, id_origen, id_destino, saldo_origen, saldo_destino , saldo_origen - Cantidad_transferir,saldo_destino + Cantidad_transferir);
         fclose(archivoTransacciones);
+        Escribir_registro("Se ha escrito en el archivo de transferencias en Transferncia.c");
     } else {
         perror("Error al escribir en transacciones.txt");
     }

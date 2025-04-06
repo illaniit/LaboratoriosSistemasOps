@@ -46,7 +46,7 @@ int main()
 
     Inicializar_semaforos();
 
-    Escribir_registro("Se ha accedido al main de banco y se han incializado los semaforos");
+    Escribir_registro("Se ha accedido al main de banco y se han incializado los semaforos en banco.c");
 
     crear_cola_mensajes();
 
@@ -83,7 +83,7 @@ void leer_alerta_cola(int sig)
         perror("No se pudo leer alerta de la cola");
         return;
     }
-    Escribir_registro("se ha accedido a la cola");
+    Escribir_registro("se ha accedido a la cola en banco.c");
     // Abrir el archivo alertas.log en modo append
     FILE *archivo = fopen("alertas.log", "a");
     if (!archivo)
@@ -95,12 +95,12 @@ void leer_alerta_cola(int sig)
     // Escribir la alerta en el archivo
     fprintf(archivo, "🚨 ALERTA DEL MONITOR 🚨\n%s\n", msg.texto);
     fclose(archivo);
-    Escribir_registro("Se ha escrito ene  el archvio una alerta");
+    Escribir_registro("Se ha escrito en el archvio una alerta en banco.c");
 
     printf("🚨 Se ha registrado una nueva alerta\n");
 
     sleep(4);
-    Escribir_registro("Se muestra que se ha registrado una alerta");
+    Escribir_registro("Se muestra que se ha registrado una alerta desde banco.c");
 
     // Mueve el cursor una línea arriba y limpia esa línea
     printf("\033[F");  // Mueve el cursor una línea arriba
@@ -121,7 +121,7 @@ void matar_hijos()
         system(comando);
         sleep(0.5);
     }
-    Escribir_registro("se ha matado los hijos");
+    Escribir_registro("se ha matado los hijos desde banco.c");
 }
 int contador = 0;
 void Menu_Procesos()
@@ -149,7 +149,7 @@ void Menu_Procesos()
             snprintf(comando, sizeof(comando),
                      "gnome-terminal -- sh -c 'echo $$ > /tmp/pid_%d.txt; gcc init_cuentas.c Usuario.c Transferencia.c ConsultarDatos.c ExtraerDinero.c IntroducirDinero.c Comun.c -o usuario && ./usuario'", getpid());
             system(comando);
-            Escribir_registro("se ha abierto una nueva terminal con usuario");
+            Escribir_registro("se ha abierto una nueva terminal con usuario desde banco.c");
 
             exit(0); // El hijo termina aquí, la terminal sigue corriendo
         }
@@ -160,7 +160,7 @@ void Menu_Procesos()
             char filename[50];
             // Leer el PID real del hijo desde el archivo
             snprintf(filename, sizeof(filename), "/tmp/pid_%d.txt", pid);
-            Escribir_registro("se ha generado un archvio con el pid del usuario");
+            Escribir_registro("se ha generado un archvio con el pid del usuario desde banco.c");
 
             // Esperamos 20 segundos (puedes quitar esto si no es necesario)
             sleep(3);
@@ -183,7 +183,7 @@ void Menu_Procesos()
                 contador++;
                 // Cerramos el archivo
                 fclose(fp);
-                Escribir_registro("Se ha alamcenado el pid del usuario");
+                Escribir_registro("Se ha alamcenado el pid del usuario desde banco.c");
             }
             else
             {
@@ -248,7 +248,7 @@ void Menu_Procesos()
 
     // Cuando el padre termina, mata a todos los hijos
     matar_hijos();
-    Escribir_registro("Se acaban con todos los procesos");
+    Escribir_registro("Se acaban con todos los procesos desde banco.c");
 }
 // Esta funcion se encarga de "pegar" la alerta en el pipe para poder pasarlo al proceso padre
 
@@ -256,18 +256,18 @@ void Menu_Procesos()
 void CrearMonitor()
 {
     pid_t Monitor = fork(); // Crea el proceso monitor
-    Escribir_registro("Se crea el fork de monitor");
+    Escribir_registro("Se crea el fork de monitor desde banco.c");
     if (Monitor < 0)
     {
         perror("Error al crear el proceso Monitor");
-        Escribir_registro("Fallo al crear el proceso monitor");
+        Escribir_registro("Fallo al crear el proceso monitor desde banco.c");
         return;
     }
 
     if (Monitor == 0)
     {
         // Proceso hijo
-        Escribir_registro("Proceso monitor hijo iniciado");
+        Escribir_registro("Proceso monitor hijo iniciado desde banco.c");
 
         // Guardar PID en archivo
         char filename[50];
@@ -289,7 +289,7 @@ void CrearMonitor()
 
         // Si execl falla:
         perror("Error al ejecutar monitor");
-        Escribir_registro("Error al ejecutar monitor");
+        Escribir_registro("Error al ejecutar monitor desde banco.c");
         exit(EXIT_FAILURE);
     }
     else
@@ -321,6 +321,6 @@ void CrearMonitor()
         }
 
         num_hijos++;
-        Escribir_registro("Proceso monitor creado correctamente");
+        Escribir_registro("Proceso monitor creado correctamente desde banco.c");
     }
 }

@@ -1,2 +1,2 @@
-1 | pedro  | 12  | paula      | tt      | morocco      | 900 | 3
-2 | geert  | asdf  | prummel      | brawl      | jannet      | 900 | 2
+1 | 1  | 1  | 1     | 1     | 1     | 50 | 4
+2 | 2  | 2  | 2     | 2     | 2     | 52 | 0

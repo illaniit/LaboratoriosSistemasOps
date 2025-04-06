@@ -37,13 +37,11 @@ int main()
     // Bucle principal que se ejecuta continuamente mientras corriendo sea true
     while (corriendo)
     {
-       // Se lanzan los hilos que detectan distintos tipos de comportamiento sospechoso
+        // Se lanzan los hilos que detectan distintos tipos de comportamiento sospechoso
         pthread_create(&h1, NULL, detectar_transferencias_consecutivas, NULL);
         pthread_create(&h2, NULL, detectar_retiros_consecutivos, NULL);
         pthread_create(&h3, NULL, detectar_saldo_negativo, NULL);
         pthread_create(&h4, NULL, detectar_transacciones_sospechosas, NULL);
-
-        
 
         pthread_join(h1, NULL);
         pthread_join(h2, NULL);
@@ -52,7 +50,7 @@ int main()
 
         sleep(60); // Espera de un minuto antes de volver a lanzar los hilos
     }
-    Destruir_semaforos();  // Libera los semáforos al terminar
+    Destruir_semaforos(); // Libera los semáforos al terminar
     return 0;
 }
 
@@ -88,54 +86,54 @@ void enviar_alerta(const char *mensaje, const int *id, const int titular)
 
     // Notificar al proceso padre con una señal
     kill(getppid(), SIGUSR1);
+    Escribir_registro("Se ha enviado una alerta desde monitor.c");
 }
 
 void *detectar_transferencias_consecutivas(void *arg)
 {
-  
-        Escribir_registro("Detectando transferencias consecutivas...");
-        FILE *archivo = fopen("transaciones.txt", "r");
-        if (!archivo)
-        {
-            perror("Error al abrir transaciones.txt");
-            sleep(5);
-            
-        }
+    Config config = leer_configuracion("variables.properties");
+    Escribir_registro("Detectando transferencias consecutivas... en monitor.c");
 
-        char linea[256];
-        int transferencias_consecutivas = 0, ultima_cuenta = -1;
-
-        while (fgets(linea, sizeof(linea), archivo))
-        {
-            int id, cuenta1, cuenta2, saldo1, saldo2, saldo_final1, saldo_final2;
-            char tipo[20];
-
-            if (sscanf(linea, "%d | %19[^|] | %d | %d | %d | %d | %d | %d",
-                       &id, tipo, &cuenta1, &cuenta2, &saldo1, &saldo2, &saldo_final1, &saldo_final2) == 8)
-            {
-                limpiar_cadena(tipo);
-                if (strcmp(tipo, "transferencia") == 0)
-                {
-                    if (cuenta1 == ultima_cuenta)
-                        transferencias_consecutivas++;
-                    else
-                    {
-                        transferencias_consecutivas = 1;
-                        ultima_cuenta = cuenta1;
-                    }
-
-                    // Si se detectan más de 4 transferencias seguidas de la misma cuenta
-                    if (transferencias_consecutivas > 4)
-                    {
-                        Escribir_registro("Transferencias consecutivas detectadas");
-                        enviar_alerta("M\xC3\xBAltiples transferencias consecutivas", &id, 0);
-                    }
-                }
-            }
-        
-        
+    
+    FILE *archivo = fopen(config.archivo_log, "r");
+    if (!archivo)
+    {
+        perror("Error al abrir transaciones.txt");
+        sleep(5);
     }
 
+    char linea[256];
+    int transferencias_consecutivas = 0, ultima_cuenta = -1;
+
+    while (fgets(linea, sizeof(linea), archivo))
+    {
+        int id, cuenta1, cuenta2, saldo1, saldo2, saldo_final1, saldo_final2;
+        char tipo[20];
+
+        if (sscanf(linea, "%d | %19[^|] | %d | %d | %d | %d | %d | %d",
+                   &id, tipo, &cuenta1, &cuenta2, &saldo1, &saldo2, &saldo_final1, &saldo_final2) == 8)
+        {
+            limpiar_cadena(tipo);
+            if (strcmp(tipo, "transferencia") == 0)
+            {
+                if (cuenta1 == ultima_cuenta)
+                    transferencias_consecutivas++;
+                else
+                {
+                    transferencias_consecutivas = 1;
+                    ultima_cuenta = cuenta1;
+                }
+
+                // Si se detectan más de 4 transferencias seguidas de la misma cuenta
+                if (transferencias_consecutivas > config.umbral_transferencias)
+                {
+                    Escribir_registro("Transferencias consecutivas detectadas desde monitor.c");
+                    enviar_alerta("M\xC3\xBAltiples transferencias consecutivas", &id, 0);
+                }
+            }
+        }
+    }
+   
     fclose(archivo);
     sleep(10);
     pthread_exit(NULL);
@@ -143,118 +141,122 @@ void *detectar_transferencias_consecutivas(void *arg)
 
 void *detectar_retiros_consecutivos(void *arg)
 {
+    Config config = leer_configuracion("variables.properties");
+    Escribir_registro("Detectando retiros consecutivos... en monitor.c");
    
-        Escribir_registro("Detectando retiros consecutivos...");
-        FILE *archivo = fopen("transaciones.txt", "r");
-        if (!archivo)
+    FILE *archivo = fopen(config.archivo_log, "r");
+    if (!archivo)
+    {
+        perror("Error al abrir transaciones.txt");
+        sleep(5);
+    }
+
+    char linea[256];
+    int retiros = 0, ultima_cuenta = -1;
+
+    while (fgets(linea, sizeof(linea), archivo))
+    {
+        int id, cuenta1, saldo1, saldo_final;
+        char tipo[20];
+
+        if (sscanf(linea, "%d | %19[^|] | %d | - | %d | - | %d",
+                   &id, tipo, &cuenta1, &saldo1, &saldo_final) == 5)
         {
-            perror("Error al abrir transaciones.txt");
-            sleep(5);
-           
-        }
-
-        char linea[256];
-        int retiros = 0, ultima_cuenta = -1;
-
-        while (fgets(linea, sizeof(linea), archivo))
-        {
-            int id, cuenta1, saldo1, saldo_final;
-            char tipo[20];
-
-            if (sscanf(linea, "%d | %19[^|] | %d | - | %d | - | %d",
-                       &id, tipo, &cuenta1, &saldo1, &saldo_final) == 5)
+            limpiar_cadena(tipo);
+            if (strcmp(tipo, "retiro") == 0)
             {
-                limpiar_cadena(tipo);
-                if (strcmp(tipo, "retiro") == 0)
+                if (cuenta1 == ultima_cuenta)
+                    retiros++;
+                else
                 {
-                    if (cuenta1 == ultima_cuenta)
-                        retiros++;
-                    else
-                    {
-                        retiros = 1;
-                        ultima_cuenta = cuenta1;
-                    }
+                    retiros = 1;
+                    ultima_cuenta = cuenta1;
+                }
 
-                    // Si se detectan más de 3 retiros consecutivos
-                    if (retiros > 3)
-                    {
-                        Escribir_registro("Retiros consecutivos detectados");
-                        enviar_alerta("M\xC3\xBAltiples retiros consecutivos", &id, 0);
-                    }
+                // Si se detectan más de 3 retiros consecutivos
+                if (retiros > 3)
+                {
+                    Escribir_registro("Retiros consecutivos detectados desde monitor.c");
+                    enviar_alerta("M\xC3\xBAltiples retiros consecutivos", &id, 0);
                 }
             }
         }
-        fclose(archivo);
-        sleep(10);
-    
+    }
+
+    fclose(archivo);
+    sleep(10);
+
     pthread_exit(NULL);
 }
 
 void *detectar_saldo_negativo(void *arg)
 {
-   
-        Escribir_registro("Detectando saldos negativos...");
-        FILE *archivo = fopen("transaciones.txt", "r");
-        if (!archivo)
-        {
-            perror("Error al abrir transaciones.txt");
-            sleep(5);
-            
-        }
+    Config config = leer_configuracion("variables.properties");
+    Escribir_registro("Detectando saldos negativos... en monitor.c");
+    
+    FILE *archivo = fopen(config.archivo_log, "r");
+    if (!archivo)
+    {
+        perror("Error al abrir transaciones.txt");
+        sleep(5);
+    }
 
-        char linea[256];
-        while (fgets(linea, sizeof(linea), archivo))
-        {
-            int id, cuenta1, cuenta2, saldo1, saldo2, saldo_final1, saldo_final2;
-            char tipo[20];
+    char linea[256];
+    while (fgets(linea, sizeof(linea), archivo))
+    {
+        int id, cuenta1, cuenta2, saldo1, saldo2, saldo_final1, saldo_final2;
+        char tipo[20];
 
-            // Leer línea y detectar saldos negativos
-            if (sscanf(linea, "%d | %19[^|] | %d | %d | %d | %d | %d | %d",
-                       &id, tipo, &cuenta1, &cuenta2, &saldo1, &saldo2, &saldo_final1, &saldo_final2) == 8)
+        // Leer línea y detectar saldos negativos
+        if (sscanf(linea, "%d | %19[^|] | %d | %d | %d | %d | %d | %d",
+                   &id, tipo, &cuenta1, &cuenta2, &saldo1, &saldo2, &saldo_final1, &saldo_final2) == 8)
+        {
+            if (saldo1 < 0 || saldo2 < 0 || saldo_final1 < 0)
             {
-                if (saldo1 < 0 || saldo2 < 0 || saldo_final1 < 0)
-                {
-                    Escribir_registro("Saldo negativo detectado");
-                    enviar_alerta("Saldo negativo", &id, 0);
-                }
+                Escribir_registro("Saldo negativo detectado desde monitor.c");
+                enviar_alerta("Saldo negativo", &id, 0);
             }
         }
-        fclose(archivo);
-        sleep(10);
-    
+    }
+  
+    fclose(archivo);
+    sleep(10);
+
     pthread_exit(NULL);
 }
 
 void *detectar_transacciones_sospechosas(void *arg)
 {
-   
-        Escribir_registro("Detectando transacciones sospechosas...");
-        FILE *archivo = fopen("transaciones.txt", "r");
-        if (!archivo)
-        {
-            perror("Error al abrir transaciones.txt");
-            sleep(5);
-           
-        }
+    Config config = leer_configuracion("variables.properties");
 
-        char linea[256];
-        while (fgets(linea, sizeof(linea), archivo))
-        {
-            int id, cuenta1, cuenta2, saldo1, saldo2, saldo_final1, saldo_final2;
-            char tipo[20];
+    Escribir_registro("Detectando transacciones sospechosas... en monitor.c");
+    
+    FILE *archivo = fopen(config.archivo_log, "r");
+    if (!archivo)
+    {
+        perror("Error al abrir transaciones.txt");
+        sleep(5);
+    }
 
-            if (sscanf(linea, "%d | %19[^|] | %d | %d | %d | %d | %d | %d",
-                       &id, tipo, &cuenta1, &cuenta2, &saldo1, &saldo2, &saldo_final1, &saldo_final2) == 8)
+    char linea[256];
+    while (fgets(linea, sizeof(linea), archivo))
+    {
+        int id, cuenta1, cuenta2, saldo1, saldo2, saldo_final1, saldo_final2;
+        char tipo[20];
+
+        if (sscanf(linea, "%d | %19[^|] | %d | %d | %d | %d | %d | %d",
+                   &id, tipo, &cuenta1, &cuenta2, &saldo1, &saldo2, &saldo_final1, &saldo_final2) == 8)
+        {
+            if (saldo_final1 < 0)
             {
-                if (saldo_final1 < 0)
-                {
-                    Escribir_registro("Transacci\xC3\xB3n sospechosa detectada");
-                    enviar_alerta("Transacci\xC3\xB3n sospechosa", &id, 0);
-                }
+                Escribir_registro("Transacci\xC3\xB3n sospechosa detectada desde monitor.c");
+                enviar_alerta("Transacci\xC3\xB3n sospechosa", &id, 0);
             }
         }
-        fclose(archivo);
-        sleep(10);
-    
+    }
+  
+    fclose(archivo);
+    sleep(10);
+
     pthread_exit(NULL);
 }

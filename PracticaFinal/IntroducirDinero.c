@@ -42,6 +42,7 @@ void *IntroducirDinero(void *arg2)
     scanf("%d", &saldo_introducir);
     if(saldo_introducir<0){
         printf("No puedes ingresar una cantidad negativa!");
+        Escribir_registro("El usuario ha intentado introducir una cantidad negativa en IntroducirDinero.c");
         return NULL;
     }
     sem_wait(sem_usuarios);
@@ -96,7 +97,7 @@ void *IntroducirDinero(void *arg2)
             {                                // comparamos el nombre del inicio de sesion con el de cda uno de las lineas de lso archivos
                 int dinero_inicial = saldo2; // declaramos una variable que almacene el dinero inciarl
                 encontrado = true;           // cambiamos el estado de la variable encontrdo a true
-                Escribir_registro("El usuario ha introducido la cantidad ha ingresar ");
+                Escribir_registro("El usuario ha introducido la cantidad ha ingresar en introducirDinero.c");
                 saldo2 += saldo_introducir; // incrementeamos su saldo
                 num_transacciones2++;       // incrementamos el nuemro de transacciones
 
@@ -127,7 +128,7 @@ void *IntroducirDinero(void *arg2)
         remove("temp.txt");
         printf("Usuario no encontrado o contraseña incorrecta.\n");
     }
-    Escribir_registro("El usuario ha ingresado dinero");
+    Escribir_registro("El usuario ha ingresado dinero en IngresarDinero.c");
     sem_post(sem_usuarios);
     sem_post(sem_transacciones);
     return NULL;

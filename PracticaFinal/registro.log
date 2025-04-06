@@ -1,506 +1,104 @@
-[2025-04-06 11:57:49] Proceso monitor hijo iniciado
-[2025-04-06 11:57:49] Detectando transferencias consecutivas...
-[2025-04-06 11:57:49] Detectando retiros consecutivos...
-[2025-04-06 11:57:49] Detectando saldos negativos...
-[2025-04-06 11:57:49] Saldo negativo detectado
-[2025-04-06 11:57:49] Detectando transacciones sospechosas...
-[2025-04-06 11:57:49] Transacción sospechosa detectada
-[2025-04-06 11:57:54] Proceso monitor creado correctamente
-[2025-04-06 11:57:55] Se ha accedido al menú de entrada
-[2025-04-06 11:58:59] Detectando transferencias consecutivas...
-[2025-04-06 11:58:59] Detectando retiros consecutivos...
-[2025-04-06 11:58:59] Detectando saldos negativos...
-[2025-04-06 11:58:59] Saldo negativo detectado
-[2025-04-06 11:58:59] Detectando transacciones sospechosas...
-[2025-04-06 11:58:59] Transacción sospechosa detectada
-[2025-04-06 12:00:09] Detectando transacciones sospechosas...
-[2025-04-06 12:00:09] Detectando saldos negativos...
-[2025-04-06 12:00:09] Detectando retiros consecutivos...
-[2025-04-06 12:00:09] Detectando transferencias consecutivas...
-[2025-04-06 12:00:09] Saldo negativo detectado
-[2025-04-06 12:00:09] Transacción sospechosa detectada
-[2025-04-06 12:01:19] Detectando retiros consecutivos...
-[2025-04-06 12:01:19] Detectando saldos negativos...
-[2025-04-06 12:01:19] Saldo negativo detectado
-[2025-04-06 12:01:19] Detectando transacciones sospechosas...
-[2025-04-06 12:01:19] Transacción sospechosa detectada
-[2025-04-06 12:01:19] Detectando transferencias consecutivas...
-[2025-04-06 12:02:29] Detectando retiros consecutivos...
-[2025-04-06 12:02:29] Detectando transacciones sospechosas...
-[2025-04-06 12:02:29] Detectando saldos negativos...
-[2025-04-06 12:02:29] Saldo negativo detectado
-[2025-04-06 12:02:29] Transacción sospechosa detectada
-[2025-04-06 12:02:29] Detectando transferencias consecutivas...
-[2025-04-06 12:03:39] Detectando transferencias consecutivas...
-[2025-04-06 12:03:39] Detectando retiros consecutivos...
-[2025-04-06 12:03:39] Detectando transacciones sospechosas...
-[2025-04-06 12:03:39] Transacción sospechosa detectada
-[2025-04-06 12:03:39] Detectando saldos negativos...
-[2025-04-06 12:03:39] Saldo negativo detectado
-[2025-04-06 12:04:49] Detectando transferencias consecutivas...
-[2025-04-06 12:04:49] Detectando transacciones sospechosas...
-[2025-04-06 12:04:49] Transacción sospechosa detectada
-[2025-04-06 12:04:49] Detectando saldos negativos...
-[2025-04-06 12:04:49] Saldo negativo detectado
-[2025-04-06 12:04:49] Detectando retiros consecutivos...
-[2025-04-06 12:24:18] Se crea el fork de monitor
-[2025-04-06 12:24:18] Se crea el fork de monitor
-[2025-04-06 12:24:18] Proceso monitor hijo iniciado
-[2025-04-06 12:24:18] Detectando retiros consecutivos...
-[2025-04-06 12:24:18] Detectando transferencias consecutivas...
-[2025-04-06 12:24:18] Detectando transacciones sospechosas...
-[2025-04-06 12:24:18] Transacción sospechosa detectada
-[2025-04-06 12:24:18] Detectando saldos negativos...
-[2025-04-06 12:24:18] Saldo negativo detectado
-[2025-04-06 12:24:18] Ha llegado una alerta de monitor mediante una señal en banco.c
-[2025-04-06 12:24:18] se ha accedido a la cola
-[2025-04-06 12:24:18] Se ha escrito ene  el archvio una alerta
-[2025-04-06 12:24:22] Se muestra que se ha registrado una alerta
-[2025-04-06 12:24:23] Proceso monitor creado correctamente
-[2025-04-06 12:24:24] se ha generado un archvio con el pid del usuario
-[2025-04-06 12:24:25] se ha abierto una nueva terminal con usuario
-[2025-04-06 12:24:25] Se ha accedido al menú de entrada
-[2025-04-06 12:24:28] Se ha alamcenado el pid del usuario
-[2025-04-06 12:24:39] se ha matado los hijos
-[2025-04-06 12:24:39] Se acaban con todos los procesos
-[2025-04-06 12:25:01] Se crea el fork de monitor
-[2025-04-06 12:25:01] Se crea el fork de monitor
-[2025-04-06 12:25:01] Proceso monitor hijo iniciado
-[2025-04-06 12:25:01] Detectando transferencias consecutivas...
-[2025-04-06 12:25:01] Detectando retiros consecutivos...
-[2025-04-06 12:25:01] Detectando saldos negativos...
-[2025-04-06 12:25:01] Saldo negativo detectado
-[2025-04-06 12:25:01] Ha llegado una alerta de monitor mediante una señal en banco.c
-[2025-04-06 12:25:01] se ha accedido a la cola
-[2025-04-06 12:25:01] Se ha escrito ene  el archvio una alerta
-[2025-04-06 12:25:01] Detectando transacciones sospechosas...
-[2025-04-06 12:25:01] Transacción sospechosa detectada
-[2025-04-06 12:25:05] Se muestra que se ha registrado una alerta
-[2025-04-06 12:25:05] Ha llegado una alerta de monitor mediante una señal en banco.c
-[2025-04-06 12:25:05] se ha accedido a la cola
-[2025-04-06 12:25:05] Se ha escrito ene  el archvio una alerta
-[2025-04-06 12:25:09] Se muestra que se ha registrado una alerta
-[2025-04-06 12:25:10] Proceso monitor creado correctamente
-[2025-04-06 12:25:11] se ha abierto una nueva terminal con usuario
-[2025-04-06 12:25:11] se ha generado un archvio con el pid del usuario
-[2025-04-06 12:25:11] Se ha accedido al menú de entrada
-[2025-04-06 12:25:15] Se ha alamcenado el pid del usuario
-[2025-04-06 12:26:11] Detectando retiros consecutivos...
-[2025-04-06 12:26:11] Detectando transferencias consecutivas...
-[2025-04-06 12:26:11] Detectando transacciones sospechosas...
-[2025-04-06 12:26:11] Transacción sospechosa detectada
-[2025-04-06 12:26:11] Ha llegado una alerta de monitor mediante una señal en banco.c
-[2025-04-06 12:26:11] se ha accedido a la cola
-[2025-04-06 12:26:11] Se ha escrito ene  el archvio una alerta
-[2025-04-06 12:26:11] Detectando saldos negativos...
-[2025-04-06 12:26:11] Saldo negativo detectado
-[2025-04-06 12:26:15] Se muestra que se ha registrado una alerta
-[2025-04-06 12:26:15] Ha llegado una alerta de monitor mediante una señal en banco.c
-[2025-04-06 12:26:15] se ha accedido a la cola
-[2025-04-06 12:26:15] Se ha escrito ene  el archvio una alerta
-[2025-04-06 12:26:19] Se muestra que se ha registrado una alerta
-[2025-04-06 12:27:21] Detectando transferencias consecutivas...
-[2025-04-06 12:27:21] Detectando retiros consecutivos...
-[2025-04-06 12:27:21] Detectando saldos negativos...
-[2025-04-06 12:27:21] Saldo negativo detectado
-[2025-04-06 12:27:21] Detectando transacciones sospechosas...
-[2025-04-06 12:27:21] Transacción sospechosa detectada
-[2025-04-06 12:27:21] Ha llegado una alerta de monitor mediante una señal en banco.c
-[2025-04-06 12:27:21] se ha accedido a la cola
-[2025-04-06 12:27:21] Se ha escrito ene  el archvio una alerta
-[2025-04-06 12:27:25] Se muestra que se ha registrado una alerta
-[2025-04-06 12:27:25] Ha llegado una alerta de monitor mediante una señal en banco.c
-[2025-04-06 12:27:25] se ha accedido a la cola
-[2025-04-06 12:27:25] Se ha escrito ene  el archvio una alerta
-[2025-04-06 12:27:29] Se muestra que se ha registrado una alerta
-[2025-04-06 12:28:31] Detectando transferencias consecutivas...
-[2025-04-06 12:28:31] Detectando saldos negativos...
-[2025-04-06 12:28:31] Saldo negativo detectado
-[2025-04-06 12:28:31] Ha llegado una alerta de monitor mediante una señal en banco.c
-[2025-04-06 12:28:31] se ha accedido a la cola
-[2025-04-06 12:28:31] Se ha escrito ene  el archvio una alerta
-[2025-04-06 12:28:31] Detectando retiros consecutivos...
-[2025-04-06 12:28:31] Detectando transacciones sospechosas...
-[2025-04-06 12:28:31] Transacción sospechosa detectada
-[2025-04-06 12:28:35] Se muestra que se ha registrado una alerta
-[2025-04-06 12:28:35] Ha llegado una alerta de monitor mediante una señal en banco.c
-[2025-04-06 12:28:35] se ha accedido a la cola
-[2025-04-06 12:28:35] Se ha escrito ene  el archvio una alerta
-[2025-04-06 12:28:39] Se muestra que se ha registrado una alerta
-[2025-04-06 12:29:41] Detectando transferencias consecutivas...
-[2025-04-06 12:29:41] Detectando retiros consecutivos...
-[2025-04-06 12:29:41] Detectando transacciones sospechosas...
-[2025-04-06 12:29:41] Transacción sospechosa detectada
-[2025-04-06 12:29:41] Detectando saldos negativos...
-[2025-04-06 12:29:41] Saldo negativo detectado
-[2025-04-06 12:29:41] Ha llegado una alerta de monitor mediante una señal en banco.c
-[2025-04-06 12:29:41] se ha accedido a la cola
-[2025-04-06 12:29:41] Se ha escrito ene  el archvio una alerta
-[2025-04-06 12:29:45] Se muestra que se ha registrado una alerta
-[2025-04-06 12:29:45] Ha llegado una alerta de monitor mediante una señal en banco.c
-[2025-04-06 12:29:45] se ha accedido a la cola
-[2025-04-06 12:29:45] Se ha escrito ene  el archvio una alerta
-[2025-04-06 12:29:49] Se muestra que se ha registrado una alerta
-[2025-04-06 12:30:51] Detectando retiros consecutivos...
-[2025-04-06 12:30:51] Detectando saldos negativos...
-[2025-04-06 12:30:51] Saldo negativo detectado
-[2025-04-06 12:30:51] Ha llegado una alerta de monitor mediante una señal en banco.c
-[2025-04-06 12:30:51] se ha accedido a la cola
-[2025-04-06 12:30:51] Se ha escrito ene  el archvio una alerta
-[2025-04-06 12:30:51] Detectando transferencias consecutivas...
-[2025-04-06 12:30:51] Detectando transacciones sospechosas...
-[2025-04-06 12:30:51] Transacción sospechosa detectada
-[2025-04-06 12:30:55] Se muestra que se ha registrado una alerta
-[2025-04-06 12:30:55] Ha llegado una alerta de monitor mediante una señal en banco.c
-[2025-04-06 12:30:55] se ha accedido a la cola
-[2025-04-06 12:30:55] Se ha escrito ene  el archvio una alerta
-[2025-04-06 12:30:59] Se muestra que se ha registrado una alerta
-[2025-04-06 12:32:01] Detectando transferencias consecutivas...
-[2025-04-06 12:32:01] Detectando transacciones sospechosas...
-[2025-04-06 12:32:01] Transacción sospechosa detectada
-[2025-04-06 12:32:01] Detectando saldos negativos...
-[2025-04-06 12:32:01] Saldo negativo detectado
-[2025-04-06 12:32:01] Detectando retiros consecutivos...
-[2025-04-06 12:32:01] Ha llegado una alerta de monitor mediante una señal en banco.c
-[2025-04-06 12:32:01] se ha accedido a la cola
-[2025-04-06 12:32:01] Se ha escrito ene  el archvio una alerta
-[2025-04-06 12:32:05] Se muestra que se ha registrado una alerta
-[2025-04-06 12:32:05] Ha llegado una alerta de monitor mediante una señal en banco.c
-[2025-04-06 12:32:05] se ha accedido a la cola
-[2025-04-06 12:32:05] Se ha escrito ene  el archvio una alerta
-[2025-04-06 12:32:09] Se muestra que se ha registrado una alerta
-[2025-04-06 12:33:11] Detectando transferencias consecutivas...
-[2025-04-06 12:33:11] Detectando saldos negativos...
-[2025-04-06 12:33:11] Saldo negativo detectado
-[2025-04-06 12:33:11] Detectando transacciones sospechosas...
-[2025-04-06 12:33:11] Ha llegado una alerta de monitor mediante una señal en banco.c
-[2025-04-06 12:33:11] se ha accedido a la cola
-[2025-04-06 12:33:11] Detectando retiros consecutivos...
-[2025-04-06 12:33:11] Se ha escrito ene  el archvio una alerta
-[2025-04-06 12:33:11] Transacción sospechosa detectada
-[2025-04-06 12:33:15] Se muestra que se ha registrado una alerta
-[2025-04-06 12:33:15] Ha llegado una alerta de monitor mediante una señal en banco.c
-[2025-04-06 12:33:15] se ha accedido a la cola
-[2025-04-06 12:33:15] Se ha escrito ene  el archvio una alerta
-[2025-04-06 12:33:19] Se muestra que se ha registrado una alerta
-[2025-04-06 12:34:21] Detectando transferencias consecutivas...
-[2025-04-06 12:34:21] Detectando transacciones sospechosas...
-[2025-04-06 12:34:21] Transacción sospechosa detectada
-[2025-04-06 12:34:21] Detectando retiros consecutivos...
-[2025-04-06 12:34:21] Ha llegado una alerta de monitor mediante una señal en banco.c
-[2025-04-06 12:34:21] se ha accedido a la cola
-[2025-04-06 12:34:21] Detectando saldos negativos...
-[2025-04-06 12:34:21] Saldo negativo detectado
-[2025-04-06 12:34:21] Se ha escrito ene  el archvio una alerta
-[2025-04-06 12:34:25] Se muestra que se ha registrado una alerta
-[2025-04-06 12:34:25] Ha llegado una alerta de monitor mediante una señal en banco.c
-[2025-04-06 12:34:25] se ha accedido a la cola
-[2025-04-06 12:34:25] Se ha escrito ene  el archvio una alerta
-[2025-04-06 12:34:29] Se muestra que se ha registrado una alerta
-[2025-04-06 12:35:31] Detectando transferencias consecutivas...
-[2025-04-06 12:35:31] Detectando transacciones sospechosas...
-[2025-04-06 12:35:31] Transacción sospechosa detectada
-[2025-04-06 12:35:31] Detectando retiros consecutivos...
-[2025-04-06 12:35:31] Detectando saldos negativos...
-[2025-04-06 12:35:31] Saldo negativo detectado
-[2025-04-06 12:35:31] Ha llegado una alerta de monitor mediante una señal en banco.c
-[2025-04-06 12:35:31] se ha accedido a la cola
-[2025-04-06 12:35:31] Se ha escrito ene  el archvio una alerta
-[2025-04-06 12:35:35] Se muestra que se ha registrado una alerta
-[2025-04-06 12:35:35] Ha llegado una alerta de monitor mediante una señal en banco.c
-[2025-04-06 12:35:35] se ha accedido a la cola
-[2025-04-06 12:35:35] Se ha escrito ene  el archvio una alerta
-[2025-04-06 12:35:39] Se muestra que se ha registrado una alerta
-[2025-04-06 12:36:41] Detectando transferencias consecutivas...
-[2025-04-06 12:36:41] Detectando transacciones sospechosas...
-[2025-04-06 12:36:41] Detectando retiros consecutivos...
-[2025-04-06 12:36:41] Detectando saldos negativos...
-[2025-04-06 12:36:41] Saldo negativo detectado
-[2025-04-06 12:36:41] Transacción sospechosa detectada
-[2025-04-06 12:36:41] Ha llegado una alerta de monitor mediante una señal en banco.c
-[2025-04-06 12:36:41] se ha accedido a la cola
-[2025-04-06 12:36:41] Se ha escrito ene  el archvio una alerta
-[2025-04-06 12:36:45] Se muestra que se ha registrado una alerta
-[2025-04-06 12:36:45] Ha llegado una alerta de monitor mediante una señal en banco.c
-[2025-04-06 12:36:45] se ha accedido a la cola
-[2025-04-06 12:36:45] Se ha escrito ene  el archvio una alerta
-[2025-04-06 12:36:49] Se muestra que se ha registrado una alerta
-[2025-04-06 12:37:51] Detectando transferencias consecutivas...
-[2025-04-06 12:37:51] Detectando transacciones sospechosas...
-[2025-04-06 12:37:51] Transacción sospechosa detectada
-[2025-04-06 12:37:51] Detectando retiros consecutivos...
-[2025-04-06 12:37:51] Detectando saldos negativos...
-[2025-04-06 12:37:51] Ha llegado una alerta de monitor mediante una señal en banco.c
-[2025-04-06 12:37:51] se ha accedido a la cola
-[2025-04-06 12:37:51] Se ha escrito ene  el archvio una alerta
-[2025-04-06 12:37:51] Saldo negativo detectado
-[2025-04-06 12:37:55] Se muestra que se ha registrado una alerta
-[2025-04-06 12:37:55] Ha llegado una alerta de monitor mediante una señal en banco.c
-[2025-04-06 12:37:55] se ha accedido a la cola
-[2025-04-06 12:37:55] Se ha escrito ene  el archvio una alerta
-[2025-04-06 12:37:59] Se muestra que se ha registrado una alerta
-[2025-04-06 12:39:01] Detectando transferencias consecutivas...
-[2025-04-06 12:39:01] Detectando retiros consecutivos...
-[2025-04-06 12:39:01] Detectando transacciones sospechosas...
-[2025-04-06 12:39:01] Transacción sospechosa detectada
-[2025-04-06 12:39:01] Detectando saldos negativos...
-[2025-04-06 12:39:01] Ha llegado una alerta de monitor mediante una señal en banco.c
-[2025-04-06 12:39:01] se ha accedido a la cola
-[2025-04-06 12:39:01] Se ha escrito ene  el archvio una alerta
-[2025-04-06 12:39:01] Saldo negativo detectado
-[2025-04-06 12:39:05] Se muestra que se ha registrado una alerta
-[2025-04-06 12:39:05] Ha llegado una alerta de monitor mediante una señal en banco.c
-[2025-04-06 12:39:05] se ha accedido a la cola
-[2025-04-06 12:39:05] Se ha escrito ene  el archvio una alerta
-[2025-04-06 12:39:09] Se muestra que se ha registrado una alerta
-[2025-04-06 12:39:50] se ha matado los hijos
-[2025-04-06 12:39:50] Se acaban con todos los procesos
-[2025-04-06 13:21:39] Se ha accedido al main de banco y se han incializado los semaforos
-[2025-04-06 13:21:39] Se crea el fork de monitor
-[2025-04-06 13:21:39] Se crea el fork de monitor
-[2025-04-06 13:21:39] Proceso monitor hijo iniciado
-[2025-04-06 13:21:39] Detectando transferencias consecutivas...
-[2025-04-06 13:21:39] Detectando retiros consecutivos...
-[2025-04-06 13:21:39] Detectando transacciones sospechosas...
-[2025-04-06 13:21:39] Transacción sospechosa detectada
-[2025-04-06 13:21:39] Ha llegado una alerta de monitor mediante una señal en banco.c
-[2025-04-06 13:21:39] se ha accedido a la cola
-[2025-04-06 13:21:39] Se ha escrito ene  el archvio una alerta
-[2025-04-06 13:21:39] Detectando saldos negativos...
-[2025-04-06 13:21:39] Saldo negativo detectado
-[2025-04-06 13:21:43] Se muestra que se ha registrado una alerta
-[2025-04-06 13:21:43] Ha llegado una alerta de monitor mediante una señal en banco.c
-[2025-04-06 13:21:43] se ha accedido a la cola
-[2025-04-06 13:21:43] Se ha escrito ene  el archvio una alerta
-[2025-04-06 13:21:47] Se muestra que se ha registrado una alerta
-[2025-04-06 13:21:48] Proceso monitor creado correctamente
-[2025-04-06 13:21:48] se ha abierto una nueva terminal con usuario
-[2025-04-06 13:21:49] se ha generado un archvio con el pid del usuario
-[2025-04-06 13:21:49] Se ha accedido al menú de entrada
-[2025-04-06 13:21:53] Se ha alamcenado el pid del usuario
-[2025-04-06 13:25:17] Se ha accedido al main de banco y se han incializado los semaforos
-[2025-04-06 13:25:17] Se crea el fork de monitor
-[2025-04-06 13:25:17] Se crea el fork de monitor
-[2025-04-06 13:25:17] Proceso monitor hijo iniciado
-[2025-04-06 13:25:17] Detectando transacciones sospechosas...
-[2025-04-06 13:25:17] Transacción sospechosa detectada
-[2025-04-06 13:25:17] Ha llegado una alerta de monitor mediante una señal en banco.c
-[2025-04-06 13:25:17] se ha accedido a la cola
-[2025-04-06 13:25:17] Se ha escrito ene  el archvio una alerta
-[2025-04-06 13:25:17] Detectando transferencias consecutivas...
-[2025-04-06 13:25:17] Detectando saldos negativos...
-[2025-04-06 13:25:17] Saldo negativo detectado
-[2025-04-06 13:25:17] Detectando retiros consecutivos...
-[2025-04-06 13:25:21] Se muestra que se ha registrado una alerta
-[2025-04-06 13:25:21] Ha llegado una alerta de monitor mediante una señal en banco.c
-[2025-04-06 13:25:21] se ha accedido a la cola
-[2025-04-06 13:25:21] Se ha escrito ene  el archvio una alerta
-[2025-04-06 13:25:25] Se muestra que se ha registrado una alerta
-[2025-04-06 13:25:26] Proceso monitor creado correctamente
-[2025-04-06 13:25:27] se ha abierto una nueva terminal con usuario
-[2025-04-06 13:25:27] se ha generado un archvio con el pid del usuario
-[2025-04-06 13:25:28] Se ha accedido al menú de entrada
-[2025-04-06 13:25:31] Se ha alamcenado el pid del usuario
-[2025-04-06 13:26:27] Detectando transferencias consecutivas...
-[2025-04-06 13:26:27] Detectando saldos negativos...
-[2025-04-06 13:26:27] Saldo negativo detectado
-[2025-04-06 13:26:27] Detectando retiros consecutivos...
-[2025-04-06 13:26:27] Detectando transacciones sospechosas...
-[2025-04-06 13:26:27] Transacción sospechosa detectada
-[2025-04-06 13:26:27] Ha llegado una alerta de monitor mediante una señal en banco.c
-[2025-04-06 13:26:27] se ha accedido a la cola
-[2025-04-06 13:26:27] Se ha escrito ene  el archvio una alerta
-[2025-04-06 13:26:31] Se muestra que se ha registrado una alerta
-[2025-04-06 13:26:52] Se ha accedido al main de banco y se han incializado los semaforos
-[2025-04-06 13:26:52] Se crea el fork de monitor
-[2025-04-06 13:26:52] Se crea el fork de monitor
-[2025-04-06 13:26:52] Proceso monitor hijo iniciado
-[2025-04-06 13:26:52] Detectando retiros consecutivos...
-[2025-04-06 13:26:52] Detectando transferencias consecutivas...
-[2025-04-06 13:26:52] Detectando transacciones sospechosas...
-[2025-04-06 13:26:52] Transacción sospechosa detectada
-[2025-04-06 13:26:52] Ha llegado una alerta de monitor mediante una señal en banco.c
-[2025-04-06 13:26:52] se ha accedido a la cola
-[2025-04-06 13:26:52] Se ha escrito ene  el archvio una alerta
-[2025-04-06 13:26:52] Detectando saldos negativos...
-[2025-04-06 13:26:52] Saldo negativo detectado
-[2025-04-06 13:26:56] Se muestra que se ha registrado una alerta
-[2025-04-06 13:26:56] Ha llegado una alerta de monitor mediante una señal en banco.c
-[2025-04-06 13:26:56] se ha accedido a la cola
-[2025-04-06 13:26:56] Se ha escrito ene  el archvio una alerta
-[2025-04-06 13:27:00] Se muestra que se ha registrado una alerta
-[2025-04-06 13:27:01] Proceso monitor creado correctamente
-[2025-04-06 13:27:01] se ha abierto una nueva terminal con usuario
-[2025-04-06 13:27:02] se ha generado un archvio con el pid del usuario
-[2025-04-06 13:27:02] Se ha accedido al menú de entrada
-[2025-04-06 13:27:06] Se ha alamcenado el pid del usuario
-[2025-04-06 13:27:08] se ha abierto una nueva terminal con usuario
-[2025-04-06 13:27:09] se ha generado un archvio con el pid del usuario
-[2025-04-06 13:27:09] Se ha accedido al menú de entrada
-[2025-04-06 13:27:13] Se ha alamcenado el pid del usuario
-[2025-04-06 13:27:13] se ha matado los hijos
-[2025-04-06 13:27:13] Se acaban con todos los procesos
-[2025-04-06 13:31:10] Se ha accedido al main de banco y se han incializado los semaforos
-[2025-04-06 13:31:10] Se crea el fork de monitor
-[2025-04-06 13:31:10] Se crea el fork de monitor
-[2025-04-06 13:31:10] Proceso monitor hijo iniciado
-[2025-04-06 13:31:10] Detectando retiros consecutivos...
-[2025-04-06 13:31:10] Detectando transferencias consecutivas...
-[2025-04-06 13:31:10] Detectando saldos negativos...
-[2025-04-06 13:31:10] Saldo negativo detectado
-[2025-04-06 13:31:10] Detectando transacciones sospechosas...
-[2025-04-06 13:31:10] Transacción sospechosa detectada
-[2025-04-06 13:31:10] Ha llegado una alerta de monitor mediante una señal en banco.c
-[2025-04-06 13:31:10] se ha accedido a la cola
-[2025-04-06 13:31:10] Se ha escrito ene  el archvio una alerta
-[2025-04-06 13:31:14] Se muestra que se ha registrado una alerta
-[2025-04-06 13:31:14] Ha llegado una alerta de monitor mediante una señal en banco.c
-[2025-04-06 13:31:14] se ha accedido a la cola
-[2025-04-06 13:31:14] Se ha escrito ene  el archvio una alerta
-[2025-04-06 13:31:18] Se muestra que se ha registrado una alerta
-[2025-04-06 13:31:19] Proceso monitor creado correctamente
-[2025-04-06 13:31:20] se ha abierto una nueva terminal con usuario
-[2025-04-06 13:31:20] se ha generado un archvio con el pid del usuario
-[2025-04-06 13:31:21] Se ha accedido al menú de entrada
-[2025-04-06 13:31:25] Se ha alamcenado el pid del usuario
-[2025-04-06 13:31:31] se ha abierto una nueva terminal con usuario
-[2025-04-06 13:31:31] se ha generado un archvio con el pid del usuario
-[2025-04-06 13:31:31] Se ha accedido al menú de entrada
-[2025-04-06 13:31:35] Se ha alamcenado el pid del usuario
-[2025-04-06 13:31:39] se ha matado los hijos
-[2025-04-06 13:31:39] Se acaban con todos los procesos
-[2025-04-06 13:32:16] Se ha accedido al main de banco y se han incializado los semaforos
-[2025-04-06 13:32:16] Se crea el fork de monitor
-[2025-04-06 13:32:16] Se crea el fork de monitor
-[2025-04-06 13:32:16] Proceso monitor hijo iniciado
-[2025-04-06 13:32:16] Detectando transferencias consecutivas...
-[2025-04-06 13:32:16] Detectando saldos negativos...
-[2025-04-06 13:32:16] Detectando transacciones sospechosas...
-[2025-04-06 13:32:16] Detectando retiros consecutivos...
-[2025-04-06 13:32:16] Saldo negativo detectado
-[2025-04-06 13:32:16] Ha llegado una alerta de monitor mediante una señal en banco.c
-[2025-04-06 13:32:16] se ha accedido a la cola
-[2025-04-06 13:32:16] Se ha escrito ene  el archvio una alerta
-[2025-04-06 13:32:16] Transacción sospechosa detectada
-[2025-04-06 13:32:20] Se muestra que se ha registrado una alerta
-[2025-04-06 13:32:20] Ha llegado una alerta de monitor mediante una señal en banco.c
-[2025-04-06 13:32:20] se ha accedido a la cola
-[2025-04-06 13:32:20] Se ha escrito ene  el archvio una alerta
-[2025-04-06 13:32:24] Se muestra que se ha registrado una alerta
-[2025-04-06 13:32:25] Proceso monitor creado correctamente
-[2025-04-06 13:32:25] se ha abierto una nueva terminal con usuario
-[2025-04-06 13:32:26] se ha generado un archvio con el pid del usuario
-[2025-04-06 13:32:26] Se ha accedido al menú de entrada
-[2025-04-06 13:32:30] Se ha alamcenado el pid del usuario
-[2025-04-06 13:33:26] Detectando transferencias consecutivas...
-[2025-04-06 13:33:26] Detectando retiros consecutivos...
-[2025-04-06 13:33:26] Detectando transacciones sospechosas...
-[2025-04-06 13:33:26] Transacción sospechosa detectada
-[2025-04-06 13:33:26] Detectando saldos negativos...
-[2025-04-06 13:33:26] Saldo negativo detectado
-[2025-04-06 13:33:26] Ha llegado una alerta de monitor mediante una señal en banco.c
-[2025-04-06 13:33:26] se ha accedido a la cola
-[2025-04-06 13:33:26] Se ha escrito ene  el archvio una alerta
-[2025-04-06 13:33:30] Se muestra que se ha registrado una alerta
-[2025-04-06 13:34:12] se ha matado los hijos
-[2025-04-06 13:34:12] Se acaban con todos los procesos
-[2025-04-06 13:34:17] Se ha accedido al main de banco y se han incializado los semaforos
-[2025-04-06 13:34:17] Se crea el fork de monitor
-[2025-04-06 13:34:17] Se crea el fork de monitor
-[2025-04-06 13:34:17] Proceso monitor hijo iniciado
-[2025-04-06 13:34:17] Detectando retiros consecutivos...
-[2025-04-06 13:34:17] Detectando saldos negativos...
-[2025-04-06 13:34:17] Saldo negativo detectado
-[2025-04-06 13:34:17] Detectando transferencias consecutivas...
-[2025-04-06 13:34:17] Detectando transacciones sospechosas...
-[2025-04-06 13:34:17] Transacción sospechosa detectada
-[2025-04-06 13:34:57] Se ha accedido al main de banco y se han incializado los semaforos
-[2025-04-06 13:34:57] se ha abierto una nueva terminal con usuario
-[2025-04-06 13:34:58] se ha generado un archvio con el pid del usuario
-[2025-04-06 13:34:58] Se ha accedido al menú de entrada
-[2025-04-06 13:35:02] Se ha alamcenado el pid del usuario
-[2025-04-06 13:35:27] Detectando transferencias consecutivas...
-[2025-04-06 13:35:27] Detectando saldos negativos...
-[2025-04-06 13:35:27] Saldo negativo detectado
-[2025-04-06 13:35:27] Detectando retiros consecutivos...
-[2025-04-06 13:35:27] Detectando transacciones sospechosas...
-[2025-04-06 13:35:27] Transacción sospechosa detectada
-[2025-04-06 13:36:37] Detectando transferencias consecutivas...
-[2025-04-06 13:36:37] Detectando transacciones sospechosas...
-[2025-04-06 13:36:37] Transacción sospechosa detectada
-[2025-04-06 13:36:37] Detectando retiros consecutivos...
-[2025-04-06 13:36:37] Detectando saldos negativos...
-[2025-04-06 13:36:37] Saldo negativo detectado
-[2025-04-06 13:37:20] se ha matado los hijos
-[2025-04-06 13:37:20] Se acaban con todos los procesos
-[2025-04-06 13:37:20] Se crea el fork de monitor
-[2025-04-06 13:37:20] Se crea el fork de monitor
-[2025-04-06 13:37:20] Proceso monitor hijo iniciado
-[2025-04-06 13:37:20] Detectando transferencias consecutivas...
-[2025-04-06 13:37:20] Detectando transacciones sospechosas...
-[2025-04-06 13:37:20] Transacción sospechosa detectada
-[2025-04-06 13:37:20] Detectando retiros consecutivos...
-[2025-04-06 13:37:20] Detectando saldos negativos...
-[2025-04-06 13:37:20] Saldo negativo detectado
-[2025-04-06 13:37:20] Ha llegado una alerta de monitor mediante una señal en banco.c
-[2025-04-06 13:37:20] se ha accedido a la cola
-[2025-04-06 13:37:20] Se ha escrito ene  el archvio una alerta
-[2025-04-06 13:37:24] Se muestra que se ha registrado una alerta
-[2025-04-06 13:37:24] Ha llegado una alerta de monitor mediante una señal en banco.c
-[2025-04-06 13:37:24] se ha accedido a la cola
-[2025-04-06 13:37:24] Se ha escrito ene  el archvio una alerta
-[2025-04-06 13:37:28] Se muestra que se ha registrado una alerta
-[2025-04-06 13:37:29] Proceso monitor creado correctamente
-[2025-04-06 13:37:47] Detectando transferencias consecutivas...
-[2025-04-06 13:37:47] Detectando retiros consecutivos...
-[2025-04-06 13:37:47] Detectando saldos negativos...
-[2025-04-06 13:37:47] Saldo negativo detectado
-[2025-04-06 13:37:47] Detectando transacciones sospechosas...
-[2025-04-06 13:37:47] Transacción sospechosa detectada
-[2025-04-06 13:38:30] Detectando transferencias consecutivas...
-[2025-04-06 13:38:30] Detectando transacciones sospechosas...
-[2025-04-06 13:38:30] Transacción sospechosa detectada
-[2025-04-06 13:38:30] Detectando retiros consecutivos...
-[2025-04-06 13:38:30] Detectando saldos negativos...
-[2025-04-06 13:38:30] Saldo negativo detectado
-[2025-04-06 13:38:57] Detectando transferencias consecutivas...
-[2025-04-06 13:38:57] Detectando retiros consecutivos...
-[2025-04-06 13:38:57] Detectando saldos negativos...
-[2025-04-06 13:38:57] Saldo negativo detectado
-[2025-04-06 13:38:57] Detectando transacciones sospechosas...
-[2025-04-06 13:38:57] Transacción sospechosa detectada
-[2025-04-06 13:40:57] Se ha accedido al main de banco y se han incializado los semaforos
-[2025-04-06 13:40:57] Se crea el fork de monitor
-[2025-04-06 13:40:57] Se crea el fork de monitor
-[2025-04-06 13:40:57] Proceso monitor hijo iniciado
-[2025-04-06 13:40:57] Detectando transferencias consecutivas...
-[2025-04-06 13:40:57] Detectando retiros consecutivos...
-[2025-04-06 13:40:57] Detectando saldos negativos...
-[2025-04-06 13:40:57] Detectando transacciones sospechosas...
-[2025-04-06 13:40:57] Transacción sospechosa detectada
-[2025-04-06 13:40:57] Saldo negativo detectado
-[2025-04-06 13:40:57] Ha llegado una alerta de monitor mediante una señal en banco.c
-[2025-04-06 13:40:57] se ha accedido a la cola
-[2025-04-06 13:40:57] Se ha escrito ene  el archvio una alerta
-[2025-04-06 13:41:01] Se muestra que se ha registrado una alerta
-[2025-04-06 13:41:02] Proceso monitor creado correctamente
-[2025-04-06 13:41:02] se ha abierto una nueva terminal con usuario
-[2025-04-06 13:41:03] se ha generado un archvio con el pid del usuario
-[2025-04-06 13:41:03] Se ha accedido al menú de entrada
-[2025-04-06 13:41:07] Se ha alamcenado el pid del usuario
-[2025-04-06 13:42:07] Detectando transferencias consecutivas...
-[2025-04-06 13:42:07] Detectando retiros consecutivos...
-[2025-04-06 13:42:07] Detectando transacciones sospechosas...
-[2025-04-06 13:42:07] Transacción sospechosa detectada
-[2025-04-06 13:42:07] Ha llegado una alerta de monitor mediante una señal en banco.c
-[2025-04-06 13:42:07] se ha accedido a la cola
-[2025-04-06 13:42:07] Se ha escrito ene  el archvio una alerta
-[2025-04-06 13:42:07] Detectando saldos negativos...
-[2025-04-06 13:42:07] Saldo negativo detectado
-[2025-04-06 13:42:11] Se muestra que se ha registrado una alerta
-[2025-04-06 13:42:11] Ha llegado una alerta de monitor mediante una señal en banco.c
-[2025-04-06 13:42:11] se ha accedido a la cola
-[2025-04-06 13:42:11] Se ha escrito ene  el archvio una alerta
-[2025-04-06 13:42:15] Se muestra que se ha registrado una alerta
-[2025-04-06 13:42:21] se ha matado los hijos
-[2025-04-06 13:42:21] Se acaban con todos los procesos
+[2025-04-06 20:54:41] se han inicializado los semaforos desde comun.c
+[2025-04-06 20:54:41] Se ha accedido al main de banco y se han incializado los semaforos en banco.c
+[2025-04-06 20:54:41] se  ha creado la cola de mensjes correctamente en Comun.c
+[2025-04-06 20:54:41] Se crea el fork de monitor desde banco.c
+[2025-04-06 20:54:41] Se crea el fork de monitor desde banco.c
+[2025-04-06 20:54:41] Proceso monitor hijo iniciado desde banco.c
+[2025-04-06 20:54:41] se han inicializado los semaforos desde comun.c
+[2025-04-06 20:54:41] Detectando transacciones sospechosas... en monitor.c
+[2025-04-06 20:54:41] Detectando saldos negativos... en monitor.c
+[2025-04-06 20:54:41] Detectando transferencias consecutivas... en monitor.c
+[2025-04-06 20:54:41] Detectando retiros consecutivos... en monitor.c
+[2025-04-06 20:54:47] Proceso monitor creado correctamente desde banco.c
+[2025-04-06 20:54:48] se ha abierto una nueva terminal con usuario desde banco.c
+[2025-04-06 20:54:48] se ha generado un archvio con el pid del usuario desde banco.c
+[2025-04-06 20:54:49] Se ha accedido al menú de entrada
+[2025-04-06 20:54:52] Se ha alamcenado el pid del usuario desde banco.c
+[2025-04-06 20:54:56] El usuario ha elegido la opción de registro
+[2025-04-06 20:54:56] El usuario ha entrado en la sección de registro en inti_cuentas.c
+[2025-04-06 20:55:05] Se ha registrado un nuevo usuario en el sistema en init_cuentas.c
+[2025-04-06 20:55:24] El usuario ha elegido la opción de registro
+[2025-04-06 20:55:24] El usuario ha entrado en la sección de registro en inti_cuentas.c
+[2025-04-06 20:55:32] Se ha registrado un nuevo usuario en el sistema en init_cuentas.c
+[2025-04-06 20:55:36] El usuario ha elegido iniciar sesión
+[2025-04-06 20:55:36] Se ha desplegado el menu de inicio de sesion en init_cuentas.c
+[2025-04-06 20:55:39] Se ha accedido al sistema correctamente desde init_cuentas.c
+[2025-04-06 20:57:44] se ha matado los hijos desde banco.c
+[2025-04-06 20:57:44] Se acaban con todos los procesos desde banco.c
+[2025-04-06 20:58:01] se han inicializado los semaforos desde comun.c
+[2025-04-06 20:58:01] Se ha accedido al main de banco y se han incializado los semaforos en banco.c
+[2025-04-06 20:58:01] se  ha creado la cola de mensjes correctamente en Comun.c
+[2025-04-06 20:58:01] Se crea el fork de monitor desde banco.c
+[2025-04-06 20:58:01] Se crea el fork de monitor desde banco.c
+[2025-04-06 20:58:01] Proceso monitor hijo iniciado desde banco.c
+[2025-04-06 20:58:01] se han inicializado los semaforos desde comun.c
+[2025-04-06 20:58:01] Detectando transferencias consecutivas... en monitor.c
+[2025-04-06 20:58:01] Detectando retiros consecutivos... en monitor.c
+[2025-04-06 20:58:01] Detectando saldos negativos... en monitor.c
+[2025-04-06 20:58:01] Detectando transacciones sospechosas... en monitor.c
+[2025-04-06 20:58:07] Proceso monitor creado correctamente desde banco.c
+[2025-04-06 20:58:08] se ha abierto una nueva terminal con usuario desde banco.c
+[2025-04-06 20:58:08] se ha generado un archvio con el pid del usuario desde banco.c
+[2025-04-06 20:58:08] Se ha accedido al menú de entrada
+[2025-04-06 20:58:10] El usuario ha elegido iniciar sesión
+[2025-04-06 20:58:10] Se ha desplegado el menu de inicio de sesion en init_cuentas.c
+[2025-04-06 20:58:12] Se ha alamcenado el pid del usuario desde banco.c
+[2025-04-06 20:58:13] Se ha accedido al sistema correctamente desde init_cuentas.c
+[2025-04-06 20:58:15] El usuario ha introducido la cantidad ha ingresar en introducirDinero.c
+[2025-04-06 20:58:17] El usuario ha ingresado dinero en IngresarDinero.c
+[2025-04-06 20:58:21] El usuario ha introducido el saldo a extraer
+[2025-04-06 20:58:25] El usuario ha desplegado el menu de consulta de datos en ConsultarDato.c
+[2025-04-06 20:58:26] El usuario ha visto sus datos en ConsultarDatos.c
+[2025-04-06 20:58:28] El usuario ha elegido la opcion de consultar datos en ConsultarDatos.c
+[2025-04-06 20:58:28] El usuario ha desplegado el menu de consulta de datos en ConsultarDato.c
+[2025-04-06 20:58:46] se ha obtenido el id del usuario en el menu de transferencia.c
+[2025-04-06 20:58:46] El usuario tiene saldo insuficiente
+[2025-04-06 20:58:53] se ha obtenido el id del usuario en el menu de transferencia.c
+[2025-04-06 20:58:53] El usuario tiene saldo insuficiente
+[2025-04-06 20:58:57] El usuario ha desplegado el menu de consulta de datos en ConsultarDato.c
+[2025-04-06 20:58:59] El usuario ha visto sus datos en ConsultarDatos.c
+[2025-04-06 20:59:01] El usuario ha elegido la opcion de consultar datos en ConsultarDatos.c
+[2025-04-06 20:59:01] El usuario ha desplegado el menu de consulta de datos en ConsultarDato.c
+[2025-04-06 20:59:08] El usuario ha introducido la cantidad ha ingresar en introducirDinero.c
+[2025-04-06 20:59:10] El usuario ha ingresado dinero en IngresarDinero.c
+[2025-04-06 20:59:15] se ha obtenido el id del usuario en el menu de transferencia.c
+[2025-04-06 20:59:15] Se ha escrito en el archivo de transferencias en Transferncia.c
+[2025-04-06 20:59:21] Se ha accedido al menú de entrada
+[2025-04-06 20:59:23] se ha matado los hijos desde banco.c
+[2025-04-06 20:59:23] Se acaban con todos los procesos desde banco.c
+[2025-04-06 20:59:44] se han inicializado los semaforos desde comun.c
+[2025-04-06 20:59:44] Se ha accedido al main de banco y se han incializado los semaforos en banco.c
+[2025-04-06 20:59:44] se  ha creado la cola de mensjes correctamente en Comun.c
+[2025-04-06 20:59:44] Se crea el fork de monitor desde banco.c
+[2025-04-06 20:59:44] Se crea el fork de monitor desde banco.c
+[2025-04-06 20:59:44] Proceso monitor hijo iniciado desde banco.c
+[2025-04-06 20:59:44] se han inicializado los semaforos desde comun.c
+[2025-04-06 20:59:44] Detectando transferencias consecutivas... en monitor.c
+[2025-04-06 20:59:44] Detectando retiros consecutivos... en monitor.c
+[2025-04-06 20:59:44] Detectando saldos negativos... en monitor.c
+[2025-04-06 20:59:44] Detectando transacciones sospechosas... en monitor.c
+[2025-04-06 20:59:50] Proceso monitor creado correctamente desde banco.c
+[2025-04-06 20:59:50] se ha abierto una nueva terminal con usuario desde banco.c
+[2025-04-06 20:59:51] se ha generado un archvio con el pid del usuario desde banco.c
+[2025-04-06 20:59:51] Se ha accedido al menú de entrada
+[2025-04-06 20:59:55] Se ha alamcenado el pid del usuario desde banco.c
+[2025-04-06 20:59:59] se ha matado los hijos desde banco.c
+[2025-04-06 20:59:59] Se acaban con todos los procesos desde banco.c
+[2025-04-06 21:03:11] se han inicializado los semaforos desde comun.c
+[2025-04-06 21:03:11] Se ha accedido al main de banco y se han incializado los semaforos en banco.c
+[2025-04-06 21:03:11] se  ha creado la cola de mensjes correctamente en Comun.c
+[2025-04-06 21:03:11] Se crea el fork de monitor desde banco.c
+[2025-04-06 21:03:11] Se crea el fork de monitor desde banco.c
+[2025-04-06 21:03:11] Proceso monitor hijo iniciado desde banco.c
+[2025-04-06 21:03:11] se han inicializado los semaforos desde comun.c
+[2025-04-06 21:03:11] Detectando retiros consecutivos... en monitor.c
+[2025-04-06 21:03:11] Detectando transacciones sospechosas... en monitor.c
+[2025-04-06 21:03:11] Detectando saldos negativos... en monitor.c
+[2025-04-06 21:03:11] Detectando transferencias consecutivas... en monitor.c
+[2025-04-06 21:03:17] Proceso monitor creado correctamente desde banco.c
+[2025-04-06 21:03:18] se ha abierto una nueva terminal con usuario desde banco.c
+[2025-04-06 21:03:18] se ha generado un archvio con el pid del usuario desde banco.c
+[2025-04-06 21:03:19] Se ha accedido al menú de entrada
+[2025-04-06 21:03:22] Se ha alamcenado el pid del usuario desde banco.c
+[2025-04-06 21:03:31] se ha matado los hijos desde banco.c
+[2025-04-06 21:03:31] Se acaban con todos los procesos desde banco.c

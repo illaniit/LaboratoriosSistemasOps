@@ -58,6 +58,7 @@ void *Menu_Usuario() {
                 break;
 
             case 3:
+                Escribir_registro("El usuario ha salido del sistema en init_cuentas.c");
                 printf("Tenga un buen día 😊...\n");
                 sleep(2);
                 break;
@@ -92,6 +93,7 @@ void InicioDeSesion() {
         printf("\n============================================================\n");
         printf("                 🔐  INICIO DE SESIÓN  🔐                   \n");
         printf("============================================================\n");
+        Escribir_registro("Se ha desplegado el menu de inicio de sesion en init_cuentas.c");
         printf("📌  Introduce tu nombre : ");
         scanf("%49s", Usuario);
     
@@ -126,14 +128,14 @@ void InicioDeSesion() {
                     if (strcmp(Contraseña, contrasena) == 0) { 
                         printf("\n✅ Acceso concedido. Bienvenido, %s!\n", Usuario);
                         sleep(2);
-                        Escribir_registro("Se ha accedido al sistema correctamente");
+                        Escribir_registro("Se ha accedido al sistema correctamente desde init_cuentas.c");
                         fclose(archivo);
                         Mostrar_Menu(Usuario,Contraseña); // Función que muestra el menú principal
                         Menu_Usuario();
                         return;
                     } else {
                         printf("\n⚠️ Contraseña incorrecta. Inténtalo de nuevo.\n");
-                        Escribir_registro("Intento de inicio de sesión con contraseña incorrecta");
+                        Escribir_registro("Intento de inicio de sesión con contraseña incorrecta desde init_cuentas.c");
                         break;
                     }
                 }
@@ -141,7 +143,7 @@ void InicioDeSesion() {
         }
 
         if (!acceso) {
-            Escribir_registro("Intento fallido de inicio de sesión");
+            Escribir_registro("Intento fallido de inicio de sesión desde init_cuentas.c");
             printf("\n⚠️ Nombre de usuario o contraseña incorrectos \n\n");
             sleep(2);
     
@@ -153,11 +155,11 @@ void InicioDeSesion() {
     } while (intentos < max_intentos);
 
     printf("\n⛔ Demasiados intentos fallidos. Inténtalo más tarde.\n");
-    Escribir_registro("Se ha bloqueado el acceso por múltiples intentos fallidos.");
+    Escribir_registro("Se ha bloqueado el acceso por múltiples intentos fallidos. En init_cuentas.c");
 }
 /// @brief esta funcion permite que el usuario se registre en una cuenta nueva
 void Registro() {
-    Escribir_registro("El usuario ha entrado en la sección de registro");
+    Escribir_registro("El usuario ha entrado en la sección de registro en inti_cuentas.c");
     Config config = leer_configuracion("variables.properties");
     struct Cuenta {
         int id;
@@ -259,5 +261,5 @@ void Registro() {
     printf("\n¡Registro exitoso! Bienvenido, %s.\n", cuenta.Nombre);
     sleep(2);
 
-    Escribir_registro("Se ha registrado un nuevo usuario en el sistema");
+    Escribir_registro("Se ha registrado un nuevo usuario en el sistema en init_cuentas.c");
 }

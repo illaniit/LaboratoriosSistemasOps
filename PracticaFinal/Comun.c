@@ -18,7 +18,7 @@ sem_t *sem_transacciones;
 sem_t *sem_registro;
 // Inicializar semáforos compartidos
 
-/// @brief 
+/// @brief incializa los semaforos y les da permisos
 void Inicializar_semaforos()
 {
     sem_registro = sem_open("/sem_registro", O_CREAT, 0666, 1);
@@ -29,6 +29,7 @@ void Inicializar_semaforos()
         perror("Error al inicializar semáforos");
         exit(EXIT_FAILURE);
     }
+    Escribir_registro("se han inicializado los semaforos desde comun.c");
 }
 
 /// @brief Cierra y elimina los semáforos, también elimina la cola de mensajes
@@ -40,7 +41,6 @@ void Destruir_semaforos()
     sem_unlink("/sem_registro");
     sem_unlink("/sem_usuarios");
     sem_unlink("/sem_transacciones");
-
     // Eliminar la cola de mensajes si existe
     int id_cola = msgget(CLAVE_COLA, 0666);
     if (id_cola != -1) {
@@ -58,6 +58,7 @@ void crear_cola_mensajes() {
         perror("Error al crear la cola de mensajes");
         exit(EXIT_FAILURE);
     }
+    Escribir_registro("se  ha creado la cola de mensjes correctamente en Comun.c");
 }
 
 
