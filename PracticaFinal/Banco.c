@@ -91,12 +91,15 @@ void leer_alerta_pipe(int sig)
     fclose(archivo);
     
     printf("🚨 Se ha registrado una nueva alerta\n");
+    sleep(4);
+
+    // Mueve el cursor una línea arriba y limpia esa línea
+    printf("\033[F");       // Mueve el cursor una línea arriba
+    printf("\033[2K");      // Borra toda la línea
+    fflush(stdout); // Asegura que el borrado se aplique antes de terminar
     
     
 }
-
-
-
 
 void matar_hijos()
 {
@@ -150,7 +153,7 @@ void Menu_Procesos()
             char filename[50];
             // Leer el PID real del hijo desde el archivo
             snprintf(filename, sizeof(filename), "/tmp/pid_%d.txt", pid);
-            printf("Este es el pid %d\n", pid);
+           
         
             // Esperamos 20 segundos (puedes quitar esto si no es necesario)
             sleep(5);
@@ -163,9 +166,9 @@ void Menu_Procesos()
                 
                 // Leemos un único número entero del archivo
                 if (fscanf(fp, "%d", &temp[contador]) == 1) {
-                    printf("El número leído y almacenado en el arreglo es: %d\n", temp[contador]);
+                    sleep(1);
                 } else {
-                    printf("No se pudo leer un número del archivo.\n");
+                    perror("No se pudo leer un número del archivo.\n");
                 }
                 contador++;
                 // Cerramos el archivo
@@ -180,7 +183,7 @@ void Menu_Procesos()
             num_hijos++;
             system("clear");
             // Preguntar si desea aceptar otro usuario
-            printf("¿Desea aceptar otro usuario? (s/n): ");
+            printf("¿Desea aceptar otro usuario? (s/n):\n");
             scanf(" %c", &respuesta);
             if (respuesta != 's' && respuesta != 'S')
             {
@@ -254,7 +257,6 @@ void CrearMonitor()
         char filename[50];
         snprintf(filename, sizeof(filename), "/tmp/pid_%d.txt", Monitor);
 
-        printf("Este es el pid (estimado): %d\n", Monitor);
 
         sleep(5); // Dar tiempo al hijo para crear el archivo
 
@@ -263,11 +265,11 @@ void CrearMonitor()
         {
             if (fscanf(fp, "%d", &temp[contador]) == 1)
             {
-                printf("El número leído y almacenado en el arreglo es: %d\n", temp[contador]);
+                sleep(1);
             }
             else
             {
-                printf("No se pudo leer un número del archivo.\n");
+                perror("No se pudo leer un número del archivo.\n");
             }
             contador++;
             fclose(fp);
