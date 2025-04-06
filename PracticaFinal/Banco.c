@@ -52,6 +52,8 @@ int main()
 
     Config config = leer_configuracion("variables.properties");
     // Lo primero abrimos el archivo de Properties y "nos traemos las variables"
+    
+
     signal(SIGUSR1, leer_alerta_cola); // Manejar señal del monitor
 
     CrearMonitor(); // Lanzar monitor
@@ -63,8 +65,8 @@ int main()
     return 0;
 }
 
-/// @brief 
-/// @param sig 
+/// @brief
+/// @param sig
 void leer_alerta_cola(int sig)
 {
     Escribir_registro("Ha llegado una alerta de monitor mediante una señal en banco.c");
@@ -124,7 +126,7 @@ void matar_hijos()
 int contador = 0;
 void Menu_Procesos()
 {
-    char respuesta;
+    int respuesta;
     int continuar = 1;
 
     while (continuar)
@@ -190,20 +192,44 @@ void Menu_Procesos()
             }
 
             num_hijos++;
-            system("clear");
-            // Preguntar si desea aceptar otro usuario
-            printf("┌────────────────────────────────────────────┐\n");
-            printf("│        🏦 BANCO CENTRAL - NUEVO USUARIO    │\n");
-            printf("├────────────────────────────────────────────┤\n");
-            printf("│ ¿Desea aceptar otro usuario? (s / n)       │\n");
-            printf("└────────────────────────────────────────────┘\n");
-            printf("Ingrese su opción: ");
-            scanf(" %c", &respuesta);
-            if (respuesta != 's' && respuesta != 'S')
-            {
-                continuar = 0;
-            }
+            int valido = 0;
+            do {
+                system("clear");
+            
+                // Menú
+                printf("\n");
+                printf("╔════════════════════════════════════════════════╗\n");
+                printf("║     🏦  BANCO CENTRAL - GESTIÓN DE USUARIOS    ║\n");
+                printf("╠════════════════════════════════════════════════╣\n");
+                printf("║  1.  Registrar otro usuario                    ║\n");
+                printf("║  2.  Cerrar el sistema                         ║\n");
+                printf("╚════════════════════════════════════════════════╝\n");
+                printf("Seleccione una opción (1 o 2):\n");
+            
+                if (scanf("%d", &respuesta) != 1) {
+                    printf("\n⚠️  Entrada no válida. Solo números del 1 al 2.\n");
+                    while (getchar() != '\n'); // Limpiar buffer
+                    sleep(2);
+                    continue;
+                }
+            
+                if (respuesta == 1) {
+                    valido = 1; // opción válida, seguir
+                } else if (respuesta == 2) {
+                    printf("\n👋 Cerrando el sistema. ¡Gracias por usar el banco!\n");
+                    sleep(2);
+                    continuar = 0;
+                    valido = 1;
+                } else {
+                    printf("\n⚠️  Opción fuera de rango. Intente nuevamente.\n");
+                    sleep(2);
+                }
+            
+            } while (!valido);
+                
+            
         }
+
         else
         {
             perror("Error en fork");
