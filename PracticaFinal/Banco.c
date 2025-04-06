@@ -20,17 +20,15 @@
 #define Cantidad_limite 1000
 #define Punt_Archivo_Properties "Variables.properties"
 #define MAX_LENGTH 256
-
 #define MAX_HIJOS 100
 
 /// @brief Esta funcion crea procesos en una nueva terminal que lo que
 /// hacen es ejecutar la instancia de usuario y ejecutar el codigo del mismo
 
-
 // Función para matar todos los procesos hijos usando system()
 pid_t hijos[MAX_HIJOS];
 int num_hijos = 0; // Contador de hijos creados
-int temp[100];  // Arreglo donde almacenarás los números
+int temp[100];     // Arreglo donde almacenarás los números
 
 // Definimos las funciones  que vamos a utilizar
 
@@ -39,20 +37,22 @@ void CrearMonitor();
 void limpiar(int sig);
 void *LeerDeMonitor(void *arg);
 void matar_hijos();
-
-void leer_alerta_pipe(int sig);
+void leer_alerta_cola(int sig);
 
 /// @brief este es el main en el cual leemos propertis con las variables
 /// @return y devolvemos 0 si la ejecuccion ha sido exitosa
 int main()
 {
+
     Inicializar_semaforos();
 
+    Escribir_registro("Se ha accedido al main de banco y se han incializado los semaforos");
+
     crear_cola_mensajes();
-    
+
     Config config = leer_configuracion("variables.properties");
     // Lo primero abrimos el archivo de Properties y "nos traemos las variables"
-    signal(SIGUSR1, leer_alerta_pipe); // Manejar señal del monitor
+    signal(SIGUSR1, leer_alerta_cola); // Manejar señal del monitor
 
     CrearMonitor(); // Lanzar monitor
 
@@ -63,8 +63,11 @@ int main()
     return 0;
 }
 
-void leer_alerta_pipe(int sig)
+/// @brief 
+/// @param sig 
+void leer_alerta_cola(int sig)
 {
+    Escribir_registro("Ha llegado una alerta de monitor mediante una señal en banco.c");
     MensajeAlerta msg;
     int id_cola = msgget(CLAVE_COLA, 0666);
     if (id_cola == -1)
@@ -78,10 +81,11 @@ void leer_alerta_pipe(int sig)
         perror("No se pudo leer alerta de la cola");
         return;
     }
-
+    Escribir_registro("se ha accedido a la cola");
     // Abrir el archivo alertas.log en modo append
     FILE *archivo = fopen("alertas.log", "a");
-    if (!archivo) {
+    if (!archivo)
+    {
         perror("No se pudo abrir alertas.log");
         return;
     }
@@ -89,16 +93,17 @@ void leer_alerta_pipe(int sig)
     // Escribir la alerta en el archivo
     fprintf(archivo, "🚨 ALERTA DEL MONITOR 🚨\n%s\n", msg.texto);
     fclose(archivo);
-    
+    Escribir_registro("Se ha escrito ene  el archvio una alerta");
+
     printf("🚨 Se ha registrado una nueva alerta\n");
+
     sleep(4);
+    Escribir_registro("Se muestra que se ha registrado una alerta");
 
     // Mueve el cursor una línea arriba y limpia esa línea
-    printf("\033[F");       // Mueve el cursor una línea arriba
-    printf("\033[2K");      // Borra toda la línea
-    fflush(stdout); // Asegura que el borrado se aplique antes de terminar
-    
-    
+    printf("\033[F");  // Mueve el cursor una línea arriba
+    printf("\033[2K"); // Borra toda la línea
+    fflush(stdout);    // Asegura que el borrado se aplique antes de terminar
 }
 
 void matar_hijos()
@@ -107,21 +112,20 @@ void matar_hijos()
 
     for (int i = 0; i < num_hijos; i++)
     {
-        
-            // Matar proceso hijo directamente
-            char comando[100];
-            snprintf(comando, sizeof(comando), "kill -9 %d", temp[i]);
-            system(comando);
-            sleep(0.5);
-        
+
+        // Matar proceso hijo directamente
+        char comando[100];
+        snprintf(comando, sizeof(comando), "kill -9 %d", temp[i]);
+        system(comando);
+        sleep(0.5);
     }
+    Escribir_registro("se ha matado los hijos");
 }
-int contador =0;
+int contador = 0;
 void Menu_Procesos()
 {
     char respuesta;
     int continuar = 1;
-   
 
     while (continuar)
     {
@@ -132,7 +136,7 @@ void Menu_Procesos()
         }
 
         pid_t pid = fork(); // Crear un proceso hijo
-        pid_t h;
+
         if (pid == 0)
         {
             // Crear un nuevo grupo de procesos para el hijo
@@ -143,7 +147,8 @@ void Menu_Procesos()
             snprintf(comando, sizeof(comando),
                      "gnome-terminal -- sh -c 'echo $$ > /tmp/pid_%d.txt; gcc init_cuentas.c Usuario.c Transferencia.c ConsultarDatos.c ExtraerDinero.c IntroducirDinero.c Comun.c -o usuario && ./usuario'", getpid());
             system(comando);
-           
+            Escribir_registro("se ha abierto una nueva terminal con usuario");
+
             exit(0); // El hijo termina aquí, la terminal sigue corriendo
         }
         else if (pid > 0)
@@ -153,27 +158,31 @@ void Menu_Procesos()
             char filename[50];
             // Leer el PID real del hijo desde el archivo
             snprintf(filename, sizeof(filename), "/tmp/pid_%d.txt", pid);
-           
-        
+            Escribir_registro("se ha generado un archvio con el pid del usuario");
+
             // Esperamos 20 segundos (puedes quitar esto si no es necesario)
-            sleep(5);
+            sleep(3);
 
             // Abrimos el archivo en modo lectura y escritura
             FILE *fp = fopen(filename, "r+");
-        
-            if (fp) {
-                
-                
+
+            if (fp)
+            {
+
                 // Leemos un único número entero del archivo
-                if (fscanf(fp, "%d", &temp[contador]) == 1) {
+                if (fscanf(fp, "%d", &temp[contador]) == 1)
+                {
                     sleep(1);
-                } else {
+                }
+                else
+                {
                     perror("No se pudo leer un número del archivo.\n");
                 }
                 contador++;
                 // Cerramos el archivo
                 fclose(fp);
-            } 
+                Escribir_registro("Se ha alamcenado el pid del usuario");
+            }
             else
             {
                 perror("Error al leer el archivo de PID");
@@ -183,7 +192,12 @@ void Menu_Procesos()
             num_hijos++;
             system("clear");
             // Preguntar si desea aceptar otro usuario
-            printf("¿Desea aceptar otro usuario? (s/n):\n");
+            printf("┌────────────────────────────────────────────┐\n");
+            printf("│        🏦 BANCO CENTRAL - NUEVO USUARIO    │\n");
+            printf("├────────────────────────────────────────────┤\n");
+            printf("│ ¿Desea aceptar otro usuario? (s / n)       │\n");
+            printf("└────────────────────────────────────────────┘\n");
+            printf("Ingrese su opción: ");
             scanf(" %c", &respuesta);
             if (respuesta != 's' && respuesta != 'S')
             {
@@ -208,6 +222,7 @@ void Menu_Procesos()
 
     // Cuando el padre termina, mata a todos los hijos
     matar_hijos();
+    Escribir_registro("Se acaban con todos los procesos");
 }
 // Esta funcion se encarga de "pegar" la alerta en el pipe para poder pasarlo al proceso padre
 
@@ -215,7 +230,7 @@ void Menu_Procesos()
 void CrearMonitor()
 {
     pid_t Monitor = fork(); // Crea el proceso monitor
-
+    Escribir_registro("Se crea el fork de monitor");
     if (Monitor < 0)
     {
         perror("Error al crear el proceso Monitor");
@@ -257,7 +272,6 @@ void CrearMonitor()
         char filename[50];
         snprintf(filename, sizeof(filename), "/tmp/pid_%d.txt", Monitor);
 
-
         sleep(5); // Dar tiempo al hijo para crear el archivo
 
         FILE *fp = fopen(filename, "r+");
@@ -284,5 +298,3 @@ void CrearMonitor()
         Escribir_registro("Proceso monitor creado correctamente");
     }
 }
-
-
