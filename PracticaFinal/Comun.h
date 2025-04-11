@@ -18,6 +18,25 @@ typedef struct Config
 #include <sys/stat.h>
 #include <sys/ipc.h>
 #include <sys/msg.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <sys/ipc.h>
+#include <sys/msg.h>
+#include <sys/types.h>
+#include <unistd.h>
+#include <signal.h>
+#include <errno.h>
+#include <pthread.h>
+#include <time.h>
+#include <stdbool.h>
+#include <semaphore.h>
+#include <sys/fcntl.h>
+#include <sys/wait.h>
+#include <sys/prctl.h> // Para PR_SET_PDEATHSIG
+#include <ctype.h>
+#include <sys/stat.h>
+#include <sys/shm.h>
 
 #define CLAVE_COLA 1234  // Puedes usar ftok si prefieres algo dinámico
 

@@ -1,16 +1,4 @@
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <sys/types.h>
-#include <unistd.h>
-#include <signal.h>
-#include <errno.h>
-#include <pthread.h>
-#include <time.h>
-#include <semaphore.h>
-#include <fcntl.h>
-#include <sys/stat.h>
 #include "Comun.h"
 
 volatile sig_atomic_t corriendo = 1;

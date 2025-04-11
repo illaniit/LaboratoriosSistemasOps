@@ -1,22 +1,5 @@
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <sys/ipc.h>
-#include <sys/msg.h>
-#include <sys/types.h>
-#include <unistd.h>
-#include <signal.h>
-#include <errno.h>
-#include <pthread.h>
-#include <time.h>
-#include <semaphore.h>
-#include <sys/fcntl.h>
-#include <sys/wait.h>
 #include "Comun.h"
-#include <sys/prctl.h> // Para PR_SET_PDEATHSIG
-#include <ctype.h>
-#include <sys/stat.h>
 #define Cantidad_limite 1000
 #define Punt_Archivo_Properties "Variables.properties"
 #define MAX_LENGTH 256
