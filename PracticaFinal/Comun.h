@@ -47,7 +47,6 @@ typedef struct {
     char texto[256];
 } MensajeAlerta;
 
-
 Config leer_configuracion(const char *ruta);
 
 extern sem_t *sem_usuarios;

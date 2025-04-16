@@ -4,6 +4,7 @@
 #define Punt_Archivo_Properties "Variables.properties"
 #define MAX_LENGTH 256
 #define MAX_HIJOS 100
+#include "Cuenta.h"
 
 /// @brief Esta funcion crea procesos en una nueva terminal que lo que
 /// hacen es ejecutar la instancia de usuario y ejecutar el codigo del mismo
@@ -21,6 +22,7 @@ void limpiar(int sig);
 void *LeerDeMonitor(void *arg);
 void matar_hijos();
 void leer_alerta_cola(int sig);
+void CrearMemoria();
 
 /// @brief este es el main en el cual leemos propertis con las variables
 /// @return y devolvemos 0 si la ejecuccion ha sido exitosa
@@ -29,13 +31,13 @@ int main()
 
     Inicializar_semaforos();
 
+    CrearMemoria();
     Escribir_registro("Se ha accedido al main de banco y se han incializado los semaforos en banco.c");
 
     crear_cola_mensajes();
 
     Config config = leer_configuracion("variables.properties");
     // Lo primero abrimos el archivo de Properties y "nos traemos las variables"
-    
 
     signal(SIGUSR1, leer_alerta_cola); // Manejar señal del monitor
 
@@ -48,6 +50,19 @@ int main()
     return 0;
 }
 
+void CrearMemoria()
+{
+    key_t clave = ftok("shmfile", 65);
+    int shmid = shmget(clave, sizeof(Cuenta) * MAX_HIJOS, 0666 | IPC_CREAT);
+
+    if (shmid == -1) {
+        perror("shmget falló");
+        exit(1);
+    }
+
+    printf("✅ Memoria compartida creada con ID: %d\n", shmid);
+    return ;
+}
 /// @brief
 /// @param sig
 void leer_alerta_cola(int sig)
@@ -176,9 +191,10 @@ void Menu_Procesos()
 
             num_hijos++;
             int valido = 0;
-            do {
+            do
+            {
                 system("clear");
-            
+
                 // Menú
                 printf("\n");
                 printf("╔════════════════════════════════════════════════╗\n");
@@ -188,29 +204,34 @@ void Menu_Procesos()
                 printf("║  2.  Cerrar el sistema                         ║\n");
                 printf("╚════════════════════════════════════════════════╝\n");
                 printf("Seleccione una opción (1 o 2):\n");
-            
-                if (scanf("%d", &respuesta) != 1) {
+
+                if (scanf("%d", &respuesta) != 1)
+                {
                     printf("\n⚠️  Entrada no válida. Solo números del 1 al 2.\n");
-                    while (getchar() != '\n'); // Limpiar buffer
+                    while (getchar() != '\n')
+                        ; // Limpiar buffer
                     sleep(2);
                     continue;
                 }
-            
-                if (respuesta == 1) {
+
+                if (respuesta == 1)
+                {
                     valido = 1; // opción válida, seguir
-                } else if (respuesta == 2) {
+                }
+                else if (respuesta == 2)
+                {
                     printf("\n👋 Cerrando el sistema. ¡Gracias por usar el banco!\n");
                     sleep(2);
                     continuar = 0;
                     valido = 1;
-                } else {
+                }
+                else
+                {
                     printf("\n⚠️  Opción fuera de rango. Intente nuevamente.\n");
                     sleep(2);
                 }
-            
+
             } while (!valido);
-                
-            
         }
 
         else
