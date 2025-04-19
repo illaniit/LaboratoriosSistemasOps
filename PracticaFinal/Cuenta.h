@@ -14,4 +14,5 @@ typedef struct Cuenta {
     int Numero_transacciones;       // Número de transacciones realizadas
 } Cuenta;
 
+ extern Cuenta *cuentas;
 #endif // CUENTA_H

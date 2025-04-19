@@ -9,7 +9,7 @@ sem_t *sem_registro;
 void Inicializar_semaforos()
 {
     sem_registro = sem_open("/sem_registro", O_CREAT, 0666, 1);
-    sem_usuarios = sem_open("/sem_usuarios", O_CREAT, 0666, 1);
+   sem_usuarios = sem_open("/sem_usuarios", O_CREAT, 0666, 1);
     sem_transacciones = sem_open("/sem_transacciones", O_CREAT, 0666, 1);
     if (sem_usuarios == SEM_FAILED || sem_transacciones == SEM_FAILED || sem_registro == SEM_FAILED)
     {

@@ -4,6 +4,7 @@
 #define Punt_Archivo_Properties "Variables.properties"
 #define MAX_LENGTH 256
 #define MAX_HIJOS 100
+#define MAX_CUENTAS 100
 #include "Cuenta.h"
 
 /// @brief Esta funcion crea procesos en una nueva terminal que lo que
@@ -15,6 +16,8 @@ int num_hijos = 0; // Contador de hijos creados
 int temp[100];     // Arreglo donde almacenarás los números
 
 // Definimos las funciones  que vamos a utilizar
+Cuenta *cuentas;
+
 
 void Menu_Procesos();
 void CrearMonitor();
@@ -23,6 +26,7 @@ void *LeerDeMonitor(void *arg);
 void matar_hijos();
 void leer_alerta_cola(int sig);
 void CrearMemoria();
+void Limpiar_MemoriaCompartida();
 
 /// @brief este es el main en el cual leemos propertis con las variables
 /// @return y devolvemos 0 si la ejecuccion ha sido exitosa
@@ -47,13 +51,18 @@ int main()
 
     Destruir_semaforos();
 
+    Limpiar_MemoriaCompartida(); // Limpiar memoria compartida
+    Escribir_registro("Se ha limpiado la memoria compartida en banco.c");
+
     return 0;
 }
 
 void CrearMemoria()
 {
-    key_t clave = ftok("shmfile", 65);
-    int shmid = shmget(clave, sizeof(Cuenta) * MAX_HIJOS, 0666 | IPC_CREAT);
+    key_t clave = ftok("Cuenta.h", 65);
+    printf("[DEBUG] Clave generada: %d\n", clave);
+    int shmid = shmget(clave, MAX_CUENTAS * sizeof(Cuenta), 0666 | IPC_CREAT);
+    cuentas = (Cuenta *)shmat(shmid, NULL, 0);
 
     if (shmid == -1) {
         perror("shmget falló");
@@ -61,6 +70,23 @@ void CrearMemoria()
     }
 
     printf("✅ Memoria compartida creada con ID: %d\n", shmid);
+    return ;
+}
+
+void Limpiar_MemoriaCompartida()
+{
+    shmdt(cuentas);
+    key_t clave = ftok("Cuenta.h", 65);
+    int shmid = shmget(clave, MAX_CUENTAS * sizeof(Cuenta), 0666 | IPC_CREAT);
+    if (shmid == -1) {
+        perror("shmget falló");
+        exit(1);
+    }
+    if (shmctl(shmid, IPC_RMID, NULL) == -1) {
+        perror("shmctl falló");
+        exit(1);
+    }
+    printf("✅ Memoria compartida eliminada\n");
     return ;
 }
 /// @brief
