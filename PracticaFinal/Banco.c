@@ -18,7 +18,6 @@ int temp[100];     // Arreglo donde almacenarás los números
 // Definimos las funciones  que vamos a utilizar
 Cuenta *cuentas;
 
-
 void Menu_Procesos();
 void CrearMonitor();
 void limpiar(int sig);
@@ -27,6 +26,7 @@ void matar_hijos();
 void leer_alerta_cola(int sig);
 void CrearMemoria();
 void Limpiar_MemoriaCompartida();
+void ListarCuentas();
 
 /// @brief este es el main en el cual leemos propertis con las variables
 /// @return y devolvemos 0 si la ejecuccion ha sido exitosa
@@ -51,7 +51,7 @@ int main()
 
     Destruir_semaforos();
 
-    Limpiar_MemoriaCompartida(); // Limpiar memoria compartida
+    // Limpiar_MemoriaCompartida(); // Limpiar memoria compartida
     Escribir_registro("Se ha limpiado la memoria compartida en banco.c");
 
     return 0;
@@ -64,13 +64,14 @@ void CrearMemoria()
     int shmid = shmget(clave, MAX_CUENTAS * sizeof(Cuenta), 0666 | IPC_CREAT);
     cuentas = (Cuenta *)shmat(shmid, NULL, 0);
 
-    if (shmid == -1) {
+    if (shmid == -1)
+    {
         perror("shmget falló");
         exit(1);
     }
 
     printf("✅ Memoria compartida creada con ID: %d\n", shmid);
-    return ;
+    return;
 }
 
 void Limpiar_MemoriaCompartida()
@@ -78,16 +79,18 @@ void Limpiar_MemoriaCompartida()
     shmdt(cuentas);
     key_t clave = ftok("Cuenta.h", 65);
     int shmid = shmget(clave, MAX_CUENTAS * sizeof(Cuenta), 0666 | IPC_CREAT);
-    if (shmid == -1) {
+    if (shmid == -1)
+    {
         perror("shmget falló");
         exit(1);
     }
-    if (shmctl(shmid, IPC_RMID, NULL) == -1) {
+    if (shmctl(shmid, IPC_RMID, NULL) == -1)
+    {
         perror("shmctl falló");
         exit(1);
     }
     printf("✅ Memoria compartida eliminada\n");
-    return ;
+    return;
 }
 /// @brief
 /// @param sig
@@ -135,7 +138,7 @@ void leer_alerta_cola(int sig)
 void matar_hijos()
 {
     printf("\n Cerrando sesiones...\n");
-
+    system("clear");
     for (int i = 0; i < num_hijos; i++)
     {
 
@@ -227,13 +230,14 @@ void Menu_Procesos()
                 printf("║     🏦  BANCO CENTRAL - GESTIÓN DE USUARIOS    ║\n");
                 printf("╠════════════════════════════════════════════════╣\n");
                 printf("║  1.  Registrar otro usuario                    ║\n");
-                printf("║  2.  Cerrar el sistema                         ║\n");
+                printf("║  2.  Listar cuentas                            ║\n");
+                printf("║  3.  Cerrar el sistema                         ║\n");
                 printf("╚════════════════════════════════════════════════╝\n");
-                printf("Seleccione una opción (1 o 2):\n");
+                printf("Seleccione una opción (1, 2 o 3):\n");
 
                 if (scanf("%d", &respuesta) != 1)
                 {
-                    printf("\n⚠️  Entrada no válida. Solo números del 1 al 2.\n");
+                    printf("\n⚠️  Entrada no válida. Solo números del 1 al 3.\n");
                     while (getchar() != '\n')
                         ; // Limpiar buffer
                     sleep(2);
@@ -246,10 +250,20 @@ void Menu_Procesos()
                 }
                 else if (respuesta == 2)
                 {
+                    system("clear");
+                    ListarCuentas(); // Llamar a la función para listar cuentas
+                    printf("\nPresione Enter para continuar...");
+                    while (getchar() != '\n')
+                        ; // Esperar a que el usuario presione Enter
+                    getchar();
+                }
+                else if (respuesta == 3)
+                {
                     printf("\n👋 Cerrando el sistema. ¡Gracias por usar el banco!\n");
                     sleep(2);
                     continuar = 0;
                     valido = 1;
+                    
                 }
                 else
                 {
@@ -352,5 +366,58 @@ void CrearMonitor()
 
         num_hijos++;
         Escribir_registro("Proceso monitor creado correctamente desde banco.c");
+    }
+}
+void ListarCuentas()
+{
+    printf("\n==============================\n");
+    printf("    📋 LISTA DE CUENTAS\n");
+    printf("==============================\n");
+
+    if (cuentas == NULL)
+    {
+        printf("❌ Memoria compartida no inicializada.\n");
+        return;
+    }
+
+    int i = 0;
+    int hayCuentas = 0;
+
+    // Recorremos las cuentas hasta encontrar una cuenta con campos vacíos (sin nombre o usuario)
+    while (1)
+    {
+        // Comprobamos si la cuenta está "vacía" (sin nombre o usuario)
+        if (strlen(cuentas[i].Nombre) == 0 || strlen(cuentas[i].Apellido) == 0)
+        {
+            // Si hemos encontrado al menos una cuenta válida, salimos
+            if (hayCuentas)
+                break;
+
+            // Si no hay ninguna cuenta válida, se asume que no hay más cuentas
+            if (i == 0)
+            {
+                printf("⚠️ No hay cuentas activas registradas.\n");
+                return;
+            }
+        }
+        else
+        {
+            hayCuentas = 1;
+
+            printf("🧾 Cuenta #%d\n", i + 1);
+            printf("   Nombre: %s\n", cuentas[i].Nombre);
+            printf("   Apellidos: %s\n", cuentas[i].Apellido);
+            printf("   Contraseña: %s\n", cuentas[i].Contraseña);
+            printf("   País: %s\n", cuentas[i].pais);
+            printf("   Saldo: %d\n", cuentas[i].saldo);
+            printf("   Transacciones: %d\n", cuentas[i].Numero_transacciones);
+            printf("   -----------------------------\n");
+        }
+
+        i++;
+
+        // Seguridad: evitar leer fuera de los límites
+        if (i >= MAX_CUENTAS)
+            break;
     }
 }

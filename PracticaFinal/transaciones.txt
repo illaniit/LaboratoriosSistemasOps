@@ -1,4 +1,1 @@
-1 | ingreso | 1 | - | 1 | - | 2 
-2 | retiro | 1 | - | 2 | - | 0 
-3 | ingreso | 1 | - | 0 | - | -100 
-4 | transferencia | 1 | 2 | 100 | 2 | 50 | 52
+1 | ingreso | 1 | - | 1870 | - | 1970 

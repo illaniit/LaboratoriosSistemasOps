@@ -155,7 +155,6 @@ void *Transferencia(void *arg) {
 
     }
     id_transacciones++; // Incrementamos para el nuevo registro
-
     // Registrar transacción
    
     if (archivoTransacciones) {

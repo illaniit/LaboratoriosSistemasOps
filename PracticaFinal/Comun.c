@@ -16,7 +16,7 @@ void Inicializar_semaforos()
         perror("Error al inicializar semáforos");
         exit(EXIT_FAILURE);
     }
-    Escribir_registro("se han inicializado los semaforos desde comun.c");
+  
 }
 
 /// @brief Cierra y elimina los semáforos, también elimina la cola de mensajes

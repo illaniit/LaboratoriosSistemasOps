@@ -1,6 +1,7 @@
 
 #include "Operaciones.h"
 #include "Comun.h"
+#include "Cuenta.h"
 
 // declaramos el struct de usuario
 struct Usuario3
@@ -15,107 +16,106 @@ struct Usuario3
 /// @return
 void *IntroducirDinero(void *arg2)
 {
+    struct Usuario3 *usuario = (struct Usuario3 *)arg2;
+    bool encontrado = false;
+    int saldo_introducir;
 
-    struct Usuario3 *usuario = (struct Usuario3 *)arg2; // cargamos el struct que le hemso pasado al hilo en nuestro struct
-    bool encontrado = false; 
-                               // declaramos una variable boolean de tipo encontrado a false
-    int saldo_introducir;  
-    system("clear");   
+    sem_wait(sem_usuarios);
+    sem_wait(sem_transacciones);
+    system("clear");
     printf("\n==============================\n");
     printf("    💵 INGRESO DE DINERO 💵\n");
-    printf("==============================\n");   // vemos cuento quiere ingresar el usuario
+    printf("==============================\n");
     printf("Introduzca la cantidad que desea ingresar: ");
     scanf("%d", &saldo_introducir);
-    if(saldo_introducir<0){
-        printf("No puedes ingresar una cantidad negativa!");
+
+    if (saldo_introducir < 0) {
+        printf("No puedes ingresar una cantidad negativa!\n");
         Escribir_registro("El usuario ha intentado introducir una cantidad negativa en IntroducirDinero.c");
         return NULL;
     }
-    sem_wait(sem_usuarios);
-    sem_wait(sem_transacciones);
 
-    FILE *ArchivoUsuarios = fopen("usuarios.txt", "r"); // abrimos el archivo de usuarios
-    if (!ArchivoUsuarios)
-    {
-        perror("Error al abrir el archivo");
+ 
+
+    // ✅ Acceso a la memoria compartida
+    key_t clave = ftok("Cuenta.h", 65);
+    if (clave == -1) {
+        perror("❌ Error al generar clave con ftok");
+        sem_post(sem_usuarios);
+        sem_post(sem_transacciones);
         return NULL;
     }
-    FILE *tempFile = fopen("temp.txt", "w"); // abrimos un archivo temporal
-    if (!tempFile)
-    {
-        perror("Error al abrir el archivo temporal");
-        fclose(ArchivoUsuarios);
+
+    int shmid = shmget(clave, sizeof(Cuenta) * MAX_CUENTAS, 0666);
+    if (shmid == -1) {
+        perror("❌ Error al obtener segmento de memoria compartida");
+        sem_post(sem_usuarios);
+        sem_post(sem_transacciones);
         return NULL;
     }
-    // declaramos las variables necesarias
-    int id2, saldo2, num_transacciones2;
-    char nombre2[50], contrasena2[50], apellidos2[50], domicilio2[100], pais2[50];
-    char linea[200], linea2[200];
 
-    // este bloqeu lo que hace es hacer que el id de las transcciones se actulice teneiendo en cuent el ultimo id registrado
+    Cuenta *cuentas = (Cuenta *)shmat(shmid, NULL, 0);
+    if (cuentas == (void *) -1) {
+        perror("❌ Error al enlazar memoria compartida");
+        sem_post(sem_usuarios);
+        sem_post(sem_transacciones);
+        return NULL;
+    }
+
+    // 📈 Leer el último ID de transacción
     int id_transacciones = 0;
-    FILE *ArchivoTransacciones = fopen("transaciones.txt", "r"); // Abrimos en modo lectura
-    if (ArchivoTransacciones)
-    {
-        while (fgets(linea2, sizeof(linea2), ArchivoTransacciones) != NULL)
-        {
+    FILE *ArchivoTransacciones = fopen("transaciones.txt", "r");
+    if (ArchivoTransacciones) {
+        char linea[256];
+        while (fgets(linea, sizeof(linea), ArchivoTransacciones)) {
             int temp_id;
-            if (sscanf(linea2, "%d |", &temp_id) == 1)
-            {
-                id_transacciones = temp_id; // Guardamos el último ID encontrado
+            if (sscanf(linea, "%d |", &temp_id) == 1) {
+                id_transacciones = temp_id;
             }
         }
-        fclose(ArchivoTransacciones); // cerramos el archivo
+        fclose(ArchivoTransacciones);
     }
-    id_transacciones++; // Incrementamos para el nuevo registro
+    id_transacciones++;
 
-    // este while lee el archivo de usuarios
-    while (fgets(linea, sizeof(linea), ArchivoUsuarios) != NULL)
-    {
-        linea[strcspn(linea, "\n")] = '\0';
+    // 🔍 Buscar al usuario en memoria compartida
+    for (int i = 0; i < MAX_CUENTAS; i++) {
+        Cuenta *c = &cuentas[i];
 
-        if (sscanf(linea, "%d | %49[^|] | %49[^|] | %49[^|] | %99[^|] | %49[^|] | %d | %d",
-                   &id2, nombre2, contrasena2, apellidos2, domicilio2, pais2, &saldo2, &num_transacciones2) == 8)
-        {
-            limpiar_cadena(nombre2); // llamamos a limpiar cadena
-            limpiar_cadena(contrasena2);
-            if (strcmp(nombre2, usuario->Usuario2) == 0 && strcmp(contrasena2, usuario->Contraseña1) == 0)
-            {                                // comparamos el nombre del inicio de sesion con el de cda uno de las lineas de lso archivos
-                int dinero_inicial = saldo2; // declaramos una variable que almacene el dinero inciarl
-                encontrado = true;           // cambiamos el estado de la variable encontrdo a true
-                Escribir_registro("El usuario ha introducido la cantidad ha ingresar en introducirDinero.c");
-                saldo2 += saldo_introducir; // incrementeamos su saldo
-                num_transacciones2++;       // incrementamos el nuemro de transacciones
+        if (strlen(c->Nombre) == 0) continue;
 
-                ArchivoTransacciones = fopen("transaciones.txt", "a"); // abrimos el archivo de transacciones para registrar la transaccione con este formato
-                if (ArchivoTransacciones)
-                {
-                    fprintf(ArchivoTransacciones, "%d | ingreso | %d | - | %d | - | %d \n", id_transacciones, id2, dinero_inicial, saldo2);
-                    fclose(ArchivoTransacciones);
-                }
+        limpiar_cadena(c->Nombre);
+        limpiar_cadena(c->Contraseña);
+
+        if (strcmp(c->Nombre, usuario->Usuario2) == 0 && strcmp(c->Contraseña, usuario->Contraseña1) == 0) {
+            int dinero_inicial = c->saldo;
+            c->saldo += saldo_introducir;
+            c->Numero_transacciones++;
+            encontrado = true;
+
+            Escribir_registro("El usuario ha introducido dinero correctamente en IntroducirDinero.c");
+
+            // 📝 Registrar transacción
+            ArchivoTransacciones = fopen("transaciones.txt", "a");
+            if (ArchivoTransacciones) {
+                fprintf(ArchivoTransacciones, "%d | ingreso | %d | - | %d | - | %d \n",
+                        id_transacciones, c->id, dinero_inicial, c->saldo);
+                fclose(ArchivoTransacciones);
             }
+            break;
         }
-        // reescribimos el archivo entero en un archivo temporal
-        fprintf(tempFile, "%d | %s | %s | %s | %s | %s | %d | %d\n", id2, nombre2, contrasena2, apellidos2, domicilio2, pais2, saldo2, num_transacciones2);
     }
 
-    fclose(ArchivoUsuarios); // cerramos ambos archiovs
-    fclose(tempFile);
-
-    if (encontrado)
-    {
-        remove("usuarios.txt");             // eliminamos le usuarios.txt
-        rename("temp.txt", "usuarios.txt"); // cambiamos el nombre del archivo temporal al usuario.txt
-        printf("Saldo actualizado correctamente.\n");
-        sleep(2);
-    }
-    else
-    {
-        remove("temp.txt");
-        printf("Usuario no encontrado o contraseña incorrecta.\n");
-    }
-    Escribir_registro("El usuario ha ingresado dinero en IngresarDinero.c");
+    // ✅ Desenlazar memoria y liberar semáforos
+    shmdt(cuentas);
     sem_post(sem_usuarios);
     sem_post(sem_transacciones);
+
+    if (encontrado) {
+        printf("✅ Saldo actualizado correctamente.\n");
+        sleep(2);
+    } else {
+        printf("❌ Usuario no encontrado o contraseña incorrecta.\n");
+    }
+
     return NULL;
 }

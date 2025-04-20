@@ -1,6 +1,7 @@
 #ifndef CUENTA_H
 #define CUENTA_H
 
+#define MAX_CUENTAS 100 // Número máximo de cuentas
 // Definición de la estructura Cuenta
 typedef struct Cuenta {
     int id;                         // ID único del usuario
@@ -11,7 +12,7 @@ typedef struct Cuenta {
     char domicilio[100];            // Domicilio del usuario
     char pais[50];                  // País de residencia del usuario
     int saldo;                      // Saldo en la cuenta
-    int Numero_transacciones;       // Número de transacciones realizadas
+    int Numero_transacciones;     // Número de transacciones realizadas
 } Cuenta;
 
  extern Cuenta *cuentas;

@@ -34,6 +34,9 @@ int main() {
         perror("❌ Error al enlazar la memoria compartida");
         return 1;
     }
+    Inicializar_semaforos();
+    sem_usuarios = sem_open("/sem_usuarios", 0);
+    sem_transacciones = sem_open("/sem_transacciones", 0);
 
     Menu_Usuario();
 
@@ -78,6 +81,7 @@ void Menu_Usuario() {
 }
 
 void InicioDeSesion() {
+    system("clear");
     char Usuario[50], Contraseña[50];
     int acceso = 0;
 
@@ -157,7 +161,7 @@ void Registro() {
 
     while (getchar() != '\n');
 
-
+    
     int i;
     for (i = 0; i < MAX_CUENTAS; i++) {
         if (cuentas[i].id == 0) {
