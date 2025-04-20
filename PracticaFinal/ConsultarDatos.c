@@ -132,8 +132,10 @@ void DatosCuenta(char *user, char *passwd) {
         printf("💰 Saldo:              %d\n", cuenta.saldo);
         printf("🔄 Transacciones:      %d\n", cuenta.Numero_transacciones);
         printf("=================================================\n");
-        printf("📌 Presione 's' para volver al menú principal... ");
-        scanf(" %s", var);
+        printf("📌 Presione 'Enter' para volver al menú principal... ");
+        while (getchar() != '\n')
+            ; // Esperar a que el usuario presione Enter
+        getchar();
     } else {
         printf("\n⚠️ Usuario o contraseña incorrectos.\n");
         sleep(2);
@@ -215,8 +217,9 @@ void ConsultarTransferencias(char *user, char *passwd) {
             // Verificamos si la transferencia involucra al usuario (como id1 o id2)
             if (user_id == id1 || user_id == id2) {
                 transacciones_encontradas = 1;
+                int cantidad = saldo1-saldo2;
                 printf("\nNúmero de transferencia: %d | Tipo: %s | De cuenta: %d | A cuenta: %d\n",id, tipo, id1, id2);
-                printf("Saldo antes: %d | Saldo después: %d\n", saldo1, saldofinal1);
+                printf("Cantidad trasnferida :%d\n", cantidad);
                 printf("-------------------------------------------------\n");
             }
         }
@@ -233,8 +236,10 @@ void ConsultarTransferencias(char *user, char *passwd) {
     }
 
     // Esperamos que el usuario presione una tecla para volver
-    printf("\n📌 Presione 's' para volver al menú principal... ");
-    scanf(" %c", &var);
+    printf("\n📌 Presione Enter para volver al menú principal... ");
+    while (getchar() != '\n')
+        ; // Esperar a que el usuario presione Enter
+    getchar();
     
     sem_post(sem_usuarios);  // Liberamos los semáforos
     sem_post(sem_transacciones);

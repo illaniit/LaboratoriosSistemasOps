@@ -1,1 +1,4 @@
 1 | ingreso | 1 | - | 1870 | - | 1970 
+2 | ingreso | 2 | - | 200 | - | 300 
+3 | transferencia | 2 | 1 | 300 | 200 | 1 | 101
+4 | transferencia | 2 | 1 | 200 | 150 | 101 | 151

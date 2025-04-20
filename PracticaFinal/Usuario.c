@@ -19,6 +19,8 @@ struct Usuario
 void Mostrar_Menu(char *user, char *passwd)
 {
 
+
+    
     // Cargamos configuración desde el archivo .properties
     Config config = leer_configuracion("variables.properties");
 

@@ -7,10 +7,8 @@
 #define MAX_CUENTAS 100
 #include "Cuenta.h"
 
-/// @brief Esta funcion crea procesos en una nueva terminal que lo que
-/// hacen es ejecutar la instancia de usuario y ejecutar el codigo del mismo
+// Aquí definimos las variables globales
 
-// Función para matar todos los procesos hijos usando system()
 pid_t hijos[MAX_HIJOS];
 int num_hijos = 0; // Contador de hijos creados
 int temp[100];     // Arreglo donde almacenarás los números
@@ -69,6 +67,8 @@ void CrearMemoria()
         perror("shmget falló");
         exit(1);
     }
+
+  
 
     printf("✅ Memoria compartida creada con ID: %d\n", shmid);
     return;
@@ -263,7 +263,6 @@ void Menu_Procesos()
                     sleep(2);
                     continuar = 0;
                     valido = 1;
-                    
                 }
                 else
                 {
