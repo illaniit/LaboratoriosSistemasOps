@@ -257,3 +257,322 @@
 [2025-04-21 01:17:02] El usuario ha desplegado el menú de consulta de datos en ConsultarDatos.c
 [2025-04-21 01:17:22] se ha matado los hijos desde banco.c
 [2025-04-21 01:17:22] Se acaban con todos los procesos desde banco.c
+[2025-04-21 12:34:54] Se ha accedido al main de banco y se han incializado los semaforos en banco.c
+[2025-04-21 12:34:54] se  ha creado la cola de mensjes correctamente en Comun.c
+[2025-04-21 12:34:54] Se crea el fork de monitor desde banco.c
+[2025-04-21 12:34:54] Se crea el fork de monitor desde banco.c
+[2025-04-21 12:34:54] Proceso monitor hijo iniciado desde banco.c
+[2025-04-21 12:34:54] se han inicializado los semaforos desde comun.c
+[2025-04-21 12:34:54] Detectando transferencias consecutivas... en monitor.c
+[2025-04-21 12:34:54] Detectando transacciones sospechosas... en monitor.c
+[2025-04-21 12:34:54] Detectando saldos negativos... en monitor.c
+[2025-04-21 12:34:54] Detectando retiros consecutivos... en monitor.c
+[2025-04-21 12:35:00] Proceso monitor creado correctamente desde banco.c
+[2025-04-21 12:35:01] se ha abierto una nueva terminal con usuario desde banco.c
+[2025-04-21 12:35:01] se ha generado un archvio con el pid del usuario desde banco.c
+[2025-04-21 12:35:05] Se ha alamcenado el pid del usuario desde banco.c
+[2025-04-21 12:35:33] El usuario ha desplegado el menú de consulta de datos en ConsultarDatos.c
+[2025-04-21 12:35:34] El usuario ha visto sus datos en ConsultarDatos.c
+[2025-04-21 12:35:36] El usuario ha elegido la opción de consultar datos.
+[2025-04-21 12:35:36] El usuario ha desplegado el menú de consulta de datos en ConsultarDatos.c
+[2025-04-21 12:36:04] Detectando transacciones sospechosas... en monitor.c
+[2025-04-21 12:36:04] Detectando saldos negativos... en monitor.c
+[2025-04-21 12:36:04] Detectando transferencias consecutivas... en monitor.c
+[2025-04-21 12:36:04] Detectando retiros consecutivos... en monitor.c
+[2025-04-21 12:36:05] El usuario ha elegido la opción de consultar transferencias.
+[2025-04-21 12:36:05] El usuario ha desplegado el menú de consulta de datos en ConsultarDatos.c
+[2025-04-21 12:36:09] se ha matado los hijos desde banco.c
+[2025-04-21 12:36:09] Se acaban con todos los procesos desde banco.c
+[2025-04-21 12:45:31] Se ha accedido al main de banco y se han incializado los semaforos en banco.c
+[2025-04-21 12:45:31] se  ha creado la cola de mensjes correctamente en Comun.c
+[2025-04-21 12:45:31] Se crea el fork de monitor desde banco.c
+[2025-04-21 12:45:31] Se crea el fork de monitor desde banco.c
+[2025-04-21 12:45:31] Proceso monitor hijo iniciado desde banco.c
+[2025-04-21 12:45:31] se han inicializado los semaforos desde comun.c
+[2025-04-21 12:45:31] Detectando transferencias consecutivas... en monitor.c
+[2025-04-21 12:45:31] Detectando saldos negativos... en monitor.c
+[2025-04-21 12:45:31] Detectando retiros consecutivos... en monitor.c
+[2025-04-21 12:45:31] Detectando transacciones sospechosas... en monitor.c
+[2025-04-21 12:45:37] Proceso monitor creado correctamente desde banco.c
+[2025-04-21 12:45:38] se ha abierto una nueva terminal con usuario desde banco.c
+[2025-04-21 12:45:38] se ha generado un archvio con el pid del usuario desde banco.c
+[2025-04-21 12:45:42] Se ha alamcenado el pid del usuario desde banco.c
+[2025-04-21 12:46:01] se ha matado los hijos desde banco.c
+[2025-04-21 12:46:01] Se acaban con todos los procesos desde banco.c
+[2025-04-21 13:07:08] Se ha accedido al main de banco y se han incializado los semaforos en banco.c
+[2025-04-21 13:07:08] se  ha creado la cola de mensjes correctamente en Comun.c
+[2025-04-21 13:07:08] Se crea el fork de monitor desde banco.c
+[2025-04-21 13:07:08] Se crea el fork de monitor desde banco.c
+[2025-04-21 13:07:08] Proceso monitor hijo iniciado desde banco.c
+[2025-04-21 13:07:08] se han inicializado los semaforos desde comun.c
+[2025-04-21 13:07:08] Detectando transferencias consecutivas... en monitor.c
+[2025-04-21 13:07:08] Detectando retiros consecutivos... en monitor.c
+[2025-04-21 13:07:08] Detectando saldos negativos... en monitor.c
+[2025-04-21 13:07:08] Detectando transacciones sospechosas... en monitor.c
+[2025-04-21 13:07:14] Proceso monitor creado correctamente desde banco.c
+[2025-04-21 13:07:14] se ha abierto una nueva terminal con usuario desde banco.c
+[2025-04-21 13:07:15] se ha generado un archvio con el pid del usuario desde banco.c
+[2025-04-21 13:07:19] Se ha alamcenado el pid del usuario desde banco.c
+[2025-04-21 13:07:22] se ha matado los hijos desde banco.c
+[2025-04-21 13:07:22] Se acaban con todos los procesos desde banco.c
+[2025-04-21 13:11:14] Se ha accedido al main de banco y se han incializado los semaforos en banco.c
+[2025-04-21 13:11:14] se  ha creado la cola de mensjes correctamente en Comun.c
+[2025-04-21 13:11:14] Se crea el fork de monitor desde banco.c
+[2025-04-21 13:11:14] Se crea el fork de monitor desde banco.c
+[2025-04-21 13:11:14] Proceso monitor hijo iniciado desde banco.c
+[2025-04-21 13:11:14] se han inicializado los semaforos desde comun.c
+[2025-04-21 13:11:14] Detectando retiros consecutivos... en monitor.c
+[2025-04-21 13:11:14] Detectando transacciones sospechosas... en monitor.c
+[2025-04-21 13:11:14] Detectando transferencias consecutivas... en monitor.c
+[2025-04-21 13:11:14] Detectando saldos negativos... en monitor.c
+[2025-04-21 13:11:20] Proceso monitor creado correctamente desde banco.c
+[2025-04-21 13:11:20] se ha abierto una nueva terminal con usuario desde banco.c
+[2025-04-21 13:11:21] se ha generado un archvio con el pid del usuario desde banco.c
+[2025-04-21 13:11:25] Se ha alamcenado el pid del usuario desde banco.c
+[2025-04-21 13:12:21] Se ha registrado un nuevo usuario en el sistema
+[2025-04-21 13:14:03] Se ha registrado un nuevo usuario en el sistema
+[2025-04-21 13:15:04] se ha matado los hijos desde banco.c
+[2025-04-21 13:15:04] Se acaban con todos los procesos desde banco.c
+[2025-04-21 13:37:51] Se ha accedido al main de banco y se han incializado los semaforos en banco.c
+[2025-04-21 13:37:51] se  ha creado la cola de mensjes correctamente en Comun.c
+[2025-04-21 13:37:51] Se crea el fork de monitor desde banco.c
+[2025-04-21 13:37:51] Se crea el fork de monitor desde banco.c
+[2025-04-21 13:37:51] Proceso monitor hijo iniciado desde banco.c
+[2025-04-21 13:37:51] se han inicializado los semaforos desde comun.c
+[2025-04-21 13:37:51] Detectando saldos negativos... en monitor.c
+[2025-04-21 13:37:51] Detectando transferencias consecutivas... en monitor.c
+[2025-04-21 13:37:51] Detectando retiros consecutivos... en monitor.c
+[2025-04-21 13:37:51] Detectando transacciones sospechosas... en monitor.c
+[2025-04-21 13:37:57] Proceso monitor creado correctamente desde banco.c
+[2025-04-21 13:37:58] se ha abierto una nueva terminal con usuario desde banco.c
+[2025-04-21 13:37:58] se ha generado un archvio con el pid del usuario desde banco.c
+[2025-04-21 13:38:02] Se ha alamcenado el pid del usuario desde banco.c
+[2025-04-21 13:38:06] se ha matado los hijos desde banco.c
+[2025-04-21 13:38:06] Se acaban con todos los procesos desde banco.c
+[2025-04-21 13:43:34] Se ha accedido al main de banco y se han incializado los semaforos en banco.c
+[2025-04-21 13:43:34] se  ha creado la cola de mensjes correctamente en Comun.c
+[2025-04-21 13:43:34] Se crea el fork de monitor desde banco.c
+[2025-04-21 13:43:34] Se crea el fork de monitor desde banco.c
+[2025-04-21 13:43:34] Proceso monitor hijo iniciado desde banco.c
+[2025-04-21 13:43:34] se han inicializado los semaforos desde comun.c
+[2025-04-21 13:43:34] Detectando transferencias consecutivas... en monitor.c
+[2025-04-21 13:43:34] Detectando retiros consecutivos... en monitor.c
+[2025-04-21 13:43:34] Detectando saldos negativos... en monitor.c
+[2025-04-21 13:43:34] Detectando transacciones sospechosas... en monitor.c
+[2025-04-21 13:43:40] Proceso monitor creado correctamente desde banco.c
+[2025-04-21 13:43:41] se ha abierto una nueva terminal con usuario desde banco.c
+[2025-04-21 13:43:41] se ha generado un archvio con el pid del usuario desde banco.c
+[2025-04-21 13:43:45] Se ha alamcenado el pid del usuario desde banco.c
+[2025-04-21 13:44:28] se ha abierto una nueva terminal con usuario desde banco.c
+[2025-04-21 13:44:28] se ha generado un archvio con el pid del usuario desde banco.c
+[2025-04-21 13:44:32] Se ha alamcenado el pid del usuario desde banco.c
+[2025-04-21 13:44:46] se ha matado los hijos desde banco.c
+[2025-04-21 13:44:46] Se acaban con todos los procesos desde banco.c
+[2025-04-21 13:46:49] Se ha accedido al main de banco y se han incializado los semaforos en banco.c
+[2025-04-21 13:46:49] se  ha creado la cola de mensjes correctamente en Comun.c
+[2025-04-21 13:46:49] Se crea el fork de monitor desde banco.c
+[2025-04-21 13:46:49] Se crea el fork de monitor desde banco.c
+[2025-04-21 13:46:49] Proceso monitor hijo iniciado desde banco.c
+[2025-04-21 13:46:49] se han inicializado los semaforos desde comun.c
+[2025-04-21 13:46:49] Detectando retiros consecutivos... en monitor.c
+[2025-04-21 13:46:49] Detectando saldos negativos... en monitor.c
+[2025-04-21 13:46:49] Detectando transacciones sospechosas... en monitor.c
+[2025-04-21 13:46:49] Detectando transferencias consecutivas... en monitor.c
+[2025-04-21 13:46:55] Proceso monitor creado correctamente desde banco.c
+[2025-04-21 13:46:55] se ha abierto una nueva terminal con usuario desde banco.c
+[2025-04-21 13:46:56] se ha generado un archvio con el pid del usuario desde banco.c
+[2025-04-21 13:47:00] Se ha alamcenado el pid del usuario desde banco.c
+[2025-04-21 13:47:37] Se ha registrado un nuevo usuario en el sistema
+[2025-04-21 13:47:59] Detectando transacciones sospechosas... en monitor.c
+[2025-04-21 13:47:59] Detectando retiros consecutivos... en monitor.c
+[2025-04-21 13:47:59] Detectando transferencias consecutivas... en monitor.c
+[2025-04-21 13:47:59] Detectando saldos negativos... en monitor.c
+[2025-04-21 13:48:01] Se ha registrado un nuevo usuario en el sistema
+[2025-04-21 13:48:10] El usuario ha introducido dinero correctamente en IntroducirDinero.c
+[2025-04-21 13:49:09] Detectando retiros consecutivos... en monitor.c
+[2025-04-21 13:49:09] Detectando transferencias consecutivas... en monitor.c
+[2025-04-21 13:49:09] Detectando transacciones sospechosas... en monitor.c
+[2025-04-21 13:49:09] Detectando saldos negativos... en monitor.c
+[2025-04-21 13:49:16] se ha matado los hijos desde banco.c
+[2025-04-21 13:49:16] Se acaban con todos los procesos desde banco.c
+[2025-04-21 14:17:59] Se ha accedido al main de banco y se han incializado los semaforos en banco.c
+[2025-04-21 14:17:59] se  ha creado la cola de mensjes correctamente en Comun.c
+[2025-04-21 14:17:59] Se crea el fork de monitor desde banco.c
+[2025-04-21 14:17:59] Se crea el fork de monitor desde banco.c
+[2025-04-21 14:17:59] Proceso monitor hijo iniciado desde banco.c
+[2025-04-21 14:17:59] se han inicializado los semaforos desde comun.c
+[2025-04-21 14:17:59] Detectando transferencias consecutivas... en monitor.c
+[2025-04-21 14:17:59] Detectando retiros consecutivos... en monitor.c
+[2025-04-21 14:17:59] Detectando saldos negativos... en monitor.c
+[2025-04-21 14:17:59] Detectando transacciones sospechosas... en monitor.c
+[2025-04-21 14:18:05] Proceso monitor creado correctamente desde banco.c
+[2025-04-21 14:18:06] se ha abierto una nueva terminal con usuario desde banco.c
+[2025-04-21 14:18:06] se ha generado un archvio con el pid del usuario desde banco.c
+[2025-04-21 14:18:10] Se ha alamcenado el pid del usuario desde banco.c
+[2025-04-21 14:18:14] se ha matado los hijos desde banco.c
+[2025-04-21 14:18:14] Se acaban con todos los procesos desde banco.c
+[2025-04-21 17:08:15] Se ha accedido al main de banco y se han incializado los semaforos en banco.c
+[2025-04-21 17:08:15] se  ha creado la cola de mensjes correctamente en Comun.c
+[2025-04-21 17:08:15] Se crea el fork de monitor desde banco.c
+[2025-04-21 17:08:15] Se crea el fork de monitor desde banco.c
+[2025-04-21 17:08:15] Proceso monitor hijo iniciado desde banco.c
+[2025-04-21 17:08:15] se han inicializado los semaforos desde comun.c
+[2025-04-21 17:08:15] Detectando transferencias consecutivas... en monitor.c
+[2025-04-21 17:08:15] Detectando retiros consecutivos... en monitor.c
+[2025-04-21 17:08:15] Detectando saldos negativos... en monitor.c
+[2025-04-21 17:08:15] Detectando transacciones sospechosas... en monitor.c
+[2025-04-21 17:08:21] Proceso monitor creado correctamente desde banco.c
+[2025-04-21 17:08:22] se ha abierto una nueva terminal con usuario desde banco.c
+[2025-04-21 17:08:22] se ha generado un archvio con el pid del usuario desde banco.c
+[2025-04-21 17:08:26] Se ha alamcenado el pid del usuario desde banco.c
+[2025-04-21 17:08:31] se ha matado los hijos desde banco.c
+[2025-04-21 17:08:31] Se acaban con todos los procesos desde banco.c
+[2025-04-21 17:13:34] Se ha accedido al main de banco y se han incializado los semaforos en banco.c
+[2025-04-21 17:13:34] se  ha creado la cola de mensjes correctamente en Comun.c
+[2025-04-21 17:13:34] Se crea el fork de monitor desde banco.c
+[2025-04-21 17:13:34] Se crea el fork de monitor desde banco.c
+[2025-04-21 17:13:34] Proceso monitor hijo iniciado desde banco.c
+[2025-04-21 17:13:34] se han inicializado los semaforos desde comun.c
+[2025-04-21 17:13:34] Detectando retiros consecutivos... en monitor.c
+[2025-04-21 17:13:34] Detectando transacciones sospechosas... en monitor.c
+[2025-04-21 17:13:34] Detectando transferencias consecutivas... en monitor.c
+[2025-04-21 17:13:34] Detectando saldos negativos... en monitor.c
+[2025-04-21 17:13:40] Proceso monitor creado correctamente desde banco.c
+[2025-04-21 17:13:40] se ha abierto una nueva terminal con usuario desde banco.c
+[2025-04-21 17:13:41] se ha generado un archvio con el pid del usuario desde banco.c
+[2025-04-21 17:13:45] Se ha alamcenado el pid del usuario desde banco.c
+[2025-04-21 17:14:15] El usuario ha desplegado el menú de consulta de datos en ConsultarDatos.c
+[2025-04-21 17:14:16] El usuario ha visto sus datos en ConsultarDatos.c
+[2025-04-21 17:14:21] El usuario ha elegido la opción de consultar datos.
+[2025-04-21 17:14:21] El usuario ha desplegado el menú de consulta de datos en ConsultarDatos.c
+[2025-04-21 17:14:44] Detectando transferencias consecutivas... en monitor.c
+[2025-04-21 17:14:44] Detectando retiros consecutivos... en monitor.c
+[2025-04-21 17:14:44] Detectando transacciones sospechosas... en monitor.c
+[2025-04-21 17:14:44] Detectando saldos negativos... en monitor.c
+[2025-04-21 17:15:54] Detectando retiros consecutivos... en monitor.c
+[2025-04-21 17:15:54] Detectando transferencias consecutivas... en monitor.c
+[2025-04-21 17:15:54] Detectando transacciones sospechosas... en monitor.c
+[2025-04-21 17:15:54] Detectando saldos negativos... en monitor.c
+[2025-04-21 17:16:34] El usuario ha desplegado el menú de consulta de datos en ConsultarDatos.c
+[2025-04-21 17:16:35] El usuario ha visto sus datos en ConsultarDatos.c
+[2025-04-21 17:16:38] El usuario ha elegido la opción de consultar datos.
+[2025-04-21 17:16:38] El usuario ha desplegado el menú de consulta de datos en ConsultarDatos.c
+[2025-04-21 17:16:42] El usuario ha elegido la opción de consultar transferencias.
+[2025-04-21 17:16:42] El usuario ha desplegado el menú de consulta de datos en ConsultarDatos.c
+[2025-04-21 17:17:04] Detectando transacciones sospechosas... en monitor.c
+[2025-04-21 17:17:04] Detectando saldos negativos... en monitor.c
+[2025-04-21 17:17:04] Detectando retiros consecutivos... en monitor.c
+[2025-04-21 17:17:04] Detectando transferencias consecutivas... en monitor.c
+[2025-04-21 17:17:16] Se ha registrado un nuevo usuario en el sistema
+[2025-04-21 17:18:14] Detectando transferencias consecutivas... en monitor.c
+[2025-04-21 17:18:14] Detectando saldos negativos... en monitor.c
+[2025-04-21 17:18:14] Detectando transacciones sospechosas... en monitor.c
+[2025-04-21 17:18:14] Detectando retiros consecutivos... en monitor.c
+[2025-04-21 17:19:24] Detectando saldos negativos... en monitor.c
+[2025-04-21 17:19:24] Detectando retiros consecutivos... en monitor.c
+[2025-04-21 17:19:24] Detectando transferencias consecutivas... en monitor.c
+[2025-04-21 17:19:24] Detectando transacciones sospechosas... en monitor.c
+[2025-04-21 17:20:34] Detectando transacciones sospechosas... en monitor.c
+[2025-04-21 17:20:34] Detectando transferencias consecutivas... en monitor.c
+[2025-04-21 17:20:34] Detectando retiros consecutivos... en monitor.c
+[2025-04-21 17:20:34] Detectando saldos negativos... en monitor.c
+[2025-04-21 17:21:44] Detectando transferencias consecutivas... en monitor.c
+[2025-04-21 17:21:44] Detectando saldos negativos... en monitor.c
+[2025-04-21 17:21:44] Detectando transacciones sospechosas... en monitor.c
+[2025-04-21 17:21:44] Detectando retiros consecutivos... en monitor.c
+[2025-04-21 17:22:54] Detectando transferencias consecutivas... en monitor.c
+[2025-04-21 17:22:54] Detectando saldos negativos... en monitor.c
+[2025-04-21 17:22:54] Detectando retiros consecutivos... en monitor.c
+[2025-04-21 17:22:54] Detectando transacciones sospechosas... en monitor.c
+[2025-04-21 17:23:04] se ha matado los hijos desde banco.c
+[2025-04-21 17:23:04] Se acaban con todos los procesos desde banco.c
+[2025-04-21 17:23:13] Se ha accedido al main de banco y se han incializado los semaforos en banco.c
+[2025-04-21 17:23:13] se  ha creado la cola de mensjes correctamente en Comun.c
+[2025-04-21 17:23:13] Se crea el fork de monitor desde banco.c
+[2025-04-21 17:23:13] Se crea el fork de monitor desde banco.c
+[2025-04-21 17:23:13] Proceso monitor hijo iniciado desde banco.c
+[2025-04-21 17:23:13] se han inicializado los semaforos desde comun.c
+[2025-04-21 17:23:13] Detectando transferencias consecutivas... en monitor.c
+[2025-04-21 17:23:13] Detectando transacciones sospechosas... en monitor.c
+[2025-04-21 17:23:13] Detectando saldos negativos... en monitor.c
+[2025-04-21 17:23:13] Detectando retiros consecutivos... en monitor.c
+[2025-04-21 17:23:19] Proceso monitor creado correctamente desde banco.c
+[2025-04-21 17:23:19] se ha abierto una nueva terminal con usuario desde banco.c
+[2025-04-21 17:23:20] se ha generado un archvio con el pid del usuario desde banco.c
+[2025-04-21 17:23:24] Se ha alamcenado el pid del usuario desde banco.c
+[2025-04-21 17:24:00] Se ha registrado un nuevo usuario en el sistema
+[2025-04-21 17:24:23] Detectando transferencias consecutivas... en monitor.c
+[2025-04-21 17:24:23] Detectando retiros consecutivos... en monitor.c
+[2025-04-21 17:24:23] Detectando transacciones sospechosas... en monitor.c
+[2025-04-21 17:24:23] Detectando saldos negativos... en monitor.c
+[2025-04-21 17:25:09] se ha matado los hijos desde banco.c
+[2025-04-21 17:25:09] Se acaban con todos los procesos desde banco.c
+[2025-04-21 17:25:12] Se ha accedido al main de banco y se han incializado los semaforos en banco.c
+[2025-04-21 17:25:12] se  ha creado la cola de mensjes correctamente en Comun.c
+[2025-04-21 17:25:12] Se crea el fork de monitor desde banco.c
+[2025-04-21 17:25:12] Se crea el fork de monitor desde banco.c
+[2025-04-21 17:25:12] Proceso monitor hijo iniciado desde banco.c
+[2025-04-21 17:25:12] se han inicializado los semaforos desde comun.c
+[2025-04-21 17:25:12] Detectando retiros consecutivos... en monitor.c
+[2025-04-21 17:25:12] Detectando transferencias consecutivas... en monitor.c
+[2025-04-21 17:25:12] Detectando transacciones sospechosas... en monitor.c
+[2025-04-21 17:25:12] Detectando saldos negativos... en monitor.c
+[2025-04-21 17:25:18] Proceso monitor creado correctamente desde banco.c
+[2025-04-21 17:25:19] se ha abierto una nueva terminal con usuario desde banco.c
+[2025-04-21 17:25:19] se ha generado un archvio con el pid del usuario desde banco.c
+[2025-04-21 17:25:23] Se ha alamcenado el pid del usuario desde banco.c
+[2025-04-21 17:26:22] Detectando transferencias consecutivas... en monitor.c
+[2025-04-21 17:26:22] Detectando retiros consecutivos... en monitor.c
+[2025-04-21 17:26:22] Detectando saldos negativos... en monitor.c
+[2025-04-21 17:26:22] Detectando transacciones sospechosas... en monitor.c
+[2025-04-21 17:26:23] Se ha registrado un nuevo usuario en el sistema
+[2025-04-21 17:26:36] Se ha registrado un nuevo usuario en el sistema
+[2025-04-21 17:27:32] Detectando transferencias consecutivas... en monitor.c
+[2025-04-21 17:27:32] Detectando transacciones sospechosas... en monitor.c
+[2025-04-21 17:27:32] Detectando retiros consecutivos... en monitor.c
+[2025-04-21 17:27:32] Detectando saldos negativos... en monitor.c
+[2025-04-21 17:28:03] El usuario ha introducido dinero correctamente en IntroducirDinero.c
+[2025-04-21 17:28:24] Dinero extraído correctamente en ExtraerDinero.c
+[2025-04-21 17:28:42] Detectando transferencias consecutivas... en monitor.c
+[2025-04-21 17:28:42] Detectando transacciones sospechosas... en monitor.c
+[2025-04-21 17:28:42] Detectando retiros consecutivos... en monitor.c
+[2025-04-21 17:28:42] Detectando saldos negativos... en monitor.c
+[2025-04-21 17:29:01] Dinero extraído correctamente en ExtraerDinero.c
+[2025-04-21 17:29:25] se ha matado los hijos desde banco.c
+[2025-04-21 17:29:25] Se acaban con todos los procesos desde banco.c
+[2025-04-21 17:33:38] Se ha accedido al main de banco y se han incializado los semaforos en banco.c
+[2025-04-21 17:33:38] se  ha creado la cola de mensjes correctamente en Comun.c
+[2025-04-21 17:33:38] Se crea el fork de monitor desde banco.c
+[2025-04-21 17:33:38] Se crea el fork de monitor desde banco.c
+[2025-04-21 17:33:38] Proceso monitor hijo iniciado desde banco.c
+[2025-04-21 17:33:38] se han inicializado los semaforos desde comun.c
+[2025-04-21 17:33:38] Detectando retiros consecutivos... en monitor.c
+[2025-04-21 17:33:38] Detectando saldos negativos... en monitor.c
+[2025-04-21 17:33:38] Detectando transferencias consecutivas... en monitor.c
+[2025-04-21 17:33:38] Detectando transacciones sospechosas... en monitor.c
+[2025-04-21 17:33:44] Proceso monitor creado correctamente desde banco.c
+[2025-04-21 17:33:44] se ha abierto una nueva terminal con usuario desde banco.c
+[2025-04-21 17:33:45] se ha generado un archvio con el pid del usuario desde banco.c
+[2025-04-21 17:33:49] Se ha alamcenado el pid del usuario desde banco.c
+[2025-04-21 17:34:09] Se ha registrado un nuevo usuario en el sistema
+[2025-04-21 17:34:35] Se ha registrado un nuevo usuario en el sistema
+[2025-04-21 17:34:48] Detectando transacciones sospechosas... en monitor.c
+[2025-04-21 17:34:48] Detectando transferencias consecutivas... en monitor.c
+[2025-04-21 17:34:48] Detectando saldos negativos... en monitor.c
+[2025-04-21 17:34:48] Detectando retiros consecutivos... en monitor.c
+[2025-04-21 17:35:22] El usuario ha desplegado el menú de consulta de datos en ConsultarDatos.c
+[2025-04-21 17:35:22] El usuario ha visto sus datos en ConsultarDatos.c
+[2025-04-21 17:35:24] El usuario ha elegido la opción de consultar datos.
+[2025-04-21 17:35:24] El usuario ha desplegado el menú de consulta de datos en ConsultarDatos.c
+[2025-04-21 17:35:30] El usuario ha introducido dinero correctamente en IntroducirDinero.c
+[2025-04-21 17:35:35] Dinero extraído correctamente en ExtraerDinero.c
+[2025-04-21 17:35:58] Detectando transferencias consecutivas... en monitor.c
+[2025-04-21 17:35:58] Detectando retiros consecutivos... en monitor.c
+[2025-04-21 17:35:58] Detectando saldos negativos... en monitor.c
+[2025-04-21 17:35:58] Detectando transacciones sospechosas... en monitor.c
+[2025-04-21 17:37:08] Detectando transferencias consecutivas... en monitor.c
+[2025-04-21 17:37:08] Detectando retiros consecutivos... en monitor.c
+[2025-04-21 17:37:08] Detectando transacciones sospechosas... en monitor.c
+[2025-04-21 17:37:08] Detectando saldos negativos... en monitor.c
+[2025-04-21 17:37:46] se ha matado los hijos desde banco.c
+[2025-04-21 17:37:46] Se acaban con todos los procesos desde banco.c

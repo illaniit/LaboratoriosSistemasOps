@@ -49,8 +49,6 @@ int main()
 
     Destruir_semaforos();
 
-    // Limpiar_MemoriaCompartida(); // Limpiar memoria compartida
-    Escribir_registro("Se ha limpiado la memoria compartida en banco.c");
 
     return 0;
 }

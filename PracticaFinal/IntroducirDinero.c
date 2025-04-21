@@ -29,17 +29,17 @@ void *IntroducirDinero(void *arg2)
     printf("Introduzca la cantidad que desea ingresar: ");
     scanf("%d", &saldo_introducir);
 
-    if (saldo_introducir < 0) {
+    if (saldo_introducir < 0)
+    {
         printf("No puedes ingresar una cantidad negativa!\n");
         Escribir_registro("El usuario ha intentado introducir una cantidad negativa en IntroducirDinero.c");
         return NULL;
     }
 
- 
-
     // ✅ Acceso a la memoria compartida
     key_t clave = ftok("Cuenta.h", 65);
-    if (clave == -1) {
+    if (clave == -1)
+    {
         perror("❌ Error al generar clave con ftok");
         sem_post(sem_usuarios);
         sem_post(sem_transacciones);
@@ -47,7 +47,8 @@ void *IntroducirDinero(void *arg2)
     }
 
     int shmid = shmget(clave, sizeof(Cuenta) * MAX_CUENTAS, 0666);
-    if (shmid == -1) {
+    if (shmid == -1)
+    {
         perror("❌ Error al obtener segmento de memoria compartida");
         sem_post(sem_usuarios);
         sem_post(sem_transacciones);
@@ -55,7 +56,8 @@ void *IntroducirDinero(void *arg2)
     }
 
     Cuenta *cuentas = (Cuenta *)shmat(shmid, NULL, 0);
-    if (cuentas == (void *) -1) {
+    if (cuentas == (void *)-1)
+    {
         perror("❌ Error al enlazar memoria compartida");
         sem_post(sem_usuarios);
         sem_post(sem_transacciones);
@@ -65,11 +67,14 @@ void *IntroducirDinero(void *arg2)
     // 📈 Leer el último ID de transacción
     int id_transacciones = 0;
     FILE *ArchivoTransacciones = fopen("transaciones.txt", "r");
-    if (ArchivoTransacciones) {
+    if (ArchivoTransacciones)
+    {
         char linea[256];
-        while (fgets(linea, sizeof(linea), ArchivoTransacciones)) {
+        while (fgets(linea, sizeof(linea), ArchivoTransacciones))
+        {
             int temp_id;
-            if (sscanf(linea, "%d |", &temp_id) == 1) {
+            if (sscanf(linea, "%d |", &temp_id) == 1)
+            {
                 id_transacciones = temp_id;
             }
         }
@@ -78,15 +83,18 @@ void *IntroducirDinero(void *arg2)
     id_transacciones++;
 
     // 🔍 Buscar al usuario en memoria compartida
-    for (int i = 0; i < MAX_CUENTAS; i++) {
+    for (int i = 0; i < MAX_CUENTAS; i++)
+    {
         Cuenta *c = &cuentas[i];
 
-        if (strlen(c->Nombre) == 0) continue;
+        if (strlen(c->Nombre) == 0)
+            continue;
 
         limpiar_cadena(c->Nombre);
         limpiar_cadena(c->Contraseña);
 
-        if (strcmp(c->Nombre, usuario->Usuario2) == 0 && strcmp(c->Contraseña, usuario->Contraseña1) == 0) {
+        if (strcmp(c->Nombre, usuario->Usuario2) == 0 && strcmp(c->Contraseña, usuario->Contraseña1) == 0)
+        {
             int dinero_inicial = c->saldo;
             c->saldo += saldo_introducir;
             c->Numero_transacciones++;
@@ -96,11 +104,41 @@ void *IntroducirDinero(void *arg2)
 
             // 📝 Registrar transacción
             ArchivoTransacciones = fopen("transaciones.txt", "a");
-            if (ArchivoTransacciones) {
+            if (ArchivoTransacciones)
+            {
                 fprintf(ArchivoTransacciones, "%d | ingreso | %d | - | %d | - | %d \n",
                         id_transacciones, c->id, dinero_inicial, c->saldo);
                 fclose(ArchivoTransacciones);
             }
+            char ruta_archivo[256];
+            const char *home = getenv("HOME");
+
+            if (!home)
+            {
+                perror("No se pudo obtener la variable HOME");
+                return NULL;
+            }
+
+            // Construir la ruta completa al archivo
+            snprintf(ruta_archivo, sizeof(ruta_archivo), "%s/transacciones/%d/transacciones.log", home, c->id);
+
+            FILE *ArchivoTransacciones2 = fopen(ruta_archivo, "a");
+            if (!ArchivoTransacciones2)
+            {
+                perror("No se pudo abrir el archivo de transacciones");
+                return NULL;
+            }
+
+            // Obtener la hora actual
+            time_t t = time(NULL);
+            struct tm *tm_info = localtime(&t);
+            char hora[20];
+            strftime(hora, sizeof(hora), "%Y-%m-%d %H:%M:%S", tm_info);
+
+            // Escribir en el archivo
+            fprintf(ArchivoTransacciones2, "[%s] Ingreso: %d ------------------------------------------------------------------- %d$\n", hora, saldo_introducir,c->saldo);
+
+            fclose(ArchivoTransacciones2);
             break;
         }
     }
@@ -110,10 +148,13 @@ void *IntroducirDinero(void *arg2)
     sem_post(sem_usuarios);
     sem_post(sem_transacciones);
 
-    if (encontrado) {
+    if (encontrado)
+    {
         printf("✅ Saldo actualizado correctamente.\n");
         sleep(2);
-    } else {
+    }
+    else
+    {
         printf("❌ Usuario no encontrado o contraseña incorrecta.\n");
     }
 

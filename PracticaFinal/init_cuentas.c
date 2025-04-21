@@ -18,6 +18,7 @@ void Menu_Usuario();
 void Registro();
 void InicioDeSesion();
 void Mostrar_Menu(char *Usuario, char *Contraseña);
+void CrearArchivoTransacciones(int id,char *Nombre);
 
 int main()
 {
@@ -50,6 +51,45 @@ int main()
     shmdt(cuentas);
     return 0;
 }
+void CrearArchivoTransacciones(int id,char *nombre)
+{
+    char path[256];
+    char log_path[300];
+
+    // Obtener ruta del directorio HOME
+    const char *home = getenv("HOME");
+    if (home == NULL) {
+        fprintf(stderr, "No se pudo obtener la variable de entorno HOME\n");
+        return;
+    }
+
+    // Construir ruta del directorio: ~/transacciones/<id>
+    snprintf(path, sizeof(path), "%s/transacciones/%d", home, id);
+
+    // Crear carpeta ~/transacciones si no existe
+    char transacciones_dir[256];
+    snprintf(transacciones_dir, sizeof(transacciones_dir), "%s/transacciones", home);
+    mkdir(transacciones_dir, 0777);
+
+    // Crear subdirectorio del usuario
+    if (mkdir(path, 0777) == -1 && errno != EEXIST) {
+        perror("Error al crear el directorio del usuario");
+        return;
+    }
+
+    // Crear archivo transacciones.log dentro del directorio
+    snprintf(log_path, sizeof(log_path), "%s/transacciones.log", path);
+    FILE *archivo = fopen(log_path, "a");
+    if (!archivo) {
+        perror("Error al crear transacciones.log");
+        return;
+    }
+    fprintf(archivo, "Bienvenido a tu extracto\n");
+    fprintf(archivo, "Registro de transacciones de %s\n", nombre);
+    fclose(archivo);
+
+    printf("Directorio y log creados en: %s\n", log_path);
+}
 
 void Menu_Usuario()
 {
@@ -60,8 +100,8 @@ void Menu_Usuario()
         system("clear");
 
         printf("\n==========================================\n");
-        printf("            💰 BANCO 💰                        \n");
-        printf("==========================================\n");
+        printf("            💰 BANCO 💰                     \n");
+        printf("==========================================  \n");
         printf(" 1️⃣  Inicio de sesión\n");
         printf(" 2️⃣  Registro\n");
         printf(" 3️⃣  Salir\n");
@@ -203,4 +243,7 @@ void Registro()
         printf("❌ No hay espacio para más cuentas.\n");
         sleep(2);
     }
+
+    CrearArchivoTransacciones(cuenta.id,cuenta.Nombre);
+    Escribir_registro("Se ha registrado un nuevo usuario en el sistema");
 }
