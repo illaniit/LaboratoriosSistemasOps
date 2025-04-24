@@ -18,7 +18,7 @@ void Menu_Usuario();
 void Registro();
 void InicioDeSesion();
 void Mostrar_Menu(char *Usuario, char *Contraseña);
-void CrearArchivoTransacciones(int id,char *Nombre);
+void CrearArchivoTransacciones(int id, const char *Nombre);
 
 int main()
 {
@@ -51,45 +51,46 @@ int main()
     shmdt(cuentas);
     return 0;
 }
-void CrearArchivoTransacciones(int id,char *nombre)
-{
-    char path[256];
+
+void CrearArchivoTransacciones(int id, const char *nombre) {
+    char path_base[] = "./transacciones";
+    char path_usuario[256];
     char log_path[300];
 
-    // Obtener ruta del directorio HOME
-    const char *home = getenv("HOME");
-    if (home == NULL) {
-        fprintf(stderr, "No se pudo obtener la variable de entorno HOME\n");
+    // Crear carpeta ./transacciones si no existe
+    if (mkdir(path_base, 0777) == -1 && errno != EEXIST) {
+        perror("Error al crear el directorio ./transacciones");
         return;
     }
 
-    // Construir ruta del directorio: ~/transacciones/<id>
-    snprintf(path, sizeof(path), "%s/transacciones/%d", home, id);
+    // Construir ruta del usuario: ./transacciones/<id>
+    snprintf(path_usuario, sizeof(path_usuario), "%s/%d", path_base, id);
 
-    // Crear carpeta ~/transacciones si no existe
-    char transacciones_dir[256];
-    snprintf(transacciones_dir, sizeof(transacciones_dir), "%s/transacciones", home);
-    mkdir(transacciones_dir, 0777);
-
-    // Crear subdirectorio del usuario
-    if (mkdir(path, 0777) == -1 && errno != EEXIST) {
+    // Crear subcarpeta ./transacciones/<id>
+    if (mkdir(path_usuario, 0777) == -1 && errno != EEXIST) {
         perror("Error al crear el directorio del usuario");
         return;
     }
 
-    // Crear archivo transacciones.log dentro del directorio
-    snprintf(log_path, sizeof(log_path), "%s/transacciones.log", path);
+    // Crear archivo: ./transacciones/<id>/transacciones.log
+    snprintf(log_path, sizeof(log_path), "%s/transacciones.log", path_usuario);
+
     FILE *archivo = fopen(log_path, "a");
     if (!archivo) {
         perror("Error al crear transacciones.log");
         return;
     }
+
     fprintf(archivo, "Bienvenido a tu extracto\n");
     fprintf(archivo, "Registro de transacciones de %s\n", nombre);
     fclose(archivo);
 
-    printf("Directorio y log creados en: %s\n", log_path);
+    printf("Directorio y archivo creados en: %s\n", log_path);
 }
+
+
+
+
 
 void Menu_Usuario()
 {
