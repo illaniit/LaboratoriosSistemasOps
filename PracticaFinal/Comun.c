@@ -86,6 +86,9 @@ Config leer_configuracion(const char *ruta)
         else if (strstr(linea, "ARCHIVO_LOG"))
             sscanf(linea, "ARCHIVO_LOG=%s",
                    config.archivo_log);
+        else if (strstr(linea, "MAX_CUENTAS"))
+            sscanf(linea, "MAX_CUENTAS=%d",
+                   &config.max_cuentas);
     }
     fclose(archivo);
     return config;

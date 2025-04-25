@@ -30,6 +30,8 @@ void ActualizarArchivoCuentas();
 
 /// @brief este es el main en el cual leemos propertis con las variables
 /// @return y devolvemos 0 si la ejecuccion ha sido exitosa
+
+
 int main()
 {
 
@@ -42,7 +44,6 @@ int main()
 
     crear_cola_mensajes();
 
-    Config config = leer_configuracion("variables.properties");
     // Lo primero abrimos el archivo de Properties y "nos traemos las variables"
 
     signal(SIGUSR1, leer_alerta_cola); // Manejar señal del monitor
@@ -61,9 +62,10 @@ int main()
 
 void CrearMemoria()
 {
+    Config config = leer_configuracion("variables.properties");
     key_t clave = ftok("Cuenta.h", 66);
     printf("[DEBUG] Clave generada: %d\n", clave);
-    int shmid = shmget(clave, MAX_CUENTAS * sizeof(Cuenta), 0666 | IPC_CREAT);
+    int shmid = shmget(clave, config.max_cuentas * sizeof(Cuenta), 0666 | IPC_CREAT);
     cuentas = (Cuenta *)shmat(shmid, NULL, 0);
     
     if (shmid == -1)
@@ -85,7 +87,7 @@ void CrearMemoria()
     // Leer y cargar las cuentas en la memoria compartida
     char linea[512];
     int i = 0;
-    while (fgets(linea, sizeof(linea), archivo) && i < MAX_CUENTAS)
+    while (fgets(linea, sizeof(linea), archivo) && i < config.max_cuentas)
     {
         Cuenta cuenta_temp;
         char fecha[20], hora[20];
@@ -417,7 +419,7 @@ void ListarCuentas()
     printf("\n==============================\n");
     printf("    📋 LISTA DE CUENTAS\n");
     printf("==============================\n");
-
+    Config config = leer_configuracion("variables.properties");
     if (cuentas == NULL)
     {
         printf("❌ Memoria compartida no inicializada.\n");
@@ -464,7 +466,7 @@ void ListarCuentas()
         i++;
 
         // Seguridad: evitar leer fuera de los límites
-        if (i >= MAX_CUENTAS)
+        if (i >= config.max_cuentas)
             break;
     }
 }
@@ -540,7 +542,7 @@ void CrearCarpetas()
                 continue;
             }
 
-            
+
             // Escribir datos en un formato más bonito
             fprintf(log, "--------------------------------------------\n");
             fprintf(log, "🏦 TRANSACCIONES DEL USUARIO\n");
@@ -570,7 +572,7 @@ void ActualizarArchivoCuentas()
         Escribir_registro("❌ Error al abrir cuentas.txt para lectura/escritura en banco.c");
         return;
     }
-
+    Config config = leer_configuracion("variables.properties");
     char linea[512];
     long posicion;
     int cuenta_actualizada = 0;
@@ -593,7 +595,7 @@ void ActualizarArchivoCuentas()
                    hora) == 9)
         {
             // Buscar la cuenta en la memoria compartida
-            for (int i = 0; i < MAX_CUENTAS; i++)
+            for (int i = 0; i < config.max_cuentas; i++)
             {
                 if (cuentas[i].id == cuenta_temp.id)
                 {

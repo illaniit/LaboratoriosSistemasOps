@@ -1295,3 +1295,57 @@
 [2025-04-25 17:42:08] se ha matado los hijos desde banco.c
 [2025-04-25 17:42:08] Se acaban con todos los procesos desde banco.c
 [2025-04-25 17:42:08] ✅ Archivo de cuentas actualizado correctamente en banco.c
+[2025-04-25 17:53:11] Se ha accedido al main de banco y se han incializado los semaforos en banco.c
+[2025-04-25 17:53:11] ✅ Carpetas de transacciones creadas correctamente en banco.c
+[2025-04-25 17:53:11] se  ha creado la cola de mensjes correctamente en Comun.c
+[2025-04-25 17:53:11] Se crea el fork de monitor desde banco.c
+[2025-04-25 17:53:11] Se crea el fork de monitor desde banco.c
+[2025-04-25 17:53:11] Proceso monitor hijo iniciado desde banco.c
+[2025-04-25 17:53:11] se han inicializado los semaforos desde comun.c
+[2025-04-25 17:53:11] Detectando retiros consecutivos... en monitor.c
+[2025-04-25 17:53:11] Detectando transferencias consecutivas... en monitor.c
+[2025-04-25 17:53:11] Detectando saldos negativos... en monitor.c
+[2025-04-25 17:53:11] Detectando transacciones sospechosas... en monitor.c
+[2025-04-25 17:53:17] Proceso monitor creado correctamente desde banco.c
+[2025-04-25 17:53:17] se ha abierto una nueva terminal con usuario desde banco.c
+[2025-04-25 17:53:18] se ha generado un archvio con el pid del usuario desde banco.c
+[2025-04-25 17:53:22] Se ha alamcenado el pid del usuario desde banco.c
+[2025-04-25 17:53:38] se ha matado los hijos desde banco.c
+[2025-04-25 17:53:38] Se acaban con todos los procesos desde banco.c
+[2025-04-25 17:53:38] ✅ Archivo de cuentas actualizado correctamente en banco.c
+[2025-04-25 17:54:48] Se ha accedido al main de banco y se han incializado los semaforos en banco.c
+[2025-04-25 17:54:48] ✅ Carpetas de transacciones creadas correctamente en banco.c
+[2025-04-25 17:54:48] se  ha creado la cola de mensjes correctamente en Comun.c
+[2025-04-25 17:54:48] Se crea el fork de monitor desde banco.c
+[2025-04-25 17:54:48] Se crea el fork de monitor desde banco.c
+[2025-04-25 17:54:48] Proceso monitor hijo iniciado desde banco.c
+[2025-04-25 17:54:48] se han inicializado los semaforos desde comun.c
+[2025-04-25 17:54:48] Detectando transferencias consecutivas... en monitor.c
+[2025-04-25 17:54:48] Detectando saldos negativos... en monitor.c
+[2025-04-25 17:54:48] Detectando retiros consecutivos... en monitor.c
+[2025-04-25 17:54:48] Detectando transacciones sospechosas... en monitor.c
+[2025-04-25 17:54:54] Proceso monitor creado correctamente desde banco.c
+[2025-04-25 17:54:54] se ha abierto una nueva terminal con usuario desde banco.c
+[2025-04-25 17:54:55] se ha generado un archvio con el pid del usuario desde banco.c
+[2025-04-25 17:54:59] Se ha alamcenado el pid del usuario desde banco.c
+[2025-04-25 17:55:09] se ha matado los hijos desde banco.c
+[2025-04-25 17:55:09] Se acaban con todos los procesos desde banco.c
+[2025-04-25 17:55:09] ✅ Archivo de cuentas actualizado correctamente en banco.c
+[2025-04-25 17:55:20] Se ha accedido al main de banco y se han incializado los semaforos en banco.c
+[2025-04-25 17:55:20] ✅ Carpetas de transacciones creadas correctamente en banco.c
+[2025-04-25 17:55:20] se  ha creado la cola de mensjes correctamente en Comun.c
+[2025-04-25 17:55:20] Se crea el fork de monitor desde banco.c
+[2025-04-25 17:55:20] Se crea el fork de monitor desde banco.c
+[2025-04-25 17:55:20] Proceso monitor hijo iniciado desde banco.c
+[2025-04-25 17:55:20] se han inicializado los semaforos desde comun.c
+[2025-04-25 17:55:20] Detectando transferencias consecutivas... en monitor.c
+[2025-04-25 17:55:20] Detectando saldos negativos... en monitor.c
+[2025-04-25 17:55:20] Detectando transacciones sospechosas... en monitor.c
+[2025-04-25 17:55:20] Detectando retiros consecutivos... en monitor.c
+[2025-04-25 17:55:26] Proceso monitor creado correctamente desde banco.c
+[2025-04-25 17:55:26] se ha abierto una nueva terminal con usuario desde banco.c
+[2025-04-25 17:55:27] se ha generado un archvio con el pid del usuario desde banco.c
+[2025-04-25 17:55:31] Se ha alamcenado el pid del usuario desde banco.c
+[2025-04-25 17:55:54] se ha matado los hijos desde banco.c
+[2025-04-25 17:55:54] Se acaban con todos los procesos desde banco.c
+[2025-04-25 17:55:55] ✅ Archivo de cuentas actualizado correctamente en banco.c

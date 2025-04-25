@@ -60,7 +60,7 @@ void *ExtraerDinero(void *arg3)
     }
     id_transacciones++;
 
-    for (int i = 0; i < MAX_CUENTAS; i++)
+    for (int i = 0; i < config.max_cuentas; i++)
     {
         if (strcmp(cuentas[i].Nombre, usuario->Usuario3) == 0 &&
             strcmp(cuentas[i].Contraseña, usuario->Contraseña1) == 0)

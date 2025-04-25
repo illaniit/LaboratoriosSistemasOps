@@ -11,6 +11,7 @@ typedef struct Config
     int num_hilos;
     char archivo_cuentas[50];
     char archivo_log[50];
+    int max_cuentas;
 } Config;
 
 #include <fcntl.h>

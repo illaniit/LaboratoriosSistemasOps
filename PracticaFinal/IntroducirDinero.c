@@ -19,7 +19,7 @@ void *IntroducirDinero(void *arg2)
     struct Usuario3 *usuario = (struct Usuario3 *)arg2;
     bool encontrado = false;
     int saldo_introducir;
-
+    Config config = leer_configuracion("variables.properties");
     sem_wait(sem_usuarios);
     sem_wait(sem_transacciones);
     system("clear");
@@ -82,7 +82,7 @@ void *IntroducirDinero(void *arg2)
     }
     id_transacciones++;
 
-    for (int i = 0; i < MAX_CUENTAS; i++)
+    for (int i = 0; i < config.max_cuentas; i++)
     {
         Cuenta *c = &cuentas[i];
 

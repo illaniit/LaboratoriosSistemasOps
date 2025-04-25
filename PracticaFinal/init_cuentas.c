@@ -179,7 +179,7 @@ void InicioDeSesion()
     system("clear");
     char Usuario[50], Contraseña[50];
     int acceso = 0;
-
+    Config config = leer_configuracion("variables.properties");
     Cuenta *cuenta = cuentas;
 
     printf("👤 Nombre de usuario: ");
@@ -188,7 +188,7 @@ void InicioDeSesion()
     scanf("%49s", Contraseña);
 
     // Buscar en memoria compartida
-    for (int i = 0; i < MAX_CUENTAS; i++)
+    for (int i = 0; i < config.max_cuentas; i++)
     {
         if (cuenta[i].id != 0 &&
             strcmp(Usuario, cuenta[i].Nombre) == 0 &&
@@ -278,7 +278,7 @@ void InicioDeSesion()
                 else
                 {
                     // Insertar el usuario en la primera posición libre
-                    for (int i = 0; i < MAX_CUENTAS; i++)
+                    for (int i = 0; i < config.max_cuentas; i++)
                     {
                         if (cuentas[i].id == 0)
                         {

@@ -31,7 +31,7 @@ void *Transferencia(void *arg) {
     sem_wait(sem_transacciones);
 
     int id_origen = -1;
-    for (int i = 0; i < MAX_CUENTAS; i++) {
+    for (int i = 0; i < config.max_cuentas; i++) {
         if (strcmp(cuentas[i].Nombre, usuario->nombre) == 0 &&
             strcmp(cuentas[i].Contraseña, usuario->contrasena) == 0) {
             id_origen = cuentas[i].id;
@@ -60,7 +60,7 @@ void *Transferencia(void *arg) {
     Cuenta *cuenta_origen = NULL;
     Cuenta *cuenta_destino = NULL;
 
-    for (int i = 0; i < MAX_CUENTAS; i++) {
+    for (int i = 0; i < config.max_cuentas; i++) {
         if (cuentas[i].id == id_origen) {
             cuenta_origen = &cuentas[i];
         }
@@ -90,9 +90,9 @@ void *Transferencia(void *arg) {
             char hora[20];
         } CuentaConFecha;
 
-        CuentaConFecha cuentas_memoria[MAX_CUENTAS];
+        CuentaConFecha cuentas_memoria[config.max_cuentas];
 
-        for (int i = 0; i < MAX_CUENTAS; i++) {
+        for (int i = 0; i < config.max_cuentas; i++) {
             if (cuentas[i].id != 0) {
                 strcpy(cuentas_memoria[ocupadas].fecha, cuentas[i].fecha);
                 strcpy(cuentas_memoria[ocupadas].hora, cuentas[i].hora);
