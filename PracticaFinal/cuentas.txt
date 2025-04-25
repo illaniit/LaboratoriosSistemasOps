@@ -6,7 +6,7 @@
 6|Juan|Díaz|clave006|Calle Falsa 310|Argentina|4847|2023-01-07|15:40:00
 7|Juan|López|clave007|Urquiza 944|Venezuela|4284|2023-01-09|06:23:00
 8|Ana|López|clave008|Calle Falsa 518|Uruguay|2188|2023-01-10|07:01:00
-9|Ana|Díaz|clave009|Belgrano 961|Argentina|3174|2022-01-10|10:13:00
+9|alejandro|de pazos|123|casa|casa|1100|2025-04-25|13:23:24
 10|Carlos|Ruiz|clave010|Laprida 463|Paraguay|1514|2023-01-11|10:28:00
 11|Luis|Mendoza|clave011|Av Siempre Viva 870|México|3414|2023-01-12|12:40:00
 12|Laura|López|clave012|San Martin 765|México|3338|2023-01-13|13:14:00
@@ -80,9 +80,9 @@
 80|Diego|Gomez|clave080|Av Siempre Viva 338|Argentina|1493|2023-03-23|07:23:00
 81|Sofia|López|clave081|Av Rivadavia 556|Paraguay|4300|2023-03-23|12:13:00
 82|Maria|Díaz|clave082|Sarmiento 376|Colombia|2911|2023-03-24|13:54:00
-83|Laura|Vargas|clave083|Mitre 147|Chile|4845|2023-03-25|19:58:00
+83|Laura|Vargas|clave083|Mitre 147|Chile|4745|2023-03-25|19:58:00
 84|Maria|Torres|clave084|San Martin 501|Ecuador|992|2023-03-26|18:21:00
-85|Diego|Pérez|clave085|Sarmiento 501|México|2651|2023-03-27|22:20:00
+85|Diego|Pérez|clave085|Sarmiento 501|México|2751|2023-03-27|22:20:00
 86|Luis|Mendoza|clave086|Corrientes 937|Colombia|1435|2023-03-28|12:46:00
 87|Carlos|Díaz|clave087|Sarmiento 378|Bolivia|3955|2023-03-29|22:17:00
 88|Maria|Vargas|clave088|Mitre 570|Chile|4307|2023-03-30|08:25:00
@@ -95,8 +95,7 @@
 95|Maria|Gomez|clave095|Laprida 406|Uruguay|3446|2023-04-06|10:14:00
 96|Diego|Gomez|clave096|Corrientes 538|Venezuela|4851|2023-04-07|22:14:00
 97|Diego|Romero|clave097|Urquiza 427|Uruguay|3722|2023-04-09|03:25:00
-98|Sofia|Gomez|clave098|Av Rivadavia 216|Argentina|2508|2023-04-09|08:13:00
+98|Sofia|Gomez|clave098|Av Rivadavia 216|Argentina|1508|2023-04-09|08:13:00
 99|Maria|López|clave099|Av Rivadavia 107|Ecuador|4850|2023-04-10|21:10:00
-100|Sofia|Mendoza|clave100|Mitre 572|Ecuador|2542|2023-04-11|22:29:00
-101|alejandro|de pazos|123|casa|casa|1000|2025-04-25|13:23:24
-102|1|1|1|1|1|1|2025-04-25|13:29:32
+100|Sofia|Mendoza|clave100|Mitre 572|Ecuador|2442|2023-04-11|22:29:00
+101|1|1|1|1|1|1100|2025-04-25|17:40:33

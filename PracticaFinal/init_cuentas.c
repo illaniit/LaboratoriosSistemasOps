@@ -51,12 +51,13 @@ int main()
     shmdt(cuentas);
     return 0;
 }
-
 void CrearArchivoTransacciones(int id, const char *nombre)
 {
     char path_base[] = "./transacciones";
     char path_usuario[256];
     char log_path[300];
+    char apellidos[100] = "";
+    char nacionalidad[100] = "";
 
     // Crear carpeta ./transacciones si no existe
     if (mkdir(path_base, 0777) == -1 && errno != EEXIST)
@@ -85,8 +86,51 @@ void CrearArchivoTransacciones(int id, const char *nombre)
         return;
     }
 
-    fprintf(archivo, "Bienvenido a tu extracto\n");
-    fprintf(archivo, "Registro de transacciones de %s\n", nombre);
+    // Buscar el ID en el archivo cuentas.txt para obtener apellidos y nacionalidad
+    FILE *cuentas_file = fopen("cuentas.txt", "r");
+    if (cuentas_file)
+    {
+        char linea[256];
+        Cuenta cuenta_temp;
+
+        while (fgets(linea, sizeof(linea), cuentas_file))
+        {
+            if (sscanf(linea, "%d|%[^|]|%[^|]|%[^|]|%[^|]|%[^|]|%d|%[^|]|%s",
+                       &cuenta_temp.id,
+                       cuenta_temp.Nombre,
+                       cuenta_temp.Apellido,
+                       cuenta_temp.Contraseña,
+                       cuenta_temp.domicilio,
+                       cuenta_temp.pais,
+                       &cuenta_temp.saldo,
+                       cuenta_temp.fecha,
+                       cuenta_temp.hora) == 9)
+            {
+                if (cuenta_temp.id == id)
+                {
+                    strncpy(apellidos, cuenta_temp.Apellido, sizeof(apellidos) - 1);
+                    strncpy(nacionalidad, cuenta_temp.pais, sizeof(nacionalidad) - 1);
+                    break;
+                }
+            }
+        }
+        fclose(cuentas_file);
+    }
+    else
+    {
+        perror("Error al abrir cuentas.txt");
+    }
+
+    // Escribir datos en un formato más bonito
+    fprintf(archivo, "--------------------------------------------\n");
+    fprintf(archivo, "🏦 TRANSACCIONES DEL USUARIO\n");
+    fprintf(archivo, "--------------------------------------------\n");
+    fprintf(archivo, "Nombre: %s\n", nombre);
+    fprintf(archivo, "Apellidos: %s\n", apellidos);
+    fprintf(archivo, "Número de Cuenta: %d\n", id);
+    fprintf(archivo, "Nacionalidad: %s\n", nacionalidad);
+    fprintf(archivo, "--------------------------------------------\n\n");
+
     fclose(archivo);
 
     printf("Directorio y archivo creados en: %s\n", log_path);

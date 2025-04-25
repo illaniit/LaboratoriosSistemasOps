@@ -31,13 +31,14 @@ void *IntroducirDinero(void *arg2)
 
     if (saldo_introducir < 0)
     {
-        printf("No puedes ingresar una cantidad negativa!\n");
+        printf("❌ No puedes ingresar una cantidad negativa!\n");
         Escribir_registro("El usuario ha intentado introducir una cantidad negativa en IntroducirDinero.c");
+        sem_post(sem_usuarios);
+        sem_post(sem_transacciones);
         return NULL;
     }
 
-    // ✅ Acceso a la memoria compartida
-    key_t clave = ftok("Cuenta.h", 65);
+    key_t clave = ftok("Cuenta.h", 66);
     if (clave == -1)
     {
         perror("❌ Error al generar clave con ftok");
@@ -64,7 +65,6 @@ void *IntroducirDinero(void *arg2)
         return NULL;
     }
 
-    // 📈 Leer el último ID de transacción
     int id_transacciones = 0;
     FILE *ArchivoTransacciones = fopen("transaciones.txt", "r");
     if (ArchivoTransacciones)
@@ -82,7 +82,6 @@ void *IntroducirDinero(void *arg2)
     }
     id_transacciones++;
 
-    // 🔍 Buscar al usuario en memoria compartida
     for (int i = 0; i < MAX_CUENTAS; i++)
     {
         Cuenta *c = &cuentas[i];
@@ -97,53 +96,48 @@ void *IntroducirDinero(void *arg2)
         {
             int dinero_inicial = c->saldo;
             c->saldo += saldo_introducir;
-         
             encontrado = true;
 
             Escribir_registro("El usuario ha introducido dinero correctamente en IntroducirDinero.c");
 
-            // 📝 Registrar transacción
+            // Registrar en transacciones globales
             ArchivoTransacciones = fopen("transaciones.txt", "a");
             if (ArchivoTransacciones)
             {
-                fprintf(ArchivoTransacciones, "%d | ingreso | %d | - | %d | - | %d \n",
+                fprintf(ArchivoTransacciones, "%d | ingreso | %d | - | %d | - | %d\n",
                         id_transacciones, c->id, dinero_inicial, c->saldo);
                 fclose(ArchivoTransacciones);
             }
-            char ruta_archivo[256];
-            const char *home = getenv("HOME");
 
-            if (!home)
-            {
-                perror("No se pudo obtener la variable HOME");
-                return NULL;
-            }
+            // Carpeta ./transacciones/{id}
+            char dir_usuario[64];
+            snprintf(dir_usuario, sizeof(dir_usuario), "./transacciones/%d", c->id);
+            mkdir("./transacciones", 0777);
+            mkdir(dir_usuario, 0777);
 
-            // Construir la ruta completa al archivo
-            snprintf(ruta_archivo, sizeof(ruta_archivo), "%s/transacciones/%d/transacciones.log", home, c->id);
+            char ruta_archivo[128];
+            snprintf(ruta_archivo, sizeof(ruta_archivo), "%s/transacciones.log", dir_usuario);
 
             FILE *ArchivoTransacciones2 = fopen(ruta_archivo, "a");
             if (!ArchivoTransacciones2)
             {
                 perror("No se pudo abrir el archivo de transacciones");
-                return NULL;
+                break;
             }
 
-            // Obtener la hora actual
             time_t t = time(NULL);
             struct tm *tm_info = localtime(&t);
             char hora[20];
             strftime(hora, sizeof(hora), "%Y-%m-%d %H:%M:%S", tm_info);
 
-            // Escribir en el archivo
-            fprintf(ArchivoTransacciones2, "[%s] Ingreso: %d ------------------------------------------------------------------- %d$\n", hora, saldo_introducir,c->saldo);
+            fprintf(ArchivoTransacciones2, "[%s] Ingreso: %d ----> %d$\n",
+                    hora, saldo_introducir, c->saldo);
 
             fclose(ArchivoTransacciones2);
             break;
         }
     }
 
-    // ✅ Desenlazar memoria y liberar semáforos
     shmdt(cuentas);
     sem_post(sem_usuarios);
     sem_post(sem_transacciones);

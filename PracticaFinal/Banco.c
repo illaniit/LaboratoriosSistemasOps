@@ -26,6 +26,7 @@ void leer_alerta_cola(int sig);
 void CrearMemoria();
 void Limpiar_MemoriaCompartida();
 void ListarCuentas();
+void ActualizarArchivoCuentas();
 
 /// @brief este es el main en el cual leemos propertis con las variables
 /// @return y devolvemos 0 si la ejecuccion ha sido exitosa
@@ -36,7 +37,9 @@ int main()
 
     CrearMemoria();
     Escribir_registro("Se ha accedido al main de banco y se han incializado los semaforos en banco.c");
+
     CrearCarpetas();
+
     crear_cola_mensajes();
 
     Config config = leer_configuracion("variables.properties");
@@ -47,6 +50,8 @@ int main()
     CrearMonitor(); // Lanzar monitor
 
     Menu_Procesos(); // Ejecutar usuarios
+
+    ActualizarArchivoCuentas();
 
     Destruir_semaforos();
 
@@ -535,6 +540,7 @@ void CrearCarpetas()
                 continue;
             }
 
+            
             // Escribir datos en un formato más bonito
             fprintf(log, "--------------------------------------------\n");
             fprintf(log, "🏦 TRANSACCIONES DEL USUARIO\n");
@@ -554,4 +560,72 @@ void CrearCarpetas()
 
     fclose(archivo);
     Escribir_registro("✅ Carpetas de transacciones creadas correctamente en banco.c");
+}
+void ActualizarArchivoCuentas()
+{
+    FILE *archivo = fopen("cuentas.txt", "r+");
+    if (!archivo)
+    {
+        perror("No se pudo abrir cuentas.txt para lectura/escritura");
+        Escribir_registro("❌ Error al abrir cuentas.txt para lectura/escritura en banco.c");
+        return;
+    }
+
+    char linea[512];
+    long posicion;
+    int cuenta_actualizada = 0;
+
+    while (fgets(linea, sizeof(linea), archivo))
+    {
+        Cuenta cuenta_temp;
+        char fecha[20], hora[20];
+
+        // Parsear la línea del archivo
+        if (sscanf(linea, "%d|%[^|]|%[^|]|%[^|]|%[^|]|%[^|]|%d|%[^|]|%s",
+                   &cuenta_temp.id,
+                   cuenta_temp.Nombre,
+                   cuenta_temp.Apellido,
+                   cuenta_temp.Contraseña,
+                   cuenta_temp.domicilio,
+                   cuenta_temp.pais,
+                   &cuenta_temp.saldo,
+                   fecha,
+                   hora) == 9)
+        {
+            // Buscar la cuenta en la memoria compartida
+            for (int i = 0; i < MAX_CUENTAS; i++)
+            {
+                if (cuentas[i].id == cuenta_temp.id)
+                {
+                    // Actualizar la línea en el archivo
+                    posicion = ftell(archivo) - strlen(linea);
+                    fseek(archivo, posicion, SEEK_SET);
+                    fprintf(archivo, "%d|%s|%s|%s|%s|%s|%d|%s|%s\n",
+                            cuentas[i].id,
+                            cuentas[i].Nombre,
+                            cuentas[i].Apellido,
+                            cuentas[i].Contraseña,
+                            cuentas[i].domicilio,
+                            cuentas[i].pais,
+                            cuentas[i].saldo,
+                            cuentas[i].fecha,
+                            cuentas[i].hora);
+                    fflush(archivo);
+                    cuenta_actualizada = 1;
+                    break;
+                }
+            }
+        }
+    }
+
+    if (!cuenta_actualizada)
+    {
+        Escribir_registro("⚠️ No se encontró ninguna cuenta para actualizar en banco.c");
+    }
+    else
+    {
+        Escribir_registro("✅ Archivo de cuentas actualizado correctamente en banco.c");
+    }
+
+    fclose(archivo);
 }

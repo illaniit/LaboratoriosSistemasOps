@@ -20,7 +20,6 @@ void *ExtraerDinero(void *arg3)
     int saldo_extraer;
     bool encontrado = false;
 
-    system("clear");
     printf("\n==============================\n");
     printf("    💵 EXTRACCION DE DINERO 💵\n");
     printf("==============================\n");
@@ -41,11 +40,9 @@ void *ExtraerDinero(void *arg3)
         return NULL;
     }
 
-    // 🔒 Entramos a zona crítica
     sem_wait(sem_usuarios);
     sem_wait(sem_transacciones);
 
-    // Leer último ID de transacción del archivo
     int id_transacciones = 0;
     char linea[200];
     FILE *ArchivoTransacciones = fopen("transaciones.txt", "r");
@@ -61,30 +58,24 @@ void *ExtraerDinero(void *arg3)
         }
         fclose(ArchivoTransacciones);
     }
-    id_transacciones++; // Siguiente ID para esta transacción
+    id_transacciones++;
 
-    // Buscar el usuario en la memoria compartida
     for (int i = 0; i < MAX_CUENTAS; i++)
     {
         if (strcmp(cuentas[i].Nombre, usuario->Usuario3) == 0 &&
             strcmp(cuentas[i].Contraseña, usuario->Contraseña1) == 0)
         {
-
             encontrado = true;
 
             if (saldo_extraer > cuentas[i].saldo)
             {
                 printf("❌ Saldo insuficiente.\n");
-                sem_post(sem_transacciones);
-                sem_post(sem_usuarios);
-                return NULL;
+                goto liberar;
             }
 
             int saldo_inicial = cuentas[i].saldo;
             cuentas[i].saldo -= saldo_extraer;
-           
 
-            // Registrar la transacción
             ArchivoTransacciones = fopen("transaciones.txt", "a");
             if (ArchivoTransacciones)
             {
@@ -93,35 +84,32 @@ void *ExtraerDinero(void *arg3)
                 fclose(ArchivoTransacciones);
             }
 
-            char ruta_archivo[256];
-            const char *home = getenv("HOME");
+            // Ruta local: ./transacciones/{id}/transacciones.log
+            char dir_usuario[64];
+            snprintf(dir_usuario, sizeof(dir_usuario), "./transacciones/%d", cuentas[i].id);
+            mkdir("./transacciones", 0777); // por si no existe la carpeta base
+            mkdir(dir_usuario, 0777);       // carpeta del usuario
 
-            if (!home)
-            {
-                perror("No se pudo obtener la variable HOME");
-                return NULL;
-            }
-
-            // Construir la ruta completa al archivo
-            snprintf(ruta_archivo, sizeof(ruta_archivo), "%s/transacciones/%d/transacciones.log", home, cuentas[i].id);
+            char ruta_archivo[128];
+            snprintf(ruta_archivo, sizeof(ruta_archivo), "%s/transacciones.log", dir_usuario);
 
             FILE *ArchivoTransacciones2 = fopen(ruta_archivo, "a");
             if (!ArchivoTransacciones2)
             {
                 perror("No se pudo abrir el archivo de transacciones");
-                return NULL;
+                goto liberar;
             }
 
-            // Obtener la hora actual
             time_t t = time(NULL);
             struct tm *tm_info = localtime(&t);
             char hora_actual[20];
             strftime(hora_actual, sizeof(hora_actual), "%Y-%m-%d %H:%M:%S", tm_info);
 
-            // Escribir en el archivo
-            fprintf(ArchivoTransacciones2, " [%s]  Retiro : %d ------------------------------------------------------------------- %d \n", hora_actual, saldo_extraer, cuentas[i].saldo);
+            fprintf(ArchivoTransacciones2, "[%s] Retiro: %d ----> %d\n",
+                    hora_actual, saldo_extraer, cuentas[i].saldo);
 
             fclose(ArchivoTransacciones2);
+
             Escribir_registro("Dinero extraído correctamente en ExtraerDinero.c");
             printf("✅ Dinero extraído correctamente. Nuevo saldo: %d\n", cuentas[i].saldo);
             sleep(2);
@@ -129,7 +117,7 @@ void *ExtraerDinero(void *arg3)
         }
     }
 
-    // 🔓 Salimos de zona crítica
+liberar:
     sem_post(sem_transacciones);
     sem_post(sem_usuarios);
 
@@ -139,4 +127,6 @@ void *ExtraerDinero(void *arg3)
         Escribir_registro("Usuario no encontrado en ExtraerDinero.c");
         sleep(2);
     }
+
+    return NULL;
 }
