@@ -16,6 +16,7 @@ int temp[100];     // Arreglo donde almacenarás los números
 // Definimos las funciones  que vamos a utilizar
 Cuenta *cuentas;
 
+void CrearCarpetas();
 void Menu_Procesos();
 void CrearMonitor();
 void limpiar(int sig);
@@ -35,7 +36,7 @@ int main()
 
     CrearMemoria();
     Escribir_registro("Se ha accedido al main de banco y se han incializado los semaforos en banco.c");
-
+    CrearCarpetas();
     crear_cola_mensajes();
 
     Config config = leer_configuracion("variables.properties");
@@ -55,20 +56,61 @@ int main()
 
 void CrearMemoria()
 {
-    key_t clave = ftok("Cuenta.h", 65);
+    key_t clave = ftok("Cuenta.h", 66);
     printf("[DEBUG] Clave generada: %d\n", clave);
     int shmid = shmget(clave, MAX_CUENTAS * sizeof(Cuenta), 0666 | IPC_CREAT);
     cuentas = (Cuenta *)shmat(shmid, NULL, 0);
-
+    
     if (shmid == -1)
     {
+        Escribir_registro("❌ Error al crear memoria compartida");
         perror("shmget falló");
         exit(1);
     }
 
-  
+    // Abrir el archivo cuentas.txt
+    FILE *archivo = fopen("cuentas.txt", "r+");
+    if (!archivo)
+    {
+        Escribir_registro("❌ Error al abrir el archivo cuentas.txt");
+        perror("No se pudo abrir cuentas.txt");
+        exit(1);
+    }
+
+    // Leer y cargar las cuentas en la memoria compartida
+    char linea[512];
+    int i = 0;
+    while (fgets(linea, sizeof(linea), archivo) && i < MAX_CUENTAS)
+    {
+        Cuenta cuenta_temp;
+        char fecha[20], hora[20];
+
+        // Parsear la línea del archivo
+        if (sscanf(linea, "%d|%[^|]|%[^|]|%[^|]|%[^|]|%[^|]|%d|%[^|]|%s",
+                   &cuenta_temp.id,
+                   cuenta_temp.Nombre,
+                   cuenta_temp.Apellido,
+                   cuenta_temp.Contraseña,
+                   cuenta_temp.domicilio,
+                   cuenta_temp.pais,
+                   &cuenta_temp.saldo,
+                   cuenta_temp.fecha,
+                   cuenta_temp.hora) == 9)
+        {
+            // Copiar la cuenta al arreglo de memoria compartida
+            cuentas[i] = cuenta_temp;
+            i++;
+        }
+        else
+        {
+            Escribir_registro("⚠️ Error al parsear una línea del archivo cuentas.txt");
+        }
+    }
+
+    fclose(archivo);
 
     printf("✅ Memoria compartida creada con ID: %d\n", shmid);
+    printf("✅ Se cargaron %d cuentas en la memoria compartida\n", i);
     return;
 }
 
@@ -402,12 +444,15 @@ void ListarCuentas()
             hayCuentas = 1;
 
             printf("🧾 Cuenta #%d\n", i + 1);
+            printf("   ID: %d\n", cuentas[i].id);
             printf("   Nombre: %s\n", cuentas[i].Nombre);
             printf("   Apellidos: %s\n", cuentas[i].Apellido);
             printf("   Contraseña: %s\n", cuentas[i].Contraseña);
+            printf("   Domicilio: %s\n", cuentas[i].domicilio);
             printf("   País: %s\n", cuentas[i].pais);
             printf("   Saldo: %d\n", cuentas[i].saldo);
-            printf("   Transacciones: %d\n", cuentas[i].Numero_transacciones);
+            printf("   Fecha de creación: %s\n", cuentas[i].fecha);
+            printf("   Hora de creación: %s\n", cuentas[i].hora);
             printf("   -----------------------------\n");
         }
 
@@ -417,4 +462,96 @@ void ListarCuentas()
         if (i >= MAX_CUENTAS)
             break;
     }
+}
+void CrearCarpetas()
+{
+    // Crear la carpeta "transacciones" si no existe
+    if (mkdir("transacciones", 0777) == -1 && errno != EEXIST)
+    {
+        perror("Error al crear la carpeta transacciones");
+        Escribir_registro("❌ Error al crear la carpeta transacciones en banco.c");
+        return;
+    }
+
+    // Abrir el archivo cuentas.txt
+    FILE *archivo = fopen("cuentas.txt", "r");
+    if (!archivo)
+    {
+        perror("No se pudo abrir cuentas.txt");
+        Escribir_registro("❌ Error al abrir el archivo cuentas.txt en banco.c");
+        return;
+    }
+
+    // Leer las cuentas del archivo
+    char linea[512];
+    while (fgets(linea, sizeof(linea), archivo))
+    {
+        Cuenta cuenta_temp;
+        // Parsear la línea del archivo
+        if (sscanf(linea, "%d|%[^|]|%[^|]|%[^|]|%[^|]|%[^|]|%d|%[^|]|%s",
+                   &cuenta_temp.id,
+                   cuenta_temp.Nombre,
+                   cuenta_temp.Apellido,
+                   cuenta_temp.Contraseña,
+                   cuenta_temp.domicilio,
+                   cuenta_temp.pais,
+                   &cuenta_temp.saldo,
+                   cuenta_temp.fecha,
+                   cuenta_temp.hora) == 9)
+        {
+            // Crear una carpeta con el ID del usuario dentro de "transacciones"
+            char carpeta_usuario[256];
+            snprintf(carpeta_usuario, sizeof(carpeta_usuario), "transacciones/%d", cuenta_temp.id);
+            if (mkdir(carpeta_usuario, 0777) == -1 && errno != EEXIST)
+            {
+                perror("Error al crear la carpeta del usuario");
+                Escribir_registro("❌ Error al crear la carpeta del usuario en banco.c");
+                continue;
+            }
+
+            // Crear el archivo transacciones.log dentro de la carpeta del usuario
+            char archivo_transacciones[256];
+            if (snprintf(archivo_transacciones, sizeof(archivo_transacciones), "%s/transacciones.log", carpeta_usuario) >= sizeof(archivo_transacciones))
+            {
+                perror("Error: ruta del archivo transacciones.log demasiado larga");
+                Escribir_registro("❌ Error: ruta del archivo transacciones.log demasiado larga en banco.c");
+                continue;
+            }
+
+            // Comprobar si el archivo ya contiene datos
+            FILE *log = fopen(archivo_transacciones, "r");
+            if (log)
+            {
+                fclose(log);
+                continue; // Si el archivo ya existe, no lo sobrescribimos
+            }
+
+            // Crear y escribir en el archivo si no existe
+            log = fopen(archivo_transacciones, "a");
+            if (!log)
+            {
+                perror("Error al crear transacciones.log");
+                Escribir_registro("❌ Error al crear transacciones.log en banco.c");
+                continue;
+            }
+
+            // Escribir datos en un formato más bonito
+            fprintf(log, "--------------------------------------------\n");
+            fprintf(log, "🏦 TRANSACCIONES DEL USUARIO\n");
+            fprintf(log, "--------------------------------------------\n");
+            fprintf(log, "Nombre: %s\n", cuenta_temp.Nombre);
+            fprintf(log, "Apellidos: %s\n", cuenta_temp.Apellido);
+            fprintf(log, "Número de Cuenta: %d\n", cuenta_temp.id);
+            fprintf(log, "Nacionalidad: %s\n", cuenta_temp.pais);
+            fprintf(log, "--------------------------------------------\n\n");
+            fclose(log);
+        }
+        else
+        {
+            Escribir_registro("⚠️ Error al parsear una línea del archivo cuentas.txt en banco.c");
+        }
+    }
+
+    fclose(archivo);
+    Escribir_registro("✅ Carpetas de transacciones creadas correctamente en banco.c");
 }

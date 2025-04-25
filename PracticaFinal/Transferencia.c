@@ -107,8 +107,7 @@ void *Transferencia(void *arg) {
     cuenta_origen->saldo -= Cantidad_transferir;
     cuenta_destino->saldo += Cantidad_transferir;
 
-    cuenta_origen->Numero_transacciones++;
-    cuenta_destino->Numero_transacciones++;
+    
 
     // Registrar en archivo
     FILE *archivoTransacciones = fopen("transaciones.txt", "a+");

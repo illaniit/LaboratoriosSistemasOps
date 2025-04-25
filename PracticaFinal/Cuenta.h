@@ -13,7 +13,8 @@ typedef struct Cuenta {
     char domicilio[100];           // Domicilio del usuario
     char pais[50];                 // País de residencia del usuario
     int saldo;                     // Saldo en la cuenta
-    int Numero_transacciones;      // Número de transacciones realizadas
+    char fecha[20];             // Fecha de creación de la cuenta
+    char hora[20];              // Hora de creación de la cuenta
 } Cuenta;
 
 extern Cuenta *cuentas;

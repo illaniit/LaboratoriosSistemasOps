@@ -97,7 +97,7 @@ void *IntroducirDinero(void *arg2)
         {
             int dinero_inicial = c->saldo;
             c->saldo += saldo_introducir;
-            c->Numero_transacciones++;
+         
             encontrado = true;
 
             Escribir_registro("El usuario ha introducido dinero correctamente en IntroducirDinero.c");

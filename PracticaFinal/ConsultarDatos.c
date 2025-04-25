@@ -70,7 +70,7 @@ void DatosCuenta(char *user, char *passwd) {
     sem_wait(sem_transacciones);
 
     // ✅ Inicializar memoria compartida
-    key_t clave = ftok("Cuenta.h", 65);
+    key_t clave = ftok("Cuenta.h", 66);
     if (clave == -1) {
         perror("❌ Error al generar clave con ftok");
         sem_post(sem_usuarios);
@@ -130,7 +130,8 @@ void DatosCuenta(char *user, char *passwd) {
         printf("🏠 Domicilio:          %s\n", cuenta.domicilio);
         printf("🌍 País:               %s\n", cuenta.pais);
         printf("💰 Saldo:              %d\n", cuenta.saldo);
-        printf("🔄 Transacciones:      %d\n", cuenta.Numero_transacciones);
+        printf("📅 Fecha de creación:  %s\n", cuenta.fecha);
+        printf("⏰ Hora de creación:   %s\n", cuenta.hora);
         printf("=================================================\n");
         printf("📌 Presione 'Enter' para volver al menú principal... ");
         while (getchar() != '\n')

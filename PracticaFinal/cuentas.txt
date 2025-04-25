@@ -1,0 +1,102 @@
+1|Sofia|Mendoza|clave001|Laprida 736|Venezuela|3680|2023-01-02|18:07:00
+2|Ana|Romero|clave002|San Martin 901|Paraguay|3566|2023-01-02|14:25:00
+3|Pedro|Castro|clave003|Av Rivadavia 749|Paraguay|3811|2023-01-04|14:47:00
+4|Maria|Díaz|clave004|Corrientes 235|Perú|4260|2023-01-05|11:07:00
+5|Camila|Pérez|clave005|Belgrano 387|Chile|1087|2023-01-07|04:25:00
+6|Juan|Díaz|clave006|Calle Falsa 310|Argentina|4847|2023-01-07|15:40:00
+7|Juan|López|clave007|Urquiza 944|Venezuela|4284|2023-01-09|06:23:00
+8|Ana|López|clave008|Calle Falsa 518|Uruguay|2188|2023-01-10|07:01:00
+9|Ana|Díaz|clave009|Belgrano 961|Argentina|3174|2022-01-10|10:13:00
+10|Carlos|Ruiz|clave010|Laprida 463|Paraguay|1514|2023-01-11|10:28:00
+11|Luis|Mendoza|clave011|Av Siempre Viva 870|México|3414|2023-01-12|12:40:00
+12|Laura|López|clave012|San Martin 765|México|3338|2023-01-13|13:14:00
+13|Diego|Pérez|clave013|Mitre 222|Chile|2061|2023-01-14|16:08:00
+14|Diego|Castro|clave014|Mitre 478|Chile|1332|2023-01-16|07:40:00
+15|Camila|Mendoza|clave015|Av Siempre Viva 521|Venezuela|3798|2023-01-17|06:43:00
+16|Carlos|Ruiz|clave016|San Martin 509|Colombia|708|2023-01-18|00:35:00
+17|Juan|Pérez|clave017|Sarmiento 285|Perú|660|2023-01-19|06:11:00
+18|Laura|Torres|clave018|Belgrano 254|Colombia|2225|2023-01-19|12:22:00
+19|Ana|López|clave019|Urquiza 248|Bolivia|1568|2023-01-20|16:10:00
+20|Diego|Vargas|clave020|Belgrano 940|Uruguay|696|2023-01-21|19:38:00
+21|Maria|Gomez|clave021|San Martin 658|Perú|691|2023-01-23|00:13:00
+22|Maria|Pérez|clave022|Calle Falsa 126|México|1417|2023-01-24|05:10:00
+23|Juan|Ruiz|clave023|San Martin 885|Paraguay|3455|2023-01-25|01:19:00
+24|Juan|Romero|clave024|Sarmiento 181|Uruguay|758|2023-01-25|13:18:00
+25|Camila|Gomez|clave025|Av Rivadavia 390|Chile|4711|2023-01-27|05:29:00
+26|Sofia|Díaz|clave026|Laprida 951|Perú|3262|2023-01-27|14:44:00
+27|Sofia|Vargas|clave027|San Martin 953|Venezuela|2249|2023-01-28|21:21:00
+28|Laura|Mendoza|clave028|Av Siempre Viva 546|Argentina|3777|2023-01-29|10:53:00
+29|Pedro|Pérez|clave029|Sarmiento 880|Uruguay|1058|2023-01-30|12:03:00
+30|Diego|Gomez|clave030|Av Siempre Viva 351|México|4278|2023-01-31|11:30:00
+31|Juan|Pérez|clave031|San Martin 448|Colombia|4849|2023-02-01|18:23:00
+32|Carlos|Castro|clave032|Corrientes 733|Colombia|4388|2023-02-02|19:12:00
+33|Laura|Gomez|clave033|Sarmiento 889|Argentina|4841|2023-02-03|12:46:00
+34|Carlos|Torres|clave034|Mitre 642|Ecuador|3677|2023-02-05|00:37:00
+35|Sofia|López|clave035|Laprida 994|Perú|780|2023-02-06|04:10:00
+36|Luis|Vargas|clave036|Urquiza 436|Ecuador|3955|2023-02-06|15:02:00
+37|Sofia|Mendoza|clave037|San Martin 991|Paraguay|626|2023-02-07|14:28:00
+38|Ana|Díaz|clave038|Urquiza 647|Bolivia|790|2023-02-09|00:35:00
+39|Diego|Gomez|clave039|Sarmiento 287|México|4842|2023-02-09|10:59:00
+40|Luis|Ruiz|clave040|Calle Falsa 332|Venezuela|1876|2023-02-10|10:26:00
+41|Carlos|Pérez|clave041|Urquiza 582|Chile|1574|2023-02-11|18:53:00
+42|Luis|Romero|clave042|Calle Falsa 537|Argentina|1925|2023-02-13|00:51:00
+43|Diego|Gomez|clave043|San Martin 122|Venezuela|1116|2023-02-13|16:42:00
+44|Sofia|Torres|clave044|Av Siempre Viva 543|Argentina|3400|2023-02-14|22:45:00
+45|Luis|Pérez|clave045|Calle Falsa 559|Ecuador|3588|2023-02-16|01:11:00
+46|Maria|Romero|clave046|Av Rivadavia 664|Argentina|525|2023-02-16|10:19:00
+47|Luis|Mendoza|clave047|Corrientes 772|México|1082|2023-02-17|15:03:00
+48|Camila|Vargas|clave048|Calle Falsa 701|Paraguay|898|2023-02-18|16:39:00
+49|Pedro|Romero|clave049|Urquiza 544|Ecuador|4255|2023-02-19|21:05:00
+50|Diego|López|clave050|Corrientes 142|Perú|590|2023-02-20|12:39:00
+51|Sofia|Gomez|clave051|Corrientes 980|Bolivia|1378|2023-02-21|21:49:00
+52|Maria|Gomez|clave052|Av Siempre Viva 474|Colombia|1697|2023-02-23|04:43:00
+53|Maria|Díaz|clave053|Belgrano 277|Venezuela|3194|2023-02-23|19:59:00
+54|Pedro|Díaz|clave054|Mitre 385|Colombia|3273|2023-02-24|17:45:00
+55|Juan|López|clave055|Sarmiento 852|Perú|1460|2023-02-25|22:00:00
+56|Pedro|Castro|clave056|Calle Falsa 399|Chile|4271|2023-02-26|21:20:00
+57|Maria|Vargas|clave057|San Martin 468|Paraguay|4267|2023-02-28|03:35:00
+58|Carlos|Ruiz|clave058|Sarmiento 788|Argentina|2270|2023-03-01|02:19:00
+59|Laura|Mendoza|clave059|Av Siempre Viva 587|Ecuador|4825|2023-03-02|07:01:00
+60|Luis|López|clave060|Urquiza 747|Chile|810|2023-03-03|05:30:00
+61|Carlos|Mendoza|clave061|Laprida 688|Colombia|2737|2023-03-03|17:53:00
+62|Diego|Romero|clave062|Corrientes 787|Bolivia|4483|2023-03-04|13:16:00
+63|Carlos|Gomez|clave063|Belgrano 171|Chile|4190|2023-03-05|10:43:00
+64|Luis|Ruiz|clave064|Belgrano 442|Uruguay|3682|2023-03-06|20:30:00
+65|Luis|Díaz|clave065|Sarmiento 625|Paraguay|4742|2023-03-07|16:44:00
+66|Carlos|Vargas|clave066|Laprida 709|Argentina|3742|2023-03-08|17:48:00
+67|Diego|Mendoza|clave067|Belgrano 318|Venezuela|3950|2023-03-09|16:25:00
+68|Diego|Ruiz|clave068|Sarmiento 720|Chile|3421|2023-03-10|11:41:00
+69|Pedro|Gomez|clave069|Belgrano 236|Paraguay|3866|2023-03-12|03:53:00
+70|Pedro|Romero|clave070|Calle Falsa 370|Chile|3066|2023-03-12|14:26:00
+71|Pedro|Ruiz|clave071|Sarmiento 972|Paraguay|3008|2023-03-13|21:13:00
+72|Carlos|Vargas|clave072|Sarmiento 780|Perú|2446|2023-03-14|20:29:00
+73|Diego|Gomez|clave073|San Martin 470|Chile|749|2023-03-16|06:57:00
+74|Sofia|Pérez|clave074|Laprida 492|Chile|1412|2023-03-16|20:15:00
+75|Sofia|Torres|clave075|Av Rivadavia 540|Bolivia|2024|2023-03-17|17:43:00
+76|Pedro|Pérez|clave076|Belgrano 929|Colombia|944|2023-03-19|00:09:00
+77|Juan|Mendoza|clave077|Av Rivadavia 821|Ecuador|3436|2023-03-19|15:55:00
+78|Sofia|Romero|clave078|Corrientes 303|Paraguay|1370|2023-03-20|22:47:00
+79|Carlos|López|clave079|Calle Falsa 529|Chile|1161|2023-03-22|07:53:00
+80|Diego|Gomez|clave080|Av Siempre Viva 338|Argentina|1493|2023-03-23|07:23:00
+81|Sofia|López|clave081|Av Rivadavia 556|Paraguay|4300|2023-03-23|12:13:00
+82|Maria|Díaz|clave082|Sarmiento 376|Colombia|2911|2023-03-24|13:54:00
+83|Laura|Vargas|clave083|Mitre 147|Chile|4845|2023-03-25|19:58:00
+84|Maria|Torres|clave084|San Martin 501|Ecuador|992|2023-03-26|18:21:00
+85|Diego|Pérez|clave085|Sarmiento 501|México|2651|2023-03-27|22:20:00
+86|Luis|Mendoza|clave086|Corrientes 937|Colombia|1435|2023-03-28|12:46:00
+87|Carlos|Díaz|clave087|Sarmiento 378|Bolivia|3955|2023-03-29|22:17:00
+88|Maria|Vargas|clave088|Mitre 570|Chile|4307|2023-03-30|08:25:00
+89|Laura|Ruiz|clave089|San Martin 418|Uruguay|2143|2023-03-31|22:34:00
+90|Maria|López|clave090|Belgrano 666|Argentina|2238|2023-04-02|00:06:00
+91|Maria|Mendoza|clave091|Av Rivadavia 450|México|3890|2023-04-02|18:24:00
+92|Luis|Gomez|clave092|San Martin 731|Perú|1049|2023-04-04|03:10:00
+93|Luis|López|clave093|Sarmiento 523|Colombia|2256|2023-04-04|22:54:00
+94|Diego|Ruiz|clave094|San Martin 840|Venezuela|2493|2023-04-06|01:34:00
+95|Maria|Gomez|clave095|Laprida 406|Uruguay|3446|2023-04-06|10:14:00
+96|Diego|Gomez|clave096|Corrientes 538|Venezuela|4851|2023-04-07|22:14:00
+97|Diego|Romero|clave097|Urquiza 427|Uruguay|3722|2023-04-09|03:25:00
+98|Sofia|Gomez|clave098|Av Rivadavia 216|Argentina|2508|2023-04-09|08:13:00
+99|Maria|López|clave099|Av Rivadavia 107|Ecuador|4850|2023-04-10|21:10:00
+100|Sofia|Mendoza|clave100|Mitre 572|Ecuador|2542|2023-04-11|22:29:00
+101|alejandro|de pazos|123|casa|casa|1000|2025-04-25|13:23:24
+102|1|1|1|1|1|1|2025-04-25|13:29:32

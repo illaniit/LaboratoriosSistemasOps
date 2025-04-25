@@ -82,7 +82,7 @@ void *ExtraerDinero(void *arg3)
 
             int saldo_inicial = cuentas[i].saldo;
             cuentas[i].saldo -= saldo_extraer;
-            cuentas[i].Numero_transacciones++;
+           
 
             // Registrar la transacción
             ArchivoTransacciones = fopen("transaciones.txt", "a");
