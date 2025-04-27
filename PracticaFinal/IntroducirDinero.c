@@ -10,6 +10,8 @@ struct Usuario3
     char Contraseña1[50];
 };
 
+Buffer buffer;
+int NumeroCuentas ;
 /// @brief Esta funcion permite que un usuario introduzca dinero en el sistema, actualizamos el saldo y le numero de transaccioens
 /// y tambien escribe en el archivo de transcciones
 /// @param arg2
@@ -47,7 +49,7 @@ void *IntroducirDinero(void *arg2)
         return NULL;
     }
 
-    int shmid = shmget(clave, sizeof(Cuenta) * MAX_CUENTAS, 0666);
+    int shmid = shmget(clave, sizeof(Cuenta) * config.max_cuentas, 0666);
     if (shmid == -1)
     {
         perror("❌ Error al obtener segmento de memoria compartida");
@@ -97,6 +99,9 @@ void *IntroducirDinero(void *arg2)
             int dinero_inicial = c->saldo;
             c->saldo += saldo_introducir;
             encontrado = true;
+            buffer.cuentas[NumeroCuentas]=* c;
+            NumeroCuentas++;
+            buffer.acceso = 1;
 
             Escribir_registro("El usuario ha introducido dinero correctamente en IntroducirDinero.c");
 

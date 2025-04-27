@@ -8,7 +8,7 @@
 #include <sys/shm.h>
 #include "Cuenta.h"
 #include "Comun.h"
-#define MAX_CUENTAS 100
+
 
 Cuenta *cuentas; // Definición del puntero global
 
@@ -23,10 +23,11 @@ void CrearArchivoTransacciones(int id, const char *Nombre);
 int main()
 {
     // Conexión con la memoria compartida creada por banco.c
+    Config config= leer_configuracion("variables.properties");
     key_t clave = ftok("Cuenta.h", 66);
     printf("[DEBUG] Clave generada: %d\n", clave);
     sleep(1);
-    int shmid = shmget(clave, sizeof(Cuenta) * MAX_CUENTAS, 0666);
+    int shmid = shmget(clave, sizeof(Cuenta) * config.max_cuentas, 0666);
     if (shmid == -1)
     {
         perror("❌ No se pudo acceder a la memoria compartida");
@@ -236,7 +237,7 @@ void InicioDeSesion()
 
                 // Contar el número de cuentas en memoria compartida
                 int numeroCuentas = 0;
-                for (int i = 0; i < MAX_CUENTAS; i++)
+                for (int i = 0; i < config.max_cuentas; i++)
                 {
                     if (cuentas[i].id != 0)
                     {
@@ -244,13 +245,13 @@ void InicioDeSesion()
                     }
                 }
 
-                if (numeroCuentas >= MAX_CUENTAS)
+                if (numeroCuentas >= config.max_cuentas)                                        
                 {
                     // Desalojar el usuario más antiguo de la memoria compartida
                     int oldest_index = -1;
                     int oldest_year = 9999, oldest_month = 12, oldest_day = 31;
 
-                    for (int i = 0; i < MAX_CUENTAS; i++)
+                    for (int i = 0; i < config.max_cuentas; i++)
                     {
                         if (cuentas[i].id != 0)
                         {

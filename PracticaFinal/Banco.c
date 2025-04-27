@@ -27,6 +27,7 @@ void CrearMemoria();
 void Limpiar_MemoriaCompartida();
 void ListarCuentas();
 void ActualizarArchivoCuentas();
+void CrearBuffer();
 
 /// @brief este es el main en el cual leemos propertis con las variables
 /// @return y devolvemos 0 si la ejecuccion ha sido exitosa
@@ -47,6 +48,8 @@ int main()
     // Lo primero abrimos el archivo de Properties y "nos traemos las variables"
 
     signal(SIGUSR1, leer_alerta_cola); // Manejar señal del monitor
+
+    CrearBuffer();
 
     CrearMonitor(); // Lanzar monitor
 
@@ -630,4 +633,77 @@ void ActualizarArchivoCuentas()
     }
 
     fclose(archivo);
+}
+
+
+void CrearBuffer()
+{
+    pid_t Buffer = fork(); // Crea el proceso buffer
+    Escribir_registro("Se crea el fork de buffer desde banco.c");
+    if (Buffer < 0)
+    {
+        perror("Error al crear el proceso Buffer");
+        Escribir_registro("Fallo al crear el proceso buffer desde banco.c");
+        return;
+    }
+
+    if (Buffer == 0)
+    {
+        // Proceso hijo
+        Escribir_registro("Proceso buffer hijo iniciado desde banco.c");
+
+        // Guardar PID en archivo
+        char filename[50];
+        snprintf(filename, sizeof(filename), "/tmp/pid_%d.txt", getpid());
+
+        FILE *fp = fopen(filename, "w");
+        if (fp)
+        {
+            fprintf(fp, "%d\n", getpid());
+            fclose(fp);
+        }
+        else
+        {
+            perror("No se pudo crear el archivo de PID para buffer");
+        }
+
+        // Ejecutar el programa buffer_
+        execl("./buffer", "buffer", (char *)NULL);
+
+        // Si execl falla:
+        perror("Error al ejecutar buffer_");
+        Escribir_registro("Error al ejecutar buffer_ desde banco.c");
+        exit(EXIT_FAILURE);
+    }
+    else
+    {
+        // Proceso padre
+        char filename[50];
+        snprintf(filename, sizeof(filename), "/tmp/pid_%d.txt", Buffer);
+
+        sleep(5); // Dar tiempo al hijo para crear el archivo
+
+        FILE *fp = fopen(filename, "r+");
+        if (fp)
+        {
+            if (fscanf(fp, "%d", &temp[contador]) == 1)
+            {
+                sleep(1);
+            }
+            else
+            {
+                perror("No se pudo leer un número del archivo del buffer\n");
+            }
+            contador++;
+            fclose(fp);
+        }
+        else
+        {
+            perror("Error al leer el archivo de PID para buffer");
+            hijos[num_hijos] = Buffer; // fallback
+        }
+
+        num_hijos++;
+        Escribir_registro("Proceso buffer creado correctamente desde banco.c");
+    }
 }

@@ -19,8 +19,14 @@ typedef struct Cuenta {
 
 extern Cuenta *cuentas;
 
+#include <stdbool.h>
+extern int NumeroCuentas;
+typedef struct {
+    Cuenta cuentas[10];
+    bool acceso;
+}Buffer;
 
-
+extern Buffer buffer;
 
 // Punteros a memoria compartida
 
