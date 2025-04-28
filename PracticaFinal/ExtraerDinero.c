@@ -19,7 +19,7 @@ void *ExtraerDinero(void *arg3)
     Config config = leer_configuracion("variables.properties");
     int saldo_extraer;
     bool encontrado = false;
-
+    system("clear");
     printf("\n==============================\n");
     printf("    💵 EXTRACCION DE DINERO 💵\n");
     printf("==============================\n");

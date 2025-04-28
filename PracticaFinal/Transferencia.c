@@ -226,11 +226,14 @@ void *Transferencia(void *arg) {
         sem_post(sem_transacciones);
         return NULL;
     }
+    time_t t = time(NULL);
+    struct tm *tm_info = localtime(&t);
+    char hora[20];
+    strftime(hora, sizeof(hora), "%Y-%m-%d %H:%M:%S", tm_info);
 
-    fprintf(archivoLogOrigen, "%d | transferencia enviada | %d | %d | %d | %d | %d | %d\n",
-            nuevo_id, id_origen, id_destino,
-            saldo_origen_antes, cuenta_origen->saldo,
-            saldo_destino_antes, cuenta_destino->saldo);
+    fprintf(archivoLogOrigen, "[%s] Transferencia enviada a la cuenta %d : %d ----> %d$ \n",
+            hora,id_destino,
+            saldo_origen_antes-cuenta_origen->saldo,cuenta_origen->saldo);
 
     fclose(archivoLogOrigen);
 
@@ -244,10 +247,9 @@ void *Transferencia(void *arg) {
         return NULL;
     }
 
-    fprintf(archivoLogDestino, "%d | transferencia recibida | %d | %d | %d | %d | %d | %d\n",
-            nuevo_id, id_origen, id_destino,
-            saldo_origen_antes, cuenta_origen->saldo,
-            saldo_destino_antes, cuenta_destino->saldo);
+    fprintf(archivoLogDestino, "[%s] Transferencia recibida de la cuenta  %d : %d ----> %d$\n",
+             hora,id_origen,
+             cuenta_destino->saldo-saldo_destino_antes, cuenta_destino->saldo);
 
     fclose(archivoLogDestino); Escribir_registro("Transferencia registrada en transacciones.txt");
 

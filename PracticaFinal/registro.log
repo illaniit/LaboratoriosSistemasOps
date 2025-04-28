@@ -2011,3 +2011,255 @@
 [2025-04-28 11:51:20] se ha matado los hijos desde banco.c
 [2025-04-28 11:51:20] Se acaban con todos los procesos desde banco.c
 [2025-04-28 11:51:20] ✅ Archivo de cuentas actualizado correctamente en banco.c
+[2025-04-28 15:46:45] Se ha accedido al main de banco y se han incializado los semaforos en banco.c
+[2025-04-28 15:46:45] ✅ Carpetas de transacciones creadas correctamente en banco.c
+[2025-04-28 15:46:45] se  ha creado la cola de mensjes correctamente en Comun.c
+[2025-04-28 15:46:45] Se ha creado la segunda cola de mensajes correctamente en Comun.c
+[2025-04-28 15:46:45] Se crea el fork de buffer desde banco.c
+[2025-04-28 15:46:45] Se crea el fork de buffer desde banco.c
+[2025-04-28 15:46:45] Proceso buffer hijo iniciado desde banco.c
+[2025-04-28 15:46:45] ✅ Archivo de cuentas actualizado correctamente en buffer.c
+[2025-04-28 15:46:51] Proceso buffer creado correctamente desde banco.c
+[2025-04-28 15:46:51] Se crea el fork de monitor desde banco.c
+[2025-04-28 15:46:51] Se crea el fork de monitor desde banco.c
+[2025-04-28 15:46:51] Proceso monitor hijo iniciado desde banco.c
+[2025-04-28 15:46:51] se han inicializado los semaforos desde comun.c
+[2025-04-28 15:46:51] Detectando retiros consecutivos... en monitor.c
+[2025-04-28 15:46:51] Detectando saldos negativos... en monitor.c
+[2025-04-28 15:46:51] Detectando transferencias consecutivas... en monitor.c
+[2025-04-28 15:46:51] Detectando transacciones sospechosas... en monitor.c
+[2025-04-28 15:46:55] ✅ Archivo de cuentas actualizado correctamente en buffer.c
+[2025-04-28 15:46:57] Proceso monitor creado correctamente desde banco.c
+[2025-04-28 15:46:58] se ha abierto una nueva terminal con usuario desde banco.c
+[2025-04-28 15:46:58] se ha generado un archvio con el pid del usuario desde banco.c
+[2025-04-28 15:47:02] Se ha alamcenado el pid del usuario desde banco.c
+[2025-04-28 15:47:05] ✅ Archivo de cuentas actualizado correctamente en buffer.c
+[2025-04-28 15:47:15] ✅ Archivo de cuentas actualizado correctamente en buffer.c
+[2025-04-28 15:47:25] ✅ Archivo de cuentas actualizado correctamente en buffer.c
+[2025-04-28 15:47:35] ✅ Archivo de cuentas actualizado correctamente en buffer.c
+[2025-04-28 15:47:36] Cuenta enviada correctamente a la cola de mensajes CLAVE_COLA2
+[2025-04-28 15:47:36] El usuario ha introducido dinero correctamente en IntroducirDinero.c
+[2025-04-28 15:47:45] ✅ Archivo de cuentas actualizado correctamente en buffer.c
+[2025-04-28 15:47:55] ✅ Archivo de cuentas actualizado correctamente en buffer.c
+[2025-04-28 15:47:58] El usuario ha desplegado el menú de consulta de datos en ConsultarDatos.c
+[2025-04-28 15:48:00] El usuario ha visto sus datos en ConsultarDatos.c
+[2025-04-28 15:48:01] Detectando transferencias consecutivas... en monitor.c
+[2025-04-28 15:48:01] Detectando retiros consecutivos... en monitor.c
+[2025-04-28 15:48:01] Detectando transacciones sospechosas... en monitor.c
+[2025-04-28 15:48:01] Detectando saldos negativos... en monitor.c
+[2025-04-28 15:48:05] ✅ Archivo de cuentas actualizado correctamente en buffer.c
+[2025-04-28 15:48:05] El usuario ha elegido la opción de consultar datos.
+[2025-04-28 15:48:05] El usuario ha desplegado el menú de consulta de datos en ConsultarDatos.c
+[2025-04-28 15:48:10] El usuario ha elegido la opción de consultar transferencias.
+[2025-04-28 15:48:10] El usuario ha desplegado el menú de consulta de datos en ConsultarDatos.c
+[2025-04-28 15:48:15] ✅ Archivo de cuentas actualizado correctamente en buffer.c
+[2025-04-28 15:48:25] ✅ Archivo de cuentas actualizado correctamente en buffer.c
+[2025-04-28 15:48:35] ✅ Archivo de cuentas actualizado correctamente en buffer.c
+[2025-04-28 15:48:45] ✅ Archivo de cuentas actualizado correctamente en buffer.c
+[2025-04-28 15:48:55] ✅ Archivo de cuentas actualizado correctamente en buffer.c
+[2025-04-28 15:49:05] ✅ Archivo de cuentas actualizado correctamente en buffer.c
+[2025-04-28 15:49:10] se ha matado los hijos desde banco.c
+[2025-04-28 15:49:10] Se acaban con todos los procesos desde banco.c
+[2025-04-28 15:49:10] ✅ Archivo de cuentas actualizado correctamente en banco.c
+[2025-04-28 15:51:31] Se ha accedido al main de banco y se han incializado los semaforos en banco.c
+[2025-04-28 15:51:31] ✅ Carpetas de transacciones creadas correctamente en banco.c
+[2025-04-28 15:51:31] se  ha creado la cola de mensjes correctamente en Comun.c
+[2025-04-28 15:51:31] Se ha creado la segunda cola de mensajes correctamente en Comun.c
+[2025-04-28 15:51:31] Se crea el fork de buffer desde banco.c
+[2025-04-28 15:51:31] Se crea el fork de buffer desde banco.c
+[2025-04-28 15:51:31] Proceso buffer hijo iniciado desde banco.c
+[2025-04-28 15:51:31] ✅ Archivo de cuentas actualizado correctamente en buffer.c
+[2025-04-28 15:51:37] Proceso buffer creado correctamente desde banco.c
+[2025-04-28 15:51:37] Se crea el fork de monitor desde banco.c
+[2025-04-28 15:51:37] Se crea el fork de monitor desde banco.c
+[2025-04-28 15:51:37] Proceso monitor hijo iniciado desde banco.c
+[2025-04-28 15:51:37] se han inicializado los semaforos desde comun.c
+[2025-04-28 15:51:37] Detectando saldos negativos... en monitor.c
+[2025-04-28 15:51:37] Detectando retiros consecutivos... en monitor.c
+[2025-04-28 15:51:37] Detectando transacciones sospechosas... en monitor.c
+[2025-04-28 15:51:37] Detectando transferencias consecutivas... en monitor.c
+[2025-04-28 15:51:43] Proceso monitor creado correctamente desde banco.c
+[2025-04-28 15:51:43] se ha abierto una nueva terminal con usuario desde banco.c
+[2025-04-28 15:51:44] se ha generado un archvio con el pid del usuario desde banco.c
+[2025-04-28 15:51:48] Se ha alamcenado el pid del usuario desde banco.c
+[2025-04-28 15:52:01] ✅ Archivo de cuentas actualizado correctamente en buffer.c
+[2025-04-28 15:52:16] Cuenta enviada correctamente a la cola de mensajes CLAVE_COLA2
+[2025-04-28 15:52:16] Cuenta enviada correctamente a la cola de mensajes CLAVE_COLA2
+[2025-04-28 15:52:16] Transferencia registrada en transacciones.txt
+[2025-04-28 15:52:31] ✅ Archivo de cuentas actualizado correctamente en buffer.c
+[2025-04-28 15:52:47] Detectando transferencias consecutivas... en monitor.c
+[2025-04-28 15:52:47] Detectando retiros consecutivos... en monitor.c
+[2025-04-28 15:52:47] Detectando saldos negativos... en monitor.c
+[2025-04-28 15:52:47] Detectando transacciones sospechosas... en monitor.c
+[2025-04-28 15:53:01] ✅ Archivo de cuentas actualizado correctamente en buffer.c
+[2025-04-28 15:53:31] ✅ Archivo de cuentas actualizado correctamente en buffer.c
+[2025-04-28 15:53:57] Detectando transferencias consecutivas... en monitor.c
+[2025-04-28 15:53:57] Detectando transacciones sospechosas... en monitor.c
+[2025-04-28 15:53:57] Detectando retiros consecutivos... en monitor.c
+[2025-04-28 15:53:57] Detectando saldos negativos... en monitor.c
+[2025-04-28 15:54:01] ✅ Archivo de cuentas actualizado correctamente en buffer.c
+[2025-04-28 15:54:31] ✅ Archivo de cuentas actualizado correctamente en buffer.c
+[2025-04-28 15:54:35] Cuenta enviada correctamente a la cola de mensajes CLAVE_COLA2
+[2025-04-28 15:54:35] El usuario ha introducido dinero correctamente en IntroducirDinero.c
+[2025-04-28 15:54:41] Cuenta enviada correctamente a la cola de mensajes CLAVE_COLA2
+[2025-04-28 15:54:41] Dinero extraído correctamente en ExtraerDinero.c
+[2025-04-28 15:54:41] Dinero extraído correctamente en ExtraerDinero.c
+[2025-04-28 15:54:57] se ha matado los hijos desde banco.c
+[2025-04-28 15:54:57] Se acaban con todos los procesos desde banco.c
+[2025-04-28 15:54:57] ✅ Archivo de cuentas actualizado correctamente en banco.c
+[2025-04-28 15:55:46] Se ha accedido al main de banco y se han incializado los semaforos en banco.c
+[2025-04-28 15:55:46] ✅ Carpetas de transacciones creadas correctamente en banco.c
+[2025-04-28 15:55:46] se  ha creado la cola de mensjes correctamente en Comun.c
+[2025-04-28 15:55:46] Se ha creado la segunda cola de mensajes correctamente en Comun.c
+[2025-04-28 15:55:46] Se crea el fork de buffer desde banco.c
+[2025-04-28 15:55:46] Se crea el fork de buffer desde banco.c
+[2025-04-28 15:55:46] Proceso buffer hijo iniciado desde banco.c
+[2025-04-28 15:55:46] ✅ Archivo de cuentas actualizado correctamente en buffer.c
+[2025-04-28 15:55:52] Proceso buffer creado correctamente desde banco.c
+[2025-04-28 15:55:52] Se crea el fork de monitor desde banco.c
+[2025-04-28 15:55:52] Se crea el fork de monitor desde banco.c
+[2025-04-28 15:55:52] Proceso monitor hijo iniciado desde banco.c
+[2025-04-28 15:55:52] se han inicializado los semaforos desde comun.c
+[2025-04-28 15:55:52] Detectando transferencias consecutivas... en monitor.c
+[2025-04-28 15:55:52] Detectando saldos negativos... en monitor.c
+[2025-04-28 15:55:52] Detectando transacciones sospechosas... en monitor.c
+[2025-04-28 15:55:52] Detectando retiros consecutivos... en monitor.c
+[2025-04-28 15:55:58] Proceso monitor creado correctamente desde banco.c
+[2025-04-28 15:55:59] se ha abierto una nueva terminal con usuario desde banco.c
+[2025-04-28 15:55:59] se ha generado un archvio con el pid del usuario desde banco.c
+[2025-04-28 15:56:03] Se ha alamcenado el pid del usuario desde banco.c
+[2025-04-28 15:56:16] ✅ Archivo de cuentas actualizado correctamente en buffer.c
+[2025-04-28 15:56:46] ✅ Archivo de cuentas actualizado correctamente en buffer.c
+[2025-04-28 15:57:02] Detectando transferencias consecutivas... en monitor.c
+[2025-04-28 15:57:02] Detectando saldos negativos... en monitor.c
+[2025-04-28 15:57:02] Detectando transacciones sospechosas... en monitor.c
+[2025-04-28 15:57:02] Detectando retiros consecutivos... en monitor.c
+[2025-04-28 15:57:16] ✅ Archivo de cuentas actualizado correctamente en buffer.c
+[2025-04-28 15:57:46] ✅ Archivo de cuentas actualizado correctamente en buffer.c
+[2025-04-28 15:57:50] El usuario ha desplegado el menú de consulta de datos en ConsultarDatos.c
+[2025-04-28 15:57:51] El usuario ha visto sus datos en ConsultarDatos.c
+[2025-04-28 15:57:54] El usuario ha elegido la opción de consultar datos.
+[2025-04-28 15:57:54] El usuario ha desplegado el menú de consulta de datos en ConsultarDatos.c
+[2025-04-28 15:57:58] El usuario ha elegido la opción de consultar transferencias.
+[2025-04-28 15:57:58] El usuario ha desplegado el menú de consulta de datos en ConsultarDatos.c
+[2025-04-28 15:58:05] Intento de extracción superior al límite en ExtraerDinero.c
+[2025-04-28 15:58:08] El usuario ha desplegado el menú de consulta de datos en ConsultarDatos.c
+[2025-04-28 15:58:09] El usuario ha visto sus datos en ConsultarDatos.c
+[2025-04-28 15:58:10] El usuario ha elegido la opción de consultar datos.
+[2025-04-28 15:58:10] El usuario ha desplegado el menú de consulta de datos en ConsultarDatos.c
+[2025-04-28 15:58:12] Detectando transferencias consecutivas... en monitor.c
+[2025-04-28 15:58:12] Detectando transacciones sospechosas... en monitor.c
+[2025-04-28 15:58:12] Detectando saldos negativos... en monitor.c
+[2025-04-28 15:58:12] Detectando retiros consecutivos... en monitor.c
+[2025-04-28 15:58:16] ✅ Archivo de cuentas actualizado correctamente en buffer.c
+[2025-04-28 15:58:28] ID destino inválido.
+[2025-04-28 15:58:36] El usuario ha desplegado el menú de consulta de datos en ConsultarDatos.c
+[2025-04-28 15:58:46] ✅ Archivo de cuentas actualizado correctamente en buffer.c
+[2025-04-28 15:58:54] Cuenta enviada correctamente a la cola de mensajes CLAVE_COLA2
+[2025-04-28 15:58:54] Cuenta enviada correctamente a la cola de mensajes CLAVE_COLA2
+[2025-04-28 15:58:54] Transferencia registrada en transacciones.txt
+[2025-04-28 15:59:00] El usuario ha desplegado el menú de consulta de datos en ConsultarDatos.c
+[2025-04-28 15:59:01] El usuario ha visto sus datos en ConsultarDatos.c
+[2025-04-28 15:59:02] El usuario ha elegido la opción de consultar datos.
+[2025-04-28 15:59:02] El usuario ha desplegado el menú de consulta de datos en ConsultarDatos.c
+[2025-04-28 15:59:16] ✅ Archivo de cuentas actualizado correctamente en buffer.c
+[2025-04-28 15:59:18] El usuario ha elegido la opción de consultar transferencias.
+[2025-04-28 15:59:18] El usuario ha desplegado el menú de consulta de datos en ConsultarDatos.c
+[2025-04-28 15:59:22] Detectando transferencias consecutivas... en monitor.c
+[2025-04-28 15:59:22] Detectando retiros consecutivos... en monitor.c
+[2025-04-28 15:59:22] Detectando saldos negativos... en monitor.c
+[2025-04-28 15:59:22] Detectando transacciones sospechosas... en monitor.c
+[2025-04-28 15:59:46] ✅ Archivo de cuentas actualizado correctamente en buffer.c
+[2025-04-28 15:59:52] se ha matado los hijos desde banco.c
+[2025-04-28 15:59:52] Se acaban con todos los procesos desde banco.c
+[2025-04-28 15:59:52] ✅ Archivo de cuentas actualizado correctamente en banco.c
+[2025-04-28 16:10:58] Se ha accedido al main de banco y se han incializado los semaforos en banco.c
+[2025-04-28 16:10:58] ✅ Carpetas de transacciones creadas correctamente en banco.c
+[2025-04-28 16:10:58] se  ha creado la cola de mensjes correctamente en Comun.c
+[2025-04-28 16:10:58] Se ha creado la segunda cola de mensajes correctamente en Comun.c
+[2025-04-28 16:10:58] Se crea el fork de buffer desde banco.c
+[2025-04-28 16:10:58] Se crea el fork de buffer desde banco.c
+[2025-04-28 16:10:58] Proceso buffer hijo iniciado desde banco.c
+[2025-04-28 16:10:58] ✅ Archivo de cuentas actualizado correctamente en buffer.c
+[2025-04-28 16:11:04] Proceso buffer creado correctamente desde banco.c
+[2025-04-28 16:11:04] Se crea el fork de monitor desde banco.c
+[2025-04-28 16:11:04] Se crea el fork de monitor desde banco.c
+[2025-04-28 16:11:04] Proceso monitor hijo iniciado desde banco.c
+[2025-04-28 16:11:04] se han inicializado los semaforos desde comun.c
+[2025-04-28 16:11:04] Detectando transferencias consecutivas... en monitor.c
+[2025-04-28 16:11:04] Detectando retiros consecutivos... en monitor.c
+[2025-04-28 16:11:04] Detectando transacciones sospechosas... en monitor.c
+[2025-04-28 16:11:04] Detectando saldos negativos... en monitor.c
+[2025-04-28 16:11:10] Proceso monitor creado correctamente desde banco.c
+[2025-04-28 16:11:11] se ha abierto una nueva terminal con usuario desde banco.c
+[2025-04-28 16:11:11] se ha generado un archvio con el pid del usuario desde banco.c
+[2025-04-28 16:11:15] Se ha alamcenado el pid del usuario desde banco.c
+[2025-04-28 16:11:28] ✅ Archivo de cuentas actualizado correctamente en buffer.c
+[2025-04-28 16:11:30] Se desalojó cuenta ID 2 para cargar cuenta destino ID 45 en memoria compartida.
+[2025-04-28 16:11:30] Cuenta enviada correctamente a la cola de mensajes CLAVE_COLA2
+[2025-04-28 16:11:30] Cuenta enviada correctamente a la cola de mensajes CLAVE_COLA2
+[2025-04-28 16:11:30] Transferencia registrada en transacciones.txt
+[2025-04-28 16:11:58] ✅ Archivo de cuentas actualizado correctamente en buffer.c
+[2025-04-28 16:12:14] Detectando transferencias consecutivas... en monitor.c
+[2025-04-28 16:12:14] Detectando saldos negativos... en monitor.c
+[2025-04-28 16:12:14] Detectando retiros consecutivos... en monitor.c
+[2025-04-28 16:12:14] Detectando transacciones sospechosas... en monitor.c
+[2025-04-28 16:12:28] ✅ Archivo de cuentas actualizado correctamente en buffer.c
+[2025-04-28 16:12:58] ✅ Archivo de cuentas actualizado correctamente en buffer.c
+[2025-04-28 16:13:24] Detectando transferencias consecutivas... en monitor.c
+[2025-04-28 16:13:24] Detectando retiros consecutivos... en monitor.c
+[2025-04-28 16:13:24] Detectando transacciones sospechosas... en monitor.c
+[2025-04-28 16:13:24] Detectando saldos negativos... en monitor.c
+[2025-04-28 16:13:28] ✅ Archivo de cuentas actualizado correctamente en buffer.c
+[2025-04-28 16:13:58] ✅ Archivo de cuentas actualizado correctamente en buffer.c
+[2025-04-28 16:14:28] ✅ Archivo de cuentas actualizado correctamente en buffer.c
+[2025-04-28 16:14:34] Detectando transacciones sospechosas... en monitor.c
+[2025-04-28 16:14:34] Detectando retiros consecutivos... en monitor.c
+[2025-04-28 16:14:34] Detectando transferencias consecutivas... en monitor.c
+[2025-04-28 16:14:34] Detectando saldos negativos... en monitor.c
+[2025-04-28 16:14:58] ✅ Archivo de cuentas actualizado correctamente en buffer.c
+[2025-04-28 16:15:18] se ha matado los hijos desde banco.c
+[2025-04-28 16:15:18] Se acaban con todos los procesos desde banco.c
+[2025-04-28 16:15:18] ✅ Archivo de cuentas actualizado correctamente en banco.c
+[2025-04-28 16:15:32] Se ha accedido al main de banco y se han incializado los semaforos en banco.c
+[2025-04-28 16:15:32] ✅ Carpetas de transacciones creadas correctamente en banco.c
+[2025-04-28 16:15:32] se  ha creado la cola de mensjes correctamente en Comun.c
+[2025-04-28 16:15:32] Se ha creado la segunda cola de mensajes correctamente en Comun.c
+[2025-04-28 16:15:32] Se crea el fork de buffer desde banco.c
+[2025-04-28 16:15:32] Se crea el fork de buffer desde banco.c
+[2025-04-28 16:15:32] Proceso buffer hijo iniciado desde banco.c
+[2025-04-28 16:15:32] ✅ Archivo de cuentas actualizado correctamente en buffer.c
+[2025-04-28 16:15:38] Proceso buffer creado correctamente desde banco.c
+[2025-04-28 16:15:38] Se crea el fork de monitor desde banco.c
+[2025-04-28 16:15:38] Se crea el fork de monitor desde banco.c
+[2025-04-28 16:15:38] Proceso monitor hijo iniciado desde banco.c
+[2025-04-28 16:15:38] se han inicializado los semaforos desde comun.c
+[2025-04-28 16:15:38] Detectando transferencias consecutivas... en monitor.c
+[2025-04-28 16:15:38] Detectando saldos negativos... en monitor.c
+[2025-04-28 16:15:38] Detectando transacciones sospechosas... en monitor.c
+[2025-04-28 16:15:38] Detectando retiros consecutivos... en monitor.c
+[2025-04-28 16:15:44] Proceso monitor creado correctamente desde banco.c
+[2025-04-28 16:15:45] se ha generado un archvio con el pid del usuario desde banco.c
+[2025-04-28 16:15:46] se ha abierto una nueva terminal con usuario desde banco.c
+[2025-04-28 16:15:49] Se ha alamcenado el pid del usuario desde banco.c
+[2025-04-28 16:16:02] ✅ Archivo de cuentas actualizado correctamente en buffer.c
+[2025-04-28 16:16:32] ✅ Archivo de cuentas actualizado correctamente en buffer.c
+[2025-04-28 16:16:35] Se desalojó cuenta ID 2 para cargar cuenta destino ID 1 en memoria compartida.
+[2025-04-28 16:16:35] Cuenta enviada correctamente a la cola de mensajes CLAVE_COLA2
+[2025-04-28 16:16:35] Cuenta enviada correctamente a la cola de mensajes CLAVE_COLA2
+[2025-04-28 16:16:35] Transferencia registrada en transacciones.txt
+[2025-04-28 16:16:48] Detectando transferencias consecutivas... en monitor.c
+[2025-04-28 16:16:48] Detectando retiros consecutivos... en monitor.c
+[2025-04-28 16:16:48] Detectando saldos negativos... en monitor.c
+[2025-04-28 16:16:48] Detectando transacciones sospechosas... en monitor.c
+[2025-04-28 16:17:02] ✅ Archivo de cuentas actualizado correctamente en buffer.c
+[2025-04-28 16:17:32] ✅ Archivo de cuentas actualizado correctamente en buffer.c
+[2025-04-28 16:17:58] Detectando retiros consecutivos... en monitor.c
+[2025-04-28 16:17:58] Detectando transferencias consecutivas... en monitor.c
+[2025-04-28 16:17:58] Detectando saldos negativos... en monitor.c
+[2025-04-28 16:17:58] Detectando transacciones sospechosas... en monitor.c
+[2025-04-28 16:18:02] ✅ Archivo de cuentas actualizado correctamente en buffer.c
+[2025-04-28 16:18:32] ✅ Archivo de cuentas actualizado correctamente en buffer.c
+[2025-04-28 16:18:45] se ha matado los hijos desde banco.c
+[2025-04-28 16:18:45] Se acaban con todos los procesos desde banco.c
+[2025-04-28 16:18:45] ✅ Archivo de cuentas actualizado correctamente en banco.c

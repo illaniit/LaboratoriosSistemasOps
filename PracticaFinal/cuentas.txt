@@ -1,12 +1,12 @@
-1|Sofia|Mendoza|clave001|Laprida 736|Venezuela|25881|2023-01-02|18:07:00
-2|Ana|Romero|clave002|San Martin 901|Paraguay|14666|2023-01-02|14:25:00
+1|Sofia|Mendoza|clave001|Laprida 736|Venezuela|16981|2023-01-02|18:07:00
+2|Ana|Romero|clave002|San Martin 901|Paraguay|24666|2023-01-02|14:25:00
 3|Pedro|Castro|clave003|Av Rivadavia 749|Paraguay|3811|2023-01-04|14:47:00
 4|Maria|Díaz|clave004|Corrientes 235|Perú|4260|2023-01-05|11:07:00
 5|Camila|Pérez|clave005|Belgrano 387|Chile|1087|2023-01-07|04:25:00
 6|Juan|Díaz|clave006|Calle Falsa 310|Argentina|4847|2023-01-07|15:40:00
 7|Juan|López|clave007|Urquiza 944|Venezuela|4284|2023-01-09|06:23:00
 8|Ana|López|clave008|Calle Falsa 518|Uruguay|2188|2023-01-10|07:01:00
-9|alejandro|de pazos|123|casa|casa|1100|2025-04-25|13:23:24
+9|alejandro|de pazos|123|casa|casa|1000|2025-04-25|13:23:24
 10|Carlos|Ruiz|clave010|Laprida 463|Paraguay|1514|2023-01-11|10:28:00
 11|Luis|Mendoza|clave011|Av Siempre Viva 870|México|3414|2023-01-12|12:40:00
 12|Laura|López|clave012|San Martin 765|México|3338|2023-01-13|13:14:00
@@ -42,7 +42,7 @@
 42|Luis|Romero|clave042|Calle Falsa 537|Argentina|1925|2023-02-13|00:51:00
 43|Diego|Gomez|clave043|San Martin 122|Venezuela|1116|2023-02-13|16:42:00
 44|Sofia|Torres|clave044|Av Siempre Viva 543|Argentina|3400|2023-02-14|22:45:00
-45|Luis|Pérez|clave045|Calle Falsa 559|Ecuador|3588|2023-02-16|01:11:00
+45|Luis|Pérez|clave045|Calle Falsa 559|Ecuador|4588|2023-02-16|01:11:00
 46|Maria|Romero|clave046|Av Rivadavia 664|Argentina|525|2023-02-16|10:19:00
 47|Luis|Mendoza|clave047|Corrientes 772|México|1082|2023-02-17|15:03:00
 48|Camila|Vargas|clave048|Calle Falsa 701|Paraguay|898|2023-02-18|16:39:00
@@ -98,4 +98,4 @@
 98|Sofia|Gomez|clave098|Av Rivadavia 216|Argentina|1508|2023-04-09|08:13:00
 99|Maria|López|clave099|Av Rivadavia 107|Ecuador|4850|2023-04-10|21:10:00
 100|Sofia|Mendoza|clave100|Mitre 572|Ecuador|2442|2023-04-11|22:29:00
-101|1|1|1|1|1|1200|2025-04-25|17:40:33
+101|1|1|1|1|1|200|2025-04-25|17:40:33

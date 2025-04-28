@@ -22,8 +22,7 @@ void *IntroducirDinero(void *arg2)
     bool encontrado = false;
     int saldo_introducir;
     Config config = leer_configuracion("variables.properties");
-    sem_wait(sem_usuarios);
-    sem_wait(sem_transacciones);
+  
     system("clear");
     printf("\n==============================\n");
     printf("    💵 INGRESO DE DINERO 💵\n");
@@ -31,6 +30,9 @@ void *IntroducirDinero(void *arg2)
     printf("Introduzca la cantidad que desea ingresar: ");
     scanf("%d", &saldo_introducir);
 
+    sem_wait(sem_usuarios);
+    sem_wait(sem_transacciones);
+    
     if (saldo_introducir < 0)
     {
         printf("❌ No puedes ingresar una cantidad negativa!\n");

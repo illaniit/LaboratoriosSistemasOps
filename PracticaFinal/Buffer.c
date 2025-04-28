@@ -117,7 +117,7 @@ int main()
 
         Escribir_registro("✅ Archivo de cuentas actualizado correctamente en buffer.c");
 
-        sleep(10); // Espera 10 segundos antes de hacer el siguiente volcado
+        sleep(30); // Espera 10 segundos antes de hacer el siguiente volcado
     }
 
     Destruir_semaforos();
