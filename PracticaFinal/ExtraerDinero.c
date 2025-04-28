@@ -75,7 +75,8 @@ void *ExtraerDinero(void *arg3)
 
             int saldo_inicial = cuentas[i].saldo;
             cuentas[i].saldo -= saldo_extraer;
-
+            MeterCuentaBuffer(&cuentas[i]);
+            Escribir_registro("Dinero extraído correctamente en ExtraerDinero.c");
             ArchivoTransacciones = fopen("transaciones.txt", "a");
             if (ArchivoTransacciones)
             {

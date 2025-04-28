@@ -99,9 +99,7 @@ void *IntroducirDinero(void *arg2)
             int dinero_inicial = c->saldo;
             c->saldo += saldo_introducir;
             encontrado = true;
-            buffer.cuentas[NumeroCuentas]=* c;
-            NumeroCuentas++;
-            buffer.acceso = 1;
+            MeterCuentaBuffer(c);
 
             Escribir_registro("El usuario ha introducido dinero correctamente en IntroducirDinero.c");
 

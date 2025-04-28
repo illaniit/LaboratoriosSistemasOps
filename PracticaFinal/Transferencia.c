@@ -182,6 +182,10 @@ void *Transferencia(void *arg) {
     cuenta_origen->saldo -= Cantidad_transferir;
     cuenta_destino->saldo += Cantidad_transferir;
 
+
+    MeterCuentaBuffer(cuenta_origen);
+    MeterCuentaBuffer(cuenta_destino);
+    
     FILE *archivoTransacciones = fopen("transaciones.txt", "a+");
     if (!archivoTransacciones) {
         perror("Error abriendo transacciones.txt");

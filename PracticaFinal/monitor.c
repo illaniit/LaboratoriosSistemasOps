@@ -60,7 +60,7 @@ void enviar_alerta(const char *mensaje, const int *id, const int titular)
              hora, *id, mensaje);
 
     // Enviar mensaje a la cola
-    int id_cola = msgget(CLAVE_COLA, 0666);
+    int id_cola = msgget(CLAVE_COLA1, 0666);
     if (id_cola == -1)
     {
         perror("Error al obtener cola");

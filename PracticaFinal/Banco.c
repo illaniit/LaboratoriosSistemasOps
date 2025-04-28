@@ -148,7 +148,7 @@ void leer_alerta_cola(int sig)
 {
     Escribir_registro("Ha llegado una alerta de monitor mediante una señal en banco.c");
     MensajeAlerta msg;
-    int id_cola = msgget(CLAVE_COLA, 0666);
+    int id_cola = msgget(CLAVE_COLA1, 0666);
     if (id_cola == -1)
     {
         perror("Error al obtener cola");

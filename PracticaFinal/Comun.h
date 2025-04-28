@@ -38,8 +38,10 @@ typedef struct Config
 #include <ctype.h>
 #include <sys/stat.h>
 #include <sys/shm.h>
+#include "Cuenta.h"
 
-#define CLAVE_COLA 1234  // Puedes usar ftok si prefieres algo dinámico
+#define CLAVE_COLA1 1234  // Puedes usar ftok si prefieres algo dinámico
+#define CLAVE_COLA2 5678
 
 #define TIPO_ALERTA 1    // Tipo de mensaje usado por monitor
 
@@ -55,6 +57,7 @@ extern sem_t *sem_usuarios;
 extern sem_t *sem_transacciones;
 extern sem_t *sem_registro;
 
+void MeterCuentaBuffer(struct Cuenta *cuenta);
 void crear_cola_mensajes();
 void Inicializar_semaforos();
 void Destruir_semaforos();

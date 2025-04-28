@@ -1,5 +1,6 @@
 
 #include "Comun.h"
+#include "Cuenta.h"
 sem_t *sem_usuarios;
 sem_t *sem_transacciones;
 sem_t *sem_registro;
@@ -29,7 +30,7 @@ void Destruir_semaforos()
     sem_unlink("/sem_usuarios");
     sem_unlink("/sem_transacciones");
     // Eliminar la cola de mensajes si existe
-    int id_cola = msgget(CLAVE_COLA, 0666);
+    int id_cola = msgget(CLAVE_COLA1, 0666);
     if (id_cola != -1) {
         msgctl(id_cola, IPC_RMID, NULL);
     }
@@ -40,12 +41,19 @@ int id_cola;
 
 //Crea una cola de mensajes del sistema con la clave definida
 void crear_cola_mensajes() {
-    id_cola = msgget(CLAVE_COLA, IPC_CREAT | 0666);
+    id_cola = msgget(CLAVE_COLA1, IPC_CREAT | 0666);
     if (id_cola == -1) {
         perror("Error al crear la cola de mensajes");
         exit(EXIT_FAILURE);
     }
     Escribir_registro("se  ha creado la cola de mensjes correctamente en Comun.c");
+
+    int id_cola2 = msgget(CLAVE_COLA2, IPC_CREAT | 0666);
+    if (id_cola2 == -1) {
+        perror("Error al crear la segunda cola de mensajes");
+        exit(EXIT_FAILURE);
+    }
+    Escribir_registro("Se ha creado la segunda cola de mensajes correctamente en Comun.c");
 }
 
 
@@ -190,3 +198,39 @@ int obtener_id_usuario(const char *nombre, const char *contrasena)
     fclose(archivo);
     return -1; // No se encontró el usuario
 }
+
+void MeterCuentaBuffer(struct Cuenta *cuenta) {
+    int id_cola2 = msgget(CLAVE_COLA2, 0666);
+    if (id_cola2 == -1) {
+        perror("Error al abrir la cola de mensajes con CLAVE_COLA2");
+        return;
+    }
+
+    Buffer buffer;
+    memset(&buffer, 0, sizeof(Buffer)); // Inicializar el buffer
+
+    // Copiar la cuenta al buffer si hay espacio
+    if (buffer.NumeroCuentas < 10) { // Limitar a 10 cuentas
+        buffer.cuentas[buffer.NumeroCuentas] = *cuenta;
+        buffer.acceso = true;
+        buffer.NumeroCuentas++;
+
+        // Enviar el buffer a la cola de mensajes
+        struct {
+            long mtype;
+            Buffer buffer;
+        } mensaje;
+
+        mensaje.mtype = 1; // Tipo de mensaje
+        mensaje.buffer = buffer;
+
+        if (msgsnd(id_cola2, &mensaje, sizeof(Buffer), 0) == -1) {
+            perror("Error al enviar el mensaje a la cola");
+        } else {
+            Escribir_registro("Cuenta enviada correctamente a la cola de mensajes CLAVE_COLA2");
+        }
+    } else {
+        Escribir_registro("Error: El buffer ya contiene 10 cuentas, no se puede agregar más.");
+    }
+}
+    

@@ -15,47 +15,76 @@ void manejador_salida(int sig)
 void *VolcadoBuffer(void *arg)
 {
     Buffer *buffer = (Buffer *)arg;
-    
-    if (!buffer || !buffer->acceso)
+    if (!buffer) return NULL;
+
+    int id_cola2 = msgget(CLAVE_COLA2, 0666);
+    if (id_cola2 == -1)
     {
+        perror("Error al abrir la cola de mensajes con CLAVE_COLA2");
         return NULL;
     }
 
-    FILE *file = fopen("cuentas.txt", "r+");
-    if (file == NULL)
-    {
-        perror("Error al abrir el archivo");
-        return NULL;
-    }
+    struct {
+        long mtype;
+        Buffer buffer;
+    } mensaje;
 
-    char line[512];
-    while (fgets(line, sizeof(line), file))
+    while (msgrcv(id_cola2, &mensaje, sizeof(Buffer), 0, IPC_NOWAIT) != -1)
     {
-        Cuenta cuentaArchivo;
-        if (sscanf(line, "%d|%49[^|]|%49[^|]|%49[^|]|%99[^|]|%49[^|]|%d|%19[^|]|%19[^\n]",
-                   &cuentaArchivo.id, cuentaArchivo.Nombre, cuentaArchivo.Apellido,
-                   cuentaArchivo.Contraseña, cuentaArchivo.domicilio, cuentaArchivo.pais,
-                   &cuentaArchivo.saldo, cuentaArchivo.fecha, cuentaArchivo.hora) == 9)
+        for (int i = 0; i < mensaje.buffer.NumeroCuentas; i++)
         {
-            for (int i = 0; i < 10; i++)
+            Cuenta cuentaCola = mensaje.buffer.cuentas[i];
+
+            FILE *file = fopen("cuentas.txt", "r");
+            if (!file)
             {
-                if (buffer->cuentas[i].id == cuentaArchivo.id)
+                perror("Error al abrir el archivo");
+                return NULL;
+            }
+
+            FILE *tempFile = fopen("cuentas_temp.txt", "w");
+            if (!tempFile)
+            {
+                perror("Error al crear el archivo temporal");
+                fclose(file);
+                return NULL;
+            }
+
+            char line[512];
+            while (fgets(line, sizeof(line), file))
+            {
+                Cuenta cuentaArchivo;
+                if (sscanf(line, "%d|%49[^|]|%49[^|]|%49[^|]|%99[^|]|%49[^|]|%d|%19[^|]|%19[^\n]",
+                           &cuentaArchivo.id, cuentaArchivo.Nombre, cuentaArchivo.Apellido,
+                           cuentaArchivo.Contraseña, cuentaArchivo.domicilio, cuentaArchivo.pais,
+                           &cuentaArchivo.saldo, cuentaArchivo.fecha, cuentaArchivo.hora) == 9)
                 {
-                    fseek(file, -strlen(line), SEEK_CUR);
-                    fprintf(file, "%d|%s|%s|%s|%s|%s|%d|%s|%s\n",
-                            buffer->cuentas[i].id, buffer->cuentas[i].Nombre,
-                            buffer->cuentas[i].Apellido, buffer->cuentas[i].Contraseña,
-                            buffer->cuentas[i].domicilio, buffer->cuentas[i].pais,
-                            buffer->cuentas[i].saldo, buffer->cuentas[i].fecha,
-                            buffer->cuentas[i].hora);
-                    fflush(file);
-                    break;
+                    if (cuentaArchivo.id == cuentaCola.id)
+                    {
+                        // Modificar saldo
+                        cuentaArchivo.saldo = cuentaCola.saldo;
+                    }
+                    fprintf(tempFile, "%d|%s|%s|%s|%s|%s|%d|%s|%s\n",
+                            cuentaArchivo.id, cuentaArchivo.Nombre, cuentaArchivo.Apellido,
+                            cuentaArchivo.Contraseña, cuentaArchivo.domicilio, cuentaArchivo.pais,
+                            cuentaArchivo.saldo, cuentaArchivo.fecha, cuentaArchivo.hora);
                 }
             }
+
+            fclose(file);
+            fclose(tempFile);
+
+            // Sobrescribir el archivo original
+            remove("cuentas.txt");
+            rename("cuentas_temp.txt", "cuentas.txt");
         }
     }
 
-    fclose(file);
+    if (errno != ENOMSG)
+    {
+        perror("Error al recibir mensajes de la cola");
+    }
+
     pthread_exit(NULL);
 }
 

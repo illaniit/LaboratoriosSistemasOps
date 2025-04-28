@@ -65,6 +65,8 @@ void DatosCuenta(char *user, char *passwd) {
     char var[100];
     Cuenta cuenta;
 
+    Config config= leer_configuracion("variables.properties");
+
     // 🔐 Esperar a los semáforos
     sem_wait(sem_usuarios);
     sem_wait(sem_transacciones);
@@ -78,7 +80,7 @@ void DatosCuenta(char *user, char *passwd) {
         return;
     }
 
-    int shmid = shmget(clave, sizeof(Cuenta) * MAX_CUENTAS, 0666);
+    int shmid = shmget(clave, sizeof(Cuenta) * config.max_cuentas, 0666);
     if (shmid == -1) {
         perror("❌ Error al obtener el segmento de memoria compartida");
         sem_post(sem_usuarios);
@@ -98,7 +100,7 @@ void DatosCuenta(char *user, char *passwd) {
     limpiar_cadena(user);
     limpiar_cadena(passwd);
 
-    for (int i = 0; i < MAX_CUENTAS; i++) {
+    for (int i = 0; i < config.max_cuentas; i++) {
         Cuenta c = cuentas[i];
 
         if (strlen(c.Nombre) == 0) continue;
@@ -153,8 +155,8 @@ void ConsultarTransferencias(char *user, char *passwd) {
     sem_wait(sem_transacciones);  // Adquiere el semáforo para transacciones
 
     // Creamos la clave para la memoria compartida
-    key_t clave = ftok("Cuenta.h", 65);
-    int shmid = shmget(clave, MAX_CUENTAS * sizeof(struct Cuenta), 0666);
+    key_t clave = ftok("Cuenta.h", 66);
+    int shmid = shmget(clave, config.max_cuentas * sizeof(struct Cuenta), 0666);
     if (shmid == -1) {
         perror("❌ Error al obtener el ID de memoria compartida");
         sem_post(sem_usuarios);
@@ -186,7 +188,7 @@ void ConsultarTransferencias(char *user, char *passwd) {
     int user_id = -1;
 
     // Recorremos todas las cuentas en la memoria compartida
-    for (int i = 0; i < MAX_CUENTAS; i++) {
+    for (int i = 0; i <config.max_cuentas; i++) {
         if (strcmp(cuentas[i].Nombre, user) == 0 && strcmp(cuentas[i].Contraseña, passwd) == 0) {
             user_id = cuentas[i].id;  // Si encontramos la cuenta, obtenemos el ID
             break;

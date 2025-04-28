@@ -1,5 +1,5 @@
-1|Sofia|Mendoza|clave001|Laprida 736|Venezuela|3680|2023-01-02|18:07:00
-2|Ana|Romero|clave002|San Martin 901|Paraguay|3566|2023-01-02|14:25:00
+1|Sofia|Mendoza|clave001|Laprida 736|Venezuela|25881|2023-01-02|18:07:00
+2|Ana|Romero|clave002|San Martin 901|Paraguay|14666|2023-01-02|14:25:00
 3|Pedro|Castro|clave003|Av Rivadavia 749|Paraguay|3811|2023-01-04|14:47:00
 4|Maria|Díaz|clave004|Corrientes 235|Perú|4260|2023-01-05|11:07:00
 5|Camila|Pérez|clave005|Belgrano 387|Chile|1087|2023-01-07|04:25:00
