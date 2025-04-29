@@ -4,20 +4,22 @@
 sem_t *sem_usuarios;
 sem_t *sem_transacciones;
 sem_t *sem_registro;
+sem_t *sem_MC;
 // Inicializar semáforos compartidos
 
 /// @brief incializa los semaforos y les da permisos
 void Inicializar_semaforos()
 {
     sem_registro = sem_open("/sem_registro", O_CREAT, 0666, 1);
-   sem_usuarios = sem_open("/sem_usuarios", O_CREAT, 0666, 1);
+    sem_usuarios = sem_open("/sem_usuarios", O_CREAT, 0666, 1);
     sem_transacciones = sem_open("/sem_transacciones", O_CREAT, 0666, 1);
-    if (sem_usuarios == SEM_FAILED || sem_transacciones == SEM_FAILED || sem_registro == SEM_FAILED)
+    sem_MC = sem_open("/sem_MC",O_CREAT,0666,1);
+    if (sem_usuarios == SEM_FAILED || sem_transacciones == SEM_FAILED || sem_registro == SEM_FAILED || sem_MC == SEM_FAILED)
     {
         perror("Error al inicializar semáforos");
         exit(EXIT_FAILURE);
     }
-  
+    
 }
 
 /// @brief Cierra y elimina los semáforos, también elimina la cola de mensajes
@@ -26,6 +28,8 @@ void Destruir_semaforos()
     sem_close(sem_usuarios);
     sem_close(sem_transacciones);
     sem_close(sem_registro);
+    sem_close(sem_MC);
+    sem_unlink("/sem_MC");
     sem_unlink("/sem_registro");
     sem_unlink("/sem_usuarios");
     sem_unlink("/sem_transacciones");
@@ -33,6 +37,10 @@ void Destruir_semaforos()
     int id_cola = msgget(CLAVE_COLA1, 0666);
     if (id_cola != -1) {
         msgctl(id_cola, IPC_RMID, NULL);
+    }
+    int id_cola2 = msgget(CLAVE_COLA2, IPC_CREAT | 0666);
+    if (id_cola2 != -1) {
+        msgctl(id_cola2, IPC_RMID, NULL);
     }
 }
 
@@ -97,6 +105,9 @@ Config leer_configuracion(const char *ruta)
         else if (strstr(linea, "MAX_CUENTAS"))
             sscanf(linea, "MAX_CUENTAS=%d",
                    &config.max_cuentas);
+        else if (strstr(linea, "TAMAÑO_BUFFER"))
+            sscanf(linea, "TAMAÑO_BUFFER=%d",
+                    &config.tamaño_buffer);
     }
     fclose(archivo);
     return config;
@@ -200,6 +211,8 @@ int obtener_id_usuario(const char *nombre, const char *contrasena)
 }
 
 void MeterCuentaBuffer(struct Cuenta *cuenta) {
+
+    Config config = leer_configuracion("variables.properties");
     int id_cola2 = msgget(CLAVE_COLA2, 0666);
     if (id_cola2 == -1) {
         perror("Error al abrir la cola de mensajes con CLAVE_COLA2");
@@ -210,7 +223,7 @@ void MeterCuentaBuffer(struct Cuenta *cuenta) {
     memset(&buffer, 0, sizeof(Buffer)); // Inicializar el buffer
 
     // Copiar la cuenta al buffer si hay espacio
-    if (buffer.NumeroCuentas < 10) { // Limitar a 10 cuentas
+    if (buffer.NumeroCuentas < config.tamaño_buffer) { // Limitar a 10 cuentas
         buffer.cuentas[buffer.NumeroCuentas] = *cuenta;
         buffer.acceso = true;
         buffer.NumeroCuentas++;

@@ -12,6 +12,7 @@ typedef struct Config
     char archivo_cuentas[50];
     char archivo_log[50];
     int max_cuentas;
+    int tamaño_buffer;
 } Config;
 
 #include <fcntl.h>
@@ -56,6 +57,7 @@ Config leer_configuracion(const char *ruta);
 extern sem_t *sem_usuarios;
 extern sem_t *sem_transacciones;
 extern sem_t *sem_registro;
+extern sem_t *sem_MC;
 
 void MeterCuentaBuffer(struct Cuenta *cuenta);
 void crear_cola_mensajes();
