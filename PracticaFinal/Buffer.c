@@ -34,11 +34,12 @@ void *VolcadoBuffer(void *arg)
         for (int i = 0; i < mensaje.buffer.NumeroCuentas; i++)
         {
             Cuenta cuentaCola = mensaje.buffer.cuentas[i];
-
+            sem_wait(sem_usuarios);
             FILE *file = fopen("cuentas.txt", "r");
             if (!file)
             {
                 perror("Error al abrir el archivo");
+                sem_post(sem_usuarios);
                 return NULL;
             }
 
@@ -46,10 +47,11 @@ void *VolcadoBuffer(void *arg)
             if (!tempFile)
             {
                 perror("Error al crear el archivo temporal");
+                sem_post(sem_usuarios);
                 fclose(file);
                 return NULL;
             }
-
+            sem_wait(sem_MC);
             char line[512];
             while (fgets(line, sizeof(line), file))
             {
@@ -73,7 +75,8 @@ void *VolcadoBuffer(void *arg)
 
             fclose(file);
             fclose(tempFile);
-
+            sem_post(sem_MC);
+            sem_post(sem_usuarios);
             // Sobrescribir el archivo original
             remove("cuentas.txt");
             rename("cuentas_temp.txt", "cuentas.txt");

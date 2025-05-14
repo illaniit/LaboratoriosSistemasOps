@@ -29,6 +29,7 @@ void *Transferencia(void *arg) {
 
     sem_wait(sem_usuarios);
     sem_wait(sem_transacciones);
+    sem_wait(sem_MC);
 
     int id_origen = -1;
     for (int i = 0; i < config.max_cuentas; i++) {
@@ -44,6 +45,7 @@ void *Transferencia(void *arg) {
         Escribir_registro("Error al obtener ID del usuario.");
         sem_post(sem_usuarios);
         sem_post(sem_transacciones);
+        sem_post(sem_MC);
         sleep(2);
         return NULL;
     }
@@ -53,6 +55,7 @@ void *Transferencia(void *arg) {
         Escribir_registro("ID destino inválido.");
         sem_post(sem_usuarios);
         sem_post(sem_transacciones);
+        sem_post(sem_MC);
         sleep(2);
         return NULL;
     }
@@ -76,6 +79,7 @@ void *Transferencia(void *arg) {
             Escribir_registro("Error al abrir cuentas.txt");
             sem_post(sem_usuarios);
             sem_post(sem_transacciones);
+            sem_post(sem_MC);
             return NULL;
         }
 
@@ -153,6 +157,7 @@ void *Transferencia(void *arg) {
             Escribir_registro("Cuenta destino no encontrada.");
             sem_post(sem_usuarios);
             sem_post(sem_transacciones);
+            sem_post(sem_MC);
             sleep(2);
             return NULL;
         }
@@ -163,6 +168,7 @@ void *Transferencia(void *arg) {
         Escribir_registro("Cantidad mayor al límite.");
         sem_post(sem_usuarios);
         sem_post(sem_transacciones);
+        sem_post(sem_MC);
         sleep(2);
         return NULL;
     }
@@ -172,6 +178,7 @@ void *Transferencia(void *arg) {
         Escribir_registro("Saldo insuficiente.");
         sem_post(sem_usuarios);
         sem_post(sem_transacciones);
+        sem_post(sem_MC);
         sleep(2);
         return NULL;
     }
@@ -192,6 +199,7 @@ void *Transferencia(void *arg) {
         Escribir_registro("Error al abrir transacciones.txt");
         sem_post(sem_usuarios);
         sem_post(sem_transacciones);
+        sem_post(sem_MC);
         return NULL;
     }
 
@@ -224,6 +232,7 @@ void *Transferencia(void *arg) {
         Escribir_registro("Error al abrir transacciones.log del origen");
         sem_post(sem_usuarios);
         sem_post(sem_transacciones);
+        sem_post(sem_MC);
         return NULL;
     }
     time_t t = time(NULL);
@@ -244,6 +253,7 @@ void *Transferencia(void *arg) {
         Escribir_registro("Error al abrir transacciones.log del destino");
         sem_post(sem_usuarios);
         sem_post(sem_transacciones);
+        sem_post(sem_MC);
         return NULL;
     }
 
@@ -257,6 +267,7 @@ void *Transferencia(void *arg) {
 
     sem_post(sem_usuarios);
     sem_post(sem_transacciones);
+    sem_post(sem_MC);
     sleep(2);
     return NULL;
 }

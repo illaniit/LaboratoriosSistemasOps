@@ -32,13 +32,14 @@ void *IntroducirDinero(void *arg2)
 
     sem_wait(sem_usuarios);
     sem_wait(sem_transacciones);
-    
+    sem_wait(sem_MC);
     if (saldo_introducir < 0)
     {
         printf("❌ No puedes ingresar una cantidad negativa!\n");
         Escribir_registro("El usuario ha intentado introducir una cantidad negativa en IntroducirDinero.c");
         sem_post(sem_usuarios);
         sem_post(sem_transacciones);
+        sem_post(sem_MC);
         return NULL;
     }
 
@@ -48,6 +49,7 @@ void *IntroducirDinero(void *arg2)
         perror("❌ Error al generar clave con ftok");
         sem_post(sem_usuarios);
         sem_post(sem_transacciones);
+        sem_post(sem_MC);
         return NULL;
     }
 
@@ -57,6 +59,7 @@ void *IntroducirDinero(void *arg2)
         perror("❌ Error al obtener segmento de memoria compartida");
         sem_post(sem_usuarios);
         sem_post(sem_transacciones);
+        sem_post(sem_MC);
         return NULL;
     }
 
@@ -66,6 +69,7 @@ void *IntroducirDinero(void *arg2)
         perror("❌ Error al enlazar memoria compartida");
         sem_post(sem_usuarios);
         sem_post(sem_transacciones);
+        sem_post(sem_MC);
         return NULL;
     }
 
@@ -146,6 +150,7 @@ void *IntroducirDinero(void *arg2)
     shmdt(cuentas);
     sem_post(sem_usuarios);
     sem_post(sem_transacciones);
+    sem_post(sem_MC);
 
     if (encontrado)
     {

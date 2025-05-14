@@ -433,6 +433,7 @@ void ListarCuentas()
     int hayCuentas = 0;
 
     // Recorremos las cuentas hasta encontrar una cuenta con campos vacíos (sin nombre o usuario)
+        sem_wait(sem_MC);
     while (1)
     {
         // Comprobamos si la cuenta está "vacía" (sin nombre o usuario)
@@ -472,6 +473,7 @@ void ListarCuentas()
         if (i >= config.max_cuentas)
             break;
     }
+    sem_post(sem_MC);
 }
 void CrearCarpetas()
 {
@@ -579,7 +581,7 @@ void ActualizarArchivoCuentas()
     char linea[512];
     long posicion;
     int cuenta_actualizada = 0;
-
+    sem_wait(sem_MC);
     while (fgets(linea, sizeof(linea), archivo))
     {
         Cuenta cuenta_temp;
@@ -622,6 +624,7 @@ void ActualizarArchivoCuentas()
             }
         }
     }
+    sem_post(sem_MC);
 
     if (!cuenta_actualizada)
     {

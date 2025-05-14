@@ -181,6 +181,8 @@ void InicioDeSesion()
     char Usuario[50], Contraseña[50];
     int acceso = 0;
     Config config = leer_configuracion("variables.properties");
+    sem_wait(sem_usuarios);
+    sem_wait(sem_MC);
     Cuenta *cuenta = cuentas;
 
     printf("👤 Nombre de usuario: ");
@@ -207,6 +209,8 @@ void InicioDeSesion()
     if (!archivo)
     {
         perror("❌ Error al abrir el archivo cuentas.txt");
+        sem_post(sem_usuarios);
+        sem_post(sem_MC);
         return;
     }
 
@@ -302,8 +306,12 @@ void InicioDeSesion()
     if (!acceso)
     {
         printf("❌ Usuario o contraseña incorrectos.\n");
+        sem_post(sem_MC);
+        sem_post(sem_usuarios);
         sleep(2);
     }
+    sem_post(sem_MC);
+    sem_post(sem_usuarios);
 }
 
 void Registro()
@@ -368,12 +376,13 @@ void Registro()
         ;
 
     int i;
-
+    sem_wait(sem_usuarios);
     // Abrir el archivo cuentas.txt para lectura y escritura
     FILE *archivo = fopen("cuentas.txt", "a+");
     if (!archivo)
     {
         perror("❌ Error al abrir el archivo cuentas.txt");
+        sem_post(sem_usuarios);
         return;
     }
 
@@ -409,4 +418,5 @@ void Registro()
     printf("✅ Registro exitoso. Los datos se han guardado en cuentas.txt\n");
     CrearArchivoTransacciones(cuenta.id, cuenta.Nombre);
     Escribir_registro("Se ha registrado un nuevo usuario en el sistema");
+    sem_post(sem_usuarios);
 }

@@ -1,4 +1,4 @@
-1|Sofia|Mendoza|clave001|Laprida 736|Venezuela|16981|2023-01-02|18:07:00
+1|Sofia|Mendoza|clave001|Laprida 736|Venezuela|15981|2023-01-02|18:07:00
 2|Ana|Romero|clave002|San Martin 901|Paraguay|24666|2023-01-02|14:25:00
 3|Pedro|Castro|clave003|Av Rivadavia 749|Paraguay|3811|2023-01-04|14:47:00
 4|Maria|Díaz|clave004|Corrientes 235|Perú|4260|2023-01-05|11:07:00
@@ -30,13 +30,13 @@
 30|Diego|Gomez|clave030|Av Siempre Viva 351|México|4278|2023-01-31|11:30:00
 31|Juan|Pérez|clave031|San Martin 448|Colombia|4849|2023-02-01|18:23:00
 32|Carlos|Castro|clave032|Corrientes 733|Colombia|4388|2023-02-02|19:12:00
-33|Laura|Gomez|clave033|Sarmiento 889|Argentina|4841|2023-02-03|12:46:00
+33|Laura|Gomez|clave033|Sarmiento 889|Argentina|4941|2023-02-03|12:46:00
 34|Carlos|Torres|clave034|Mitre 642|Ecuador|3677|2023-02-05|00:37:00
 35|Sofia|López|clave035|Laprida 994|Perú|780|2023-02-06|04:10:00
 36|Luis|Vargas|clave036|Urquiza 436|Ecuador|3955|2023-02-06|15:02:00
 37|Sofia|Mendoza|clave037|San Martin 991|Paraguay|626|2023-02-07|14:28:00
 38|Ana|Díaz|clave038|Urquiza 647|Bolivia|790|2023-02-09|00:35:00
-39|Diego|Gomez|clave039|Sarmiento 287|México|4842|2023-02-09|10:59:00
+39|Diego|Gomez|clave039|Sarmiento 287|México|5842|2023-02-09|10:59:00
 40|Luis|Ruiz|clave040|Calle Falsa 332|Venezuela|1876|2023-02-10|10:26:00
 41|Carlos|Pérez|clave041|Urquiza 582|Chile|1574|2023-02-11|18:53:00
 42|Luis|Romero|clave042|Calle Falsa 537|Argentina|1925|2023-02-13|00:51:00

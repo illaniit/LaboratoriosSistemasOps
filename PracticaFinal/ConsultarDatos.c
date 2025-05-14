@@ -72,6 +72,7 @@ void DatosCuenta(char *user, char *passwd) {
     sem_wait(sem_transacciones);
 
     // ✅ Inicializar memoria compartida
+    sem_wait(&sem_MC);
     key_t clave = ftok("Cuenta.h", 66);
     if (clave == -1) {
         perror("❌ Error al generar clave con ftok");
@@ -95,7 +96,7 @@ void DatosCuenta(char *user, char *passwd) {
         sem_post(sem_transacciones);
         return;
     }
-
+    
     // 🔎 Buscar el usuario en la memoria
     limpiar_cadena(user);
     limpiar_cadena(passwd);
@@ -115,8 +116,7 @@ void DatosCuenta(char *user, char *passwd) {
         }
     }
 
-    // ✅ Liberar la memoria compartida y semáforos
- 
+    sem_post(&sem_MC);
     sem_post(sem_usuarios);
     sem_post(sem_transacciones);
 
@@ -153,7 +153,8 @@ void ConsultarTransferencias(char *user, char *passwd) {
 
     sem_wait(sem_usuarios);  // Adquiere el semáforo para usuarios
     sem_wait(sem_transacciones);  // Adquiere el semáforo para transacciones
-
+    sem_wait(sem_MC);
+    
     // Creamos la clave para la memoria compartida
     key_t clave = ftok("Cuenta.h", 66);
     int shmid = shmget(clave, config.max_cuentas * sizeof(struct Cuenta), 0666);
@@ -161,6 +162,7 @@ void ConsultarTransferencias(char *user, char *passwd) {
         perror("❌ Error al obtener el ID de memoria compartida");
         sem_post(sem_usuarios);
         sem_post(sem_transacciones);
+        sem_post(sem_MC);
         return;
     }
 
@@ -170,6 +172,7 @@ void ConsultarTransferencias(char *user, char *passwd) {
         perror("❌ Error al asociar la memoria compartida");
         sem_post(sem_usuarios);
         sem_post(sem_transacciones);
+        sem_post(sem_MC);
         return;
     }
 
@@ -180,6 +183,7 @@ void ConsultarTransferencias(char *user, char *passwd) {
         shmdt(cuentas);  // Desasociamos la memoria compartida
         sem_post(sem_usuarios);
         sem_post(sem_transacciones);
+        sem_post(sem_MC);
         return;
     }
 
@@ -202,6 +206,7 @@ void ConsultarTransferencias(char *user, char *passwd) {
         shmdt(cuentas);
         sem_post(sem_usuarios);
         sem_post(sem_transacciones);
+        sem_post(sem_MC);
         return;
     }
 
@@ -246,5 +251,6 @@ void ConsultarTransferencias(char *user, char *passwd) {
     
     sem_post(sem_usuarios);  // Liberamos los semáforos
     sem_post(sem_transacciones);
+    sem_post(sem_MC);
 }
 
