@@ -181,8 +181,6 @@ void InicioDeSesion()
     char Usuario[50], Contraseña[50];
     int acceso = 0;
     Config config = leer_configuracion("variables.properties");
-    sem_wait(sem_usuarios);
-    sem_wait(sem_MC);
     Cuenta *cuenta = cuentas;
 
     printf("👤 Nombre de usuario: ");

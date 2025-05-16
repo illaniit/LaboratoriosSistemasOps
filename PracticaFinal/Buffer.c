@@ -34,7 +34,7 @@ void *VolcadoBuffer(void *arg)
         for (int i = 0; i < mensaje.buffer.NumeroCuentas; i++)
         {
             Cuenta cuentaCola = mensaje.buffer.cuentas[i];
-            sem_wait(sem_usuarios);
+            //sem_wait(sem_usuarios);
             FILE *file = fopen("cuentas.txt", "r");
             if (!file)
             {
@@ -51,7 +51,7 @@ void *VolcadoBuffer(void *arg)
                 fclose(file);
                 return NULL;
             }
-            sem_wait(sem_MC);
+            //sem_wait(sem_MC);
             char line[512];
             while (fgets(line, sizeof(line), file))
             {

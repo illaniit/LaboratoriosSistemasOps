@@ -6,7 +6,7 @@
 6|Juan|Díaz|clave006|Calle Falsa 310|Argentina|4847|2023-01-07|15:40:00
 7|Juan|López|clave007|Urquiza 944|Venezuela|4284|2023-01-09|06:23:00
 8|Ana|López|clave008|Calle Falsa 518|Uruguay|2188|2023-01-10|07:01:00
-9|alejandro|de pazos|123|casa|casa|1000|2025-04-25|13:23:24
+9|alejandro|de pazos|123|casa|casa|1200|2025-04-25|13:23:24
 10|Carlos|Ruiz|clave010|Laprida 463|Paraguay|1514|2023-01-11|10:28:00
 11|Luis|Mendoza|clave011|Av Siempre Viva 870|México|3414|2023-01-12|12:40:00
 12|Laura|López|clave012|San Martin 765|México|3338|2023-01-13|13:14:00
