@@ -2431,3 +2431,239 @@
 [2025-05-14 18:54:10] se ha matado los hijos desde banco.c
 [2025-05-14 18:54:10] Se acaban con todos los procesos desde banco.c
 [2025-05-14 18:54:10] ✅ Archivo de cuentas actualizado correctamente en banco.c
+[2025-05-15 20:03:55] Detectando transferencias consecutivas... en monitor.c
+[2025-05-15 20:03:55] Detectando retiros consecutivos... en monitor.c
+[2025-05-15 20:03:55] Detectando saldos negativos... en monitor.c
+[2025-05-15 20:03:55] Detectando transacciones sospechosas... en monitor.c
+[2025-05-15 20:04:00] Se ha accedido al main de banco y se han incializado los semaforos en banco.c
+[2025-05-15 20:04:00] ✅ Carpetas de transacciones creadas correctamente en banco.c
+[2025-05-15 20:04:00] se  ha creado la cola de mensjes correctamente en Comun.c
+[2025-05-15 20:04:00] Se ha creado la segunda cola de mensajes correctamente en Comun.c
+[2025-05-15 20:04:00] Se crea el fork de buffer desde banco.c
+[2025-05-15 20:04:00] Se crea el fork de buffer desde banco.c
+[2025-05-15 20:04:00] Proceso buffer hijo iniciado desde banco.c
+[2025-05-15 20:04:00] ✅ Archivo de cuentas actualizado correctamente en buffer.c
+[2025-05-15 20:04:06] Proceso buffer creado correctamente desde banco.c
+[2025-05-15 20:04:06] Se crea el fork de monitor desde banco.c
+[2025-05-15 20:04:06] Se crea el fork de monitor desde banco.c
+[2025-05-15 20:04:06] Proceso monitor hijo iniciado desde banco.c
+[2025-05-15 20:04:06] se han inicializado los semaforos desde comun.c
+[2025-05-15 20:04:06] Detectando transferencias consecutivas... en monitor.c
+[2025-05-15 20:04:06] Detectando retiros consecutivos... en monitor.c
+[2025-05-15 20:04:06] Detectando saldos negativos... en monitor.c
+[2025-05-15 20:04:06] Detectando transacciones sospechosas... en monitor.c
+[2025-05-15 20:04:12] Proceso monitor creado correctamente desde banco.c
+[2025-05-15 20:04:13] se ha abierto una nueva terminal con usuario desde banco.c
+[2025-05-15 20:04:13] se ha generado un archvio con el pid del usuario desde banco.c
+[2025-05-15 20:04:17] Se ha alamcenado el pid del usuario desde banco.c
+[2025-05-15 20:04:30] ✅ Archivo de cuentas actualizado correctamente en buffer.c
+[2025-05-15 20:04:31] se ha matado los hijos desde banco.c
+[2025-05-15 20:04:31] Se acaban con todos los procesos desde banco.c
+[2025-05-15 20:04:31] ✅ Archivo de cuentas actualizado correctamente en banco.c
+[2025-05-15 20:06:04] Se ha accedido al main de banco y se han incializado los semaforos en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ❌ Error al crear la carpeta del usuario en banco.c
+[2025-05-15 20:06:04] ✅ Carpetas de transacciones creadas correctamente en banco.c
+[2025-05-15 20:06:04] se  ha creado la cola de mensjes correctamente en Comun.c
+[2025-05-15 20:06:04] Se ha creado la segunda cola de mensajes correctamente en Comun.c
+[2025-05-15 20:06:04] Se crea el fork de buffer desde banco.c
+[2025-05-15 20:06:04] Proceso buffer hijo iniciado desde banco.c
+[2025-05-15 20:06:04] Se crea el fork de buffer desde banco.c
+[2025-05-15 20:06:04] ✅ Archivo de cuentas actualizado correctamente en buffer.c
+[2025-05-15 20:12:26] Se ha accedido al main de banco y se han incializado los semaforos en banco.c
+[2025-05-15 20:12:26] ✅ Carpetas de transacciones creadas correctamente en banco.c
+[2025-05-15 20:12:26] se  ha creado la cola de mensjes correctamente en Comun.c
+[2025-05-15 20:12:26] Se ha creado la segunda cola de mensajes correctamente en Comun.c
+[2025-05-15 20:12:26] Se crea el fork de buffer desde banco.c
+[2025-05-15 20:12:26] Se crea el fork de buffer desde banco.c
+[2025-05-15 20:12:26] Proceso buffer hijo iniciado desde banco.c
+[2025-05-15 20:12:26] ✅ Archivo de cuentas actualizado correctamente en buffer.c
+[2025-05-15 20:12:32] Proceso buffer creado correctamente desde banco.c
+[2025-05-15 20:12:32] Se crea el fork de monitor desde banco.c
+[2025-05-15 20:12:32] Se crea el fork de monitor desde banco.c
+[2025-05-15 20:12:32] Proceso monitor hijo iniciado desde banco.c
+[2025-05-15 20:12:32] se han inicializado los semaforos desde comun.c
+[2025-05-15 20:12:32] Detectando transferencias consecutivas... en monitor.c
+[2025-05-15 20:12:32] Detectando retiros consecutivos... en monitor.c
+[2025-05-15 20:12:32] Detectando saldos negativos... en monitor.c
+[2025-05-15 20:12:32] Detectando transacciones sospechosas... en monitor.c
+[2025-05-15 20:12:38] Proceso monitor creado correctamente desde banco.c
+[2025-05-15 20:12:38] se ha abierto una nueva terminal con usuario desde banco.c
+[2025-05-15 20:12:39] se ha generado un archvio con el pid del usuario desde banco.c
+[2025-05-15 20:12:43] Se ha alamcenado el pid del usuario desde banco.c
+[2025-05-15 20:12:56] ✅ Archivo de cuentas actualizado correctamente en buffer.c
+[2025-05-15 20:12:57] se ha matado los hijos desde banco.c
+[2025-05-15 20:12:57] Se acaban con todos los procesos desde banco.c
+[2025-05-15 20:12:57] ✅ Archivo de cuentas actualizado correctamente en banco.c
+[2025-05-15 20:13:32] Se ha accedido al main de banco y se han incializado los semaforos en banco.c
+[2025-05-15 20:13:32] ✅ Carpetas de transacciones creadas correctamente en banco.c
+[2025-05-15 20:13:32] se  ha creado la cola de mensjes correctamente en Comun.c
+[2025-05-15 20:13:32] Se ha creado la segunda cola de mensajes correctamente en Comun.c
+[2025-05-15 20:13:32] Se crea el fork de buffer desde banco.c
+[2025-05-15 20:13:32] Proceso buffer hijo iniciado desde banco.c
+[2025-05-15 20:13:32] Se crea el fork de buffer desde banco.c
+[2025-05-15 20:13:32] ✅ Archivo de cuentas actualizado correctamente en buffer.c
+[2025-05-15 20:13:38] Proceso buffer creado correctamente desde banco.c
+[2025-05-15 20:13:38] Se crea el fork de monitor desde banco.c
+[2025-05-15 20:13:38] Se crea el fork de monitor desde banco.c
+[2025-05-15 20:13:38] Proceso monitor hijo iniciado desde banco.c
+[2025-05-15 20:13:38] se han inicializado los semaforos desde comun.c
+[2025-05-15 20:13:38] Detectando transferencias consecutivas... en monitor.c
+[2025-05-15 20:13:38] Detectando retiros consecutivos... en monitor.c
+[2025-05-15 20:13:38] Detectando saldos negativos... en monitor.c
+[2025-05-15 20:13:38] Detectando transacciones sospechosas... en monitor.c
+[2025-05-15 20:13:44] Proceso monitor creado correctamente desde banco.c
+[2025-05-15 20:13:45] se ha abierto una nueva terminal con usuario desde banco.c
+[2025-05-15 20:13:45] se ha generado un archvio con el pid del usuario desde banco.c
+[2025-05-15 20:13:49] Se ha alamcenado el pid del usuario desde banco.c
+[2025-05-15 20:13:56] se ha matado los hijos desde banco.c
+[2025-05-15 20:13:56] Se acaban con todos los procesos desde banco.c
+[2025-05-15 20:13:56] ✅ Archivo de cuentas actualizado correctamente en banco.c
+[2025-05-15 20:14:28] Se ha accedido al main de banco y se han incializado los semaforos en banco.c
+[2025-05-15 20:14:28] ✅ Carpetas de transacciones creadas correctamente en banco.c
+[2025-05-15 20:14:28] se  ha creado la cola de mensjes correctamente en Comun.c
+[2025-05-15 20:14:28] Se ha creado la segunda cola de mensajes correctamente en Comun.c
+[2025-05-15 20:14:28] Se crea el fork de buffer desde banco.c
+[2025-05-15 20:14:28] Proceso buffer hijo iniciado desde banco.c
+[2025-05-15 20:14:28] Se crea el fork de buffer desde banco.c
+[2025-05-15 20:14:28] ✅ Archivo de cuentas actualizado correctamente en buffer.c
+[2025-05-15 20:14:34] Proceso buffer creado correctamente desde banco.c
+[2025-05-15 20:14:34] Se crea el fork de monitor desde banco.c
+[2025-05-15 20:14:34] Se crea el fork de monitor desde banco.c
+[2025-05-15 20:14:34] Proceso monitor hijo iniciado desde banco.c
+[2025-05-15 20:14:34] se han inicializado los semaforos desde comun.c
+[2025-05-15 20:14:34] Detectando transferencias consecutivas... en monitor.c
+[2025-05-15 20:14:34] Detectando retiros consecutivos... en monitor.c
+[2025-05-15 20:14:34] Detectando saldos negativos... en monitor.c
+[2025-05-15 20:14:34] Detectando transacciones sospechosas... en monitor.c
+[2025-05-15 20:14:40] Proceso monitor creado correctamente desde banco.c
+[2025-05-15 20:14:40] se ha abierto una nueva terminal con usuario desde banco.c
+[2025-05-15 20:14:41] se ha generado un archvio con el pid del usuario desde banco.c
+[2025-05-15 20:14:45] Se ha alamcenado el pid del usuario desde banco.c
+[2025-05-15 20:14:58] ✅ Archivo de cuentas actualizado correctamente en buffer.c
+[2025-05-15 20:15:13] se ha matado los hijos desde banco.c
+[2025-05-15 20:15:13] Se acaban con todos los procesos desde banco.c
+[2025-05-15 20:15:13] ✅ Archivo de cuentas actualizado correctamente en banco.c
+[2025-05-15 20:16:09] Se ha accedido al main de banco y se han incializado los semaforos en banco.c
+[2025-05-15 20:16:09] ✅ Carpetas de transacciones creadas correctamente en banco.c
+[2025-05-15 20:16:09] se  ha creado la cola de mensjes correctamente en Comun.c
+[2025-05-15 20:16:09] Se ha creado la segunda cola de mensajes correctamente en Comun.c
+[2025-05-15 20:16:09] Se crea el fork de buffer desde banco.c
+[2025-05-15 20:16:09] Proceso buffer hijo iniciado desde banco.c
+[2025-05-15 20:16:09] Se crea el fork de buffer desde banco.c
+[2025-05-15 20:16:09] ✅ Archivo de cuentas actualizado correctamente en buffer.c
+[2025-05-15 20:16:15] Proceso buffer creado correctamente desde banco.c
+[2025-05-15 20:16:15] Se crea el fork de monitor desde banco.c
+[2025-05-15 20:16:15] Se crea el fork de monitor desde banco.c
+[2025-05-15 20:16:15] Proceso monitor hijo iniciado desde banco.c
+[2025-05-15 20:16:15] se han inicializado los semaforos desde comun.c
+[2025-05-15 20:16:15] Detectando transferencias consecutivas... en monitor.c
+[2025-05-15 20:16:15] Detectando retiros consecutivos... en monitor.c
+[2025-05-15 20:16:15] Detectando saldos negativos... en monitor.c
+[2025-05-15 20:16:15] Detectando transacciones sospechosas... en monitor.c
+[2025-05-15 20:16:21] Proceso monitor creado correctamente desde banco.c
+[2025-05-15 20:16:22] se ha abierto una nueva terminal con usuario desde banco.c
+[2025-05-15 20:16:22] se ha generado un archvio con el pid del usuario desde banco.c
+[2025-05-15 20:16:26] Se ha alamcenado el pid del usuario desde banco.c
+[2025-05-15 20:16:36] se ha matado los hijos desde banco.c
+[2025-05-15 20:16:36] Se acaban con todos los procesos desde banco.c
+[2025-05-15 20:16:36] ✅ Archivo de cuentas actualizado correctamente en banco.c

@@ -72,7 +72,7 @@ void DatosCuenta(char *user, char *passwd) {
     sem_wait(sem_transacciones);
 
     // ✅ Inicializar memoria compartida
-    sem_wait(&sem_MC);
+    sem_wait(sem_MC);
     key_t clave = ftok("Cuenta.h", 66);
     if (clave == -1) {
         perror("❌ Error al generar clave con ftok");
@@ -116,7 +116,7 @@ void DatosCuenta(char *user, char *passwd) {
         }
     }
 
-    sem_post(&sem_MC);
+    sem_post(sem_MC);
     sem_post(sem_usuarios);
     sem_post(sem_transacciones);
 
