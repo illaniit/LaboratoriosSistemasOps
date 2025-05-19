@@ -35,7 +35,6 @@ void CrearBuffer();
 
 int main()
 {
-
     Inicializar_semaforos();// Iniciar semaforos
 
     CrearMemoria();//Crear la memoria compartida
@@ -59,7 +58,7 @@ int main()
     ActualizarArchivoCuentas();// Actualizar el archivo de cuentas
 
     Destruir_semaforos();// se destruyen los semaforos
-
+    
     Limpiar_MemoriaCompartida(); // se desconecta y elimina la memoria compartida
     return 0;
 }
