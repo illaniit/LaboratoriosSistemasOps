@@ -59,7 +59,7 @@ int main()
 
     Destruir_semaforos();
 
-
+    Limpiar_MemoriaCompartida();
     return 0;
 }
 
@@ -67,7 +67,6 @@ void CrearMemoria()
 {
     Config config = leer_configuracion("variables.properties");
     key_t clave = ftok("Cuenta.h", 66);
-    printf("[DEBUG] Clave generada: %d\n", clave);
     int shmid = shmget(clave, config.max_cuentas * sizeof(Cuenta), 0666 | IPC_CREAT);
     cuentas = (Cuenta *)shmat(shmid, NULL, 0);
     
@@ -119,16 +118,14 @@ void CrearMemoria()
 
     fclose(archivo);
 
-    printf("✅ Memoria compartida creada con ID: %d\n", shmid);
-    printf("✅ Se cargaron %d cuentas en la memoria compartida\n", i);
     return;
 }
 
 void Limpiar_MemoriaCompartida()
 {
-    shmdt(cuentas);
-    key_t clave = ftok("Cuenta.h", 65);
-    int shmid = shmget(clave, MAX_CUENTAS * sizeof(Cuenta), 0666 | IPC_CREAT);
+    Config config = leer_configuracion("variables.properties");
+    key_t clave = ftok("Cuenta.h", 66);
+    int shmid = shmget(clave, config.max_cuentas * sizeof(Cuenta), 0666 | IPC_CREAT);
     if (shmid == -1)
     {
         perror("shmget falló");
@@ -240,7 +237,7 @@ void Menu_Procesos()
             Escribir_registro("se ha generado un archvio con el pid del usuario desde banco.c");
 
             // Esperamos 20 segundos (puedes quitar esto si no es necesario)
-            sleep(3);
+            sleep(1);
 
             // Abrimos el archivo en modo lectura y escritura
             FILE *fp = fopen(filename, "r+");
@@ -391,7 +388,7 @@ void CrearMonitor()
         char filename[50];
         snprintf(filename, sizeof(filename), "/tmp/pid_%d.txt", Monitor);
 
-        sleep(5); // Dar tiempo al hijo para crear el archivo
+        sleep(1); // Dar tiempo al hijo para crear el archivo
 
         FILE *fp = fopen(filename, "r+");
         if (fp)
@@ -570,7 +567,6 @@ void CrearCarpetas()
 }
 void ActualizarArchivoCuentas()
 {
-    Escribir_registro("Actualizar si");
     FILE *archivo = fopen("cuentas.txt", "r+");
     if (!archivo)
     {
@@ -583,7 +579,7 @@ void ActualizarArchivoCuentas()
     long posicion;
     int cuenta_actualizada = 0;
   // 
-  // sem_wait(sem_MC);
+  sem_wait(sem_MC);
     while (fgets(linea, sizeof(linea), archivo))
     {
         Cuenta cuenta_temp;
@@ -626,7 +622,7 @@ void ActualizarArchivoCuentas()
             }
         }
     }
-    //sem_post(sem_MC);
+    sem_post(sem_MC);
 
     if (!cuenta_actualizada)
     {
@@ -638,7 +634,6 @@ void ActualizarArchivoCuentas()
     }
 
     fclose(archivo);
-    Escribir_registro("Actualizar no");
 }
 
 
@@ -687,7 +682,7 @@ void CrearBuffer()
         char filename[50];
         snprintf(filename, sizeof(filename), "/tmp/pid_%d.txt", Buffer);
 
-        sleep(5); // Dar tiempo al hijo para crear el archivo
+        sleep(2); // Dar tiempo al hijo para crear el archivo
 
         FILE *fp = fopen(filename, "r+");
         if (fp)

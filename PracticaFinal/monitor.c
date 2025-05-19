@@ -192,18 +192,27 @@ void *detectar_saldo_negativo(void *arg)
     char linea[256];
     while (fgets(linea, sizeof(linea), archivo))
     {
-        int id, cuenta1, cuenta2, saldo1, saldo2, saldo_final1, saldo_final2;
+        int id, cuenta1, cuenta2, saldo1, saldo2, saldo_final1, saldo_final2,saldo_final;
         char tipo[20];
 
         // Leer línea y detectar saldos negativos
         if (sscanf(linea, "%d | %19[^|] | %d | %d | %d | %d | %d | %d",
                    &id, tipo, &cuenta1, &cuenta2, &saldo1, &saldo2, &saldo_final1, &saldo_final2) == 8)
         {
-            if (saldo1 < 0 || saldo2 < 0 || saldo_final1 < 0)
+            if (saldo1 < 0 || saldo2 < 0 || saldo_final1 < 0 || saldo_final2 < 0)
             {
                 Escribir_registro("Saldo negativo detectado desde monitor.c");
                 enviar_alerta("Saldo negativo", &id, 0);
             }
+        }
+        if (sscanf(linea, "%d | %19[^|] | %d | - | %d | - | %d",
+                   &id, tipo, &cuenta1, &saldo1, &saldo_final) == 5)
+        {
+            if (saldo1 < 0 || saldo_final < 0)
+            {
+                Escribir_registro("Saldo negativo detectado desde monitor.c");
+                enviar_alerta("Saldo negativo", &id, 0);
+            }           
         }
     }
   

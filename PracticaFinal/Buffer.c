@@ -5,13 +5,16 @@
 #include "Comun.h"
 #include "Cuenta.h"
 
+
 volatile sig_atomic_t corriendo = 1;
 
+/// @brief Maneja la señal de salida
 void manejador_salida(int sig)
 {
     corriendo = 0;
 }
 
+/// @brief Esta funcion se encarga de volver a 
 void *VolcadoBuffer(void *arg)
 {
     Buffer *buffer = (Buffer *)arg;
@@ -34,7 +37,7 @@ void *VolcadoBuffer(void *arg)
         for (int i = 0; i < mensaje.buffer.NumeroCuentas; i++)
         {
             Cuenta cuentaCola = mensaje.buffer.cuentas[i];
-            //sem_wait(sem_usuarios);
+            sem_wait(sem_usuarios);
             FILE *file = fopen("cuentas.txt", "r");
             if (!file)
             {
@@ -51,7 +54,7 @@ void *VolcadoBuffer(void *arg)
                 fclose(file);
                 return NULL;
             }
-            //sem_wait(sem_MC);
+            sem_wait(sem_MC);
             char line[512];
             while (fgets(line, sizeof(line), file))
             {

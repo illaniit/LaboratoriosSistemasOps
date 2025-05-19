@@ -25,8 +25,6 @@ int main()
     // Conexión con la memoria compartida creada por banco.c
     Config config= leer_configuracion("variables.properties");
     key_t clave = ftok("Cuenta.h", 66);
-    printf("[DEBUG] Clave generada: %d\n", clave);
-    sleep(1);
     int shmid = shmget(clave, sizeof(Cuenta) * config.max_cuentas, 0666);
     if (shmid == -1)
     {
