@@ -50,6 +50,12 @@ int main()
     shmdt(cuentas);
     return 0;
 }
+
+/// @brief Esta función se encarga de crear un archivo de transacciones
+/// para un usuario específico, guardando su información personal
+/// @param id ID del usuario
+/// @param nombre Nombre del usuario
+/// @note Esta funcion crea un carpeta especifica para un usuario que se ha registrado en el sistema
 void CrearArchivoTransacciones(int id, const char *nombre)
 {
     char path_base[] = "./transacciones";
@@ -135,6 +141,9 @@ void CrearArchivoTransacciones(int id, const char *nombre)
     printf("Directorio y archivo creados en: %s\n", log_path);
 }
 
+/// @brief Esta función se encarga de mostrar el menú principal al usuario
+/// y gestionar las opciones de inicio de sesión y registro
+/// @param Usuario Nombre de usuario
 void Menu_Usuario()
 {
     int Eleccion;
@@ -173,6 +182,9 @@ void Menu_Usuario()
 
     } while (Eleccion != 3);
 }
+
+/// @brief Esta función se encarga de iniciar sesión
+/// y verificar las credenciales del usuario
 void InicioDeSesion()
 {
     system("clear");
@@ -310,6 +322,8 @@ void InicioDeSesion()
     sem_post(sem_usuarios);
 }
 
+/// @brief Esta función se encarga de registrar a un nuevo usuario
+/// y guardar sus datos en el archivo cuentas.txt
 void Registro()
 {
     Cuenta cuenta;

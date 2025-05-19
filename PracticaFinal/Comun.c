@@ -114,7 +114,7 @@ Config leer_configuracion(const char *ruta)
 }
 // Funcion para escribir en el registro de log
 
-/// @brief 
+/// @brief Esta funcion escribe en el archivo de log
 /// @param mensaje_registro 
 void Escribir_registro(const char *mensaje_registro)
 {
@@ -209,6 +209,11 @@ int obtener_id_usuario(const char *nombre, const char *contrasena)
     fclose(archivo);
     return -1; // No se encontró el usuario
 }
+
+/// @brief Esta funcion se encarga de enviar la cuenta al buffer y luego a la cola de mensajes
+/// @param cuenta Estructura de cuenta a enviar
+/// @return void
+/// @note Esta funcion se encarga de enviar la cuenta al buffer y luego a la cola de mensajes
 
 void MeterCuentaBuffer(struct Cuenta *cuenta) {
 

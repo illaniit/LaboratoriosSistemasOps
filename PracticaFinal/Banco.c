@@ -58,7 +58,7 @@ int main()
     ActualizarArchivoCuentas();// Actualizar el archivo de cuentas
 
     Destruir_semaforos();// se destruyen los semaforos
-    
+
     Limpiar_MemoriaCompartida(); // se desconecta y elimina la memoria compartida
     return 0;
 }
@@ -488,7 +488,11 @@ void ListarCuentas()
 }
 
 /// @brief Esta función se encarga de crear las carpetas
-/// y archivos de transacciones para cada usuario
+/// y archivos de transacciones para cada usuario mirando el archivo cuentas.txt
+/// @note Se crea una carpeta por cada usuario con su ID
+/// y un archivo transacciones.log dentro de esa carpeta
+/// @note Si el archivo ya existe, no se sobrescribe
+/// @note Se utiliza para almacenar las transacciones de cada usuario
 void CrearCarpetas()
 {
     // Crear la carpeta "transacciones" si no existe
