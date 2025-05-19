@@ -36,33 +36,36 @@ void CrearBuffer();
 int main()
 {
 
-    Inicializar_semaforos();
+    Inicializar_semaforos();// Iniciar semaforos
 
-    CrearMemoria();
+    CrearMemoria();//Crear la memoria compartida
+
     Escribir_registro("Se ha accedido al main de banco y se han incializado los semaforos en banco.c");
 
-    CrearCarpetas();
+    CrearCarpetas();// Crear carpetas para transacciones
 
-    crear_cola_mensajes();
+    crear_cola_mensajes(); // Crear la cola de mensajes
 
     // Lo primero abrimos el archivo de Properties y "nos traemos las variables"
 
     signal(SIGUSR1, leer_alerta_cola); // Manejar señal del monitor
 
-    CrearBuffer();
+    CrearBuffer(); // Lanzar buffer
 
     CrearMonitor(); // Lanzar monitor
 
     Menu_Procesos(); // Ejecutar usuarios
 
-    ActualizarArchivoCuentas();
+    ActualizarArchivoCuentas();// Actualizar el archivo de cuentas
 
-    Destruir_semaforos();
+    Destruir_semaforos();// se destruyen los semaforos
 
-    Limpiar_MemoriaCompartida();
+    Limpiar_MemoriaCompartida(); // se desconecta y elimina la memoria compartida
     return 0;
 }
 
+/// @brief Esta función se encarga de crear la memoria compartida y
+//  cargar las cuentas desde el archivo
 void CrearMemoria()
 {
     Config config = leer_configuracion("variables.properties");
@@ -121,6 +124,8 @@ void CrearMemoria()
     return;
 }
 
+/// @brief Esta función se encarga de limpiar la memoria compartida
+/// y eliminarla al finalizar el programa
 void Limpiar_MemoriaCompartida()
 {
     Config config = leer_configuracion("variables.properties");
@@ -139,7 +144,7 @@ void Limpiar_MemoriaCompartida()
     printf("✅ Memoria compartida eliminada\n");
     return;
 }
-/// @brief
+/// @brief Cuando llega la señal de SIGUSR1, se ejecuta esta función
 /// @param sig
 void leer_alerta_cola(int sig)
 {
@@ -182,6 +187,8 @@ void leer_alerta_cola(int sig)
     fflush(stdout);    // Asegura que el borrado se aplique antes de terminar
 }
 
+/// @brief Esta función se encarga de matar los procesos hijos
+/// y cerrar las sesiones de los usuarios
 void matar_hijos()
 {
     printf("\n Cerrando sesiones...\n");
@@ -198,6 +205,9 @@ void matar_hijos()
     Escribir_registro("se ha matado los hijos desde banco.c");
 }
 int contador = 0;
+
+/// @brief Esta función se encarga de mostrar el menú de procesos
+/// y gestionar la creación de nuevos usuarios
 void Menu_Procesos()
 {
     int respuesta;
@@ -341,8 +351,10 @@ void Menu_Procesos()
     Escribir_registro("Se acaban con todos los procesos desde banco.c");
 }
 // Esta funcion se encarga de "pegar" la alerta en el pipe para poder pasarlo al proceso padre
-
 // Función para crear el proceso Monitor y manejar alertas en tiempo real
+
+/// @brief Esta función se encarga de crear el proceso monitor
+/// y manejar las alertas en tiempo real
 void CrearMonitor()
 {
     pid_t Monitor = fork(); // Crea el proceso monitor
@@ -414,6 +426,9 @@ void CrearMonitor()
         Escribir_registro("Proceso monitor creado correctamente desde banco.c");
     }
 }
+
+/// @brief Esta función se encarga de listar las cuentas
+/// y mostrar la información de cada una
 void ListarCuentas()
 {
     printf("\n==============================\n");
@@ -472,6 +487,9 @@ void ListarCuentas()
     }
     sem_post(sem_MC);
 }
+
+/// @brief Esta función se encarga de crear las carpetas
+/// y archivos de transacciones para cada usuario
 void CrearCarpetas()
 {
     // Crear la carpeta "transacciones" si no existe
@@ -565,6 +583,9 @@ void CrearCarpetas()
     fclose(archivo);
     Escribir_registro("✅ Carpetas de transacciones creadas correctamente en banco.c");
 }
+
+/// @brief Esta función se encarga de actualizar el archivo de cuentas
+/// y sincronizarlo con la memoria compartida
 void ActualizarArchivoCuentas()
 {
     FILE *archivo = fopen("cuentas.txt", "r+");
@@ -636,7 +657,8 @@ void ActualizarArchivoCuentas()
     fclose(archivo);
 }
 
-
+/// @brief Esta función se encarga de crear el proceso buffer
+/// y manejar la comunicación entre procesos
 void CrearBuffer()
 {
     pid_t Buffer = fork(); // Crea el proceso buffer

@@ -4,9 +4,7 @@
 #include "Cuenta.h"
 #define MAX_CUENTAS 100
 
- // Definido en otro archivo (main o banco.c)
-
-
+// Definido en otro archivo (main o banco.c)
 void DatosCuenta(char *user, char *passwd);
 void ConsultarTransferencias(char *user, char *passwd);
 bool ComprobarCuenta(char *cuenta, char *contraseña);
@@ -17,6 +15,9 @@ struct UsuarioInfo {
     char Contraseña[50];
 };
 
+/// @brief Función que maneja el menú de consulta de datos
+/// @param arg Puntero a la estructura UsuarioInfo que contiene el nombre de usuario y contraseña
+/// @return NULL
 void *ConsultarDatos(void *arg) {
     struct UsuarioInfo *usuario = (struct UsuarioInfo *)arg;
     int Eleccion = 0;

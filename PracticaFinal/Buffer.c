@@ -96,20 +96,20 @@ void *VolcadoBuffer(void *arg)
 
 int main()
 {
-    signal(SIGINT, manejador_salida);
+    signal(SIGINT, manejador_salida); // Manejador de la señal SIGINT
     signal(SIGTERM, manejador_salida);
 
-    Inicializar_semaforos();
+    Inicializar_semaforos(); // inicializamos los semaforos
 
     Buffer buffer;
     buffer.acceso = 0; // Aseguramos que el buffer esté habilitado para escribir
     // Nota: aquí podrías inicializar buffer.cuentas si es necesario.
 
-    pthread_t hilo_volcado;
+    pthread_t hilo_volcado; // Hilo para el volcado de buffer
 
-    while (corriendo)
+    while (corriendo) //bucle de l buffer para que compruebe si hay que actualizado el archivo
     {
-        if (pthread_create(&hilo_volcado, NULL, VolcadoBuffer, (void *)&buffer) != 0)
+        if (pthread_create(&hilo_volcado, NULL, VolcadoBuffer, (void *)&buffer) != 0) // creamos el hilo
         {
             perror("Error al crear el hilo de volcado de buffer");
             break;
@@ -123,9 +123,9 @@ int main()
 
         Escribir_registro("✅ Archivo de cuentas actualizado correctamente en buffer.c");
 
-        sleep(30); // Espera 10 segundos antes de hacer el siguiente volcado
+        sleep(30); // Espera 30 segundos antes de hacer el siguiente volcado
     }
 
-    Destruir_semaforos();
+    Destruir_semaforos(); // Destruimos los semáforos
     return 0;
 }
